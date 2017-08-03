@@ -1,0 +1,103 @@
+<div class="sidebar">
+  <div class="sidebar-inner-index">
+    <ul class="main-menu">
+      <%- partial('partials/main_menu', { context: 'sidebar' }) %>
+    </ul>
+  </div>
+</div>
+
+<div id="hero">
+  <div class="inner">
+    <div class="left">
+      <img class="hero-logo" src="<%- url_for("/images/logo.png") %>">
+    </div><div class="right">
+      <h2 class="queryphp">QueryPHP</h2>
+      <h1>
+        The PHP Framework For Code Poem As Free As Wind
+      </h1>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <img height="100" src="/images/code-poem.jpg" />
+          </div>
+          <div class="col">
+            <img height="100"src="/images/as-free-as-wind.jpg" />
+          </div>
+        </div>
+      </div>
+      <p>
+        <a class="button" href="<%- url_for("/v4/") %>">开发文档 V4.0</a>
+        <a class="button white" href="<%- url_for("/download/") %>">下 载</a>
+        <a class="button white" href="<%- url_for("/support/") %>">捐 赠</a>
+        <a class="button white" href="https://github.com/hunzhiwange/queryphp" target="_blank">GITHUB</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div id="highlights">
+  <div class="inner">
+    <div class="point">
+      <h2><img src="/images/query.png" height="50"  /></h2>
+      <p>Query the endless software world</p>
+      <p>is complex enough</p>
+      <p>探寻无尽的软件世界已足够复杂</p>
+    </div>
+
+    <div class="point">
+      <h2><img src="/images/yet.png" height="50" /></h2>
+      <p>But yet</p>
+      <p>This is not what we want</p>
+      <p>这不是我们想要的</p>
+    </div>
+
+    <div class="point">
+      <h2><img src="/images/simple.png" height="50" /></h2>
+      <p>We just want to write code</p>
+      <p>simply and happily</p>
+      <p>我们只想简单快乐地撸一撸代码</p>
+    </div>
+  </div>
+  <div class="inner-code">
+    <figure class="highlight php"><table><tbody><tr><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$oComposer = <span class="keyword">require</span> dirname ( <span class="keyword">__DIR__</span> ) . <span class="string">'/vendor/autoload.php'</span>;</div><div class="line">queryyetsimple\bootstrap\project::singletons ( $oComposer );</div></pre></td></tr></tbody></table></figure>
+  </div>
+  <div class="inner">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <img height="55" src="/images/query-yet-simple-left.png" />
+        </div>
+        <div class="col">
+          <img height="55"src="/images/query-yet-simple-right.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sponsors">
+  <div class="inner">
+    <h3>开发赞助商</h3>
+    <%- partial('partials/sponsors') %>
+    <br>
+    <a class="become-sponsor button white" href="<%- url_for("/support/") %>">成为赞助商</a>
+  </div>
+</div>
+
+<div id="footer">
+  <p>&copy; 2010-<%- new Date().getFullYear() %> Xiangmin Liu</p>
+</div>
+
+
+<script>
+var topScrolled = false
+window.addEventListener('scroll', function () {
+  if (window.pageYOffset > 165 && !topScrolled) {
+    topScrolled = true
+    document.getElementById('mobile-bar').classList.remove('top')
+  } else if (window.pageYOffset <= 165 && topScrolled) {
+    topScrolled = false
+    document.getElementById('mobile-bar').classList.add('top')
+  }
+})
+</script>

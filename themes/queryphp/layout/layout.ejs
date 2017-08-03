@@ -1,0 +1,102 @@
+<% var isIndex = page.path === 'index.html' %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%- page.title ? page.title + ' — ' : '' %>The PHP Framework For Code Poem As Free As Wind . QueryPHP</title>
+        <meta charset="utf-8">
+        <meta name="description" content="<%- theme.site_description %>">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <link rel="alternate" hreflang="x-default" href="https://queryphp.com/<%- page.path %>">
+        <link rel="alternate" hreflang="zh" href="https://queryphp.com/<%- page.path %>">
+
+        <link rel="apple-touch-icon" sizes="57x57" href="<%- url_for("/images/icons/apple-icon-57x57.png") %>">
+        <link rel="apple-touch-icon" sizes="60x60" href="<%- url_for("/images/icons/apple-icon-60x60.png") %>">
+        <link rel="apple-touch-icon" sizes="72x72" href="<%- url_for("/images/icons/apple-icon-72x72.png") %>">
+        <link rel="apple-touch-icon" sizes="76x76" href="<%- url_for("/images/icons/apple-icon-76x76.png") %>">
+        <link rel="apple-touch-icon" sizes="114x114" href="<%- url_for("/images/icons/apple-icon-114x114.png") %>">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%- url_for("/images/icons/apple-icon-120x120.png") %>">
+        <link rel="apple-touch-icon" sizes="144x144" href="<%- url_for("/images/icons/apple-icon-144x144.png") %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%- url_for("/images/icons/apple-icon-152x152.png") %>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%- url_for("/images/icons/apple-icon-180x180.png") %>">
+        <link rel="icon" type="image/png" sizes="192x192"  href="<%- url_for("/images/icons/android-icon-192x192.png") %>">
+        <link rel="icon" type="image/png" sizes="32x32" href="<%- url_for("/images/icons/favicon-32x32.png") %>">
+        <link rel="icon" type="image/png" sizes="96x96" href="<%- url_for("/images/icons/favicon-96x96.png") %>">
+        <link rel="icon" type="image/png" sizes="16x16" href="<%- url_for("/images/icons/favicon-16x16.png") %>">
+        <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+        <link rel="icon" href="<%- url_for("/images/logo.png") %>" type="image/png">
+
+        <meta name="msapplication-TileColor" content="#4fc08d">
+        <meta name="theme-color" content="#4fc08d">
+
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <link rel="manifest" href="/manifest.json">
+
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Dosis:500&text=QueryPHP' rel='stylesheet' type='text/css'>
+
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap-grid.min.css" rel="stylesheet">
+        
+        <!-- main page styles -->
+        <%- css(isIndex ? 'css/index' : 'css/page') %>
+
+        <script>window.PAGE_TYPE = "<%- page.type %>"</script>
+    </head>
+    <body class="<%- isIndex ? '' : 'docs' -%>">
+        <div id="mobile-bar" <%- isIndex ? 'class="top"' : '' %>>
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        <%- partial('partials/header') %>
+        <% if (!isIndex) { %>
+            <div id="main" class="fix-sidebar">
+                <% if (page.blog_index) { %>
+                    <%- partial('partials/blog') %>
+                <% } else { %>
+                    <%- body %>
+                <% } %>
+            </div>
+            <script src="<%- url_for("/js/smooth-scroll.min.js") %>"></script>
+        <% } else { %>
+            <%- body %>
+        <% } %>
+
+        <!-- main custom script for sidebars, version selects etc. -->
+        <script src="<%- url_for("/js/css.escape.js") %>"></script>
+        <script src="<%- url_for("/js/common.js") %>"></script>
+
+        <!-- search -->
+        <link href="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" rel='stylesheet' type='text/css'>
+        <%- css('css/search') %>
+        <script src="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+        <script>
+        [
+          '#search-query-nav',
+          '#search-query-sidebar',
+          '#search-query-menu'
+        ].forEach(function (selector) {
+          if (!document.querySelector(selector)) return
+          // search index defaults to v4
+          var match = window.location.pathname.match(/^\/(v\d+)/)
+          var version = match ? match[1] : 'v4'
+          docsearch({
+            appId: 'V7BF4QDC7Z',
+            apiKey: '204f42cf4e8df33bf785dbfcc21bf83f',
+            indexName: 'queryphp',
+            inputSelector: selector,
+            algoliaOptions: { facetFilters: ["version:" + version] }
+          })
+        })
+        </script>
+
+        <!-- fastclick -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body)
+        }, false)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<div class="tag-container">
+
+    <!--<div class="ui dividing header">-->
+            <!--<span class="tagpage header">-->
+                <!--<% //page.tag%>-->
+            <!--</span>-->
+        <!--<div class="ui label">-->
+            <!--<i class="book icon"></i><%= page.posts.size() %>-->
+        <!--</div>-->
+    <!--</div>-->
+    <h1 ui header><%=page.tag%></h1>
+
+    <div class="ui relaxed list">
+        <% page.posts.each(function(article) { %>
+            <div class="item">
+                <div class="content post-content"></div>
+                <% if (article.link) { %>
+                <a href="<%=url_for(article.link)%>" target="_blank">
+                    <%=article.title || 'No Title'%>
+                </a>
+                <% } else { %>
+                <a href="<%=url_for(article.path)%>">
+                    <%=article.title || 'No Title'%>
+                </a>
+                <% } %>
+                <time datetime="<%=date_xml(article.date)%>">
+                    <%=date(article.date)%>
+                </time>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<%- partial('partials/pagination') %>

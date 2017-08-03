@@ -1,0 +1,49 @@
+<ul class="menu-root">
+    <% type !== 'api' && site.pages.find({type: type}).sort('order').each(function (p) { %>
+        <% var fileName = p.path %>
+        <% if (type === 'v4') { %>
+            <% if (fileName === 'v4/about-queryphp/index.html') { %>
+                <li><h3>About QueryPHP</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/execution-flow/index.html') { %>
+                <li><h3>Execution Flow</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/router/index.html') { %>
+                <li><h3>Router</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/controller/index.html') { %>
+                <li><h3>Controller</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/response/index.html') { %>
+                <li><h3>Response</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/system-architecture/index.html') { %>
+                <li><h3>System Architecture</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/template-engine/index.html') { %>
+                <li><h3>Template Engine</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/database/index.html') { %>
+                <li><h3>Database</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/option/index.html') { %>
+                <li><h3>Option</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/log/index.html') { %>
+                <li><h3>Log</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/cache/index.html') { %>
+                <li><h3>Cache</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/cookie/index.html') { %>
+                <li><h3>Cookie</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/trace/index.html') { %>
+                <li><h3>Trace</h3></li>
+            <% } %>
+        <% } %>
+        <li>
+            <a href="<%- url_for(p.path) %>" class="sidebar-link<%- page.title === p.title ? ' current' : '' %><%- p.is_new ? ' new' : '' %>"><%- p.title %></a>
+        </li>
+    <% }) %>
+</ul>
