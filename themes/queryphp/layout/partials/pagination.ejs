@@ -1,63 +1,19 @@
-<div id="pagination" class="ui text container pagination">
-    <div class="ui two column centered grid">
-
-        <div class="tiny ui buttons">
-
-            <%
-                var hasPre = page.prev_link || (page.prev && page.prev.path);
-                var hasNext = page.next_link || (page.next && page.next.path);
-
-            %>
-
-            <% if(hasPre) { %>
-
-                <% if (page.prev_link) { %>
-
-                <a href="<%= url_for(page.prev_link) %>" class="ui button"><i class="angle left icon"></i><%= page.prev.title %></a>
-
-                <% } else if (page.prev && page.prev.path) { %>
-
-                <a href="<%= url_for(page.prev.path) %>" class="ui button"><i class="angle left icon"></i><%= page.prev.title %></a>
-
-                <% } %>
-
-
-            <% } else { %>
-
-                <a class="ui button disabled"><i class="angle left icon"></i><%= __('prePage') %></a>
-
-            <% } %>
-
-            <% if (typeof page.current === 'number' && typeof page.total === 'number') { %>
-
-                <div class="or" data-text="<%= page.current %>"></div>
-
-            <% } else { %>
-
-                <div class="or" data-text="<%= __('or') %>"></div>
-
-            <% } %>
-
-            <% if(hasNext) { %>
-
-                <% if (page.next_link) { %>
-
-                <a href="<%= url_for(page.next_link) %>" class="ui button"><%= page.next.title %><i class="angle right icon"></i></a>
-
-                <% } else if (page.next && page.next.path) { %>
-
-                <a href="<%= url_for(page.next.path) %>" class="ui button"><%= page.next.title %><i class="angle right icon"></i></a>
-
-                <% } %>
-
-
-            <% } else { %>
-
-                <a class="ui button disabled"><%= __('nextPage') %><i class="angle right icon"></i></a>
-
-            <% } %>
-
-        </div>
-
-    </div>
-</div>
+<%
+    var hasPre = page.prev_link || (page.prev && page.prev.path);
+    var hasNext = page.next_link || (page.next && page.next.path);
+%>
+<nav class="pagination">
+      <% if(hasPre) { %>
+      <a class="prev button" href="<% if (page.prev_link) { %><%= url_for(page.prev_link) %><% } else { %><%= url_for(page.prev.path) %><% } %>">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
+      </a>
+      <% } %>
+    
+      <% if(hasNext) { %>
+      <a class="next button" href="<% if (page.next_link) { %><%= url_for(page.next_link) %><% } else { %><%= url_for(page.next.path) %><% } %>">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+      <% } %>
+  </nav>

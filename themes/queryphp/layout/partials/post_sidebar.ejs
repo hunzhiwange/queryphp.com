@@ -1,0 +1,32 @@
+<%
+var categoriesList = list_categories({ show_count: false }),
+  tagsList = list_tags({ show_count: false }),
+  archivesList = list_archives({ show_count: false,format: "YYYY 年 MM 月" });
+%>
+
+<div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <%- partial('partials/main_menu', { context: 'sidebar' }) %>
+    </ul>
+    <h2><a class="main-archives" href="<%- url_for("/archives/") %>">动态</a></h2>
+    <div class="list">
+      <h3 class="sub-title">CATEGORIES</h3>
+      <% if (categoriesList) { %> 
+        <%-categoriesList%>
+      <% } %>
+    </div>
+    <div class="list">
+      <h3 class="sub-title">TAGS</h3>
+      <% if (tagsList) { %> 
+        <%-tagsList%>
+      <% } %>
+    </div>
+    <div class="list">
+      <h3 class="sub-title">ARCHIVES</h3>
+      <% if (archivesList) { %> 
+        <%-archivesList%>
+      <% } %>
+    </div>
+  </div>
+</div>

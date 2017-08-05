@@ -32,11 +32,25 @@
     font-size: .9em
     color: #fff
     margin: .2em 0
-    width: 180px
     text-align: center
     padding: 12px 24px
     display: inline-block
     vertical-align: middle
+  .article-category
+    .article-category-link
+      color: #34495e
+
+  .post-footer .post-tags
+      padding: 5px 0
+      margin-bottom: 10px
+
+     .post-tags a
+        margin-right: 5px
+        color: #34495e
+        word-break: break-all
+
+      .post-tags a::before 
+          content: '#'
   img
     max-width: 100%
   span.light
@@ -164,12 +178,73 @@
   margin-top: 2em
   height: 1em
 
-.footer
+.footer,.post-footer
   color: $light
   margin-top: 2em
-  padding-top: 2em
+  padding-top: 5px
   border-top: 1px solid #e5e5e5
   font-size: .9em
+
+.pagination
+    padding-bottom: 1.2em
+
+.pagination:before, .pagination:after
+    content: " "
+    display: table
+
+.pagination .prev, .pagination .next
+    font-weight: 400
+    font-size: 16px
+    font-family: "Open Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif
+    transition-property: transform
+    transition-timing-function: ease-out
+    transition-duration: 0.3s
+
+.pagination .prev
+    float: left
+
+.pagination .prev:hover
+    color: #FFF
+    transform: translateX(-4px)
+
+.pagination .next:hover
+    color: #FFF
+    transform: translateX(4px)
+
+.pagination .next 
+    float: right
+
+.archive
+    margin: 2em 0px
+    line-height: 1.6
+
+.archive .archive-post
+    margin: 15px 0
+
+.archive .archive-post:hover
+    transition: 0.2s ease-out
+    transform: translateX(4px)
+
+.archive .archive-post .archive-post-time
+    float: left
+    overflow: hidden
+    color: #aaa
+    font-size: 14px
+    line-height: 25px
+    display: block
+
+.archive .archive-post:hover .archive-post-time
+    color: #045efc
+
+.archive .archive-post .archive-post-title
+    margin-left: 85px
+    display: block
+
+.archive .archive-post .archive-post-title .archive-post-link
+    color: #333333
+
+.archive .archive-post:hover .archive-post-title .archive-post-link
+    color: #045efc     
 
 #main.fix-sidebar
   .sidebar

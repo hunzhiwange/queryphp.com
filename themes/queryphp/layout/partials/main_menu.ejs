@@ -4,6 +4,7 @@
   </form>
 </li>
 <li><a href="<%- url_for("/document/") %>" class="nav-link<%- page.path.match(/document/) ? ' current' : '' %>">开发文档</a></li>
+<li><a href="<%- url_for("/archives/") %>" class="nav-link<%- page.path.match(/archives/) ? ' current' : '' %>">动态</a></li>
 <li><a href="<%- url_for("/ecosystem/") %>" class="nav-link<%- page.path.match(/ecosystem/) ? ' current' : '' %>">社区</a></li>
 <li><a href="<%- url_for("/download/") %>" class="nav-link<%- page.path.match(/download/) ? ' current' : '' %>">下载</a></li>
 <li><a href="<%- url_for("/support/") %>" class="nav-link<%- page.path.match(/support/) ? ' current' : '' %>">捐赠</a></li>
