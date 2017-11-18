@@ -33,7 +33,7 @@ lists 标签主要用于在模板中循环输出数据集或者多维数组。
 
 模板编译后的结果：
 ~~~
-<?php if( is_array ( $arrList ) ) : $index = 0; $arrList = array_slice( $arrList, 2, 4 ); if( count( $arrList ) == 0 ) : echo  ""; else : foreach ( $arrList as $key => $arrVo ) : ++$index; $mod = ( $index % 2) ?>
+<?php if( is_array ( $arrList ) ) : $index = 0; $arrList = array_slice( $arrList, 2, 4 ); if( count( $arrList ) == 0 ) : echo  ""; else : foreach ( $arrList as $key => $arrVo ) : ++$index; $mod = $index % 2; ?>
     <?php echo is_array( $arrVo ) ? $arrVo['title'] : $arrVo->title; ?> <?php echo is_array( $arrVo ) ? $arrVo['people'] : $arrVo->people; ?>
 <?php endforeach; endif; else: echo ""; endif; ?>
 ~~~
