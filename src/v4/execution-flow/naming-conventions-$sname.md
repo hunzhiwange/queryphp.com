@@ -32,17 +32,17 @@ $strName [] =  $strName; // 转换为数组，保持不变
 ```
 
 ### 常量 define
-define 函数的第一个参数全部大写，且以 "_" 分割，例如：
+define 函数的第一个参数全部大写，且以 `_` 分割，例如：
 
 ``` php
-define('Q_VER', '4.0');
+define('HELLO_WORLD', 'foobar');
 ```
 
 ### 数组键值
 数组的键值以 `_` 分割，不采用驼峰法
 
 ``` php
-$arrData['first_name'] = 'Hello Xiaoniu';
+$arrData['first_name'] = 'Hello QueryPHP';
 ```
 
 ## 命名空间

@@ -12,6 +12,15 @@ $ npm install
 $ hexo server
 ```
 
+## Publish
+
+You can publish your modify by use the command:
+
+```
+hexo generate
+hexo deploy
+```
+
 ## Thanks vuejs.org
 
 This theme is modify from vue
