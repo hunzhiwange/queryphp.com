@@ -1,5 +1,5 @@
 ---
-title: 序言
+title: Query Yet Simple
 type: v4
 order: 0
 ---

@@ -1,45 +1,37 @@
 <ul class="menu-root">
     <% type !== 'api' && site.pages.find({type: type}).sort('order').each(function (p) { %>
+        <%- partial('partials/v4_menu') %>
         <% var fileName = p.path %>
         <% if (type === 'v4') { %>
-            <% if (fileName === 'v4/about-queryphp/index.html') { %>
-                <li><h3>About QueryPHP</h3></li>
+            <% if (fileName === 'v4/preface/index.html') { %>
+                <li><h3>preface</h3></li>
             <% } %>
-            <% if (fileName === 'v4/execution-flow/index.html') { %>
-                <li><h3>Execution Flow</h3></li>
+            <% if (fileName === 'v4/started/index.html') { %>
+                <li><h3>started</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/guide/index.html') { %>
+                <li><h3>guide</h3></li>
+            <% } %>
+            <% if (fileName === 'v4/architecture/index.html') { %>
+                <li><h3>architecture</h3></li>
             <% } %>
             <% if (fileName === 'v4/router/index.html') { %>
-                <li><h3>Router</h3></li>
+                <li><h3>router</h3></li>
             <% } %>
-            <% if (fileName === 'v4/controller/index.html') { %>
-                <li><h3>Controller</h3></li>
-            <% } %>
-            <% if (fileName === 'v4/response/index.html') { %>
-                <li><h3>Response</h3></li>
-            <% } %>
-            <% if (fileName === 'v4/system-architecture/index.html') { %>
-                <li><h3>System Architecture</h3></li>
-            <% } %>
-            <% if (fileName === 'v4/template-engine/index.html') { %>
-                <li><h3>Template Engine</h3></li>
+            <% if (fileName === 'v4/template/index.html') { %>
+                <li><h3>template</h3></li>
             <% } %>
             <% if (fileName === 'v4/database/index.html') { %>
-                <li><h3>Database</h3></li>
+                <li><h3>database</h3></li>
             <% } %>
-            <% if (fileName === 'v4/option/index.html') { %>
-                <li><h3>Option</h3></li>
+            <% if (fileName === 'v4/orm/index.html') { %>
+                <li><h3>orm</h3></li>
             <% } %>
-            <% if (fileName === 'v4/log/index.html') { %>
-                <li><h3>Log</h3></li>
+            <% if (fileName === 'v4/component/index.html') { %>
+                <li><h3>component</h3></li>
             <% } %>
-            <% if (fileName === 'v4/cache/index.html') { %>
-                <li><h3>Cache</h3></li>
-            <% } %>
-            <% if (fileName === 'v4/cookie/index.html') { %>
-                <li><h3>Cookie</h3></li>
-            <% } %>
-            <% if (fileName === 'v4/trace/index.html') { %>
-                <li><h3>Trace</h3></li>
+            <% if (fileName === 'v4/test/index.html') { %>
+                <li><h3>test</h3></li>
             <% } %>
         <% } %>
         <li>

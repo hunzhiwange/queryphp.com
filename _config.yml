@@ -149,4 +149,10 @@ feed:
   type: atom
   path: atom.xml
   limit: 20
-  
+
+algolia:
+  applicationID: 'VKDQI9318H'
+  apiKey: '73414587dafc111d13d3b79e09bf15ab'
+  adminApiKey: '7672ba5977354ffaf8b0c19108d27c38'
+  indexName: 'queryphp.com'
+  chunkSize: 5000

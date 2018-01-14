@@ -82,21 +82,15 @@
           var match = window.location.pathname.match(/^\/(v\d+)/)
           var version = match ? match[1] : 'v4'
           docsearch({
-            appId: 'V7BF4QDC7Z',
-            apiKey: '204f42cf4e8df33bf785dbfcc21bf83f',
-            indexName: 'queryphp',
+            appId: 'VKDQI9318H',
+            apiKey: '73414587dafc111d13d3b79e09bf15ab',
+            indexName: 'queryphp.com',
             inputSelector: selector,
-            algoliaOptions: { facetFilters: ["version:" + version] }
+            algoliaOptions: { 
+                // facetFilters: ["version:" + version] 
+            }
           })
         })
-        </script>
-
-        <!-- fastclick -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          FastClick.attach(document.body)
-        }, false)
         </script>
     </body>
 </html>
