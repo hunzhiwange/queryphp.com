@@ -6,8 +6,16 @@
   </div>
 </div>
 
-<div id="hero">
-  <div class="inner">
+<div id="canvas" style="position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 300px;overflow:hidden;opacity:0.1;">
+</div>
+
+<div id="hero" >
+
+  <div class="inner" style="position: absolute;
+  top: 120px;text-">
     <div class="left">
       <img class="hero-logo" src="<%- url_for("/images/logo.png") %>">
     </div><div class="right">
@@ -26,7 +34,7 @@
         </div>
       </div>
       <p>
-        <a class="button" href="<%- url_for("/v4/") %>">开发文档 V4.0</a>
+        <a class="button" target="_blank" href="https://www.leevel.vip">开发文档</a>
         <a class="button white" href="http://api.queryphp.com">Api 文档</a>
         <a class="button white" href="<%- url_for("/support/") %>">捐 赠</a>
         <a class="button white" href="https://github.com/hunzhiwange/queryphp" target="_blank">GITHUB</a>
@@ -35,7 +43,7 @@
   </div>
 </div>
 
-<div id="highlights">
+<div id="highlights" style="margin-top:300px;">
   <div class="inner">
     <div class="point">
       <h2><img src="/images/query.png" height="50"  /></h2>
@@ -91,6 +99,8 @@
   <p>&copy; 2010-<%- new Date().getFullYear() %> Xiangmin Liu</p>
 </div>
 
+<script src="//studio-res.coding.net/StudioWebResource/Scripts/three.min.js"></script>
+<script src="<%- url_for("/js/stats.min.js") %>"></script>
 
 <script>
 var topScrolled = false
@@ -103,4 +113,116 @@ window.addEventListener('scroll', function () {
     document.getElementById('mobile-bar').classList.add('top')
   }
 })
+
+var camera, scene, renderer, stats;
+var geometry, root;
+var mouseX = 0, mouseY = 0;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+init();
+animate();
+function init() {
+  camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 15000 );
+  camera.position.z = 500;
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color( 0xffffff );
+  var geometry = new THREE.BoxBufferGeometry( 100, 100, 100 );
+  var material = new THREE.MeshNormalMaterial();
+  root = new THREE.Mesh( geometry, material );
+  root.position.x = 1000;
+  scene.add( root );
+  var amount = 200, object, parent = root;
+  for ( var i = 0; i < amount; i ++ ) {
+    object = new THREE.Mesh( geometry, material );
+    object.position.x = 100;
+    parent.add( object );
+    parent = object;
+  }
+  parent = root;
+  for ( var i = 0; i < amount; i ++ ) {
+    object = new THREE.Mesh( geometry, material );
+    object.position.x = - 100;
+    parent.add( object );
+    parent = object;
+  }
+  parent = root;
+  for ( var i = 0; i < amount; i ++ ) {
+    object = new THREE.Mesh( geometry, material );
+    object.position.y = - 100;
+    parent.add( object );
+    parent = object;
+  }
+  parent = root;
+  for ( var i = 0; i < amount; i ++ ) {
+    object = new THREE.Mesh( geometry, material );
+    object.position.y = 100;
+    parent.add( object );
+    parent = object;
+  }
+  parent = root;
+  for ( var i = 0; i < amount; i ++ ) {
+    object = new THREE.Mesh( geometry, material );
+    object.position.z = - 100;
+    parent.add( object );
+    parent = object;
+  }
+  parent = root;
+  for ( var i = 0; i < amount; i ++ ) {
+    object = new THREE.Mesh( geometry, material );
+    object.position.z = 100;
+    parent.add( object );
+    parent = object;
+  }
+  //
+  renderer = new THREE.WebGLRenderer( { antialias: true } );
+  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  //document.body.appendChild( renderer.domElement );
+  //
+  //stats = new Stats();
+
+
+  var container = document.createElement('div');
+
+  document.getElementById("canvas").appendChild(container);
+  container.appendChild( renderer.domElement );
+
+  //container.appendChild( stats.dom );
+  //
+  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  //
+  window.addEventListener( 'resize', onWindowResize, false );
+}
+function onWindowResize() {
+  windowHalfX = window.innerWidth / 2;
+  windowHalfY = window.innerHeight / 2;
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+}
+function onDocumentMouseMove( event ) {
+  mouseX = ( event.clientX - windowHalfX ) * 10;
+  mouseY = ( event.clientY - windowHalfY ) * 10;
+}
+//
+function animate() {
+  requestAnimationFrame( animate );
+  render();
+  //stats.update();
+}
+function render() {
+  var time = Date.now() * 0.001;
+  var rx = Math.sin( time * 0.7 ) * 0.2;
+  var ry = Math.sin( time * 0.3 ) * 0.1;
+  var rz = Math.sin( time * 0.2 ) * 0.1;
+  camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+  camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+  camera.lookAt( scene.position );
+  root.traverse( function ( object ) {
+    object.rotation.x = rx;
+    object.rotation.y = ry;
+    object.rotation.z = rz;
+  } );
+  renderer.render( scene, camera );
+}
 </script>

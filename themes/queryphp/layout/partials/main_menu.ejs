@@ -1,9 +1,9 @@
-<li>
+<li style="display:none;">
   <form id="search-form">
     <input type="text" id="search-query-<%- context %>" class="search-query st-default-search-input">
   </form>
 </li>
-<li><a href="<%- url_for("/document/") %>" class="nav-link<%- page.path.match(/document/) ? ' current' : '' %>">开发文档</a></li>
+<li><a target="_blank" href="https://www.leevel.vip" class="nav-link">开发文档</a></li>
 <li><a href="<%- url_for("/archives/") %>" class="nav-link<%- page.path.match(/archives/) ? ' current' : '' %>">动态</a></li>
 <li><a href="<%- url_for("/ecosystem/") %>" class="nav-link<%- page.path.match(/ecosystem/) ? ' current' : '' %>">社区</a></li>
 <li><a href="<%- url_for("/download/") %>" class="nav-link<%- page.path.match(/download/) ? ' current' : '' %>">下载</a></li>
