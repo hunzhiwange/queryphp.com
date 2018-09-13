@@ -15,7 +15,7 @@ use Leevel\Database\Ddd\Entity;
 
 class Dream extends Entity
 {
-    const TABLE = 'test';
+    const TABLE = 'dream';
     const ID = 'id';
     const AUTO = 'id';
     const STRUCT = [
