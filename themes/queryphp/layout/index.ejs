@@ -6,34 +6,287 @@
   </div>
 </div>
 
-<div id="hero">
+<div id="hero" style="text-align: center;">
   <div class="inner">
     <div class="left">
       <img class="hero-logo" src="<%- url_for("/images/logo.png") %>">
     </div><div class="right">
       <h2 class="queryphp">QueryPHP</h2>
       <h1>
-        The PHP Framework For Code Poem As Free As Wind
+        渐进式 PHP 常驻框架引擎
       </h1>
+      <div style="color:#868e96!important;font-weight:400;font-size: 1.25rem;line-height: 1.5;text-align:left;opacity: 0.7 !important;">
+        QueryPHP 是一款渐进式 PHP 常驻框架引擎，我们提供了可选的基于 Zephir 开发的扩展来接管底层核心，无需修改任何代码即可性能加倍。对于 QueryPHP 来说稳定与性能是第一个要素，未来数年主要围绕着 swoole 做常驻服务，我们的远景是少量代码修改或者无修改，让你的业务撑起更多的用户服务。
+      </div>
       <div class="container">
         <div class="row">
           <div class="col">
-            <img height="100" src="/images/code-poem.jpg" />
+            <img height="50" src="/images/code-poem.jpg" />
           </div>
           <div class="col">
-            <img height="100"src="/images/as-free-as-wind.jpg" />
+            <img height="50"src="/images/as-free-as-wind.jpg" />
           </div>
         </div>
       </div>
-      <p>
+      <div class="board">
+              <div class="blackbar">
+                  
+              </div>
+              <div class="keyboard">
+                  <ul>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li style="font-size:18px;">Q</li>
+                      <li>uery</li>
+                      <li>PHP</li>
+                      <li>.</li>
+                      <li>渐</li>
+                      <li>进</li>
+                      <li>式</li>
+                      <li>PHP</li>
+                      <li>常</li>
+                      <li>驻</li>
+                      <li>框</li>
+                      <li>架</li>
+                      <li>引</li>
+                      <li>擎</li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li>The</li>
+                      <li></li>
+                      <li>F</li>
+                      <li>r</li>
+                      <li>a</li>
+                      <li>m</li>
+                      <li>e</li>
+                      <li>w</li>
+                      <li>o</li>
+                      <li>r</li>
+                      <li>k</li>
+                      <li></li>
+                      <li>PHP</li>
+                      <li>Progressive</li>
+                      <li></li>
+                      <li></li>
+                      <li>F</li>
+                      <li></li>
+                      <li>O</li>
+                      <li></li>
+                      <li>R</li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li>Resident</li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li>Code Poem As Free As Wind</li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                  </ul>
+              </div>
+
+              <div class="touch" style="display:none;">
+              </div>      
+          <p style="position: absolute;
+    width: 600px;
+    height: 150px;
+    top: 235px;
+    left: 10px;
+    border-radius: 8px;">
         <a class="button" target="_blank" href="https://www.leevel.vip">开发文档</a>
-        <a class="button white" href="http://api.queryphp.com">Api 文档</a>
-        <a class="button white" href="<%- url_for("/support/") %>">捐 赠</a>
+        <a class="button white" href="http://api.queryphp.com">API 文档</a>
+        <a class="button white" target="_blank" href="https://hunzhiwange.com">使命感</a>
         <a class="button white" href="https://github.com/hunzhiwange/queryphp" target="_blank">GITHUB</a>
       </p>
+           
+      </div>
+           </div>
+
     </div>
   </div>
 </div>
+
+<style type="text/css">
+.board{
+    margin: 0 auto;
+    padding: 0 auto;
+    width: 600px;
+    height: 330px;
+    margin-top: 50px;
+    background: rgb(210,210,210);
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0px 5px 6px rgb(160,160,160);
+    background:-webkit-linear-gradient(60deg,rgba(250,250,250,1) 25%,rgba(210,210,210,1));
+}
+.board:before{
+    content: '';
+    display: block;
+    width: 780px;
+    height: 20px;
+    background: rgb(210,210,210);
+    border-radius: 0px 0px 3px 3px;
+    border-top-left-radius: 390px 18px;
+    border-top-right-radius: 390px 18px;
+    position: absolute;
+    top:-20px; 
+    left: -90px;
+     border-bottom: 2px solid rgb(0,0,0); 
+    background:-webkit-linear-gradient(top,rgb(210,210,210) 50%,rgb(255,255,255));
+}
+.blackbar{
+    width: 450px;
+    height: 18px;
+    position: absolute; 
+    left: 75px;
+    border-radius: 2px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    background: -webkit-linear-gradient(top,rgb(30,30,30) ,rgb(60,60,60) 35%,rgb(100,100,100) 50%,rgb(30,30,30) 65%);
+    background: -linear-gradient(top,rgb(30,30,30) ,rgb(60,60,60) 35%,rgb(100,100,100) 50%,rgb(30,30,30) 65%);
+}
+.keyboard{
+    position: absolute;
+    width:530px;
+    height: 216px;
+    left: 35px;
+    top: 35px;
+    border: 1px solid rgb(180,180,180);
+    border-radius: 8px;
+    background:rgba(250,250,250,1);
+    box-shadow:2px 0px 2px rgb(180,180,180) inset,
+    0px 3px 3px rgb(180,180,180) inset,
+    -5px -0px 1px rgb(255,255,255) inset,
+    0px -3px 3px rgb(180,180,180) inset;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}   
+.board ul,.board li{
+    list-style: none;
+    margin:0 auto;
+    padding:0 auto;
+    display: block;
+    font-family: "Vrinda";
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.board ul{
+    width:530px;
+    margin-top: 8px;
+    padding-left: 8px;
+}
+.board li{
+    width:29px;
+    height:29px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    background-color: rgb(30,30,30);
+    color: rgb(200,200,200);
+    text-align: center;
+    line-height: 28px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid rgb(70,70,70);
+    box-shadow: 1px 0px 0px rgb(0,0,0),
+    0px 1px 0px rgb(0,0,0),
+    -1px 0px 0px rgb(0,0,0),
+    0px -1px 0px rgb(0,0,0);
+}
+.board li:nth-child(-n+14):nth-child(n+1){
+    width:30px;
+    height:15px;
+}
+.board li:nth-child(-n+27):nth-child(n+16){
+    /*box-sizing: border-box;
+    padding-top: 4px;*/
+}
+.board li:nth-child(-n+26):nth-child(n+15) span,
+.board li:nth-child(27) span,
+.board li:nth-child(40) span,
+.board li:nth-child(41) span,
+.board li:nth-child(42) span,
+.board li:nth-child(53) span,
+.board li:nth-child(54) span,
+.board li:nth-child(-n+66):nth-child(n+64) span{
+    display: block;
+    margin-top: 5px;
+    line-height: 0.5; 
+}
+.board li:nth-child(28),.board li:nth-child(29){
+    width:45px;
+}
+.board li:nth-child(43),.board li:nth-child(55){
+    width:55px;
+}
+.board li:nth-child(56),.board li:nth-child(67){
+    width:73px;
+}
+.board li:nth-child(-n+74):nth-child(n+68){
+    height:33px;
+}
+.board li:nth-child(72){
+    width:173px;
+}
+.board li:nth-child(71),.board li:nth-child(73){
+    width:37px;
+}
+.board li:nth-child(75),.board li:nth-child(77),.board li:nth-child(78){
+    margin-top: 18px;
+    height: 14px;
+}
+.board li:nth-child(76){
+    height: 13px;
+    margin-top: 19px;
+}
+.board li:nth-child(78){
+    position: absolute;
+    bottom: 22px;
+    right:38px;
+}
+.board .touch{
+    position: absolute;
+    width:200px;
+    height:150px;
+    border: 2px solid rgb(190,190,190);
+    bottom: 23px;
+    left: 200px;
+    border-radius: 8px;
+</style>
 
 <div id="highlights">
   <div class="inner">
@@ -52,7 +305,6 @@
       <p>这不是</p>
       <p>我们想要的</p>
     </div>
-
     <div class="point">
       <h2><img src="/images/simple.png" height="50" /></h2>
       <p>We just want to write code</p>
@@ -61,22 +313,49 @@
       <p>左手代码右手年华</p>
     </div>
   </div>
-  <div class="inner-code">
-    <figure class="highlight php"><table><tbody><tr><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$composer = <span class="keyword">require_once</span> dirname ( <span class="keyword">__DIR__</span> ) . <span class="string">'/vendor/autoload.php'</span>;</div><div class="line">queryyetsimple\bootstrap\project::singletons ( $composer );</div></pre></td></tr></tbody></table></figure>
-  </div>
+
+
   <div class="inner">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <img height="55" src="/images/query-yet-simple-left.png" />
-        </div>
-        <div class="col">
-          <img height="55"src="/images/query-yet-simple-right.png" />
-        </div>
-      </div>
+
+    <div class="point">
+      <h2>框架理念</h2>
+      <p>值得托付的使命感，让每一个 PHP 应用都有一个好框架。</p>
+    </div>
+
+
+    <div class="point">
+      <h2>组件系统</h2>
+      <p>框架底层由独立的高内聚低耦合组件构成，可以轻松无侵入接入现有系统。</p>
+    </div>
+
+    <div class="point">
+      <h2>路由系统</h2>
+      <p>框架提供 MVC 自动路由和基于 OpenApi 3.0 规范的 swagger-php 注解路由，文档路由一步搞定。</p>
+    </div>
+
+    <div class="point">
+      <h2>整体解决方案</h2>
+      <p>框架提供了从缓存、Session、IOC 容器、模板引擎、Ddd ORM 等大量开箱即用的功能，提供了基于 Symfony Console 命令行工具集。</p>
+    </div>
+
+    <div class="point">
+      <h2>框架常驻</h2>
+      <p>我们基于 Zephir 开发整个系统核心组件的扩展版本，与 PHP 功能完全一致，无需修改任何代码即可性能加倍。</p>
+    </div>
+
+    <div class="point">
+      <h2>业务常驻</h2>
+      <p>基于 Swoole 4 开发，我们的远景是少量代码或者无修改，让你的业务撑起更多的用户服务。</p>
     </div>
   </div>
-</div>
+
+ <div class="inner-code">
+
+  <h1 style="margin:10px 0px 0px 38px">
+        Why is QueryPHP ?
+      </h1>
+<figure class="highlight php"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Common</span>\<span class="title">Domain</span>\<span class="title">Entity</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Leevel</span>\<span class="title">Database</span>\<span class="title">Ddd</span>\<span class="title">Entity</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dream</span> <span class="keyword">extends</span> <span class="title">Entity</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">const</span> TABLE = <span class="string">'test'</span>;</span><br><span class="line">    <span class="keyword">const</span> ID = <span class="string">'id'</span>;</span><br><span class="line">    <span class="keyword">const</span> AUTO = <span class="string">'id'</span>;</span><br><span class="line">    <span class="keyword">const</span> STRUCT = [</span><br><span class="line">        <span class="string">'id'</span> =&gt; [</span><br><span class="line">            <span class="string">'name'</span> =&gt; <span class="string">'id'</span>,</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">'name'</span> =&gt; [</span><br><span class="line">            <span class="string">'name'</span>     =&gt; <span class="string">'name'</span>,</span><br><span class="line">            <span class="string">'readonly'</span> =&gt; <span class="keyword">true</span>,</span><br><span class="line">        ],</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> $id;</span><br><span class="line">    <span class="keyword">protected</span> $name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The old dream of changing the world.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@with</span>  QueryPHP</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">changeTheWorld</span><span class="params">()</span>: <span class="title">string</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">// Starts from this moment.</span></span><br><span class="line">        <span class="keyword">return</span> sprintf(<span class="string">'Hi %s, remember your old dream?'</span>, <span class="keyword">$this</span>-&gt;name);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+        </div>
 
 <div id="sponsors">
   <div class="inner">
