@@ -153,7 +153,7 @@
       videoModal.classList.toggle('open')
       document.body.classList.toggle('stop-scroll')
       document.body.appendChild(overlay)
-      videoWrapper.innerHTML = '<iframe style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;" src="http://47.98.160.139/queryphp.mp4" frameborder="0" allowfullscreen></iframe>'
+      videoWrapper.innerHTML = '<iframe style="height: 100%; left: 0; position: absolute; top: 0; width: 100%;" src="//player.youku.com/embed/XMzg2NjAwMjM2NA==?client_id=8ff7b01be88850bf&password=&autoplay=true" frameborder="0" allow="autoplay" allowfullscreen></iframe>'
       isOpen = true
     })
 
