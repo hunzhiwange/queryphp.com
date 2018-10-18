@@ -1,12 +1,5 @@
 .DS_Store
-Thumbs.db
-db.json
+node_modules
 *.log
-node_modules/
-public/
-.deploy*/
-src/_drafts
-.buildpath
-.project
-.settings
-package-lock.json
+.temp
+vuepress
