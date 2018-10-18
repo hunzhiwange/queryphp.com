@@ -1,9 +1,0 @@
-site_description: "QueryPHP - The PHP Framework For Code Poem As Free As Wind"
-root_domain: queryphp.com
-vue_version: 4.0.0
-tags: /tags
-
-# html languages
-language:
-- zh-CN
-- en
