@@ -17,6 +17,6 @@ git add -A
 git commit -m 'deploy'
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:hunzhiwange/queryphp.com.git master:gh-pages
+git push git@github.com:hunzhiwange/queryphp.com.git gh-pages
 
 cd -
