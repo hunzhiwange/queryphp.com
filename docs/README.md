@@ -2,7 +2,7 @@
 home: true
 heroImage: /hero.png
 actionText: 快速上手 →
-actionLink: /guide/
+actionLink: https://github.com/hunzhiwange/queryphp
 features-bak:
 - title: 框架理念
   details: 值得托付的使命感，让每一个 PHP 应用都有一个好框架。
