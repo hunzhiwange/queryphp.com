@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  dest: '../../vuepress',
+  dest: 'vuepress',
   locales: {
     '/': {
       lang: 'zh-CN',
