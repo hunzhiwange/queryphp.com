@@ -21,4 +21,4 @@ git push -f git@github.com:hunzhiwange/queryphp.com.git master:gh-pages
 
 cd -
 
-git clone -b gh-pages git@github.com:hunzhiwange/queryphp.com.git .deploy
+#git clone -b gh-pages git@github.com:hunzhiwange/queryphp.com.git .deploy
