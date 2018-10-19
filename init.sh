@@ -17,7 +17,7 @@ git add -A
 git commit -m 'first commit'
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git -f push git@github.com:hunzhiwange/queryphp.com.git master:gh-pages
+git push -f git@github.com:hunzhiwange/queryphp.com.git master:gh-pages
 
 cd -
 
