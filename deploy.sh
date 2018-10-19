@@ -3,27 +3,20 @@
 # 确保脚本抛出遇到的错误
 set -e
 
+commit=$(date "+Update site %Y-%m-%d %H:%M:%S")
+
 # 生成静态文件
 npm run build
 
-# 拉取 git 仓库
-if [ test -d 文件夹名称 ] ; then
-echo "文件夹存在！"
-else
-echo "文件夹不存在！"
-fi
-
 # 进入生成的文件夹
-cd vuepress
+cp -rf ./vuepress/* ./.deploy/
 
-# 如果是发布到自定义域名
-echo 'www.queryphp.com' > CNAME
+cd .deploy
 
-#git init
 git add -A
-git commit -m 'deploy'
+git commit -m "$commit"
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push git@github.com:hunzhiwange/queryphp.com.git gh-pages
+git -f push git@github.com:hunzhiwange/queryphp.com.git gh-pages
 
 cd -

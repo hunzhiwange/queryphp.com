@@ -9,6 +9,7 @@ Start a dev server at `localhost:8081`:
 ```
 $ yarn add -D vuepress # or npm install -D vuepress
 $ yarn run dev # or npx vuepress dev docs
+& sh ./init.sh # need remove note
 ```
 
 ## Publish
