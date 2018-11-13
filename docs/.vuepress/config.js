@@ -21,7 +21,7 @@ module.exports = {
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
   themeConfig: {
-    repo: 'hunzhiwange/queryphp',
+    repo: 'hunzhiwange/queryphp.com',
     editLinks: true,
     docsDir: 'docs',
     // #697 Provided by the official algolia team.

@@ -1,55 +1,158 @@
-# 介绍222222222222
+# 介绍
 
-VuePress 由两部分组成：一部分是支持用 Vue 开发主题的极简静态网站生成器，另一个部分是为书写技术文档而优化的默认主题。它的诞生初衷是为了支持 Vue 及其子项目的文档需求。
+::: tip The PHP Framework For Code Poem As Free As Wind
+始于二零一零，八年磨一剑
+:::
 
-每一个由 VuePress 生成的页面都带有预渲染好的 HTML，也因此具有非常好的加载性能和搜索引擎优化（SEO）。同时，一旦页面被加载，Vue 将接管这些静态内容，并将其转换成一个完整的单页应用（SPA），其他的页面则会只在用户浏览到的时候才按需加载。
+QueryPHP 是一款现代化的高性能 PHP 7 常驻框架，以工程师用户体验为历史使命，让每一个 PHP 应用都有一个好框架。
 
-## 它是如何工作的？2
+百分之百单元测试覆盖直面 Bug 一剑封喉，基于 Zephir 实现框架常驻，依托 Swoole 生态实现业务常驻，此刻未来逐步渐进。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，让您的业务撑起更多的用户服务。
 
-事实上，一个 VuePress 网站是一个由 [Vue](http://vuejs.org/)、[Vue Router](https://github.com/vuejs/vue-router) 和 [webpack](http://webpack.js.org/) 驱动的单页应用。如果你以前使用过 Vue 的话，当你在开发一个自定义主题的时候，你会感受到非常熟悉的开发体验，你甚至可以使用 Vue DevTools 去调试你的自定义主题。
+::: tip 两年重构，只为更好的自己
+QueryPHP 基于一款成立于 2010 年的 PHP 框架 [DoYouHaoBaby](https://raw.githubusercontent.com/hunzhiwange/framework/master/doyouhaobaby-googlecode.jpg/) 开发，继承了上一代产品的优秀之处，彻底革新并进行了长达 2 年重构.
 
-在构建时，我们会为应用创建一个服务端渲染（SSR）的版本，然后通过虚拟访问每一条路径来渲染对应的HTML。这种做法的灵感来源于 [Nuxt](https://nuxtjs.org/) 的 `nuxt generate` 命令，以及其他的一些项目，比如 [Gatsby](https://www.gatsbyjs.org/)。
+在这个基础上，我们引入了 Laravel、Symfony 等框架现代化先进特性，站在巨人的肩膀上保持创新。
+:::
+
+## 它是如何工作的？
+
+QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式，它既可以运行在 php-fpm 场景，也可以将框架核心编译成 C 扩展，同时还支持在 swoole 服务中运行。
+
+### 运行在 php-fpm 场景或者 PHP 内置 webserver
+
+事实上，QueryPHP 也是一个普通的 PHP 框架，目前最低版本要求 PHP 7.1.3，我们对环境并没有特别的要求。
+
+ * PHP ^7.1.3
+ * ext-mbstring [字符处理](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Support/Str.php)
+ * ext-openssl [加密组件](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Encryption/Encryption.php)
+
+我们系统依赖的组件可以通过 [composer.json](https://github.com/hunzhiwange/queryphp/blob/master/composer.json) 找到，我们提供了大量开箱即用的功能。
+
+```
+~ $ php leevel server
+# => Now visite http://127.0.0.1:9527/
+```
+
+上面就是运行在 PHP 内置 webserver 中，也可以用 nginx 搭建站点。
+
+### 框架编译成 C 扩展
+
+我们为了更好的性能，为整个 QueryPHP 的核心开发了一套可选的 C 扩展，它不是必须要安装的。
+
+Leevel 是一个开源 PHP C 扩展开发框架，采用 zephir 编写，是为了解决使用框架带来性能下降的经典矛盾，Leevel 是为了解决 QueryPHP 性能而开发，可以与同版本的 QueryPHP 混合使用，将接管 composer 中的 PHP 版本功能。
+
+它是如何做到接管 composer 中的底层核心的呢。
+
+我们访问一个类, composer 根据 psr4 规则去搜索到我们文件而载入，如下的脚本会被载入。
+
+[Leevel/Di/Container.php](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Di/Container.php)
+
+```
+<?php
+
+use Leevel\Di\Container;
+
+...
+$container = new Container();
+$container->instance('foo', 'bar');
+var_dump($container->make('foo')); // bar
+...
+```
+
+如果我们存在一个扩展就提供了这样一个类并随着 PHP 常驻，是不是性能不错，实际上是可以，QueryPHP 选择了 zephir 来实现。
+
+[leevel/di/container.zep](https://github.com/hunzhiwange/leevel/blob/master/leevel/di/container.zep)
+
+
+实际上会被编译成 C，被最终被编译成 PHP 扩展。
+
+[leevel/di/container.zep.c](https://github.com/hunzhiwange/leevel/blob/master/ext/leevel/di/container.zep.c)
+
+这样子,不需要修改代码直接提升性能。
+
+#### Windows 系统
+
+暂未提供 dll.
+
+#### Linux 操作系统
+
+下载源代码.
+
+```
+git clone git@github.com:hunzhiwange/leevel.git
+cd ext
+```
+
+编译扩展.
+
+```
+$/path/to/phpize
+$./configure --with-php-config=/path/to/php-config
+$make && make install
+```
+
+将扩展添加到你的 php.ini, 使用 php -m 查看扩展是否被安装.
+
+```
+extension = leevel.so
+```
+
+### 运行在 Swoole 环境中
+
+swoole 的问世对于 PHP 后端来说是一种福音，swoole 4.1 已经开始支持原始 pdo,redis 协程，支持 swoole 势在必行。已经做了一些基础工作，对于第一个版本我们要完善单元测试，所以下一个版本主要支持 swoole。
+
+```
+php leevel swoole:http
+```
+
+::: warning
+Swoole 部分在第一个版本被撤下来了，后面回归。
+:::
 
 ## 特性
 
-- 为技术文档而优化的 [内置 Markdown 拓展](markdown.md)
-- [在 Markdown 文件中使用 Vue 组件的能力](using-vue.md)
-- [Vue 驱动的自定义主题系统](custom-themes.md)
-- [自动生成 Service Worker](../config/README.md#serviceworker)
-- [Google Analytics 集成](../config/README.md#ga)
-- [基于 Git 的 “最后更新时间”](../theme/default-theme-config.md#最后更新时间)
-- [多语言支持](i18n.md)
-- 默认主题包含：
-  - 响应式布局
-  - [可选的主页](../theme/default-theme-config.md#首页)
-  - [简洁的开箱即用的标题搜索](../theme/default-theme-config.md#内置搜索)
-  - [Algolia 搜索](../theme/default-theme-config.md#algolia-搜索)
-  - 可自定义的[导航栏](../theme/default-theme-config.md#导航栏) 和[侧边栏](../theme/default-theme-config.md#侧边栏)
-  - [自动生成的 GitHub 链接和页面的编辑链接](../theme/default-theme-config.md#git-仓库和编辑链接)
+- 框架理念 (值得托付的使命感，让每一个 PHP 应用都有一个好框架。)
+- 组件系统 ([框架底层由独立的高内聚低耦合组件构成，可以轻松无侵入接入现有系统。](https://packagist.org/packages/leevel/))
+- 路由系统 ([框架提供 MVC 自动路由并能够智能解析 Restful 请求和基于 OpenApi 3.0 规范的 swagger-php 注解路由，文档路由一步搞定。](https://www.v2ex.com/t/492979#reply3))
+- 整体解决方案 (框架提供了从缓存、Session、IOC 容器、模板引擎、Ddd ORM 等大量开箱即用的功能，提供了基于 Symfony Console 命令行工具集。)
+- 框架常驻 ([Leevel 可选扩展接管底层核心](https://github.com/hunzhiwange/leevel))
+- 业务常驻 (基于 Swoole 4 开发，我们的愿景是少量代码或者无修改，让你的业务撑起更多的用户服务。)
+- 百分之百单元测试覆盖（[单元测试一直是国产 PHP 开源项目的痛](https://github.com/hunzhiwange/framework/tree/master/tests)）
+- 拜师国外现代化框架 ([从 Laravel、Symfony 吸收大量特性，也包含其它的框架.](https://github.com/hunzhiwange/framework/blob/master/LICENSE))
+- PHP 7 严格模式 （每一个 PHP 脚本都是 strict_types = 1） 
+- PHP 7 类型提示 （仅可能为每一个方法提供确定的参数类型和返回值类型）
+- 依赖注入 （完整实现，关键 mvc、命令行脚本、事件监听器全部接入 IOC）
+- 领域驱动设计 （在妖怪的 QeePHP 基础上保持创新，提供了 UnitOfWork[事务工作单元]、Repository[仓储]、Specification[查询规约]，Entity getter setter[领域实体或叫模型] ）
+- more...
 
 ## Todo
 
-VuePress 仍然处于开发中，这里有一些目前还不支持、但已经在计划中的特性：
+QueryPHP 仍然处于开发中，这里有一些目前还不支持、但已经在计划中的特性：
 
-- 插件
-- 博客系统
+- 基于 Vue + IView 通用权限系统
+- 完善 Swoole
+- 开发文档
 
-我们欢迎你为 VuePress 的开发作出贡献。
+我们欢迎你为 QueryPHP 的开发作出贡献。
 
 ## 为什么不是...?
 
-### Nuxt
+### Laravel
 
-VuePress 能做的事情，Nuxt 理论上确实能够胜任，但 Nuxt 是为构建应用程序而生的，而 VuePress 则专注在以内容为中心的静态网站上，同时提供了一些为技术文档定制的开箱即用的特性。
+Laravel 是一个非常优秀的框架，拥有非常庞大的社区，实际上 QueryPHP 大量吸收了 Laravel 的一些优秀特性。一致依赖 Laravel 性能确实为人诟病，QueryPHP 开发了一个 Leevel 来解决这一部分问题，用 Laravel 没错，QueryPHP 只是其中一个选择。
 
-### Docsify / Docute
+### Symfony
 
-这两个项目同样都是基于 Vue，然而它们都是完全的运行时驱动，因此对 SEO 不够友好。如果你并不关注 SEO，同时也不想安装大量依赖，它们仍然是非常好的选择！
+Symfony 实际上是 PHP 社区事实标准，QueryPHP 底层大量使用 Symfony 的基础组件例如 console、finder 等，Symfony 可以与 QueryPHP 更好地结合。
 
-### Hexo
+### ThinkPHP 
 
-Hexo 一直驱动着 Vue 的文档 —— 事实上，在把我们的主站从 Hexo 迁移到 VuePress 之前，我们可能还有很长的路要走。Hexo 最大的问题在于他的主题系统太过于静态以及过度地依赖纯字符串，而我们十分希望能够好好地利用 Vue 来处理我们的布局和交互，同时，Hexo 的 Markdown 渲染的配置也不是最灵活的。
+ThinkPHP 是我最佩服的一个国产 PHP 框架，10 多年来还在持续不断的革新，国内很少有生命力这么久的框架。我在 2010 年就通读了 ThinkPHP 2.0 代码，在后面工作中主要也是使用 ThinkPHP 3 系列，有苦也有乐。加油！
 
-### GitBook
+### Phalcon & Yaf
 
-我们的子项目文档一直都在使用 GitBook。GitBook 最大的问题在于当文件很多时，每次编辑后的重新加载时间长得令人无法忍受。它的默认主题导航结构也比较有限制性，并且，主题系统也不是 Vue 驱动的。GitBook 背后的团队如今也更专注于将其打造为一个商业产品而不是开源工具。
+Phalcon 与 Yaf 世界上最快的 PHP 框架，Yaf 很轻，Phalcon 很重，它们都是世界级的框架。
+
+QueryPHP 选择一部分由 PHP 编写，一部分编译成扩选扩展 Leevel。
+
+Leevel 位于 Yaf 和 Phalcon 轻重之间，是一种可选的方案。
