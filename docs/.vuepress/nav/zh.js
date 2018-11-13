@@ -4,6 +4,10 @@ module.exports = [
     link: 'https://www.leevel.vip/',
   },
   {
+    text: 'API 文档',
+    link: 'https://api.queryphp.com/',
+  },
+  {
     text: '社区',
     items: [
       {
