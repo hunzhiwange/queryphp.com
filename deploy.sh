@@ -17,6 +17,6 @@ git add -A
 git commit -m "$commit"
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git -f push git@github.com:hunzhiwange/queryphp.com.git gh-pages
+git push git@github.com:hunzhiwange/queryphp.com.git gh-pages
 
 cd -
