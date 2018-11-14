@@ -2,6 +2,7 @@ const path = require('path')
 
 module.exports = {
   dest: 'vuepress',
+  port: 8088,
   locales: {
     '/': {
       lang: 'zh-CN',
@@ -37,7 +38,8 @@ module.exports = {
           lastUpdated: '上次更新',
           nav: require('./nav/zh'),
           sidebar: {
-            '/guide/': genSidebarConfig('指南')
+            '/guide/': genSidebarConfig('指南', '深入'),
+            '/docs/': genSidebarConfigDoc(),
           }
       }
     }
@@ -63,15 +65,97 @@ function genSidebarConfig (title) {
       collapsable: false,
       children: [
         '',
-        /*'getting-started',
-        'directory-structure',
-        'permalinks',
-        'basic-config',
-        'assets',
-        'markdown',
-        'using-vue',
-        'i18n',
-        'deploy'*/
+      ]
+    }
+  ]
+}
+
+function genSidebarConfig (groupA, groupB) {
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      children: [
+        ''
+      ]
+    },
+    {
+      title: groupB,
+      collapsable: false,
+      children: [
+        'deploy'
+      ]
+    }
+  ]
+}
+
+function genSidebarConfigDoc () {
+  return [
+    {
+      title: '序言',
+      collapsable: false,
+      children: [
+        ''
+      ]
+    },
+    {
+      title: '模板引擎',
+      collapsable: false,
+      children: [
+        'template/',
+        'template/var',
+        'template/assign',
+        'template/quick',
+        'template/if',
+        'template/for',
+        'template/list',
+        'template/while',
+        'template/break',
+        'template/php',
+        'template/include',
+        'template/css',
+        'template/tagself',
+      ]
+    },
+    {
+      title: '数据库',
+      collapsable: false,
+      children: [
+        'database/',
+        'database/create/insert',
+        'database/create/insertall',
+        'database/delete/delete',
+        'database/update/update',
+        'database/update/updatecolumn',
+        'database/update/updateincrease',
+        'database/update/updatedecrease',
+        'database/read/aggregate',
+        'database/read/find',
+        'database/read/findall',
+        'database/read/findone',
+        'database/read/finddynamics',
+        'database/read/select',
+        'database/read/lists',
+        'database/read/valuepull',
+        'database/query/flow',
+        'database/query/sql',
+        'database/query/table',
+        'database/query/columns',
+        'database/query/where',
+        'database/query/prefix',
+        'database/query/forceindex',
+        'database/query/bind',
+        'database/query/join',
+        'database/query/union',
+        'database/query/orderby',
+        'database/query/groupby',
+        'database/query/having',
+        'database/query/distinct',
+        'database/query/aggregate',
+        'database/query/limit',
+        'database/query/forupdate',
+        'database/query/reset',
+        'database/truncate',
       ]
     }
   ]

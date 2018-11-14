@@ -538,7 +538,7 @@ export default {
 }
 
 .home .hero .description {
-     max-width: 100%;
+    max-width: 100%;
     font-size: 3.6rem;
 }
 

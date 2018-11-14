@@ -1,7 +1,7 @@
 module.exports = [
   {
     text: '开发文档',
-    link: 'https://www.leevel.vip/',
+    link: '/docs/',
   },
   {
     text: 'API 文档',
