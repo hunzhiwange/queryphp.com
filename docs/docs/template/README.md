@@ -1,4 +1,8 @@
-# 概述
+---
+title: 概述
+---
+
+# 模板
 
 QueryPHP 内置三种方式的模板引擎，一种是类似于 `smart` 模板的 Code 语法，一种是 HTML 标签式的 Node 语法，例外还有一种类 Javascript 的语法与 Twig 比较相似。
 

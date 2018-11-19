@@ -38,7 +38,7 @@ module.exports = {
           lastUpdated: '上次更新',
           nav: require('./nav/zh'),
           sidebar: {
-            '/guide/': genSidebarConfig('指南', '深入'),
+            '/guide/': genSidebarConfig(),
             '/docs/': genSidebarConfigDoc(),
           }
       }
@@ -70,20 +70,13 @@ function genSidebarConfig (title) {
   ]
 }
 
-function genSidebarConfig (groupA, groupB) {
+function genSidebarConfig () {
   return [
     {
-      title: groupA,
+      title: '指南',
       collapsable: false,
       children: [
         ''
-      ]
-    },
-    {
-      title: groupB,
-      collapsable: false,
-      children: [
-        'deploy'
       ]
     }
   ]
@@ -99,7 +92,24 @@ function genSidebarConfigDoc () {
       ]
     },
     {
-      title: '模板引擎',
+      title: '入门',
+      collapsable: false,
+      children: [
+        'started/',
+        'started/install',
+        'started/specification',
+        'started/directory',
+      ]
+    },
+    {
+      title: '路由',
+      collapsable: false,
+      children: [
+        'router/',
+      ]
+    },
+    {
+      title: '模板',
       collapsable: false,
       children: [
         'template/',

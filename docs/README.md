@@ -341,9 +341,9 @@ class Dream extends Entity
     private $id;
 
     /**
-     * id.
+     * name.
      *
-     * @var int
+     * @var string
      */
     private $name;
 

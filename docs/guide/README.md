@@ -139,7 +139,7 @@ QueryPHP 仍然处于开发中，这里有一些目前还不支持、但已经�
 
 ### Laravel
 
-Laravel 是一个非常优秀的框架，拥有非常庞大的社区，实际上 QueryPHP 大量吸收了 Laravel 的一些优秀特性。一致依赖 Laravel 性能确实为人诟病，QueryPHP 开发了一个 Leevel 来解决这一部分问题，用 Laravel 没错，QueryPHP 只是其中一个选择。
+Laravel 是一个非常优秀的框架，拥有非常庞大的社区，实际上 QueryPHP 大量吸收了 Laravel 的一些优秀特性。一直以来 Laravel 性能确实为人诟病，QueryPHP 开发了一个 Leevel 来解决这一部分问题，用 Laravel 没错，QueryPHP 只是其中一个选择。
 
 ### Symfony
 
