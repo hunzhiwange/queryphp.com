@@ -50,7 +50,7 @@ $cd /data/codes/queryphp
 $php-cs-fixer fix --config=.php_cs.dist
 ```
 
-### 结合 `Git` Hooks 结合来格式化代码：
+### 结合 `Git` Hooks 来格式化代码：
 
 ```
 /data/codes/queryphp/build/pre-commit.sh

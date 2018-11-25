@@ -12,7 +12,7 @@ QueryPHP 有一个非常独特的地方就是路由设计与其它框架有点�
 
 ### Laravel 5
 
-```
+``` php
 Route::middleware(['first', 'second'])->group(function () {
     Route::get('/', function () {
     });
@@ -24,7 +24,7 @@ Route::middleware(['first', 'second'])->group(function () {
 
 ### ThinkPHP 5
 
-```
+``` php
 Route::group('blog', function () {
     Route::rule(':id', 'blog/read');
     Route::rule(':name', 'blog/read');
@@ -33,7 +33,7 @@ Route::group('blog', function () {
 
 ### FastRoute
 
-```
+``` php
 $r->addRoute('GET', '/user/{id:\d+}', 'handler');
 $r->addRoute('GET', '/user/{name}', 'handler');
 $r->addRoute('GET', '/user/{name:.+}', 'handler');
@@ -206,7 +206,7 @@ public function petLeevelForApi($petId)
 
 VS Laravel:
 
-```
+``` php
 Route::get('/', function () {
 });
 ```
