@@ -119,8 +119,8 @@ Swoole 部分在第一个版本被撤下来了，后面回归。
 - 业务常驻 (基于 Swoole 4 开发，我们的愿景是少量代码或者无修改，让你的业务撑起更多的用户服务。)
 - 百分之百单元测试覆盖（[单元测试一直是国产 PHP 开源项目的痛](https://github.com/hunzhiwange/framework/tree/master/tests)）
 - 拜师国外现代化框架 ([从 Laravel、Symfony 吸收大量特性，也包含其它的框架.](https://github.com/hunzhiwange/framework/blob/master/LICENSE))
-- PHP 7 严格模式 （每一个 PHP 脚本都是 strict_types = 1） 
-- PHP 7 类型提示 （仅可能为每一个方法提供确定的参数类型和返回值类型）
+- PHP 7 严格模式 （每一个 PHP 脚本都是 strict_types = 1）
+- PHP 7 类型提示 (尽可能为每一个方法提供确定的参数类型和返回值类型）
 - 依赖注入 （完整实现，关键 mvc、命令行脚本、事件监听器全部接入 IOC）
 - 领域驱动设计 （在妖怪的 QeePHP 基础上保持创新，提供了 UnitOfWork[事务工作单元]、Repository[仓储]、Specification[查询规约]，Entity getter setter[领域实体或叫模型] ）
 - more...
@@ -145,7 +145,7 @@ Laravel 是一个非常优秀的框架，拥有非常庞大的社区，实际上
 
 Symfony 实际上是 PHP 社区事实标准，QueryPHP 底层大量使用 Symfony 的基础组件例如 console、finder 等，Symfony 可以与 QueryPHP 更好地结合。
 
-### ThinkPHP 
+### ThinkPHP
 
 ThinkPHP 是我最佩服的一个国产 PHP 框架，10 多年来还在持续不断的革新，国内很少有生命力这么久的框架。我在 2010 年就通读了 ThinkPHP 2.0 代码，在后面工作中主要也是使用 ThinkPHP 3 系列，有苦也有乐。加油！
 
