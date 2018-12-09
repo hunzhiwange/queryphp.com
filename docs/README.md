@@ -38,8 +38,8 @@ footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
 
 <div class="board">
     <div class="blackbar"></div>
-    <div style="position:absolute;left:95px;top:45px;font-size:25px;font-weight:500;">The PHP Framework For Code Poem As Free As Wind.</div>
-    <div class="features" style="text-align:center;padding-top:70px;padding-left:15px;">
+    <div style="position: relative;left: 95px;top: 45px;font-size: 25px;font-weight: 500;">The PHP Framework For Code Poem As Free As Wind.</div>
+    <div class="features" style="text-align: center;padding-top: 0px;padding-left: 15px;border-top: none;">
      <div class="feature" style="max-width:40%;text-align:center;">
       <p><a id="modal-player" class="button has-icon" href="javascript:;">
        <img height="40px" width="40px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
