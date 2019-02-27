@@ -6,7 +6,7 @@ set -e
 commit=$(date "+Update site %Y-%m-%d %H:%M:%S")
 
 # 生成静态文件
-npm run build
+yarn build
 
 # 进入生成的文件夹
 cp -rf ./vuepress/* ./.deploy/
