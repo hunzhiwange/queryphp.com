@@ -167,6 +167,13 @@ function genSidebarConfigDoc () {
         'database/query/reset',
         'database/truncate',
       ]
+    },
+    {
+      title: '组件',
+      collapsable: false,
+      children: [
+        'component/support/str',
+      ]
     }
   ]
 }

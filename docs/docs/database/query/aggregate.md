@@ -1,99 +1,258 @@
 # 查询语言.aggregate
 
+数据库聚合查询功能。
+
+**引入相关类**
+
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
 ## 记录数量 count
 
+计算记录数量。
+
+`函数原型`
+
+
 ``` php
-# 函数原型
-# public function count($strField = '*', $sAlias = 'row_count');
-
-# SELECT COUNT(`test`.*) AS row_count FROM `test` LIMIT 1
-Db::table('test')->
-
-count()->
-
-getOne();
-
-# SELECT COUNT(`test`.`id`) AS row_count FROM `test` LIMIT 1
-Db::table('test')->
-
-count('id')->
-
-getOne();
-
-# SELECT COUNT(`test`.`id`) AS count1 FROM `test` LIMIT 1
-Db::table('test')->
-
-count('id', 'count1')->
-
-getOne();
-
-# SELECT COUNT(`test`.`id`*50) AS count1 FROM `test` LIMIT 1
-Db::table('test')->
-
-count('{[id]*50}', 'count1')->
-
-getOne();
+public function findCount(string $field = '*', string $alias = 'row_count', bool $flag = false);
 ```
+
+
+::: tip
+可使用 `findCount()` 或者 `count()->find()` 来统计记录行。
+:::
+
+
+``` php
+public function testBaseUse()
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+[
+    "SELECT COUNT(*) AS row_count FROM `test` LIMIT 1",
+    [],
+    false,
+    null,
+    null,
+    []
+]
+eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect->table('test')->
+
+            count()->
+
+            findOne(true)
+        )
+    );
+
+    $sql = <<<'eot'
+[
+    "SELECT COUNT(`test`.`id`) AS row_count FROM `test` LIMIT 1",
+    [],
+    false,
+    null,
+    null,
+    []
+]
+eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect->table('test')->
+
+            count('id')->
+
+            findOne(true),
+            1
+        )
+    );
+
+    $sql = <<<'eot'
+[
+    "SELECT COUNT(`test`.`id`) AS count1 FROM `test` LIMIT 1",
+    [],
+    false,
+    null,
+    null,
+    []
+]
+eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect->table('test')->
+
+            count('id', 'count1')->
+
+            findOne(true),
+            2
+        )
+    );
+
+    $sql = <<<'eot'
+[
+    "SELECT COUNT(`test`.`id`*50) AS count1 FROM `test` LIMIT 1",
+    [],
+    false,
+    null,
+    null,
+    []
+]
+eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect->table('test')->
+
+            count('{[id]*50}', 'count1')->
+
+            findOne(true),
+            3
+        )
+    );
+}
+```
+
 
 ## 平均值 avg
 
+计算平均值。
+
 ``` php
-# 函数原型
-public function avg($strField, $sAlias = 'avg_value');
+public function testAvg()
+{
+    $connect = $this->createDatabaseConnectMock();
 
-# SELECT AVG(`test`.`id`) AS avg_value FROM `test`
-Db::table('test')->
+    $sql = <<<'eot'
+[
+    "SELECT AVG(`test`.`id`) AS avg_value FROM `test` LIMIT 1",
+    [],
+    false,
+    null,
+    null,
+    []
+]
+eot;
 
-avg('id')->
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect->table('test')->
 
-getOne();
-    
-# SELECT AVG(`test`.`num1`*`test`.`num2`) AS avg_value FROM `test` 
-Db::table('test')->
+            avg('id')->
 
-avg('{[num1]*[num2]}')->
-
-getOne();
+            findOne(true)
+        )
+    );
+}
 ```
+
 
 ## 最大值 max
 
+计算最大值。
+
 ``` php
-# 函数原型
-# public function max($strField, $sAlias = 'max_value');
+public function testMax()
+{
+    $connect = $this->createDatabaseConnectMock();
 
-# SELECT MAX(`test`.`num`) AS max_value FROM `test`
-Db::table('test')->
+    $sql = <<<'eot'
+[
+    "SELECT MAX(`test`.`num`) AS max_value FROM `test` LIMIT 1",
+    [],
+    false,
+    null,
+    null,
+    []
+]
+eot;
 
-max('num')->
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect->table('test')->
 
-getOne();
+            max('num')->
+
+            findOne(true)
+        )
+    );
+}
 ```
+
 
 ## 最小值 min
 
+计算最小值。
+
 ``` php
-# 函数原型
-# public function min($strField, $sAlias = 'min_value');
+public function testMin()
+{
+    $connect = $this->createDatabaseConnectMock();
 
-# SELECT MIN(`test`.`num`) AS min_value FROM `test`
-Db::table('test')->
+    $sql = <<<'eot'
+[
+    "SELECT MIN(`test`.`num`) AS min_value FROM `test` LIMIT 1",
+    [],
+    false,
+    null,
+    null,
+    []
+]
+eot;
 
-min('num')->
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect->table('test')->
 
-getOne();
+            min('num')->
+
+            findOne(true)
+        )
+    );
+}
 ```
+
 
 ## 合计 sum
 
+计算合计。
+
 ``` php
-# 函数原型
-# public function sum($strField, $sAlias = 'sum_value');
+public function testSum()
+{
+    $connect = $this->createDatabaseConnectMock();
 
-# SELECT SUM(`test`.`num`) AS sum_value FROM `test`
-Db::table('test')->
+    $sql = <<<'eot'
+[
+    "SELECT SUM(`test`.`num`) AS sum_value FROM `test` LIMIT 1",
+    [],
+    false,
+    null,
+    null,
+    []
+]
+eot;
 
-sum('num')->
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect->table('test')->
 
-getOne();
+            sum('num')->
+
+            findOne(true)
+        )
+    );
+}
 ```

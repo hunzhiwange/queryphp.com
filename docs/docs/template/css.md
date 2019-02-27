@@ -2,9 +2,18 @@
 
 QueryPHP 支持提供两个简单标签来简化 javascript 和 css 标签输入。
 
-我们在模板中写下如下的代码：
 
-``` html
+
+## 基本使用
+
+我们在模板中写下如下的代码和模板编译后的结果。
+
+``` php
+public function testBaseUse()
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
 {script}
 var hello = 'world';
 {/script}
@@ -13,12 +22,10 @@ var hello = 'world';
 .red {
     color: red;
 }
-{/stle}
-```
+{/style}
+eot;
 
-模板编译后的结果：
-
-``` php
+    $compiled = <<<'eot'
 <script type="text/javascript">
 var hello = 'world';
 </script>
@@ -27,5 +34,9 @@ var hello = 'world';
 .red {
     color: red;
 }
-{/stle}
+</style>
+eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
 ```
