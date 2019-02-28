@@ -119,6 +119,7 @@ function genSidebarConfigDoc () {
         'template/if',
         'template/for',
         'template/list',
+        'template/lists',
         'template/while',
         'template/break',
         'template/php',
