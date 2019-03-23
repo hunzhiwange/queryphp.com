@@ -2,12 +2,13 @@
 
 可以使用 tagself 标签来防止模板标签被解析，在特殊场景非常有用。
 
-
-
 ## 基本使用
 
-我们在模板中写下如下的代码和模板编译后的结果。
 
+::: tip
+上面的 **if 标签** 被 **tagself** 标签包含，因此 **if 标签** 里面的内容并不会被模板引擎解析，而是保持原样输出。
+:::
+    
 ``` php
 public function testBaseUse()
 {
@@ -40,7 +41,3 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-::: tip
-上面的 **if 标签** 被 **tagself** 标签包含，因此 **if 标签** 里面的内容并不会被模板引擎解析，而是保持原样输出。
-:::

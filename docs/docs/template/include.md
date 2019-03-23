@@ -2,8 +2,6 @@
 
 可以使用 include 标签来包含外部的模板文件。
 
-
-
 ## 使用完整文件名包含
 
 使用方法如下：
@@ -14,6 +12,7 @@
 
 
 这种情况下，模板文件名必须包含后缀。
+
 
 
 ``` php
@@ -32,10 +31,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 使用变量定义完整的文件
+
 
 
 ``` php
@@ -56,10 +54,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 包含当前视图目录下的模板文件
+
 
 
 ``` php
@@ -78,12 +75,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 包含其他模块的操作模板
 
 其中模块以目录分隔
+
 
 ``` php
 public function testOtherModule()
@@ -111,12 +107,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 函数表达式支持
 
 为了防止 `.` 被解析为 `->`，需要由 `()` 包裹起来，`file` 内容区的解析规则遵循 `if` 标签的 `condition` 特性。
+
 
 ``` php
 public function testExpr()
@@ -141,4 +136,3 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-

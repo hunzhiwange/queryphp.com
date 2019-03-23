@@ -2,11 +2,9 @@
 
 如果我们需要在模板中使用 for 循环，那么通过 for 标签可以很方便地输出。
 
-
-
 ## code
 
-我们在模板中写下如下的代码和模板编译后的结果。
+
 
 ``` php
 public function testBaseUse()
@@ -28,11 +26,10 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
+    
 ## node 简单版
 
-我们在模板中写下如下的代码和模板编译后的结果。
+
 
 ``` php
 public function testForNode()
@@ -54,11 +51,10 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
+    
 ## node 完整版
 
-我们在模板中写下如下的代码和模板编译后的结果。
+
 
 ``` php
 public function testForNode2()
@@ -79,11 +75,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
+    
 ## JS 风格版: 例 1
 
 最终生成一个 foreach 结果，简单的循环。
+
 
 ``` php
 public function testForJsStyle()
@@ -105,11 +101,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
+    
 ## JS 风格版: 例 2
 
 可以使用逗号分割建和值，逗号连接不能有空格。
+
 
 ``` php
 public function testForJsStyle2()
@@ -131,11 +127,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
+    
 ## JS 风格版: 例 3
 
 可以使用空格分割建和值。
+
 
 ``` php
 public function testForJsStyle3()

@@ -2,12 +2,13 @@
 
 变量是最基本的用法，这里模板引擎做了大量的工作支持更好。
 
-
-
 ## 最简单一个普通变量
 
-我们在模板中写下如下的代码和模板编译后的结果。
 
+::: tip
+模板标签的 “{” 和 “$” 之间不能有任何的空格，否则标签无效。
+:::
+    
 ``` php
 public function testBaseUse()
 {
@@ -25,16 +26,14 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-::: tip
-模板标签的 “{” 和 “$” 之间不能有任何的空格，否则标签无效。
-:::
-
-
+    
 ## JS 风格变量
 
-我们在模板中写下如下的代码和模板编译后的结果。
 
+::: tip
+注意：“{{“ 与内容之间可以有空格,也可以没有，结果一样。
+:::
+    
 ``` php
 public function testJsStyle()
 {
@@ -52,15 +51,10 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-::: tip
-注意：“{{“ 与内容之间可以有空格,也可以没有，结果一样。
-:::
-
-
+    
 ## 输出一个数组
 
-我们在模板中写下如下的代码和模板编译后的结果。
+
 
 ``` php
 public function testArraySupport()
@@ -79,12 +73,10 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## JS 风格输出一个数组
 
-我们在模板中写下如下的代码和模板编译后的结果。
+
 
 ``` php
 public function testJsStyleArraySupport()
@@ -103,12 +95,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 输出一个对象
 
 我们编写这样子一个简单对象，然后再赋值。
+
 
 ``` php
 public function testObject()
@@ -125,18 +116,20 @@ eot;
 eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
- }
+}
 ```
-
-
-
+    
 ## JS 风格输出一个对象
 
 其中 `.` 是一个非常特殊的语法，如果中间没有空格将被解析为对象连接符，否则就是字符串连接符。
 
+::: tip
+`.` 周围有空格表示变量
+:::
+    
 ``` php
- public function testJsStyleObject()
- {
+public function testJsStyleObject()
+{
     $parser = $this->createParser();
 
     // JS 风格输出一个对象
@@ -160,13 +153,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-::: tip
-`.` 周围有空格表示变量
-:::
-
-
+    
 ## 无限级支持
+
 
 
 ``` php
@@ -186,13 +175,15 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 对象点语法支持
 
 为了方便模板定义，对象还可以支持点语法，例如，上面的模板中：
 
+::: tip
+值得注意的是点语法不支持数组，这个需要明确。
+:::
+    
 ``` php
 public function testObjectSpot()
 {
@@ -210,20 +201,16 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-::: tip
-值得注意的是点语法不支持数组，这个需要明确。
-:::
-
-
+    
 ## 支持无限级对象属性
+
 
 
 ``` php
 public function testLevelProperty()
 {
     $parser = $this->createParser();
-    
+
     // 支持无限级对象属性
     $source = <<<'eot'
 我的梦想是写好”{$demo.name.one.two.three.four}“，我相信”{$demo.description.one.two.three.four}“。
@@ -236,12 +223,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 运算符.加减法运算
 
 我们有的时候需要进行一些字符串的操作，以及变量之间的运算，当然直接使用 PHP 可以进行这样子的操作。这里，我们给出的是另一种简单的语法规则。
+
 
 ``` php
 public function testOperator()
@@ -262,10 +248,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 运算符.乘除余数
+
 
 
 ``` php
@@ -293,17 +278,16 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 运算符.连接字符
+
 
 
 ``` php
 public function testOperator3()
 {
     $parser = $this->createParser();
-    
+
     // 变量之间的连接字符
     $source = <<<'eot'
 {$value3.'start - '.$value.$value2.'- end'}
@@ -316,12 +300,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## JS 风格运算符.加减法运算
 
 JS 风格的运算符也遵循这一个规则，需要注意的 `.` 语法有一定特殊性，周围 `是否有空格` 会影响到解析为 `->` 作为对象或者 `.` 作为连接符。
+
 
 ``` php
 public function testJsOperator()
@@ -342,10 +325,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## JS 风格运算符.乘除余数
+
 
 
 ``` php
@@ -373,10 +355,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## JS 风格运算符.连接字符
+
 
 
 ``` php
@@ -396,9 +377,7 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 函数支持
 
 仅仅是输出变量并不能满足模板输出的需要，内置模板引擎支持对模板变量使用调节器和格式化功能，其实也就是提供函数支持，并支持多个函数同时使用。
@@ -422,6 +401,10 @@ eot;
 * 支持多个函数，函数之间支持空格
 
 
+::: tip
+函数的定义和使用顺序的对应关系，通常来说函数的第一个参数就是前面的变量或者前一个函数使用的结果，如果你的变量并不是函数的第一个参数，需要使用定位符号 “**”。
+:::
+    
 ``` php
 public function testFunction()
 {
@@ -450,13 +433,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-::: tip
-函数的定义和使用顺序的对应关系，通常来说函数的第一个参数就是前面的变量或者前一个函数使用的结果，如果你的变量并不是函数的第一个参数，需要使用定位符号 “**”。
-:::
-
-
+    
 ## 函数支持.基本用法
+
 
 
 ``` php
@@ -476,10 +455,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 函数支持.占位符
+
 
 
 ``` php
@@ -499,12 +477,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 函数支持.快捷方法
 
 并且还提供了在模板文件中直接调用函数的快捷方法，无需通过模板变量，包括两种方式：
+
 
 ``` php
 public function testFunction4()
@@ -523,12 +500,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 函数支持.静态方法
 
 使用静态函数来格式化参数。
+
 
 ``` php
 public function testFunction5()
@@ -549,10 +525,9 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 函数支持.执行方法但不输出
+
 
 
 ``` php
@@ -583,13 +558,15 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-
-
+    
 ## 函数支持.对象方法
 
 如果我们需要在模板中使用对象的方法，那么通过代码版本的变量语法可以很方便地输出。
 
+::: tip
+程序编译后默认是输出值，所以最好在类的方法中最好不要直接输出值，直接返回，这样可以交给模版来做数据处理。
+:::
+    
 ``` php
 public function testFunction7()
 {
@@ -607,12 +584,7 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-::: tip
-程序编译后默认是输出值，所以最好在类的方法中最好不要直接输出值，直接返回，这样可以交给模版来做数据处理。
-:::
-
-
+    
 ## 函数支持.默认值
 
 如果输出的模板变量没有值，但是我们需要在显示的时候赋予一个默认值的话，可以使用 default 语法，格式：
@@ -625,6 +597,10 @@ eot;
 > 这里的 default 不是函数，而是系统的一个语法规则。
 
 
+::: tip
+“default=” 之间不能有空格，否则无法识别。
+:::
+    
 ``` php
 public function testFunction8()
 {
@@ -650,15 +626,11 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-
-::: tip
-“default=” 之间不能有空格，否则无法识别。
-:::
-
-
+    
 ## JS 风格函数支持
 
 JS 风格函数和上面的函数支持得差不多。
+
 
 ``` php
 public function testJsFunction()
@@ -712,4 +684,3 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
-

@@ -5,7 +5,6 @@
 **引入相关类**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
-
 ## 记录数量 count
 
 计算记录数量。
@@ -21,6 +20,7 @@ public function findCount(string $field = '*', string $alias = 'row_count', bool
 ::: tip
 可使用 `findCount()` 或者 `count()->find()` 来统计记录行。
 :::
+
 
 
 ``` php
@@ -120,11 +120,11 @@ eot;
     );
 }
 ```
-
-
+    
 ## 平均值 avg
 
 计算平均值。
+
 
 ``` php
 public function testAvg()
@@ -154,11 +154,11 @@ eot;
     );
 }
 ```
-
-
+    
 ## 最大值 max
 
 计算最大值。
+
 
 ``` php
 public function testMax()
@@ -188,11 +188,11 @@ eot;
     );
 }
 ```
-
-
+    
 ## 最小值 min
 
 计算最小值。
+
 
 ``` php
 public function testMin()
@@ -222,11 +222,11 @@ eot;
     );
 }
 ```
-
-
+    
 ## 合计 sum
 
 计算合计。
+
 
 ``` php
 public function testSum()

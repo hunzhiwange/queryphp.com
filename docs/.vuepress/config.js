@@ -93,7 +93,7 @@ function genSidebarConfigDoc () {
     },
     {
       title: '入门',
-      collapsable: false,
+      collapsable: true,
       children: [
         'started/',
         'started/install',
@@ -103,14 +103,14 @@ function genSidebarConfigDoc () {
     },
     {
       title: '路由',
-      collapsable: false,
+      collapsable: true,
       children: [
         'router/',
       ]
     },
     {
       title: '模板',
-      collapsable: false,
+      collapsable: true,
       children: [
         'template/',
         'template/var',
@@ -130,7 +130,7 @@ function genSidebarConfigDoc () {
     },
     {
       title: '数据库',
-      collapsable: false,
+      collapsable: true,
       children: [
         'database/',
         'database/create/insert',
@@ -170,8 +170,16 @@ function genSidebarConfigDoc () {
       ]
     },
     {
+      title: 'ORM',
+      collapsable: true,
+      children: [
+        'orm/',
+        'orm/unitofwork',
+      ]
+    },
+    {
       title: '组件',
-      collapsable: false,
+      collapsable: true,
       children: [
         'component/support/str',
       ]
