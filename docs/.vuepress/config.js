@@ -174,6 +174,7 @@ function genSidebarConfigDoc () {
       collapsable: true,
       children: [
         'orm/',
+        'orm/create',
         'orm/unitofwork',
       ]
     },

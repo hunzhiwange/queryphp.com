@@ -9,10 +9,6 @@
 
 利用本方法可以生成随机数小写字母。
 
-::: tip
-支持位数和指定字符范围
-:::
-    
 ``` php
 public function testRandAlphaNumLowercase()
 {
@@ -32,14 +28,14 @@ public function testRandAlphaNumLowercase()
 }
 ```
     
-## 随机大写字母和数字
-
-利用本方法可以生成随机数大写字母。
-
 ::: tip
 支持位数和指定字符范围
 :::
     
+## 随机大写字母和数字
+
+利用本方法可以生成随机数大写字母。
+
 ``` php
 public function testRandAlphaNumUppercase()
 {
@@ -59,14 +55,14 @@ public function testRandAlphaNumUppercase()
 }
 ```
     
-## 随机字母
-
-利用本方法可以生成随机字母。
-
 ::: tip
 支持位数和指定字符范围
 :::
     
+## 随机字母
+
+利用本方法可以生成随机字母。
+
 ``` php
 public function testRandAlpha()
 {
@@ -85,3 +81,7 @@ public function testRandAlpha()
     );
 }
 ```
+    
+::: tip
+支持位数和指定字符范围
+:::

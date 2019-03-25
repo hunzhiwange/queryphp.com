@@ -5,7 +5,6 @@ break 和 continue 是各种循环中非常重要的两个流程标记语言，�
 ## break 标签
 
 
-
 ``` php
 public function testBaseUse()
 {
@@ -35,8 +34,8 @@ eot;
 }
 ```
     
-## ontinue 标签
 
+## ontinue 标签
 
 
 ``` php

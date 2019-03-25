@@ -14,7 +14,6 @@
 这种情况下，模板文件名必须包含后缀。
 
 
-
 ``` php
 public function testBaseUse()
 {
@@ -32,8 +31,8 @@ eot;
 }
 ```
     
-## 使用变量定义完整的文件
 
+## 使用变量定义完整的文件
 
 
 ``` php
@@ -55,8 +54,8 @@ eot;
 }
 ```
     
-## 包含当前视图目录下的模板文件
 
+## 包含当前视图目录下的模板文件
 
 
 ``` php
@@ -76,10 +75,10 @@ eot;
 }
 ```
     
+
 ## 包含其他模块的操作模板
 
 其中模块以目录分隔
-
 
 ``` php
 public function testOtherModule()
@@ -108,17 +107,17 @@ eot;
 }
 ```
     
+
 ## 函数表达式支持
 
 为了防止 `.` 被解析为 `->`，需要由 `()` 包裹起来，`file` 内容区的解析规则遵循 `if` 标签的 `condition` 特性。
-
 
 ``` php
 public function testExpr()
 {
     $parser = $this->createParser();
 
-    // 放置 . 被替换加上 () 包裹起来
+    // 防止 . 被替换加上 () 包裹起来
     $source = <<<'eot'
 <include file="($path . '/' . $name)" />
 <include file="Template::tpl('header')" />

@@ -22,7 +22,6 @@ public function findCount(string $field = '*', string $alias = 'row_count', bool
 :::
 
 
-
 ``` php
 public function testBaseUse()
 {
@@ -121,10 +120,10 @@ eot;
 }
 ```
     
+
 ## 平均值 avg
 
 计算平均值。
-
 
 ``` php
 public function testAvg()
@@ -155,10 +154,10 @@ eot;
 }
 ```
     
+
 ## 最大值 max
 
 计算最大值。
-
 
 ``` php
 public function testMax()
@@ -189,10 +188,10 @@ eot;
 }
 ```
     
+
 ## 最小值 min
 
 计算最小值。
-
 
 ``` php
 public function testMin()
@@ -223,10 +222,10 @@ eot;
 }
 ```
     
+
 ## 合计 sum
 
 计算合计。
-
 
 ``` php
 public function testSum()

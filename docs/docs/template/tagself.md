@@ -5,10 +5,6 @@
 ## 基本使用
 
 
-::: tip
-上面的 **if 标签** 被 **tagself** 标签包含，因此 **if 标签** 里面的内容并不会被模板引擎解析，而是保持原样输出。
-:::
-    
 ``` php
 public function testBaseUse()
 {
@@ -41,3 +37,7 @@ eot;
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
+    
+::: tip
+上面的 **if 标签** 被 **tagself** 标签包含，因此 **if 标签** 里面的内容并不会被模板引擎解析，而是保持原样输出。
+:::

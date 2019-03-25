@@ -5,7 +5,6 @@ QueryPHP 支持 while 语法标签，通过这种方式可以很好地将 PHP �
 ## code
 
 
-
 ``` php
 public function testCode()
 {
@@ -31,8 +30,8 @@ eot;
 }
 ```
     
-## node
 
+## node
 
 
 ``` php

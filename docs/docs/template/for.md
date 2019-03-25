@@ -5,7 +5,6 @@
 ## code
 
 
-
 ``` php
 public function testBaseUse()
 {
@@ -27,8 +26,8 @@ eot;
 }
 ```
     
-## node 简单版
 
+## node 简单版
 
 
 ``` php
@@ -52,8 +51,8 @@ eot;
 }
 ```
     
-## node 完整版
 
+## node 完整版
 
 
 ``` php
@@ -76,10 +75,10 @@ eot;
 }
 ```
     
+
 ## JS 风格版: 例 1
 
 最终生成一个 foreach 结果，简单的循环。
-
 
 ``` php
 public function testForJsStyle()
@@ -102,10 +101,10 @@ eot;
 }
 ```
     
+
 ## JS 风格版: 例 2
 
 可以使用逗号分割建和值，逗号连接不能有空格。
-
 
 ``` php
 public function testForJsStyle2()
@@ -128,10 +127,10 @@ eot;
 }
 ```
     
+
 ## JS 风格版: 例 3
 
 可以使用空格分割建和值。
-
 
 ``` php
 public function testForJsStyle3()

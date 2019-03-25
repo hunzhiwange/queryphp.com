@@ -16,10 +16,6 @@
 ## 保存一个实体
 
 
-::: tip
-通过 persist 方法保存一个实体，并通过 flush 将实体持久化到数据库。
-:::
-    
 ``` php
 public function testBaseUse()
 {
@@ -48,13 +44,13 @@ public function testBaseUse()
 }
 ```
     
+::: tip
+通过 persist 方法保存一个实体，并通过 flush 将实体持久化到数据库。
+:::
+    
 ## 保存多个实体
 
 
-::: tip
-底层会开启一个事务，只有全部保存成功才会真正持久化到数据库。
-:::
-    
 ``` php
 public function testPersist()
 {
@@ -98,13 +94,13 @@ public function testPersist()
 }
 ```
     
+::: tip
+底层会开启一个事务，只有全部保存成功才会真正持久化到数据库。
+:::
+    
 ## 新增实体
 
 
-::: tip
-底层执行的是 insert 语句，只有全部保存成功才会真正持久化到数据库。
-:::
-    
 ``` php
 public function testCreate()
 {
@@ -161,13 +157,13 @@ public function testCreate()
 }
 ```
     
+::: tip
+底层执行的是 insert 语句，只有全部保存成功才会真正持久化到数据库。
+:::
+    
 ## 更新实体
 
 
-::: tip
-底层执行的是 update 语句，只有全部保存成功才会真正持久化到数据库。
-:::
-    
 ``` php
 public function testUpdate()
 {
@@ -259,13 +255,13 @@ public function testUpdate()
 }
 ```
     
+::: tip
+底层执行的是 update 语句，只有全部保存成功才会真正持久化到数据库。
+:::
+    
 ## 删除实体
 
 
-::: tip
-底层执行的是 delete 语句，只有全部保存成功才会真正持久化到数据库。
-:::
-    
 ``` php
 public function testDelete()
 {
@@ -355,13 +351,13 @@ public function testDelete()
 }
 ```
     
+::: tip
+底层执行的是 delete 语句，只有全部保存成功才会真正持久化到数据库。
+:::
+    
 ## 刷新实体
 
 
-::: tip
-底层执行的是 select 语句，这个操作会读取数据库最新信息并刷新实体的属性。
-:::
-    
 ``` php
 public function testRefresh()
 {
@@ -413,13 +409,13 @@ public function testRefresh()
 }
 ```
     
+::: tip
+底层执行的是 select 语句，这个操作会读取数据库最新信息并刷新实体的属性。
+:::
+    
 ## 手工启动事务 beginTransaction
 
 
-::: tip
-通常来说事务工作单元会自动帮你处理事务，可以通过手工 beginTransaction，成功 commit 或者失败 rollBack，系统提供了 API 让你也手工开启事务处理。
-:::
-    
 ``` php
 public function testBeginTransaction()
 {
@@ -458,13 +454,13 @@ public function testBeginTransaction()
 }
 ```
     
+::: tip
+通常来说事务工作单元会自动帮你处理事务，可以通过手工 beginTransaction，成功 commit 或者失败 rollBack，系统提供了 API 让你也手工开启事务处理。
+:::
+    
 ## 执行失败事务回滚 rollBack
 
 
-::: tip
-底层会自动运行一个事务，如果执行失败自动回滚，不会更新数据库。
-:::
-    
 ``` php
 public function testFlushButRollBack()
 {
@@ -494,13 +490,13 @@ public function testFlushButRollBack()
 }
 ```
     
+::: tip
+底层会自动运行一个事务，如果执行失败自动回滚，不会更新数据库。
+:::
+    
 ## 事务包裹在闭包中 transaction
 
 
-::: tip
-可以将事务包裹在一个闭包中，如果执行失败自动回滚，不会更新数据库。
-:::
-    
 ``` php
 public function testTransaction()
 {
@@ -533,13 +529,13 @@ public function testTransaction()
 }
 ```
     
+::: tip
+可以将事务包裹在一个闭包中，如果执行失败自动回滚，不会更新数据库。
+:::
+    
 ## 事务包裹在闭包中失败回滚 transaction 
 
 
-::: tip
-可以将事务包裹在一个闭包中，执行失败自动回滚测试，不会更新数据库。
-:::
-    
 ``` php
 public function testTransactionAndRollBack()
 {
@@ -576,13 +572,13 @@ public function testTransactionAndRollBack()
 }
 ```
     
+::: tip
+可以将事务包裹在一个闭包中，执行失败自动回滚测试，不会更新数据库。
+:::
+    
 ## 设置根实体 setRootEntity
 
 
-::: tip
-系统默认读取基础的数据库配置来处理数据相关信息，设置跟实体可以更改事务处理的数据库连接。
-:::
-    
 ``` php
 public function testSetRootEntity()
 {
@@ -621,13 +617,13 @@ public function testSetRootEntity()
 }
 ```
     
+::: tip
+系统默认读取基础的数据库配置来处理数据相关信息，设置跟实体可以更改事务处理的数据库连接。
+:::
+    
 ## 更改数据库连接 setConnect
 
 
-::: tip
-如果没有存在的连接，则会使用默认的连接。
-:::
-    
 ``` php
 public function testSetConnectNotFoundWillUseDefault()
 {
@@ -663,5 +659,180 @@ public function testSetConnectNotFoundWillUseDefault()
 
     $this->assertSame('1', $newPost->getId());
     $this->assertSame('new title', $newPost->getTitle());
+}
+```
+    
+::: tip
+如果没有存在的连接，则会使用默认的连接。
+:::
+    
+## 无实体执行 flush 什么都不做
+
+
+``` php
+public function testFlushButNotFoundAny()
+{
+    $work = UnitOfWork::make(new Post());
+
+    $this->assertNull($work->flush());
+}
+```
+    
+::: tip
+实际上什么也不会发生。
+:::
+    
+## 实体实体支持缓存
+
+
+``` php
+public function testPersistStageManagedEntityDoNothing()
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post([
+        'id'      => 1,
+        'title'   => 'old',
+        'summary' => 'old',
+    ]);
+
+    $work->persist($post, 'create');
+    $work->persist($post, 'create');
+
+    $work->flush();
+
+    $this->assertSame(1, $connect->table('post')->findCount());
+}
+```
+    
+::: tip
+保存两个一样的实体，第二个实体并不会被添加。
+:::
+    
+## 重新保存已删除的实体实体
+
+
+``` php
+public function testPersistStageRemovedEntity()
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame('1', $connect->
+    table('post')->
+    insert([
+        'title'   => 'hello world',
+        'user_id' => 1,
+        'summary' => 'post summary',
+    ]));
+
+    $post = Post::find(1);
+
+    $this->assertSame('1', $post->getId());
+    $this->assertSame('hello world', $post->getTitle());
+    $this->assertSame('post summary', $post->getSummary());
+
+    $work->delete($post);
+
+    $work->persist($post);
+
+    $work->flush();
+
+    $this->assertSame(1, $connect->table('post')->findCount());
+}
+```
+    
+::: tip
+这样被删除的实体并不会被删除。
+:::
+    
+## 注册更新的实体不能重新被创建
+
+
+``` php
+public function testCreateButAlreadyInUpdates()
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Updated entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for create.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'foo']);
+
+    $work->update($post);
+
+    $work->create($post);
+}
+```
+    
+
+## 注册删除的实体不能重新被创建
+
+
+``` php
+public function testCreateButAlreadyInDeletes()
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Deleted entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for create.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5]);
+
+    $work->delete($post);
+
+    $work->create($post);
+}
+```
+    
+
+## 注册替换的实体不能重新被创建
+
+
+``` php
+public function testCreateButAlreadyInReplaces()
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Replaced entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for create.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5]);
+
+    $work->replace($post);
+
+    $work->create($post);
+}
+```
+    
+
+## 不能多次创建同一个实体
+
+
+``` php
+public function testCreateManyTimes()
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for twice.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post(['title' => 'foo']);
+
+    $work->create($post);
+    $work->create($post);
 }
 ```
