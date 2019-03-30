@@ -16,7 +16,7 @@
 **完整例子**
 
 
-```
+``` php
 $entity = new TestEntity();
 $entity->name = 'foo';
 $entity->save()->flush();

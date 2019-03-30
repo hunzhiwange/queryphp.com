@@ -5,6 +5,29 @@
 **引入相关类**
 
  * use Leevel\Support\Str;
+## 随机字母数字
+
+
+``` php
+public function testBaseUse()
+{
+    $this->assertSame('', Str::randAlphaNum(0));
+
+    $this->assertTrue(
+        1 === preg_match('/^[A-Za-z0-9]+$/', Str::randAlphaNum(4))
+    );
+
+    $this->assertTrue(
+        1 === preg_match('/^[A-Za-z0-9]+$/', Str::randAlphaNum(4, 'AB4cdef'))
+    );
+
+    $this->assertTrue(
+        4 === strlen(Str::randAlphaNum(4))
+    );
+}
+```
+    
+
 ## 随机小写字母和数字
 
 利用本方法可以生成随机数小写字母。
@@ -85,3 +108,258 @@ public function testRandAlpha()
 ::: tip
 支持位数和指定字符范围
 :::
+    
+## 随机小写字母
+
+
+``` php
+public function testRandAlphaLowercase()
+{
+    $this->assertSame('', Str::randAlphaLowercase(0));
+
+    $this->assertTrue(
+        1 === preg_match('/^[a-z]+$/', Str::randAlphaLowercase(4))
+    );
+
+    $this->assertTrue(
+        1 === preg_match('/^[a-z]+$/', Str::randAlphaLowercase(4, 'cdefghigk'))
+    );
+
+    $this->assertTrue(
+        4 === strlen(Str::randAlphaLowercase(4))
+    );
+}
+```
+    
+
+## 随机大写字母
+
+
+``` php
+public function testRandAlphaUppercase()
+{
+    $this->assertSame('', Str::randAlphaUppercase(0));
+
+    $this->assertTrue(
+        1 === preg_match('/^[A-Z]+$/', Str::randAlphaUppercase(4))
+    );
+
+    $this->assertTrue(
+        1 === preg_match('/^[A-Z]+$/', Str::randAlphaUppercase(4, 'ABCDEFG'))
+    );
+
+    $this->assertTrue(
+        4 === strlen(Str::randAlphaUppercase(4))
+    );
+}
+```
+    
+
+## 随机数字
+
+
+``` php
+public function testRandNum()
+{
+    $this->assertSame('', Str::randNum(0));
+
+    $this->assertTrue(
+        1 === preg_match('/^[0-9]+$/', Str::randNum(4))
+    );
+
+    $this->assertTrue(
+        1 === preg_match('/^[0-9]+$/', Str::randNum(4, '012456'))
+    );
+
+    $this->assertTrue(
+        4 === strlen(Str::randNum(4))
+    );
+}
+```
+    
+
+## 随机字中文
+
+
+``` php
+public function testRandChinese()
+{
+    $this->assertSame('', Str::randChinese(0));
+
+    $this->assertTrue(
+        1 === preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', Str::randChinese(4))
+    );
+
+    $this->assertTrue(
+        1 === preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', Str::randChinese(4, '我是一个中国人'))
+    );
+
+    $this->assertTrue(
+        12 === strlen(Str::randChinese(4))
+    );
+}
+```
+    
+
+## 随机字符串
+
+
+``` php
+public function testRandStr()
+{
+    $this->assertSame('', Str::randStr(0, ''));
+
+    $this->assertSame('', Str::randStr(5, ''));
+
+    $this->assertTrue(
+        4 === strlen(Str::randStr(4, 'helloworld'))
+    );
+}
+```
+    
+
+## 编码转换
+
+这里只是简单的对函数调用一次 `mb_convert_encoding($contents, $fromChar, $toChar)`。
+
+``` php
+public function testConvertEncoding()
+{
+    $this->assertSame('hello', Str::convertEncoding('hello', 'gbk', 'utf8'));
+    $sourceConvert = Str::convertEncoding($source = '故事', 'gbk', 'utf8');
+    $this->assertSame($source, Str::convertEncoding($sourceConvert, 'utf8', 'gbk'));
+}
+```
+    
+
+## 字符串截取
+
+这里只是简单的对函数调用一次 `mb_substr($strings, $start, $length, $charset)`。
+
+``` php
+public function testSubstr()
+{
+    $this->assertSame('我', Str::substr('我是人', 0, 1));
+    $this->assertSame('我是', Str::substr('我是人', 0, 2));
+    $this->assertSame('人', Str::substr('我是人', 2));
+}
+```
+    
+
+## 日期格式化
+
+
+``` php
+public function testFormatDate()
+{
+    $time = time();
+
+    $this->assertSame(date('Y-m-d H:i', $time + 600), Str::formatDate($time + 600));
+    $this->assertSame(date('Y-m-d', $time + 600), Str::formatDate($time + 600, [], 'Y-m-d'));
+
+    $this->assertSame(date('Y-m-d', $time - 1286400), Str::formatDate($time - 1286400, [], 'Y-m-d'));
+
+    $this->assertSame('1 hours ago', Str::formatDate($time - 5040));
+    $this->assertSame('1 小时之前', Str::formatDate($time - 5040, ['hours' => '小时之前']));
+
+    $this->assertSame('4 minutes ago', Str::formatDate($time - 240));
+    $this->assertSame('4 分钟之前', Str::formatDate($time - 240, ['minutes' => '分钟之前']));
+
+    $this->assertTrue(in_array(Str::formatDate($time - 40), ['40 seconds ago', '41 seconds ago', '42 seconds ago'], true));
+    $this->assertTrue(in_array(Str::formatDate($time - 40, ['seconds' => '秒之前']), ['40 秒之前', '41 秒之前', '42 秒之前'], true));
+}
+```
+    
+
+## 文件大小格式化
+
+
+``` php
+public function testFormatBytes()
+{
+    $this->assertSame('2.4G', Str::formatBytes(2573741824));
+    $this->assertSame('2.4', Str::formatBytes(2573741824, false));
+
+    $this->assertSame('4.81M', Str::formatBytes(5048576));
+    $this->assertSame('4.81', Str::formatBytes(5048576, false));
+
+    $this->assertSame('2.95K', Str::formatBytes(3024));
+    $this->assertSame('2.95', Str::formatBytes(3024, false));
+
+    $this->assertSame('100B', Str::formatBytes(100));
+    $this->assertSame('100', Str::formatBytes(100, false));
+}
+```
+    
+
+## 下划线转驼峰
+
+
+``` php
+public function testCamelize()
+{
+    $this->assertSame('helloWorld', Str::camelize('helloWorld'));
+
+    $this->assertSame('helloWorld', Str::camelize('helloWorld', '-'));
+
+    $this->assertSame('helloWorld', Str::camelize('hello_world'));
+
+    $this->assertSame('helloWorld', Str::camelize('hello-world', '-'));
+}
+```
+    
+
+## 驼峰转下划线
+
+
+``` php
+public function testUnCamelize()
+{
+    $this->assertSame('hello_world', Str::unCamelize('hello_world'));
+
+    $this->assertSame('hello-world', Str::unCamelize('hello-world', '-'));
+
+    $this->assertSame('hello_world', Str::unCamelize('helloWorld'));
+
+    $this->assertSame('hello-world', Str::unCamelize('helloWorld', '-'));
+}
+```
+    
+
+## 判断字符串中是否包含给定的字符开始
+
+
+``` php
+public function testStartsWith()
+{
+    $this->assertFalse(Str::startsWith('foo', 'hello'));
+
+    $this->assertTrue(Str::startsWith('foo bar', 'foo'));
+}
+```
+    
+
+## 判断字符串中是否包含给定的字符结尾
+
+
+``` php
+public function testEndsWith()
+{
+    $this->assertFalse(Str::endsWith('foo', 'hello'));
+
+    $this->assertTrue(Str::endsWith('foo bar', 'bar'));
+}
+```
+    
+
+## 判断字符串中是否包含给定的字符串集合
+
+
+``` php
+public function testContains()
+{
+    $this->assertFalse(Str::contains('foo', ''));
+
+    $this->assertTrue(Str::contains('foo bar', 'foo'));
+}
+```

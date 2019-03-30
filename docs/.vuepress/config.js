@@ -45,7 +45,7 @@ module.exports = {
     }
   },
   plugins: {
-    '@vuepress/i18n-ui': true,
+    '@vuepress/i18n-ui': false,
     '@vuepress/back-to-top': true,
     '@vuepress/pwa': {
       serviceWorker: true,
@@ -183,6 +183,7 @@ function genSidebarConfigDoc () {
       collapsable: true,
       children: [
         'component/support/str',
+        'component/support/arr',
       ]
     }
   ]
