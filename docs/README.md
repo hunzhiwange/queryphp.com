@@ -407,7 +407,7 @@ class Dream extends Entity
      *
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(string $name): Entity
     {
         $this->name = $name;
 
