@@ -102,6 +102,14 @@ function genSidebarConfigDoc () {
       ]
     },
     {
+      title: '架构',
+      collapsable: true,
+      children: [
+        'architecture/',
+        'architecture/ioc',
+      ]
+    },
+    {
       title: '路由',
       collapsable: true,
       children: [
