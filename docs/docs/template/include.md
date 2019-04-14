@@ -20,12 +20,12 @@ public function testBaseUse()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-<include file="application/app/ui/theme/default/header.html">
-eot;
+        <include file="application/app/ui/theme/default/header.html">
+        eot;
 
     $compiled = <<<'eot'
-<?php $this->display('application/app/ui/theme/default/header', [], '.html', true); ?>
-eot;
+        <?php $this->display('application/app/ui/theme/default/header', [], '.html', true); ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -41,14 +41,14 @@ public function testVar()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-{~$headTpl = \Leevel::themesPath() . '/' . 'header.html'}
-<include file="$headTpl">
-eot;
+        {~$headTpl = \Leevel::themesPath() . '/' . 'header.html'}
+        <include file="$headTpl">
+        eot;
 
     $compiled = <<<'eot'
-<?php $headTpl = \Leevel::themesPath() . '/' . 'header.html'; ?>
-<?php $this->display($headTpl, [], '', true); ?>
-eot;
+        <?php $headTpl = \Leevel::themesPath() . '/' . 'header.html'; ?>
+        <?php $this->display($headTpl, [], '', true); ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -64,12 +64,12 @@ public function testInViewDir()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-<include file="test" />
-eot;
+        <include file="test" />
+        eot;
 
     $compiled = <<<'eot'
-<?php $this->display('test', [], '', true); ?>
-eot;
+        <?php $this->display('test', [], '', true); ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -86,22 +86,22 @@ public function testOtherModule()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-<include file="public+header" />
-eot;
+        <include file="public+header" />
+        eot;
 
     $compiled = <<<'eot'
-<?php $this->display('public+header', [], '', true); ?>
-eot;
+        <?php $this->display('public+header', [], '', true); ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 
     $source = <<<'eot'
-<include file="public/header" />
-eot;
+        <include file="public/header" />
+        eot;
 
     $compiled = <<<'eot'
-<?php $this->display('public/header', [], '', true); ?>
-eot;
+        <?php $this->display('public/header', [], '', true); ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -119,18 +119,18 @@ public function testExpr()
 
     // 防止 . 被替换加上 () 包裹起来
     $source = <<<'eot'
-<include file="($path . '/' . $name)" />
-<include file="Template::tpl('header')" />
-<include file="tpl('header')" />
-<include file="$hello.world('header')" />
-eot;
+        <include file="($path . '/' . $name)" />
+        <include file="Template::tpl('header')" />
+        <include file="tpl('header')" />
+        <include file="$hello.world('header')" />
+        eot;
 
     $compiled = <<<'eot'
-<?php $this->display(($path . '/' . $name), [], '', true); ?>
-<?php $this->display(Template::tpl('header'), [], '', true); ?>
-<?php $this->display(tpl('header'), [], '', true); ?>
-<?php $this->display($hello->world('header'), [], '', true); ?>
-eot;
+        <?php $this->display(($path . '/' . $name), [], '', true); ?>
+        <?php $this->display(Template::tpl('header'), [], '', true); ?>
+        <?php $this->display(tpl('header'), [], '', true); ?>
+        <?php $this->display($hello->world('header'), [], '', true); ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }

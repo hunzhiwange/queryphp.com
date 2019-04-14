@@ -11,12 +11,12 @@ public function testBaseUse()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-<php>echo 'Hello,world!';</php>
-eot;
+        <php>echo 'Hello,world!';</php>
+        eot;
 
     $compiled = <<<'eot'
-<?php echo 'Hello,world!'; ?>
-eot;
+        <?php echo 'Hello,world!'; ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -32,19 +32,19 @@ public function testPhpSelf()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-<?php echo 'Hello,world!'; ?>
-eot;
+        <?php echo 'Hello,world!'; ?>
+        eot;
 
     $compiled = <<<'eot'
-<?php echo 'Hello,world!'; ?>
-eot;
+        <?php echo 'Hello,world!'; ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
 ```
     
 ::: tip
-不过这种方式来使用 PHP 脚本，这是我们大力推荐的写法，用最原始的 PHP 开发项目是我们共同的追求。
+不过这种方式来使用 PHP 脚本，这是我们大力推荐的写法，用最原始的 PHP 开发应用是我们共同的追求。
 :::
     
 ## PHP 内部不能使用标签
@@ -58,20 +58,20 @@ public function testErrorExample()
 
     // 错误的写法
     $source = <<<'eot'
-<php>
-    {if $hello == ''}
-    Yet !
-    {/if}
-</php>
-eot;
+        <php>
+            {if $hello == ''}
+                Yet !
+            {/if}
+        </php>
+        eot;
 
     $compiled = <<<'eot'
-<?php 
-    <?php if ($hello == ''): ?>
-    Yet !
-    <?php endif; ?>
- ?>
-eot;
+        <?php 
+            <?php if ($hello == ''): ?>
+                Yet !
+            <?php endif; ?>
+         ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }

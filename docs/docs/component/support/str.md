@@ -218,34 +218,6 @@ public function testRandStr()
 ```
     
 
-## 编码转换
-
-这里只是简单的对函数调用一次 `mb_convert_encoding($contents, $fromChar, $toChar)`。
-
-``` php
-public function testConvertEncoding()
-{
-    $this->assertSame('hello', Str::convertEncoding('hello', 'gbk', 'utf8'));
-    $sourceConvert = Str::convertEncoding($source = '故事', 'gbk', 'utf8');
-    $this->assertSame($source, Str::convertEncoding($sourceConvert, 'utf8', 'gbk'));
-}
-```
-    
-
-## 字符串截取
-
-这里只是简单的对函数调用一次 `mb_substr($strings, $start, $length, $charset)`。
-
-``` php
-public function testSubstr()
-{
-    $this->assertSame('我', Str::substr('我是人', 0, 1));
-    $this->assertSame('我是', Str::substr('我是人', 0, 2));
-    $this->assertSame('人', Str::substr('我是人', 2));
-}
-```
-    
-
 ## 日期格式化
 
 

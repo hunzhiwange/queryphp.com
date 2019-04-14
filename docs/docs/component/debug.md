@@ -12,7 +12,7 @@
  * use Leevel\Http\JsonResponse;
  * use Leevel\Http\Request;
  * use Leevel\Http\Response;
- * use Leevel\Leevel\Project as Projects;
+ * use Leevel\Leevel\App as Apps;
  * use Leevel\Log\File as LogFile;
  * use Leevel\Log\ILog;
  * use Leevel\Log\Log;
@@ -312,7 +312,7 @@ public function testWithSession()
     $request = new Request();
     $response = new JsonResponse(['foo' => 'bar']);
 
-    $session = $debug->getProject()->make('session');
+    $session = $debug->getApp()->make('session');
 
     $session->set('test_session', 'test_value');
 
@@ -333,7 +333,7 @@ public function testWithLog()
 {
     $debug = $this->createDebugWithLog();
 
-    $project = $debug->getProject();
+    $app = $debug->getApp();
 
     $this->assertFalse($debug->isBootstrap());
 
@@ -344,7 +344,7 @@ public function testWithLog()
     $request = new Request();
     $response = new JsonResponse(['foo' => 'bar']);
 
-    $log = $project->make('log');
+    $log = $app->make('log');
 
     $log->info('test_log', ['exends' => 'bar']);
     $log->debug('test_log_debug');

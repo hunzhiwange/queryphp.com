@@ -37,10 +37,10 @@ public function testNormalize(): void
     $result = Arr::normalize('hello');
 
     $json = <<<'eot'
-[
-    "hello"
-]
-eot;
+        [
+            "hello"
+        ]
+        eot;
 
     $this->assertSame(
         $json,
@@ -61,11 +61,11 @@ public function testNormalizeSplitString(): void
     $result = Arr::normalize('hello,world');
 
     $json = <<<'eot'
-[
-    "hello",
-    "world"
-]
-eot;
+        [
+            "hello",
+            "world"
+        ]
+        eot;
 
     $this->assertSame(
         $json,
@@ -86,11 +86,11 @@ public function testNormalizeArr(): void
     $result = Arr::normalize(['hello', 'world']);
 
     $json = <<<'eot'
-[
-    "hello",
-    "world"
-]
-eot;
+        [
+            "hello",
+            "world"
+        ]
+        eot;
 
     $this->assertSame(
         $json,
@@ -111,11 +111,11 @@ public function testNormalizeArrFilterEmpty(): void
     $result = Arr::normalize(['hello', 'world', ' ', '0']);
 
     $json = <<<'eot'
-[
-    "hello",
-    "world"
-]
-eot;
+        [
+            "hello",
+            "world"
+        ]
+        eot;
 
     $this->assertSame(
         $json,
@@ -136,12 +136,12 @@ public function testNormalizeArrNotFilterEmpty(): void
     $result = Arr::normalize(['hello', 'world', ' ', '0'], ',', true);
 
     $json = <<<'eot'
-[
-    "hello",
-    "world",
-    " "
-]
-eot;
+        [
+            "hello",
+            "world",
+            " "
+        ]
+        eot;
 
     $this->assertSame(
         $json,
@@ -176,11 +176,12 @@ public function testOnly(): void
     $result = Arr::only(['input' => 'test', 'foo' => 'bar', 'hello' => 'world'], ['input', 'hello', 'notfound']);
 
     $json = <<<'eot'
-{
-    "input": "test",
-    "hello": "world"
-}
-eot;
+        {
+            "input": "test",
+            "hello": "world",
+            "notfound": null
+        }
+        eot;
 
     $this->assertSame(
         $json,
@@ -202,10 +203,10 @@ public function testExcept(): void
     $result = Arr::except(['input' => 'test', 'foo' => 'bar', 'hello' => 'world'], ['input', 'hello', 'notfound']);
 
     $json = <<<'eot'
-{
-    "foo": "bar"
-}
-eot;
+        {
+            "foo": "bar"
+        }
+        eot;
 
     $this->assertSame(
         $json,
@@ -230,12 +231,12 @@ public function testFilter(): void
     $result = Arr::filter($sourceData, $rule);
 
     $json = <<<'eot'
-{
-    "foo": "bar",
-    "hello": "world",
-    "i": "5"
-}
-eot;
+        {
+            "foo": "bar",
+            "hello": "world",
+            "i": "5"
+        }
+        eot;
 
     $this->assertSame(
         $json,
@@ -265,12 +266,12 @@ public function testFilterWithRule(): void
     $result = Arr::filter($sourceData, $rule);
 
     $json = <<<'eot'
-{
-    "foo": "37b51d194a7513e45b56f6524f2d51f2",
-    "hello": "world",
-    "i": 5
-}
-eot;
+        {
+            "foo": "37b51d194a7513e45b56f6524f2d51f2",
+            "hello": "world",
+            "i": 5
+        }
+        eot;
 
     $this->assertSame(
         $json,

@@ -14,16 +14,16 @@ public function testBaseUse()
     $strings = "O'Reilly?";
     $out = "O\\'Reilly?";
 
-    $this->assertSame($out, Safe::addslashes($strings));
+    $this->assertSame($out, Safe::customAddslashes($strings));
 
-    $this->assertSame($strings, Safe::stripslashes($out));
+    $this->assertSame($strings, Safe::customStripslashes($out));
 
     $arrays = ["O'Reilly?" => "O'Reilly?"];
     $outs = ["O\\'Reilly?" => "O\\'Reilly?"];
 
-    $this->assertSame($outs, Safe::addslashes($arrays));
+    $this->assertSame($outs, Safe::customAddslashes($arrays));
 
-    $this->assertSame($arrays, Safe::stripslashes($outs));
+    $this->assertSame($arrays, Safe::customStripslashes($outs));
 }
 ```
     

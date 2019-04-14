@@ -11,16 +11,16 @@ public function testBaseUse()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-{for $i=1;$i<10;$i++}
-    QueryPHP - 代码版本for <br>
-{/for}
-eot;
+        {for $i=1;$i<10;$i++}
+            QueryPHP - 代码版本for <br>
+        {/for}
+        eot;
 
     $compiled = <<<'eot'
-<?php for ($i=1;$i<10;$i++): ?>
-    QueryPHP - 代码版本for <br>
-<?php endfor; ?>
-eot;
+        <?php for ($i=1;$i<10;$i++): ?>
+            QueryPHP - 代码版本for <br>
+        <?php endfor; ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -36,16 +36,16 @@ public function testForNode()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-<for start='1'>
-    QueryPHP - node - for <br>
-</for>
-eot;
+        <for start='1'>
+            QueryPHP - node - for <br>
+        </for>
+        eot;
 
     $compiled = <<<'eot'
-<?php for ($var = 1; $var <= 0; $var += 1): ?>
-    QueryPHP - node - for <br>
-<?php endfor; ?>
-eot;
+        <?php for ($var = 1; $var <= 0; $var += 1): ?>
+            QueryPHP - node - for <br>
+        <?php endfor; ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -60,16 +60,16 @@ public function testForNode2()
 {
     $parser = $this->createParser();
     $source = <<<'eot'
-<for start='1' end='10' var='myValue' step='3'>
-    QueryPHP for <br>
-</for>
-eot;
+        <for start='1' end='10' var='myValue' step='3'>
+            QueryPHP for <br>
+        </for>
+        eot;
 
     $compiled = <<<'eot'
-<?php for ($myValue = 1; $myValue <= 10; $myValue += 3): ?>
-    QueryPHP for <br>
-<?php endfor; ?>
-eot;
+        <?php for ($myValue = 1; $myValue <= 10; $myValue += 3): ?>
+            QueryPHP for <br>
+        <?php endfor; ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -86,16 +86,16 @@ public function testForJsStyle()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-{% for item in navigation %}
-    <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
-{% /for %}
-eot;
+        {% for item in navigation %}
+            <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+        {% /for %}
+        eot;
 
     $compiled = <<<'eot'
-<?php foreach ($navigation as $key => $item): ?>
-    <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
-<?php endforeach; ?>
-eot;
+        <?php foreach ($navigation as $key => $item): ?>
+            <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
+        <?php endforeach; ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -112,16 +112,16 @@ public function testForJsStyle2()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-{% for mykey,item in navigation %}
-    <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
-{% /for %}
-eot;
+        {% for mykey,item in navigation %}
+            <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+        {% /for %}
+        eot;
 
     $compiled = <<<'eot'
-<?php foreach ($navigation as $mykey => $item): ?>
-    <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
-<?php endforeach; ?>
-eot;
+        <?php foreach ($navigation as $mykey => $item): ?>
+            <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
+        <?php endforeach; ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
@@ -138,16 +138,16 @@ public function testForJsStyle3()
     $parser = $this->createParser();
 
     $source = <<<'eot'
-{% for mykey item in navigation %}
-    <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
-{% /for %}
-eot;
+        {% for mykey item in navigation %}
+            <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+        {% /for %}
+        eot;
 
     $compiled = <<<'eot'
-<?php foreach ($navigation as $mykey => $item): ?>
-    <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
-<?php endforeach; ?>
-eot;
+        <?php foreach ($navigation as $mykey => $item): ?>
+            <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
+        <?php endforeach; ?>
+        eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
 }
