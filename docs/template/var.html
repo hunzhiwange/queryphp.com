@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>变量 | QueryPHP</title>
+    <meta name="description" content="渐进式 PHP 常驻框架引擎">
+    <link rel="icon" href="/logo.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/0.styles.6b5656aa.css" as="style"><link rel="preload" href="/assets/js/app.5f56ab55.js" as="script"><link rel="preload" href="/assets/js/3.ce8c3442.js" as="script"><link rel="preload" href="/assets/js/78.d1f4491a.js" as="script"><link rel="preload" href="/assets/js/5.4980778e.js" as="script"><link rel="prefetch" href="/assets/js/10.9117444e.js"><link rel="prefetch" href="/assets/js/11.21c8a391.js"><link rel="prefetch" href="/assets/js/12.a77a3fb2.js"><link rel="prefetch" href="/assets/js/13.805b3261.js"><link rel="prefetch" href="/assets/js/14.1acd3087.js"><link rel="prefetch" href="/assets/js/15.8f625c51.js"><link rel="prefetch" href="/assets/js/16.674cdf2e.js"><link rel="prefetch" href="/assets/js/17.7bafc579.js"><link rel="prefetch" href="/assets/js/18.7a29936f.js"><link rel="prefetch" href="/assets/js/19.6d023a2a.js"><link rel="prefetch" href="/assets/js/20.9e466413.js"><link rel="prefetch" href="/assets/js/21.63b6ce43.js"><link rel="prefetch" href="/assets/js/22.21430217.js"><link rel="prefetch" href="/assets/js/23.590b07f8.js"><link rel="prefetch" href="/assets/js/24.36ceafea.js"><link rel="prefetch" href="/assets/js/25.7af1ff22.js"><link rel="prefetch" href="/assets/js/26.2b74be91.js"><link rel="prefetch" href="/assets/js/27.0f558286.js"><link rel="prefetch" href="/assets/js/28.1ee84284.js"><link rel="prefetch" href="/assets/js/29.76c399a2.js"><link rel="prefetch" href="/assets/js/30.54cd1958.js"><link rel="prefetch" href="/assets/js/31.e5e684da.js"><link rel="prefetch" href="/assets/js/32.df7519c8.js"><link rel="prefetch" href="/assets/js/33.03d07b79.js"><link rel="prefetch" href="/assets/js/34.4f83ef99.js"><link rel="prefetch" href="/assets/js/35.f8372c76.js"><link rel="prefetch" href="/assets/js/36.24025176.js"><link rel="prefetch" href="/assets/js/37.91fd3faa.js"><link rel="prefetch" href="/assets/js/38.2eee1815.js"><link rel="prefetch" href="/assets/js/39.eba8ee37.js"><link rel="prefetch" href="/assets/js/4.cd9fe626.js"><link rel="prefetch" href="/assets/js/40.12cfd3b8.js"><link rel="prefetch" href="/assets/js/41.510921c4.js"><link rel="prefetch" href="/assets/js/42.5f455744.js"><link rel="prefetch" href="/assets/js/43.8c690ba1.js"><link rel="prefetch" href="/assets/js/44.5a551ea2.js"><link rel="prefetch" href="/assets/js/45.5820de8b.js"><link rel="prefetch" href="/assets/js/46.2335acff.js"><link rel="prefetch" href="/assets/js/47.d6d99a36.js"><link rel="prefetch" href="/assets/js/48.cba12ba3.js"><link rel="prefetch" href="/assets/js/49.d23dbcb4.js"><link rel="prefetch" href="/assets/js/50.f7904018.js"><link rel="prefetch" href="/assets/js/51.3e43183c.js"><link rel="prefetch" href="/assets/js/52.92cd9891.js"><link rel="prefetch" href="/assets/js/53.b590effa.js"><link rel="prefetch" href="/assets/js/54.57743a66.js"><link rel="prefetch" href="/assets/js/55.4852c44b.js"><link rel="prefetch" href="/assets/js/56.b2df7e65.js"><link rel="prefetch" href="/assets/js/57.83be8862.js"><link rel="prefetch" href="/assets/js/58.54bfa5c9.js"><link rel="prefetch" href="/assets/js/59.400df5eb.js"><link rel="prefetch" href="/assets/js/6.0265af51.js"><link rel="prefetch" href="/assets/js/60.ab1ffa87.js"><link rel="prefetch" href="/assets/js/61.9d880b3d.js"><link rel="prefetch" href="/assets/js/62.f77510bd.js"><link rel="prefetch" href="/assets/js/63.900e58f9.js"><link rel="prefetch" href="/assets/js/64.5569e9e1.js"><link rel="prefetch" href="/assets/js/65.2eee9731.js"><link rel="prefetch" href="/assets/js/66.02bb1516.js"><link rel="prefetch" href="/assets/js/67.a3036aa8.js"><link rel="prefetch" href="/assets/js/68.3ac5fcb3.js"><link rel="prefetch" href="/assets/js/69.545501fd.js"><link rel="prefetch" href="/assets/js/7.928871e5.js"><link rel="prefetch" href="/assets/js/70.80626183.js"><link rel="prefetch" href="/assets/js/71.f6298ff8.js"><link rel="prefetch" href="/assets/js/72.b97e9cdd.js"><link rel="prefetch" href="/assets/js/73.2ac8862f.js"><link rel="prefetch" href="/assets/js/74.ed8e74af.js"><link rel="prefetch" href="/assets/js/75.b878c6ba.js"><link rel="prefetch" href="/assets/js/76.50fa4e2d.js"><link rel="prefetch" href="/assets/js/77.ed9216ba.js"><link rel="prefetch" href="/assets/js/79.e0b45d7a.js"><link rel="prefetch" href="/assets/js/8.6f5f6877.js"><link rel="prefetch" href="/assets/js/80.1920167e.js"><link rel="prefetch" href="/assets/js/81.1437ac33.js"><link rel="prefetch" href="/assets/js/82.fa64db5d.js"><link rel="prefetch" href="/assets/js/9.b1d6cab4.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.5a4d067b.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6b5656aa.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">QueryPHP</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">开发文档</a></div><div class="nav-item"><a href="https://api.queryphp.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  API 文档
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">社区</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://www.114.ms/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  论坛
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="/ecosystem/" class="nav-link">其它</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">关于我们</a></div> <a href="https://github.com/hunzhiwange/queryphp.com" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">开发文档</a></div><div class="nav-item"><a href="https://api.queryphp.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  API 文档
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">社区</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://www.114.ms/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  论坛
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="/ecosystem/" class="nav-link">其它</a></li></ul></div></div><div class="nav-item"><a href="/about/" class="nav-link">关于我们</a></div> <a href="https://github.com/hunzhiwange/queryphp.com" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>序言</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/" class="sidebar-link">QueryPHP</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>入门</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>架构</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>路由</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>模板</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/template/" class="sidebar-link">模板</a></li><li><a href="/docs/template/var.html" class="active sidebar-link">变量</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/template/var.html#最简单一个普通变量" class="sidebar-link">最简单一个普通变量</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#js-风格变量" class="sidebar-link">JS 风格变量</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#输出一个数组" class="sidebar-link">输出一个数组</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#js-风格输出一个数组" class="sidebar-link">JS 风格输出一个数组</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#输出一个对象" class="sidebar-link">输出一个对象</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#js-风格输出一个对象" class="sidebar-link">JS 风格输出一个对象</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#无限级支持" class="sidebar-link">无限级支持</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#对象点语法支持" class="sidebar-link">对象点语法支持</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#支持无限级对象属性" class="sidebar-link">支持无限级对象属性</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#运算符-加减法运算" class="sidebar-link">运算符.加减法运算</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#运算符-乘除余数" class="sidebar-link">运算符.乘除余数</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#运算符-连接字符" class="sidebar-link">运算符.连接字符</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#js-风格运算符-加减法运算" class="sidebar-link">JS 风格运算符.加减法运算</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#js-风格运算符-乘除余数" class="sidebar-link">JS 风格运算符.乘除余数</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#js-风格运算符-连接字符" class="sidebar-link">JS 风格运算符.连接字符</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#函数支持" class="sidebar-link">函数支持</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#函数支持-基本用法" class="sidebar-link">函数支持.基本用法</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#函数支持-占位符" class="sidebar-link">函数支持.占位符</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#函数支持-快捷方法" class="sidebar-link">函数支持.快捷方法</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#函数支持-静态方法" class="sidebar-link">函数支持.静态方法</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#函数支持-执行方法但不输出" class="sidebar-link">函数支持.执行方法但不输出</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#函数支持-对象方法" class="sidebar-link">函数支持.对象方法</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#函数支持-默认值" class="sidebar-link">函数支持.默认值</a></li><li class="sidebar-sub-header"><a href="/docs/template/var.html#js-风格函数支持" class="sidebar-link">JS 风格函数支持</a></li></ul></li><li><a href="/docs/template/assign.html" class="sidebar-link">变量赋值</a></li><li><a href="/docs/template/quick.html" class="sidebar-link">快捷标签</a></li><li><a href="/docs/template/if.html" class="sidebar-link">流程控制</a></li><li><a href="/docs/template/for.html" class="sidebar-link">For 循环</a></li><li><a href="/docs/template/list.html" class="sidebar-link">List 循环</a></li><li><a href="/docs/template/lists.html" class="sidebar-link">Lists 循环</a></li><li><a href="/docs/template/while.html" class="sidebar-link">While 循环</a></li><li><a href="/docs/template/break.html" class="sidebar-link">跳出循环</a></li><li><a href="/docs/template/php.html" class="sidebar-link">PHP 标签</a></li><li><a href="/docs/template/include.html" class="sidebar-link">Include 标签</a></li><li><a href="/docs/template/css.html" class="sidebar-link">CSS 标签</a></li><li><a href="/docs/template/tagself.html" class="sidebar-link">Tagself 保护标签</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据库</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ORM</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>组件</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="content default"><h1 id="变量"><a href="#变量" aria-hidden="true" class="header-anchor">#</a> 变量</h1> <p>变量是最基本的用法，这里模板引擎做了大量的工作支持更好。</p> <h2 id="最简单一个普通变量"><a href="#最简单一个普通变量" aria-hidden="true" class="header-anchor">#</a> 最简单一个普通变量</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testBaseUse()
+{
+    $parser = $this-&gt;createParser();
+
+    // 普通变量
+    $source = &lt;&lt;&lt;'eot'
+        {$name}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$name</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>模板标签的 “{” 和 “$” 之间不能有任何的空格，否则标签无效。</p></div> <h2 id="js-风格变量"><a href="#js-风格变量" aria-hidden="true" class="header-anchor">#</a> JS 风格变量</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testJsStyle()
+{
+    $parser = $this-&gt;createParser();
+
+    // JS 风格变量
+    $source = &lt;&lt;&lt;'eot'
+        {{ value }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>注意：“{{“ 与内容之间可以有空格,也可以没有，结果一样。</p></div> <h2 id="输出一个数组"><a href="#输出一个数组" aria-hidden="true" class="header-anchor">#</a> 输出一个数组</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testArraySupport()
+{
+    $parser = $this-&gt;createParser();
+
+    // 数组支持
+    $source = &lt;&lt;&lt;'eot'
+        我的梦想是写好”{$value['name']}“，我相信”{$value['description']}“。
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">我的梦想是写好”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“，我相信”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'description'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“。</span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="js-风格输出一个数组"><a href="#js-风格输出一个数组" aria-hidden="true" class="header-anchor">#</a> JS 风格输出一个数组</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testJsStyleArraySupport()
+{
+    $parser = $this-&gt;createParser();
+
+    // JS 风格数组支持
+    $source = &lt;&lt;&lt;'eot'
+        {{ value['test'] }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'test'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="输出一个对象"><a href="#输出一个对象" aria-hidden="true" class="header-anchor">#</a> 输出一个对象</h2> <p>我们编写这样子一个简单对象，然后再赋值。</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testObject()
+{
+    $parser = $this-&gt;createParser();
+
+    // 输出一个对象
+    $source = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">我的梦想是写好”{$demo-</span><span class="token punctuation">&gt;</span></span>name}“，我相信”{$demo-&gt;description}“。
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">我的梦想是写好”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“，我相信”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">description</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“。</span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="js-风格输出一个对象"><a href="#js-风格输出一个对象" aria-hidden="true" class="header-anchor">#</a> JS 风格输出一个对象</h2> <p>其中 <code>.</code> 是一个非常特殊的语法，如果中间没有空格将被解析为对象连接符，否则就是字符串连接符。</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testJsStyleObject()
+{
+    $parser = $this-&gt;createParser();
+
+    // JS 风格输出一个对象
+    // . 周围有空格表示变量
+    $source = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">&lt;li</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{{ item.href }}<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ item.caption }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+        eot;
+
+    $source = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">{{</span> <span class="token attr-name">a.b</span> <span class="token attr-name">}}</span>
+        <span class="token attr-name">{{</span> <span class="token attr-name">a</span> <span class="token attr-name">.</span> <span class="token attr-name">b</span> <span class="token attr-name">}}</span>
+        <span class="token attr-name">{{</span> <span class="token attr-name">a-</span><span class="token punctuation">&gt;</span></span>b }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$a</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">b</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$a</span> <span class="token punctuation">.</span> <span class="token variable">$b</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$a</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">b</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p><code>.</code> 周围有空格表示变量</p></div> <h2 id="无限级支持"><a href="#无限级支持" aria-hidden="true" class="header-anchor">#</a> 无限级支持</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testLevel()
+{
+    $parser = $this-&gt;createParser();
+
+    // 对象无限层级支持
+    $source = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">我的梦想是写好”{$demo-</span><span class="token punctuation">&gt;</span></span>name-&gt;child-&gt;child-&gt;child}“，我相信”{$demo-&gt;description}“。
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">我的梦想是写好”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">child</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">child</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">child</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“，我相信”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">description</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“。</span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="对象点语法支持"><a href="#对象点语法支持" aria-hidden="true" class="header-anchor">#</a> 对象点语法支持</h2> <p>为了方便模板定义，对象还可以支持点语法，例如，上面的模板中：</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testObjectSpot()
+{
+    $parser = $this-&gt;createParser();
+
+    // 对象数组点语法支持
+    $source = &lt;&lt;&lt;'eot'
+        我的梦想是写好”{$demo.name}“，我相信”{$demo.description}“。
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">我的梦想是写好”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“，我相信”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">description</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“。</span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>值得注意的是点语法不支持数组，这个需要明确。</p></div> <h2 id="支持无限级对象属性"><a href="#支持无限级对象属性" aria-hidden="true" class="header-anchor">#</a> 支持无限级对象属性</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testLevelProperty()
+{
+    $parser = $this-&gt;createParser();
+
+    // 支持无限级对象属性
+    $source = &lt;&lt;&lt;'eot'
+        我的梦想是写好”{$demo.name.one.two.three.four}“，我相信”{$demo.description.one.two.three.four}“。
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">我的梦想是写好”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">one</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">two</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">three</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">four</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“，我相信”<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">description</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">one</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">two</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">three</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">four</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span>“。</span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="运算符-加减法运算"><a href="#运算符-加减法运算" aria-hidden="true" class="header-anchor">#</a> 运算符.加减法运算</h2> <p>我们有的时候需要进行一些字符串的操作，以及变量之间的运算，当然直接使用 PHP 可以进行这样子的操作。这里，我们给出的是另一种简单的语法规则。</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testOperator()
+{
+    $parser = $this-&gt;createParser();
+
+    // 变量之间的加减法运算
+    $source = &lt;&lt;&lt;'eot'
+        {$value+$value2}
+        {$value-$value2}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span><span class="token operator">+</span><span class="token variable">$value2</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span><span class="token operator">-</span><span class="token variable">$value2</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="运算符-乘除余数"><a href="#运算符-乘除余数" aria-hidden="true" class="header-anchor">#</a> 运算符.乘除余数</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testOperator2()
+{
+    $parser = $this-&gt;createParser();
+
+    // 变量之间的乘除余数
+    $source = &lt;&lt;&lt;'eot'
+        {$value + 9 +10}
+        {$value * $value2 * 10}
+        {$value / $value2}
+        {$value3+$list['key']}
+        {$value3%$list['key']}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span> <span class="token operator">+</span> <span class="token number">9</span> <span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span> <span class="token operator">*</span> <span class="token variable">$value2</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span> <span class="token operator">/</span> <span class="token variable">$value2</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value3</span><span class="token operator">+</span><span class="token variable">$list</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'key'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value3</span><span class="token operator">%</span><span class="token variable">$list</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'key'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="运算符-连接字符"><a href="#运算符-连接字符" aria-hidden="true" class="header-anchor">#</a> 运算符.连接字符</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testOperator3()
+{
+    $parser = $this-&gt;createParser();
+
+    // 变量之间的连接字符
+    $source = &lt;&lt;&lt;'eot'
+        {$value3.'start - '.$value.$value2.'- end'}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value3</span><span class="token punctuation">.</span><span class="token single-quoted-string string">'start - '</span><span class="token punctuation">.</span><span class="token variable">$value</span><span class="token punctuation">.</span><span class="token variable">$value2</span><span class="token punctuation">.</span><span class="token single-quoted-string string">'- end'</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="js-风格运算符-加减法运算"><a href="#js-风格运算符-加减法运算" aria-hidden="true" class="header-anchor">#</a> JS 风格运算符.加减法运算</h2> <p>JS 风格的运算符也遵循这一个规则，需要注意的 <code>.</code> 语法有一定特殊性，周围 <code>是否有空格</code> 会影响到解析为 <code>-&gt;</code> 作为对象或者 <code>.</code> 作为连接符。</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testJsOperator()
+{
+    $parser = $this-&gt;createParser();
+
+    // 变量之间的加减法运算
+    $source = &lt;&lt;&lt;'eot'
+        {{ value+value2 }}
+        {{ value-value2 }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span><span class="token operator">+</span><span class="token variable">$value2</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span><span class="token operator">-</span><span class="token variable">$value2</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="js-风格运算符-乘除余数"><a href="#js-风格运算符-乘除余数" aria-hidden="true" class="header-anchor">#</a> JS 风格运算符.乘除余数</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testJsOperator2()
+{
+    $parser = $this-&gt;createParser();
+
+    // 变量之间的乘除余数
+    $source = &lt;&lt;&lt;'eot'
+        {{ value + 9 +10 }}
+        {{ value * value2 * 10 }}
+        {{ value / value2 }}
+        {{ value3+list['key'] }}
+        {{ value3%list['key'] }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span> <span class="token operator">+</span> <span class="token number">9</span> <span class="token operator">+</span><span class="token number">10</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span> <span class="token operator">*</span> <span class="token variable">$value2</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value</span> <span class="token operator">/</span> <span class="token variable">$value2</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value3</span><span class="token operator">+</span><span class="token variable">$list</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'key'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value3</span><span class="token operator">%</span><span class="token variable">$list</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'key'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="js-风格运算符-连接字符"><a href="#js-风格运算符-连接字符" aria-hidden="true" class="header-anchor">#</a> JS 风格运算符.连接字符</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testJsOperator3()
+{
+    $parser = $this-&gt;createParser();
+
+    // 变量之间的连接字符
+    $source = &lt;&lt;&lt;'eot'
+        {{ value3.'start - '. value. value2.'end' }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$value3</span><span class="token punctuation">.</span><span class="token single-quoted-string string">'start - '</span><span class="token punctuation">.</span> <span class="token variable">$value</span><span class="token punctuation">.</span> <span class="token variable">$value2</span><span class="token punctuation">.</span><span class="token single-quoted-string string">'end'</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="函数支持"><a href="#函数支持" aria-hidden="true" class="header-anchor">#</a> 函数支持</h2> <p>仅仅是输出变量并不能满足模板输出的需要，内置模板引擎支持对模板变量使用调节器和格式化功能，其实也就是提供函数支持，并支持多个函数同时使用。</p> <p>用于模板标签的函数可以是PHP 内置函数或者是用户自定义函数，和 smarty 不同的是用于模板的函数不需要特别的定义。</p> <h3 id="函数调用格式"><a href="#函数调用格式" aria-hidden="true" class="header-anchor">#</a> 函数调用格式</h3> <div class="language-php extra-class"><pre class="language-php"><code><span class="token punctuation">{</span><span class="token variable">$varName</span><span class="token operator">|</span>function1<span class="token operator">|</span>function2<span class="token operator">=</span>arg1<span class="token punctuation">,</span>arg2<span class="token punctuation">,</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">}</span>
+</code></pre></div><p>说明：</p> <ul><li>“{” 和 “$” 符号之间不能有空格 ，后面参数的空格就没有问题</li> <li>表示模板变量本身的参数位置</li> <li>支持多个函数，函数之间支持空格</li></ul> <div class="language-php extra-class"><pre class="language-php"><code>public function testFunction()
+{
+    $parser = $this-&gt;createParser();
+
+    // base
+    $source = &lt;&lt;&lt;'eot'
+        {$varName|function1|function2=arg1,arg2,**}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">function2</span><span class="token punctuation">(</span>arg1<span class="token punctuation">,</span>arg2<span class="token punctuation">,</span><span class="token function">function1</span><span class="token punctuation">(</span><span class="token variable">$varName</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+
+    // 模板中如果不加 ** 的格式为
+    $source = &lt;&lt;&lt;'eot'
+        {$varName|function1|function2=arg1,arg2}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">function2</span><span class="token punctuation">(</span><span class="token function">function1</span><span class="token punctuation">(</span><span class="token variable">$varName</span><span class="token punctuation">)</span><span class="token punctuation">,</span> arg1<span class="token punctuation">,</span>arg2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>函数的定义和使用顺序的对应关系，通常来说函数的第一个参数就是前面的变量或者前一个函数使用的结果，如果你的变量并不是函数的第一个参数，需要使用定位符号 “**”。</p></div> <h2 id="函数支持-基本用法"><a href="#函数支持-基本用法" aria-hidden="true" class="header-anchor">#</a> 函数支持.基本用法</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testFunction2()
+{
+    $parser = $this-&gt;createParser();
+
+    // 例 1
+    $source = &lt;&lt;&lt;'eot'
+        {$content|strtoupper|substr=0,3}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">substr</span><span class="token punctuation">(</span><span class="token function">strtoupper</span><span class="token punctuation">(</span><span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="函数支持-占位符"><a href="#函数支持-占位符" aria-hidden="true" class="header-anchor">#</a> 函数支持.占位符</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testFunction3()
+{
+    $parser = $this-&gt;createParser();
+
+    // 例 2
+    $source = &lt;&lt;&lt;'eot'
+        {$date|date=&quot;Y-m-d&quot;,**}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">date</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&quot;Y-m-d&quot;</span><span class="token punctuation">,</span><span class="token variable">$date</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="函数支持-快捷方法"><a href="#函数支持-快捷方法" aria-hidden="true" class="header-anchor">#</a> 函数支持.快捷方法</h2> <p>并且还提供了在模板文件中直接调用函数的快捷方法，无需通过模板变量，包括两种方式：</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testFunction4()
+{
+    $parser = $this-&gt;createParser();
+
+    // 例 3
+    $source = &lt;&lt;&lt;'eot'
+        {:function1($var)}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">function1</span><span class="token punctuation">(</span><span class="token variable">$var</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="函数支持-静态方法"><a href="#函数支持-静态方法" aria-hidden="true" class="header-anchor">#</a> 函数支持.静态方法</h2> <p>使用静态函数来格式化参数。</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testFunction5()
+{
+    $parser = $this-&gt;createParser();
+
+    // 静态方法
+    $source = &lt;&lt;&lt;'eot'
+        {~$currentTime=time()}
+        {$currentTime|\Leevel\Support\Str::formatDate}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token variable">$currentTime</span><span class="token operator">=</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> \<span class="token package">Leevel<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Str</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">formatDate</span><span class="token punctuation">(</span><span class="token variable">$currentTime</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="函数支持-执行方法但不输出"><a href="#函数支持-执行方法但不输出" aria-hidden="true" class="header-anchor">#</a> 函数支持.执行方法但不输出</h2> <div class="language-php extra-class"><pre class="language-php"><code>public function testFunction6()
+{
+    $parser = $this-&gt;createParser();
+
+    // 执行方法但不输出
+    $source = &lt;&lt;&lt;'eot'
+        {~function1($var)}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token function">function1</span><span class="token punctuation">(</span><span class="token variable">$var</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+
+    // 例 1
+    $source = &lt;&lt;&lt;'eot'
+        {~echo('Hello world!')}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'Hello world!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><h2 id="函数支持-对象方法"><a href="#函数支持-对象方法" aria-hidden="true" class="header-anchor">#</a> 函数支持.对象方法</h2> <p>如果我们需要在模板中使用对象的方法，那么通过代码版本的变量语法可以很方便地输出。</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testFunction7()
+{
+    $parser = $this-&gt;createParser();
+
+    // 对象方法
+    $source = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name">{$demo-</span><span class="token punctuation">&gt;</span></span>test()}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$demo</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>程序编译后默认是输出值，所以最好在类的方法中最好不要直接输出值，直接返回，这样可以交给模版来做数据处理。</p></div> <h2 id="函数支持-默认值"><a href="#函数支持-默认值" aria-hidden="true" class="header-anchor">#</a> 函数支持.默认值</h2> <p>如果输出的模板变量没有值，但是我们需要在显示的时候赋予一个默认值的话，可以使用 default 语法，格式：</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token punctuation">{</span>$变量<span class="token operator">|</span><span class="token keyword">default</span><span class="token operator">=</span><span class="token double-quoted-string string">&quot;默认值&quot;</span><span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>这里的 default 不是函数，而是系统的一个语法规则。</p></blockquote> <div class="language-php extra-class"><pre class="language-php"><code>public function testFunction8()
+{
+    $parser = $this-&gt;createParser();
+
+    // 三元运算符
+    $source = &lt;&lt;&lt;'eot'
+        {~$name=''}
+        {$name|default=&quot;Hello，我最爱的雪碧！&quot;}
+        
+        {~$name='肯德基更配！'}
+        {$name|default=&quot;Hello，我最爱的雪碧！&quot;}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token variable">$name</span><span class="token operator">=</span><span class="token single-quoted-string string">''</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$name</span> <span class="token operator">?</span><span class="token punctuation">:</span> <span class="token double-quoted-string string">&quot;Hello，我最爱的雪碧！&quot;</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token variable">$name</span><span class="token operator">=</span><span class="token single-quoted-string string">'肯德基更配！'</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token variable">$name</span> <span class="token operator">?</span><span class="token punctuation">:</span> <span class="token double-quoted-string string">&quot;Hello，我最爱的雪碧！&quot;</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>“default=” 之间不能有空格，否则无法识别。</p></div> <h2 id="js-风格函数支持"><a href="#js-风格函数支持" aria-hidden="true" class="header-anchor">#</a> JS 风格函数支持</h2> <p>JS 风格函数和上面的函数支持得差不多。</p> <div class="language-php extra-class"><pre class="language-php"><code>public function testJsFunction()
+{
+    $parser = $this-&gt;createParser();
+
+    // 例 1
+    $source = &lt;&lt;&lt;'eot'
+        {{ var|escape }}
+        {{ var|e }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">escape</span><span class="token punctuation">(</span><span class="token variable">$var</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">e</span><span class="token punctuation">(</span><span class="token variable">$var</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+
+    // 例 2
+    $source = &lt;&lt;&lt;'eot'
+        {{ list|join=',' }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">join</span><span class="token punctuation">(</span><span class="token variable">$list</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">','</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+
+    // 例 3
+    $source = &lt;&lt;&lt;'eot'
+        {{ data|convert_encoding='iso-2022-jp', 'UTF-8') }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">convert_encoding</span><span class="token punctuation">(</span><span class="token variable">$data</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">'iso-2022-jp'</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">'UTF-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+
+    // 例 4
+    $source = &lt;&lt;&lt;'eot'
+        {{ data|convert_encoding='iso-2022-jp', **, 'UTF-8') }}
+        eot;
+
+    $compiled = &lt;&lt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>'eot'</span>
+        <span class="token attr-name"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token function">convert_encoding</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'iso-2022-jp'</span><span class="token punctuation">,</span> <span class="token variable">$data</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">'UTF-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter important">?&gt;</span></span></span>
+        <span class="token attr-name">eot;</span>
+
+    <span class="token attr-name">$this-</span><span class="token punctuation">&gt;</span></span>assertSame($compiled, $parser-&gt;doCompile($source, null, true));
+}
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/hunzhiwange/queryphp.com/edit/master/docs/docs/template/var.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2019/4/14 下午8:14:38</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/docs/template/" class="prev router-link-active">
+          模板
+        </a></span> <span class="next"><a href="/docs/template/assign.html">
+          变量赋值
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.5f56ab55.js" defer></script><script src="/assets/js/3.ce8c3442.js" defer></script><script src="/assets/js/78.d1f4491a.js" defer></script><script src="/assets/js/5.4980778e.js" defer></script>
+  </body>
+</html>
