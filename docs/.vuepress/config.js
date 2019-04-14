@@ -107,6 +107,7 @@ function genSidebarConfigDoc () {
       children: [
         'architecture/',
         'architecture/ioc',
+        'architecture/fn',
       ]
     },
     {
