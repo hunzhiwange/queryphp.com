@@ -7,7 +7,7 @@ module.exports = {
     '/': {
       lang: 'zh-CN',
       title: 'QueryPHP',
-      description: '渐进式 PHP 常驻框架引擎'
+      description: '渐进式 PHP 7 不仅仅是常驻框架引擎.'
     }
   },
   head: [
@@ -227,6 +227,13 @@ function genSidebarConfigDoc () {
         'component/debug',
         'component/encryption',
         'component/safe',
+      ]
+    },
+    {
+      title: '开发者',
+      collapsable: true,
+      children: [
+        'developer/',
       ]
     }
   ]

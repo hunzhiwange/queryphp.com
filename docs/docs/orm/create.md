@@ -72,6 +72,7 @@ public function testBaseUse()
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\IEntity;
 
 class TestConstructPropWhiteEntity extends Entity
 {
@@ -93,7 +94,7 @@ class TestConstructPropWhiteEntity extends Entity
 
     private $name;
 
-    public function setter(string $prop, $value): Entity
+    public function setter(string $prop, $value): IEntity
     {
         $this->{$this->prop($prop)} = $value;
 
@@ -119,8 +120,8 @@ public function testConsturctPropWhite()
         'name' => 'foo',
     ]);
 
-    $this->assertSame(5, $entity->getId());
-    $this->assertNull($entity->getName());
+    $this->assertSame(5, $entity->getterId());
+    $this->assertNull($entity->getterName());
 }
 ```
     
@@ -134,6 +135,7 @@ public function testConsturctPropWhite()
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\IEntity;
 
 class TestConstructPropBlackEntity extends Entity
 {
@@ -155,7 +157,7 @@ class TestConstructPropBlackEntity extends Entity
 
     private $name;
 
-    public function setter(string $prop, $value): Entity
+    public function setter(string $prop, $value): IEntity
     {
         $this->{$this->prop($prop)} = $value;
 
@@ -181,7 +183,7 @@ public function testConsturctPropBlack()
         'name' => 'foo',
     ]);
 
-    $this->assertNull($entity->getId());
-    $this->assertSame('foo', $entity->getName());
+    $this->assertNull($entity->getterId());
+    $this->assertSame('foo', $entity->getterName());
 }
 ```

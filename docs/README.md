@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: /hero.png
-actionText: 快速上手 →
+actionText: 设计理念指南 →
 actionLink: /guide/
 features-bak:
 - title: 框架理念
@@ -19,8 +19,13 @@ features-bak:
 footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
 ---
 
-<div style="color:#868e96!important;font-weight:500;font-size: 1.25rem;line-height: 1.5;text-align:left;opacity: 0.7 !important;">
-        QueryPHP 是一款现代化的高性能 PHP 7 常驻框架，以工程师用户体验为历史使命，让每一个 PHP 应用都有一个好框架。百分之百单元测试覆盖直面 Bug 一剑封喉，基于 Zephir 实现框架常驻，依托 Swoole 生态实现业务常驻，此刻未来逐步渐进。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，让您的业务撑起更多的用户服务。
+<div style="background:#f5f8fb!important;color:#212121!important;font-weight:500;font-size: 1.25rem;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
+        <span>QueryPHP 是一款现代化的渐进式高性能 PHP 7 不仅仅是常驻框架，以工程师用户体验为历史使命，让每一个 PHP 应用都有一个好框架。</span><br/><br/>
+        <span>百分之百单元测试覆盖直面 Bug 一剑封喉，基于 Zephir 实现框架常驻，依托 Swoole 生态实现业务常驻，此刻未来逐步渐进。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，让您的业务撑起更多的用户服务。</span>
+</div>
+<div style="color:#fff!important;background:rgb(248, 3, 120)!important;font-weight:bold;line-height: 1.5;text-align:left;opacity: 0.7 !important;margin-top:20px;margin-bottom:15px;padding: 10px;border-radius:15px;">
+  我们崇尚的渐进式工作模式，QueryPHP 既可以运行在 php-fpm 场景，也可以将框架核心编译成 C 扩展，同时还支持在 swoole 或者 Go Roadrunner 服务中运行。
+  这意味着可以在 php-fpm 这种非常传统的方式进行快速开发验证产品，遇到性能问题可以少量代码或者无修改无缝支持在 swoole 和 Go Roadrunner 上运行，这将极大降低企业重构业务的风险。
 </div>
 
 <div class="features" style="text-align:center;padding-left:15px;border-top:none;margin:0;padding:0;">
@@ -221,11 +226,18 @@ footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
   <div class="features" style="text-align: center; padding: 0px; border-top: none; margin: 0px;">
    <div class="feature" style="max-width: 50%; text-align: center;">
     <p><h2><img width="15px" src="data:image/png;base64,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"> QueryPHP</h2></p>
-    <p><iframe src="https://ghbtns.com/github-btn.html?user=hunzhiwange&repo=queryphp&type=watch&count=true&size=large" width="130px" height="30px" style="border:none;padding: 5px 0 0 0;"></iframe></p>
+    <p>
+      <div style="border:none;padding: 5px 0 0 0;width:130px;height:30px;margin:10px auto;">
+        <span class="github-btn github-stargazers github-btn-large" id="github-btn"><a class="gh-btn" id="gh-btn" href="https://github.com/hunzhiwange/queryphp/stargazers" target="_blank" aria-label="Star on GitHub"><span class="gh-ico" aria-hidden="true"></span> <span class="gh-text" id="gh-text">Star</span></a> </span>
+      </div>
    </div>
    <div class="feature" style="max-width: 50%; text-align: center;">
-    <p><h2><img width="15px" src="data:image/png;base64,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"> Leevel</h2></p>
-    <p><iframe src="https://ghbtns.com/github-btn.html?user=hunzhiwange&repo=leevel&type=watch&count=true&size=large" width="135px" height="30px" style="border:none;padding: 5px 0 0 0;"></iframe></p>
+    <p><h2 style="margin-left: -45px;"><img width="15px" src="data:image/png;base64,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"> Leevel</h2></p>
+    <p>
+      <div style="border:none;padding: 5px 0 0 0;width:130px;height:30px;margin:10px auto;">
+        <span class="github-btn github-stargazers github-btn-large" id="github-btn"><a class="gh-btn" id="gh-btn" href="https://github.com/hunzhiwange/leevel/stargazers" target="_blank" aria-label="Star on GitHub"><span class="gh-ico" aria-hidden="true"></span> <span class="gh-text" id="gh-text">Star</span></a> </span>
+      </div>
+    </p>
    </div>
   </div>
 </p>
@@ -323,6 +335,7 @@ declare(strict_types=1);
 namespace Common\Domain\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\IEntity;
 
 class Dream extends Entity
 {
@@ -407,7 +420,7 @@ class Dream extends Entity
      *
      * @return $this
      */
-    public function setName(string $name): Entity
+    public function setterName(string $name): IEntity
     {
         $this->name = $name;
 
@@ -419,7 +432,7 @@ class Dream extends Entity
      *
      * @return string
      */
-    public function getName(): string
+    public function getterName(): string
     {
         return $this->name;
     }
@@ -438,7 +451,7 @@ class Dream extends Entity
 ```
 
 ::: warning 注意
-请确保你的 PHP 版本 >= 7.1.3。
+请确保你的 PHP 版本 >= 7.3.2。
 :::
 
 <div id="sponsors">
@@ -447,7 +460,7 @@ class Dream extends Entity
     <a href="https://queryphp.com/" target="_blank" style="width: 180px">
       <img style="width: 180px" src="/link/queryphp-use-leevel.png">
     </a>
-    <a href="https://leevel.vip/" target="_blank" style="width: 180px">
+    <a href="https://github.com/hunzhiwange/leevel" target="_blank" style="width: 180px">
       <img style="width: 180px" src="/link/leevel.png">
     </a>
     <a href="https://hunzhiwange.com/" target="_blank" style="width: 180px">
@@ -687,5 +700,137 @@ a.button.has-icon > img {
     letter-spacing: 0.1em;
     min-width: 8em;
     text-align: center;
+}
+
+.github-btn {
+	height: 20px;
+	overflow: hidden
+}
+
+.gh-btn,.gh-count,.gh-ico {
+	float: left
+}
+
+.gh-btn,.gh-count {
+	padding: 2px 5px 2px 4px;
+	color: #333;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #fff;
+	white-space: nowrap;
+	cursor: pointer;
+	border-radius: 3px
+}
+
+.gh-btn {
+	background-color: #eee;
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fcfcfc),color-stop(100%,#eee));
+	background-image: -webkit-linear-gradient(top,#fcfcfc 0,#eee 100%);
+	background-image: -moz-linear-gradient(top,#fcfcfc 0,#eee 100%);
+	background-image: -ms-linear-gradient(top,#fcfcfc 0,#eee 100%);
+	background-image: -o-linear-gradient(top,#fcfcfc 0,#eee 100%);
+	background-image: linear-gradient(to bottom,#fcfcfc 0,#eee 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#eeeeee', GradientType=0);
+	background-repeat: no-repeat;
+	border: 1px solid #d5d5d5
+}
+
+.gh-btn:focus,.gh-btn:hover {
+	text-decoration: none;
+	background-color: #ddd;
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#eee),color-stop(100%,#ddd));
+	background-image: -webkit-linear-gradient(top,#eee 0,#ddd 100%);
+	background-image: -moz-linear-gradient(top,#eee 0,#ddd 100%);
+	background-image: -ms-linear-gradient(top,#eee 0,#ddd 100%);
+	background-image: -o-linear-gradient(top,#eee 0,#ddd 100%);
+	background-image: linear-gradient(to bottom,#eee 0,#ddd 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#dddddd', GradientType=0);
+	border-color: #ccc
+}
+
+.gh-btn:active {
+	background-image: none;
+	background-color: #dcdcdc;
+	border-color: #b5b5b5;
+	box-shadow: inset 0 2px 4px rgba(0,0,0,.15)
+}
+
+.gh-ico {
+	width: 14px;
+	height: 14px;
+	margin-right: 4px;
+  background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjQwcHgiIGhlaWdodD0iNDBweCIgdmlld0JveD0iMTIgMTIgNDAgNDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMTIgMTIgNDAgNDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiMzMzMzMzMiIGQ9Ik0zMiAxMy40Yy0xMC41IDAtMTkgOC41LTE5IDE5YzAgOC40IDUuNSAxNS41IDEzIDE4YzEgMC4yIDEuMy0wLjQgMS4zLTAuOWMwLTAuNSAwLTEuNyAwLTMuMiBjLTUuMyAxLjEtNi40LTIuNi02LjQtMi42QzIwIDQxLjYgMTguOCA0MSAxOC44IDQxYy0xLjctMS4yIDAuMS0xLjEgMC4xLTEuMWMxLjkgMC4xIDIuOSAyIDIuOSAyYzEuNyAyLjkgNC41IDIuMSA1LjUgMS42IGMwLjItMS4yIDAuNy0yLjEgMS4yLTIuNmMtNC4yLTAuNS04LjctMi4xLTguNy05LjRjMC0yLjEgMC43LTMuNyAyLTUuMWMtMC4yLTAuNS0wLjgtMi40IDAuMi01YzAgMCAxLjYtMC41IDUuMiAyIGMxLjUtMC40IDMuMS0wLjcgNC44LTAuN2MxLjYgMCAzLjMgMC4yIDQuNyAwLjdjMy42LTIuNCA1LjItMiA1LjItMmMxIDIuNiAwLjQgNC42IDAuMiA1YzEuMiAxLjMgMiAzIDIgNS4xYzAgNy4zLTQuNSA4LjktOC43IDkuNCBjMC43IDAuNiAxLjMgMS43IDEuMyAzLjVjMCAyLjYgMCA0LjYgMCA1LjJjMCAwLjUgMC40IDEuMSAxLjMgMC45YzcuNS0yLjYgMTMtOS43IDEzLTE4LjFDNTEgMjEuOSA0Mi41IDEzLjQgMzIgMTMuNHoiLz48L3N2Zz4=);
+  background-size: 100% 100%;
+	background-repeat: no-repeat
+}
+
+.gh-count {
+	position: relative;
+	display: none;
+	margin-left: 4px;
+	background-color: #fafafa;
+	border: 1px solid #d4d4d4
+}
+
+.gh-count:focus,.gh-count:hover {
+	color: #4183C4
+}
+
+.gh-count:after,.gh-count:before {
+	content: '';
+	position: absolute;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid
+}
+
+.gh-count:before {
+	top: 50%;
+	left: -3px;
+	margin-top: -4px;
+	border-width: 4px 4px 4px 0;
+	border-right-color: #fafafa
+}
+
+.gh-count:after {
+	top: 50%;
+	left: -4px;
+	z-index: -1;
+	margin-top: -5px;
+	border-width: 5px 5px 5px 0;
+	border-right-color: #d4d4d4
+}
+
+.github-btn-large {
+	height: 30px
+}
+
+.github-btn-large .gh-btn,.github-btn-large .gh-count {
+	padding: 3px 10px 3px 8px;
+	font-size: 16px;
+	line-height: 22px;
+	border-radius: 4px
+}
+
+.github-btn-large .gh-ico {
+	width: 20px;
+	height: 20px
+}
+
+.github-btn-large .gh-count {
+	margin-left: 6px
+}
+
+.github-btn-large .gh-count:before {
+	left: -5px;
+	margin-top: -6px;
+	border-width: 6px 6px 6px 0
+}
+
+.github-btn-large .gh-count:after {
+	left: -6px;
+	margin-top: -7px;
+	border-width: 7px 7px 7px 0
 }
 </style>
