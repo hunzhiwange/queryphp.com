@@ -20,7 +20,7 @@ QueryPHP 非常欢迎各位给我们共同的伟大的作品添砖加瓦，实�
 这里以笔者的 Mac 为例子说明，其实 Windows 下面还更简单些。
 
 
-## 克隆 hunzhiwange/queryphp 仓库
+## 克隆 `queryphp` 仓库
 
 QueryPHP 框架的开发来自于从克隆主仓库开始，由于国内访问 Github 网速的问题，只需要等待一小段时间。
 
@@ -70,10 +70,7 @@ Resolving deltas: 100% (8700/8700), done.
 如果可以访问，那么恭喜你第一阶段即安装完毕。
 
 
-``` shell
-php leevel server <Visite http://127.0.0.1:9527/>
-```
-    
+
 
 ## 标准后台 API 端
 
@@ -116,11 +113,11 @@ DATABASE_PORT = 3306
 DATABASE_NAME = queryphp_development_db
 DATABASE_USER = root
 DATABASE_PASSWORD = 123456
-... 
+...
 ```
 
 
-**执行数据库迁移命令** 
+**执行数据库迁移命令**
 
 
 ```
@@ -206,7 +203,7 @@ php leevel server <http://127.0.0.1:9527/api/entity>
     :trace: {
         ...
     }
-} 
+}
 ```
     
 
@@ -262,7 +259,9 @@ password: 123456
 
 ## 运行测试用例
 
-QueryPHP 推崇通过编写测试用例来让代码变得可维护，所以这里需要本地开发跑通测试用例。**首先创建一个数据库**
+QueryPHP 推崇通过编写测试用例来让代码变得可维护，所以这里需要本地开发跑通测试用例。
+
+**首先创建一个数据库**
 
 
 可以用 Navicat For Mysql 创建一个数据库 `queryphp_development_test`.
@@ -299,7 +298,7 @@ DATABASE_PORT = 3306
 DATABASE_NAME = queryphp_development_test
 DATABASE_USER = root
 DATABASE_PASSWORD = 123456
-... 
+...
 ```
 
 
@@ -370,7 +369,7 @@ All Done. Took 0.2273s
 ```
 
 
-**运行测试用例** 
+**运行测试用例**
 
 
 ```
@@ -407,7 +406,7 @@ OK (26 tests, 43 assertions)
 
 ## 统一团队代码风格
 
-风格统一对保证我们系统一致性非常重要，我们做到开箱即用，支持 PHP 和 JavaScript。
+风格统一对保证我们系统一致性非常重要，我们做到开箱即用，支持 `PHP` 和 `JavaScript`。
 
 **使用 Git 钩子**
 
@@ -415,7 +414,7 @@ OK (26 tests, 43 assertions)
 ```
 cp ./build/pre-commit.sh ./.git/hooks/pre-commit
 chmod 777 ./.git/hooks/pre-commit
-``` 
+```
 
 
 **测试自动化格式**
@@ -508,7 +507,7 @@ declare(strict_types=1);
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *\/
+ */
 
 namespace Common;
 
@@ -550,7 +549,7 @@ HEAD is now at 931f283b Merge branch 'dev'
 ```
     
 
-## 克隆 hunzhiwange/framework 仓库将框架替换为开发版本
+## 克隆 `framework` 仓库将框架替换为开发版本
 
 应用层框架全部搭建完毕，接下来我们将框架层代码替换为开发阶段的代码来进行日常框架迭代。
 
@@ -599,7 +598,7 @@ remote: Counting objects: 100% (382/382), done.
 remote: Compressing objects: 100% (218/218), done.
 remote: Total 39304 (delta 196), reused 262 (delta 125), pack-reused 38922
 Receiving objects: 100% (39304/39304), 14.49 MiB | 12.00 KiB/s, done.
-Resolving deltas: 100% (27594/27594), done. 
+Resolving deltas: 100% (27594/27594), done.
 ```
 
 
@@ -732,7 +731,7 @@ All Done. Took 0.1179s
 ```
 
 
-**运行测试用例** 
+**运行测试用例**
 
 
 ```
@@ -782,7 +781,7 @@ Tests: 2978, Assertions: 10031, Failures: 0, Skipped: 6.
 ```
 cp ./build/pre-commit.sh ./.git/hooks/pre-commit
 chmod 777 ./.git/hooks/pre-commit
-``` 
+```
 
 
 **测试自动化格式**
@@ -848,7 +847,7 @@ create mode 100644 tests/Name.php
 
 declare(strict_types=1);
 
-/*
+*
 * This file is part of the ************************ package.
 * _____________                           _______________
 *  ______/     \__  _____  ____  ______  / /_  _________
@@ -862,7 +861,7 @@ declare(strict_types=1);
 *
 * For the full copyright and license information, please view the LICENSE
 * file that was distributed with this source code.
-*\/
+*/
 
 namespace Test;
 
@@ -876,7 +875,7 @@ class Name
 ```
     
 
-## 克隆 hunzhiwange/queryphp.com 仓库实现自动化文档搭建
+## 克隆 `queryphp.com` 仓库实现自动化文档搭建
 
 QueryPHP 底层的文档基于单元测试加备注的方式来实现的，通过命名工具全部采用自动化生成 Markdown，这大幅度简化了文档的编写工作，同时保证了文档实时性。
 
@@ -908,7 +907,7 @@ FRAMEWORK_DOC_OUTPUTDIR = "/data/codes/test/queryphp.com/docs/docs/"
 ```
 $cd /data/codes/test/queryphp
 $php leevel make:docwithin tests
-``` 
+```
 
 
 运行过程
