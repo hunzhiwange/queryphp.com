@@ -24,7 +24,7 @@
 
 关联数组结构会在尾部追加一个选项 `:trace` 用于调试。
 
-**返回结构**
+_**返回结构**_
 
 
 ``` php
@@ -66,7 +66,7 @@ public function testJson()
 
 非关联数组结构会在尾部追加一个 `:trace` 用于调试。
 
-**返回结构**
+_**返回结构**_
 
 
 ``` php
@@ -244,7 +244,7 @@ public function testEnableWithoutBootstrap()
 
 ## 调试消息等级
 
-**支持的消息类型**
+_**支持的消息类型**_
 
 
 ``` php

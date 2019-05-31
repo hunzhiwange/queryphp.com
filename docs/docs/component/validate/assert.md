@@ -10,7 +10,7 @@
 断言和验证器共享规则，所以可以直接参考验证器有哪些规则，排查掉依赖验证器自身的校验规则。
 
 
-**支持格式**
+_**支持格式**_
 
 
 ``` php
@@ -136,7 +136,7 @@ public function testAssertMultiWithOptional()
 
 我们可以使用链式表达式来校验规则。
 
-**make 原型**
+_**make 原型**_
 
 
 ``` php
@@ -161,7 +161,7 @@ public function testAssertChain()
 
 可以将所有错误几种抛出。
 
-**lazy 原型**
+_**lazy 原型**_
 
 
 ``` php

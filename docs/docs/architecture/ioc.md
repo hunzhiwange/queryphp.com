@@ -103,7 +103,7 @@ public function testInterface()
 
 接口可以作为控制器参数来做依赖注入。
 
-**ITest2 定义**
+_**ITest2 定义**_
 
 
 ``` php
@@ -115,7 +115,7 @@ interface ITest2
 ```
 
 
-**Test2 定义**
+_**Test2 定义**_
 
 
 ``` php
@@ -127,7 +127,7 @@ class Test2 implements ITest2
 ```
 
 
-**Test3 定义**
+_**Test3 定义**_
 
 
 ``` php

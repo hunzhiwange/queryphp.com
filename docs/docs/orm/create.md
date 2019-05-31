@@ -13,7 +13,7 @@
  * use Tests\Database\Ddd\Entity\TestEntity;
 ## 创建一个实体
 
-**完整例子**
+_**完整例子**_
 
 
 ``` php
@@ -65,7 +65,7 @@ public function testBaseUse()
     
 ## 创建一个实体支持构造器白名单
 
-**完整模型**
+_**完整模型**_
 
 
 ``` php
@@ -128,7 +128,7 @@ public function testConsturctPropWhite()
 
 ## 创建一个实体支持构造器黑名单
 
-**完整模型**
+_**完整模型**_
 
 
 ``` php
