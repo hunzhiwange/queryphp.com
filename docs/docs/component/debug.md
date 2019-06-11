@@ -1,5 +1,9 @@
 # Debug
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Debug/DebugTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Debug/DebugTest.php)
+:::
+    
 添加一个组件调试。
 
 **引入相关类**
@@ -36,7 +40,7 @@ $response = ["foo" => "bar", ":trace" => []];
 
 
 ``` php
-public function testJson()
+public function testJson(): void
 {
     $debug = $this->createDebug();
 
@@ -78,7 +82,7 @@ $response = ["foo", "bar", [":trace" => []]];
 
 
 ``` php
-public function testJsonForNotAssociativeArray()
+public function testJsonForNotAssociativeArray(): void
 {
     $debug = $this->createDebug();
 
@@ -108,7 +112,7 @@ public function testJsonForNotAssociativeArray()
 
 
 ``` php
-public function testDisable()
+public function testDisable(): void
 {
     $debug = $this->createDebug();
 
@@ -152,7 +156,7 @@ public function testDisable()
 
 
 ``` php
-public function testEnable()
+public function testEnable(): void
 {
     $debug = $this->createDebug();
 
@@ -202,7 +206,7 @@ public function testEnable()
 
 
 ``` php
-public function testEnableWithoutBootstrap()
+public function testEnableWithoutBootstrap(): void
 {
     $debug = $this->createDebug();
 
@@ -297,7 +301,7 @@ public function testMessageLevelsData(string $level)
 
 
 ``` php
-public function testWithSession()
+public function testWithSession(): void
 {
     $debug = $this->createDebug();
 
@@ -327,7 +331,7 @@ public function testWithSession()
 
 
 ``` php
-public function testWithLog()
+public function testWithLog(): void
 {
     $debug = $this->createDebugWithLog();
 
@@ -364,7 +368,7 @@ public function testWithLog()
 
 
 ``` php
-public function testTime()
+public function testTime(): void
 {
     $debug = $this->createDebug();
 
@@ -396,7 +400,7 @@ public function testTime()
 
 
 ``` php
-public function testTimeWithLabel()
+public function testTimeWithLabel(): void
 {
     $debug = $this->createDebug();
 

@@ -1,5 +1,9 @@
 # 如何成为 QueryPHP 开发者
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Docs/BecomeAQueryphpDeveloperDoc.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/BecomeAQueryphpDeveloperDoc.php)
+:::
+    
 QueryPHP 非常欢迎各位给我们共同的伟大的作品添砖加瓦，实现为 PHP 社区提供一个好框架的美好愿景。
 
  * 文档开发.基于单元测试实现的自动化文档 [当前文档开发](https://github.com/hunzhiwange/framework/projects/2)
@@ -70,9 +74,12 @@ Resolving deltas: 100% (8700/8700), done.
 如果可以访问，那么恭喜你第一阶段即安装完毕。
 
 
+``` shell
+php leevel server <Visite http://127.0.0.1:9527/>
+```
+    
 
-
-## 标准后台 API 端
+## 搭建后台 API 端
 
 首先我们需要创建一个数据库来运行我们的后台，让我们对 QueryPHP 有一个直观的感受，同时方便后期开发调试等。
 
@@ -207,7 +214,7 @@ php leevel server <http://127.0.0.1:9527/api/entity>
 ```
     
 
-## 标准后台前端端
+## 搭建前端
 
 后台 API 搭建好了，我们开始搭建前端了，前端基于 `Vue-cli 3` 和 `IView`，首先需要安装 `node` 才能够跑起来。
 
@@ -615,7 +622,9 @@ php leevel server <Visite http://127.0.0.1:9527/>
 
 ## 运行框架核心测试用例
 
-QueryPHP 底层框架拥有 3000 多例测试用例，这些测试用例需要被维护，所以这里需要本地开发跑通测试用例。**首先创建一个数据库**
+QueryPHP 底层框架拥有 3000 多例测试用例，这些测试用例需要被维护，所以这里需要本地开发跑通测试用例。
+
+**首先创建一个数据库**
 
 
 可以用 Navicat For Mysql 创建一个数据库 `test`.
@@ -847,21 +856,21 @@ create mode 100644 tests/Name.php
 
 declare(strict_types=1);
 
-*
-* This file is part of the ************************ package.
-* _____________                           _______________
-*  ______/     \__  _____  ____  ______  / /_  _________
-*   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
-*    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
-*      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
-*         \_\                /_/_/         /_/
-*
-* The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
-* (c) 2010-2019 http://queryphp.com All rights reserved.
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+/*
+ * This file is part of the ************************ package.
+ * _____________                           _______________
+ *  ______/     \__  _____  ____  ______  / /_  _________
+ *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
+ *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
+ *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
+ *         \_\                /_/_/         /_/
+ *
+ * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
+ * (c) 2010-2019 http://queryphp.com All rights reserved.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Test;
 

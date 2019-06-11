@@ -1,5 +1,9 @@
 # 查询语言.aggregate
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Query/AggregateTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/AggregateTest.php)
+:::
+    
 数据库聚合查询功能。
 
 **引入相关类**
@@ -23,7 +27,7 @@ public function findCount(string $field = '*', string $alias = 'row_count', bool
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $connect = $this->createDatabaseConnectMock();
 
@@ -41,11 +45,10 @@ public function testBaseUse()
     $this->assertSame(
         $sql,
         $this->varJson(
-            $connect->table('test')->
-
-            count()->
-
-            findOne(true)
+            $connect
+                ->table('test')
+                ->count()
+                ->findOne(true)
         )
     );
 
@@ -63,11 +66,10 @@ public function testBaseUse()
     $this->assertSame(
         $sql,
         $this->varJson(
-            $connect->table('test')->
-
-            count('id')->
-
-            findOne(true),
+            $connect
+                ->table('test')
+                ->count('id')
+                ->findOne(true),
             1
         )
     );
@@ -86,11 +88,10 @@ public function testBaseUse()
     $this->assertSame(
         $sql,
         $this->varJson(
-            $connect->table('test')->
-
-            count('id', 'count1')->
-
-            findOne(true),
+            $connect
+                ->table('test')
+                ->count('id', 'count1')
+                ->findOne(true),
             2
         )
     );
@@ -109,11 +110,10 @@ public function testBaseUse()
     $this->assertSame(
         $sql,
         $this->varJson(
-            $connect->table('test')->
-
-            count('{[id]*50}', 'count1')->
-
-            findOne(true),
+            $connect
+                ->table('test')
+                ->count('{[id]*50}', 'count1')
+                ->findOne(true),
             3
         )
     );
@@ -126,7 +126,7 @@ public function testBaseUse()
 计算平均值。
 
 ``` php
-public function testAvg()
+public function testAvg(): void
 {
     $connect = $this->createDatabaseConnectMock();
 
@@ -144,11 +144,10 @@ public function testAvg()
     $this->assertSame(
         $sql,
         $this->varJson(
-            $connect->table('test')->
-
-            avg('id')->
-
-            findOne(true)
+            $connect
+                ->table('test')
+                ->avg('id')
+                ->findOne(true)
         )
     );
 }
@@ -160,7 +159,7 @@ public function testAvg()
 计算最大值。
 
 ``` php
-public function testMax()
+public function testMax(): void
 {
     $connect = $this->createDatabaseConnectMock();
 
@@ -178,11 +177,10 @@ public function testMax()
     $this->assertSame(
         $sql,
         $this->varJson(
-            $connect->table('test')->
-
-            max('num')->
-
-            findOne(true)
+            $connect
+                ->table('test')
+                ->max('num')
+                ->findOne(true)
         )
     );
 }
@@ -194,7 +192,7 @@ public function testMax()
 计算最小值。
 
 ``` php
-public function testMin()
+public function testMin(): void
 {
     $connect = $this->createDatabaseConnectMock();
 
@@ -212,11 +210,10 @@ public function testMin()
     $this->assertSame(
         $sql,
         $this->varJson(
-            $connect->table('test')->
-
-            min('num')->
-
-            findOne(true)
+            $connect
+                ->table('test')
+                ->min('num')
+                ->findOne(true)
         )
     );
 }
@@ -228,7 +225,7 @@ public function testMin()
 计算合计。
 
 ``` php
-public function testSum()
+public function testSum(): void
 {
     $connect = $this->createDatabaseConnectMock();
 
@@ -246,11 +243,10 @@ public function testSum()
     $this->assertSame(
         $sql,
         $this->varJson(
-            $connect->table('test')->
-
-            sum('num')->
-
-            findOne(true)
+            $connect
+                ->table('test')
+                ->sum('num')
+                ->findOne(true)
         )
     );
 }

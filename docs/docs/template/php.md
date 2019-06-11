@@ -1,12 +1,16 @@
 # PHP 标签
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerPhpTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerPhpTest.php)
+:::
+    
 PHP 代码可以和标签在模板文件中混合使用，可以在模板文件里面书写任意的 PHP 语句代码 ，包括下面两种方式。
 
 ## 基本使用
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $parser = $this->createParser();
 
@@ -27,7 +31,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testPhpSelf()
+public function testPhpSelf(): void
 {
     $parser = $this->createParser();
 
@@ -52,7 +56,7 @@ public function testPhpSelf()
 PHP 标签或者 PHP 代码里面就不能再使用标签（包括 code 标签和 node 标签），因此下面的几种方式都是无效的：
 
 ``` php
-public function testErrorExample()
+public function testErrorExample(): void
 {
     $parser = $this->createParser();
 

@@ -1,12 +1,16 @@
 # 跳出循环
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerBreakTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerBreakTest.php)
+:::
+    
 break 和 continue 是各种循环中非常重要的两个流程标记语言，框架当然也会支持它们。
 
 ## break 标签
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $parser = $this->createParser();
 
@@ -39,7 +43,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testContinue()
+public function testContinue(): void
 {
     $parser = $this->createParser();
 

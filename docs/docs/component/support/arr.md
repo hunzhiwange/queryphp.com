@@ -1,5 +1,9 @@
 # 数组
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Support/ArrTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Support/ArrTest.php)
+:::
+    
 这里为系统提供的数组使用的功能文档说明。
 
 **引入相关类**
@@ -9,7 +13,7 @@
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $this->assertTrue(Arr::normalize(true));
 

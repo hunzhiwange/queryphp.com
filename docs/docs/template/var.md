@@ -1,12 +1,16 @@
 # 变量
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerVarTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerVarTest.php)
+:::
+    
 变量是最基本的用法，这里模板引擎做了大量的工作支持更好。
 
 ## 最简单一个普通变量
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $parser = $this->createParser();
 
@@ -31,7 +35,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testJsStyle()
+public function testJsStyle(): void
 {
     $parser = $this->createParser();
 
@@ -56,7 +60,7 @@ public function testJsStyle()
 
 
 ``` php
-public function testArraySupport()
+public function testArraySupport(): void
 {
     $parser = $this->createParser();
 
@@ -78,7 +82,7 @@ public function testArraySupport()
 
 
 ``` php
-public function testJsStyleArraySupport()
+public function testJsStyleArraySupport(): void
 {
     $parser = $this->createParser();
 
@@ -101,7 +105,7 @@ public function testJsStyleArraySupport()
 我们编写这样子一个简单对象，然后再赋值。
 
 ``` php
-public function testObject()
+public function testObject(): void
 {
     $parser = $this->createParser();
 
@@ -124,7 +128,7 @@ public function testObject()
 其中 `.` 是一个非常特殊的语法，如果中间没有空格将被解析为对象连接符，否则就是字符串连接符。
 
 ``` php
-public function testJsStyleObject()
+public function testJsStyleObject(): void
 {
     $parser = $this->createParser();
 
@@ -158,7 +162,7 @@ public function testJsStyleObject()
 
 
 ``` php
-public function testLevel()
+public function testLevel(): void
 {
     $parser = $this->createParser();
 
@@ -181,7 +185,7 @@ public function testLevel()
 为了方便模板定义，对象还可以支持点语法，例如，上面的模板中：
 
 ``` php
-public function testObjectSpot()
+public function testObjectSpot(): void
 {
     $parser = $this->createParser();
 
@@ -206,7 +210,7 @@ public function testObjectSpot()
 
 
 ``` php
-public function testLevelProperty()
+public function testLevelProperty(): void
 {
     $parser = $this->createParser();
 
@@ -229,7 +233,7 @@ public function testLevelProperty()
 我们有的时候需要进行一些字符串的操作，以及变量之间的运算，当然直接使用 PHP 可以进行这样子的操作。这里，我们给出的是另一种简单的语法规则。
 
 ``` php
-public function testOperator()
+public function testOperator(): void
 {
     $parser = $this->createParser();
 
@@ -253,7 +257,7 @@ public function testOperator()
 
 
 ``` php
-public function testOperator2()
+public function testOperator2(): void
 {
     $parser = $this->createParser();
 
@@ -283,7 +287,7 @@ public function testOperator2()
 
 
 ``` php
-public function testOperator3()
+public function testOperator3(): void
 {
     $parser = $this->createParser();
 
@@ -306,7 +310,7 @@ public function testOperator3()
 JS 风格的运算符也遵循这一个规则，需要注意的 `.` 语法有一定特殊性，周围 `是否有空格` 会影响到解析为 `->` 作为对象或者 `.` 作为连接符。
 
 ``` php
-public function testJsOperator()
+public function testJsOperator(): void
 {
     $parser = $this->createParser();
 
@@ -330,7 +334,7 @@ public function testJsOperator()
 
 
 ``` php
-public function testJsOperator2()
+public function testJsOperator2(): void
 {
     $parser = $this->createParser();
 
@@ -360,7 +364,7 @@ public function testJsOperator2()
 
 
 ``` php
-public function testJsOperator3()
+public function testJsOperator3(): void
 {
     $parser = $this->createParser();
 
@@ -402,7 +406,7 @@ _* 支持多个函数，函数之间支持空格
 
 
 ``` php
-public function testFunction()
+public function testFunction(): void
 {
     $parser = $this->createParser();
 
@@ -438,7 +442,7 @@ public function testFunction()
 
 
 ``` php
-public function testFunction2()
+public function testFunction2(): void
 {
     $parser = $this->createParser();
 
@@ -460,7 +464,7 @@ public function testFunction2()
 
 
 ``` php
-public function testFunction3()
+public function testFunction3(): void
 {
     $parser = $this->createParser();
 
@@ -483,7 +487,7 @@ public function testFunction3()
 并且还提供了在模板文件中直接调用函数的快捷方法，无需通过模板变量，包括两种方式：
 
 ``` php
-public function testFunction4()
+public function testFunction4(): void
 {
     $parser = $this->createParser();
 
@@ -506,7 +510,7 @@ public function testFunction4()
 使用静态函数来格式化参数。
 
 ``` php
-public function testFunction5()
+public function testFunction5(): void
 {
     $parser = $this->createParser();
 
@@ -530,7 +534,7 @@ public function testFunction5()
 
 
 ``` php
-public function testFunction6()
+public function testFunction6(): void
 {
     $parser = $this->createParser();
 
@@ -564,7 +568,7 @@ public function testFunction6()
 如果我们需要在模板中使用对象的方法，那么通过代码版本的变量语法可以很方便地输出。
 
 ``` php
-public function testFunction7()
+public function testFunction7(): void
 {
     $parser = $this->createParser();
 
@@ -598,7 +602,7 @@ public function testFunction7()
 
 
 ``` php
-public function testFunction8()
+public function testFunction8(): void
 {
     $parser = $this->createParser();
 
@@ -632,7 +636,7 @@ public function testFunction8()
 JS 风格函数和上面的函数支持得差不多。
 
 ``` php
-public function testJsFunction()
+public function testJsFunction(): void
 {
     $parser = $this->createParser();
 

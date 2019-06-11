@@ -1,12 +1,16 @@
 # For 循环
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerForTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerForTest.php)
+:::
+    
 如果我们需要在模板中使用 for 循环，那么通过 for 标签可以很方便地输出。
 
 ## code
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $parser = $this->createParser();
 
@@ -31,7 +35,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testForNode()
+public function testForNode(): void
 {
     $parser = $this->createParser();
 
@@ -56,7 +60,7 @@ public function testForNode()
 
 
 ``` php
-public function testForNode2()
+public function testForNode2(): void
 {
     $parser = $this->createParser();
     $source = <<<'eot'
@@ -81,7 +85,7 @@ public function testForNode2()
 最终生成一个 foreach 结果，简单的循环。
 
 ``` php
-public function testForJsStyle()
+public function testForJsStyle(): void
 {
     $parser = $this->createParser();
 
@@ -107,7 +111,7 @@ public function testForJsStyle()
 可以使用逗号分割建和值，逗号连接不能有空格。
 
 ``` php
-public function testForJsStyle2()
+public function testForJsStyle2(): void
 {
     $parser = $this->createParser();
 
@@ -133,7 +137,7 @@ public function testForJsStyle2()
 可以使用空格分割建和值。
 
 ``` php
-public function testForJsStyle3()
+public function testForJsStyle3(): void
 {
     $parser = $this->createParser();
 

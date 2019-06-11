@@ -1,5 +1,9 @@
 # 数据库配置
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/ManagerTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/ManagerTest.php)
+:::
+    
 我们可以在 `option/database.php` 文件中定义数据库连接。
 
 **引入相关类**
@@ -66,7 +70,7 @@ protected function createDatabaseManager(): Manager
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $manager = $this->createDatabaseManager();
 
@@ -95,7 +99,7 @@ QueryPHP 允许用户一个主数据库作为写入、更新以及删除,外加�
 
 
 ``` php
-public function testParseDatabaseOptionDistributedIsTrue()
+public function testParseDatabaseOptionDistributedIsTrue(): void
 {
     $manager = $this->createDatabaseManager();
 
@@ -163,7 +167,7 @@ public function testParseDatabaseOptionDistributedIsTrue()
 从数据库支持多个，支持二维数组
 
 ``` php
-public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray()
+public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(): void
 {
     $manager = $this->createDatabaseManager();
 
@@ -245,7 +249,7 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
 数据库主从连接只支持数组。
 
 ``` php
-public function testParseDatabaseOptionMasterAndSlaveMustBeAnArray()
+public function testParseDatabaseOptionMasterAndSlaveMustBeAnArray(): void
 {
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage(

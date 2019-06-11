@@ -1,5 +1,9 @@
 # 变量赋值
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerAssignTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerAssignTest.php)
+:::
+    
 可以在模板中进行一些变量的赋值，以便于进行后续计算处理。
 
 ## node 版本
@@ -7,7 +11,7 @@
 assign 标签也是用于页面快捷赋值，这个还是用起来比较方便。
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $parser = $this->createParser();
 
@@ -30,7 +34,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testNode()
+public function testNode(): void
 {
     $parser = $this->createParser();
 
@@ -51,7 +55,7 @@ public function testNode()
 
 
 ``` php
-public function testNode2()
+public function testNode2(): void
 {
     $parser = $this->createParser();
 
@@ -72,7 +76,7 @@ public function testNode2()
 
 
 ``` php
-public function testNode3()
+public function testNode3(): void
 {
     $parser = $this->createParser();
 
@@ -93,7 +97,7 @@ public function testNode3()
 
 
 ``` php
-public function testNode4()
+public function testNode4(): void
 {
     $parser = $this->createParser();
 
@@ -114,7 +118,7 @@ public function testNode4()
 
 
 ``` php
-public function testLet()
+public function testLet(): void
 {
     $parser = $this->createParser();
 
@@ -137,7 +141,7 @@ public function testLet()
 
 
 ``` php
-public function testLet2()
+public function testLet2(): void
 {
     $parser = $this->createParser();
 
@@ -158,7 +162,7 @@ public function testLet2()
 
 
 ``` php
-public function testLet3()
+public function testLet3(): void
 {
     $parser = $this->createParser();
 
@@ -179,7 +183,7 @@ public function testLet3()
 
 
 ``` php
-public function testLet4()
+public function testLet4(): void
 {
     $parser = $this->createParser();
 

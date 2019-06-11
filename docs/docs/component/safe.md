@@ -1,5 +1,9 @@
 # 安全过滤
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Encryption/SafeTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Encryption/SafeTest.php)
+:::
+    
 可以对用户输入数据进行过滤。
 
 **引入相关类**
@@ -9,7 +13,7 @@
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $strings = "O'Reilly?";
     $out = "O\\'Reilly?";
@@ -32,7 +36,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testDeepReplace()
+public function testDeepReplace(): void
 {
     $strings = 'You should eat fruits, vegetables, and fiber every day.';
     $out = 'You should eat fruits, vegetables, and fiber every .';
@@ -46,7 +50,7 @@ public function testDeepReplace()
 
 
 ``` php
-public function testEscUrl()
+public function testEscUrl(): void
 {
     $strings = 'You should eat fruits, vegetables, and fiber every day.';
     $out = 'You should eat fruits, vegetables, and fiber every .';
@@ -75,7 +79,7 @@ public function testEscUrl()
 
 
 ``` php
-public function testFilterScript()
+public function testFilterScript(): void
 {
     $strings = '<script>hello world.';
     $out = '&lt;script>hello world.';
@@ -89,7 +93,7 @@ public function testFilterScript()
 
 
 ``` php
-public function testCleanHex()
+public function testCleanHex(): void
 {
     $strings = '0x63hello 0x6f world.';
     $out = '0hello 0 world.';
@@ -103,7 +107,7 @@ public function testCleanHex()
 
 
 ``` php
-public function testSignature()
+public function testSignature(): void
 {
     $query = [
         'foo'   => 'bar',
@@ -121,7 +125,7 @@ public function testSignature()
 
 
 ``` php
-public function testSignatureWithIgnore()
+public function testSignatureWithIgnore(): void
 {
     $query = [
         'foo'       => 'bar',
@@ -141,7 +145,7 @@ public function testSignatureWithIgnore()
 
 
 ``` php
-public function testSignatureWithSubArray()
+public function testSignatureWithSubArray(): void
 {
     $query = [
         'foo'   => 'bar',

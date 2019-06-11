@@ -1,5 +1,9 @@
 # Include 标签
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerIncludeTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerIncludeTest.php)
+:::
+    
 可以使用 include 标签来包含外部的模板文件。
 
 ## 使用完整文件名包含
@@ -15,7 +19,7 @@
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $parser = $this->createParser();
 
@@ -36,7 +40,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testVar()
+public function testVar(): void
 {
     $parser = $this->createParser();
 
@@ -59,7 +63,7 @@ public function testVar()
 
 
 ``` php
-public function testInViewDir()
+public function testInViewDir(): void
 {
     $parser = $this->createParser();
 
@@ -81,7 +85,7 @@ public function testInViewDir()
 其中模块以目录分隔
 
 ``` php
-public function testOtherModule()
+public function testOtherModule(): void
 {
     $parser = $this->createParser();
 
@@ -113,7 +117,7 @@ public function testOtherModule()
 为了防止 `.` 被解析为 `->`，需要由 `()` 包裹起来，`file` 内容区的解析规则遵循 `if` 标签的 `condition` 特性。
 
 ``` php
-public function testExpr()
+public function testExpr(): void
 {
     $parser = $this->createParser();
 

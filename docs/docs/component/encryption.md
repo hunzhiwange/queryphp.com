@@ -1,5 +1,9 @@
 # 加密解密
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Encryption/EncryptionTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Encryption/EncryptionTest.php)
+:::
+    
 字符串加密解密支持。
 
 **引入相关类**
@@ -10,7 +14,7 @@
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $encryption = new Encryption('encode-key');
 
@@ -44,7 +48,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testUse128()
+public function testUse128(): void
 {
     $encryption = new Encryption('encode-key', 'AES-128-CBC');
 
@@ -78,7 +82,7 @@ public function testUse128()
 
 
 ``` php
-public function testDecryptButExpired()
+public function testDecryptButExpired(): void
 {
     $encryption = new Encryption('encode-key');
 
@@ -99,7 +103,7 @@ public function testDecryptButExpired()
 
 
 ``` php
-public function testWithPublicAndPrimaryKey()
+public function testWithPublicAndPrimaryKey(): void
 {
     $encryption = new Encryption(
         'encode-key', 'AES-256-CBC',

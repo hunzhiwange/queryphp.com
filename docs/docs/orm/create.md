@@ -1,5 +1,9 @@
 # 保存实体
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Ddd/Create/CreateTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Ddd/Create/CreateTest.php)
+:::
+    
 将实体持久化到数据库。
 
 **引入相关类**
@@ -27,7 +31,7 @@ $entity->save()->flush();
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $entity = new TestEntity();
 
@@ -113,7 +117,7 @@ class TestConstructPropWhiteEntity extends Entity
 
 
 ``` php
-public function testConsturctPropWhite()
+public function testConsturctPropWhite(): void
 {
     $entity = new TestConstructPropWhiteEntity([
         'id'   => 5,
@@ -176,7 +180,7 @@ class TestConstructPropBlackEntity extends Entity
 
 
 ``` php
-public function testConsturctPropBlack()
+public function testConsturctPropBlack(): void
 {
     $entity = new TestConstructPropBlackEntity([
         'id'   => 5,

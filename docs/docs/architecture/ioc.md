@@ -1,5 +1,9 @@
 # IOC 容器
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Di/ContainerTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Di/ContainerTest.php)
+:::
+    
 IOC 容器是整个框架最核心的部分，负责服务的管理和解耦组件。
 
 目前系统所有的关键服务都接入了 IOC 容器，包括控制器、Console 命令行。
@@ -19,7 +23,7 @@ IOC 容器是整个框架最核心的部分，负责服务的管理和解耦组�
 通常来说，系统大部分服务都是单例来提升性能和共享。
 
 ``` php
-public function testBindClosure()
+public function testBindClosure(): void
 {
     $container = new Container();
 
@@ -36,7 +40,7 @@ public function testBindClosure()
 
 
 ``` php
-public function testSingletonClosure()
+public function testSingletonClosure(): void
 {
     $container = new Container();
 
@@ -57,7 +61,7 @@ public function testSingletonClosure()
 一个独立的类可以直接生成，而不需要提前注册到容器中。
 
 ``` php
-public function testClass()
+public function testClass(): void
 {
     $container = new Container();
 
@@ -71,7 +75,7 @@ public function testClass()
 类也可以注册为单例。
 
 ``` php
-public function testSingletonClass()
+public function testSingletonClass(): void
 {
     $container = new Container();
 
@@ -87,7 +91,7 @@ public function testSingletonClass()
 可以为接口绑定实现。
 
 ``` php
-public function testInterface()
+public function testInterface(): void
 {
     $container = new Container();
 
@@ -149,7 +153,7 @@ class Test3 implements ITest3
 
 
 ``` php
-public function testInterface2()
+public function testInterface2(): void
 {
     $container = new Container();
 

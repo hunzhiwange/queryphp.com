@@ -1,5 +1,9 @@
 # 字符串
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Support/StrTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Support/StrTest.php)
+:::
+    
 这里为系统提供的字符串使用的功能文档说明。
 
 **引入相关类**
@@ -9,7 +13,7 @@
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $this->assertSame('', Str::randAlphaNum(0));
 
@@ -33,7 +37,7 @@ public function testBaseUse()
 利用本方法可以生成随机数小写字母。
 
 ``` php
-public function testRandAlphaNumLowercase()
+public function testRandAlphaNumLowercase(): void
 {
     $this->assertSame('', Str::randAlphaNumLowercase(0));
 
@@ -60,7 +64,7 @@ public function testRandAlphaNumLowercase()
 利用本方法可以生成随机数大写字母。
 
 ``` php
-public function testRandAlphaNumUppercase()
+public function testRandAlphaNumUppercase(): void
 {
     $this->assertSame('', Str::randAlphaNumUppercase(0));
 
@@ -87,7 +91,7 @@ public function testRandAlphaNumUppercase()
 利用本方法可以生成随机字母。
 
 ``` php
-public function testRandAlpha()
+public function testRandAlpha(): void
 {
     $this->assertSame('', Str::randAlpha(0));
 
@@ -113,7 +117,7 @@ public function testRandAlpha()
 
 
 ``` php
-public function testRandAlphaLowercase()
+public function testRandAlphaLowercase(): void
 {
     $this->assertSame('', Str::randAlphaLowercase(0));
 
@@ -136,7 +140,7 @@ public function testRandAlphaLowercase()
 
 
 ``` php
-public function testRandAlphaUppercase()
+public function testRandAlphaUppercase(): void
 {
     $this->assertSame('', Str::randAlphaUppercase(0));
 
@@ -159,7 +163,7 @@ public function testRandAlphaUppercase()
 
 
 ``` php
-public function testRandNum()
+public function testRandNum(): void
 {
     $this->assertSame('', Str::randNum(0));
 
@@ -182,7 +186,7 @@ public function testRandNum()
 
 
 ``` php
-public function testRandChinese()
+public function testRandChinese(): void
 {
     $this->assertSame('', Str::randChinese(0));
 
@@ -205,7 +209,7 @@ public function testRandChinese()
 
 
 ``` php
-public function testRandStr()
+public function testRandStr(): void
 {
     $this->assertSame('', Str::randStr(0, ''));
 
@@ -222,7 +226,7 @@ public function testRandStr()
 
 
 ``` php
-public function testFormatDate()
+public function testFormatDate(): void
 {
     $time = time();
 
@@ -247,7 +251,7 @@ public function testFormatDate()
 
 
 ``` php
-public function testFormatBytes()
+public function testFormatBytes(): void
 {
     $this->assertSame('2.4G', Str::formatBytes(2573741824));
     $this->assertSame('2.4', Str::formatBytes(2573741824, false));
@@ -268,7 +272,7 @@ public function testFormatBytes()
 
 
 ``` php
-public function testCamelize()
+public function testCamelize(): void
 {
     $this->assertSame('helloWorld', Str::camelize('helloWorld'));
 
@@ -285,7 +289,7 @@ public function testCamelize()
 
 
 ``` php
-public function testUnCamelize()
+public function testUnCamelize(): void
 {
     $this->assertSame('hello_world', Str::unCamelize('hello_world'));
 
@@ -302,7 +306,7 @@ public function testUnCamelize()
 
 
 ``` php
-public function testStartsWith()
+public function testStartsWith(): void
 {
     $this->assertFalse(Str::startsWith('foo', 'hello'));
 
@@ -315,7 +319,7 @@ public function testStartsWith()
 
 
 ``` php
-public function testEndsWith()
+public function testEndsWith(): void
 {
     $this->assertFalse(Str::endsWith('foo', 'hello'));
 
@@ -328,7 +332,7 @@ public function testEndsWith()
 
 
 ``` php
-public function testContains()
+public function testContains(): void
 {
     $this->assertFalse(Str::contains('foo', ''));
 

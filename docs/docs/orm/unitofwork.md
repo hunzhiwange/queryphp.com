@@ -1,5 +1,9 @@
 # 事务工作单元
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Ddd/UnitOfWorkTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Ddd/UnitOfWorkTest.php)
+:::
+    
 用事务工作单元更好地处理数据库相关工作。
 
 **引入相关类**
@@ -17,7 +21,7 @@
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     $work = UnitOfWork::make();
 
@@ -52,7 +56,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testPersist()
+public function testPersist(): void
 {
     $work = UnitOfWork::make();
 
@@ -102,7 +106,7 @@ public function testPersist()
 
 
 ``` php
-public function testCreate()
+public function testCreate(): void
 {
     $work = UnitOfWork::make();
 
@@ -165,7 +169,7 @@ public function testCreate()
 
 
 ``` php
-public function testUpdate()
+public function testUpdate(): void
 {
     $work = UnitOfWork::make();
 
@@ -174,21 +178,25 @@ public function testUpdate()
 
     $connect = $this->createDatabaseConnect();
 
-    $this->assertSame('1', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 1,
-        'summary' => 'post summary',
-    ]));
+    $this->assertSame(
+        '1',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 1,
+                'summary' => 'post summary',
+            ]));
 
-    $this->assertSame('2', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 2,
-        'summary' => 'foo bar',
-    ]));
+    $this->assertSame(
+        '2',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 2,
+                'summary' => 'foo bar',
+            ]));
 
     $post = Post::find(1);
 
@@ -263,7 +271,7 @@ public function testUpdate()
 
 
 ``` php
-public function testDelete()
+public function testDelete(): void
 {
     $work = UnitOfWork::make();
 
@@ -272,21 +280,25 @@ public function testDelete()
 
     $connect = $this->createDatabaseConnect();
 
-    $this->assertSame('1', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 1,
-        'summary' => 'post summary',
-    ]));
+    $this->assertSame(
+        '1',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 1,
+                'summary' => 'post summary',
+            ]));
 
-    $this->assertSame('2', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 2,
-        'summary' => 'foo bar',
-    ]));
+    $this->assertSame(
+        '2',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 2,
+                'summary' => 'foo bar',
+            ]));
 
     $post = Post::find(1);
 
@@ -359,7 +371,7 @@ public function testDelete()
 
 
 ``` php
-public function testRefresh()
+public function testRefresh(): void
 {
     $work = UnitOfWork::make();
 
@@ -368,13 +380,15 @@ public function testRefresh()
 
     $connect = $this->createDatabaseConnect();
 
-    $this->assertSame('1', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 1,
-        'summary' => 'post summary',
-    ]));
+    $this->assertSame(
+        '1',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 1,
+                'summary' => 'post summary',
+            ]));
 
     $post = new Post([
         'id'      => 1,
@@ -417,7 +431,7 @@ public function testRefresh()
 
 
 ``` php
-public function testBeginTransaction()
+public function testBeginTransaction(): void
 {
     $work = UnitOfWork::make();
 
@@ -426,13 +440,15 @@ public function testBeginTransaction()
 
     $connect = $this->createDatabaseConnect();
 
-    $this->assertSame('1', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 1,
-        'summary' => 'post summary',
-    ]));
+    $this->assertSame(
+        '1',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 1,
+                'summary' => 'post summary',
+            ]));
 
     $work->beginTransaction();
 
@@ -462,7 +478,7 @@ public function testBeginTransaction()
 
 
 ``` php
-public function testFlushButRollBack()
+public function testFlushButRollBack(): void
 {
     $this->expectException(\Leevel\Database\ReplaceException::class);
     $this->expectExceptionMessage(
@@ -498,7 +514,7 @@ public function testFlushButRollBack()
 
 
 ``` php
-public function testTransaction()
+public function testTransaction(): void
 {
     $work = UnitOfWork::make();
 
@@ -507,13 +523,15 @@ public function testTransaction()
 
     $connect = $this->createDatabaseConnect();
 
-    $this->assertSame('1', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 1,
-        'summary' => 'post summary',
-    ]));
+    $this->assertSame(
+        '1',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 1,
+                'summary' => 'post summary',
+            ]));
 
     $work->transaction(function ($w) {
         $post = Post::find(1);
@@ -537,7 +555,7 @@ public function testTransaction()
 
 
 ``` php
-public function testTransactionAndRollBack()
+public function testTransactionAndRollBack(): void
 {
     $this->expectException(\Leevel\Database\ReplaceException::class);
     $this->expectExceptionMessage(
@@ -580,7 +598,7 @@ public function testTransactionAndRollBack()
 
 
 ``` php
-public function testSetRootEntity()
+public function testSetRootEntity(): void
 {
     $work = UnitOfWork::make();
 
@@ -589,13 +607,15 @@ public function testSetRootEntity()
 
     $connect = $this->createDatabaseConnect();
 
-    $this->assertSame('1', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 1,
-        'summary' => 'post summary',
-    ]));
+    $this->assertSame(
+        '1',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 1,
+                'summary' => 'post summary',
+            ]));
 
     $post = Post::find(1);
 
@@ -625,7 +645,7 @@ public function testSetRootEntity()
 
 
 ``` php
-public function testSetConnectNotFoundWillUseDefault()
+public function testSetConnectNotFoundWillUseDefault(): void
 {
     $work = UnitOfWork::make();
 
@@ -634,13 +654,15 @@ public function testSetConnectNotFoundWillUseDefault()
 
     $connect = $this->createDatabaseConnect();
 
-    $this->assertSame('1', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 1,
-        'summary' => 'post summary',
-    ]));
+    $this->assertSame(
+        '1',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 1,
+                'summary' => 'post summary',
+            ]));
 
     $post = Post::find(1);
 
@@ -670,7 +692,7 @@ public function testSetConnectNotFoundWillUseDefault()
 
 
 ``` php
-public function testFlushButNotFoundAny()
+public function testFlushButNotFoundAny(): void
 {
     $work = UnitOfWork::make(new Post());
 
@@ -686,7 +708,7 @@ public function testFlushButNotFoundAny()
 
 
 ``` php
-public function testPersistStageManagedEntityDoNothing()
+public function testPersistStageManagedEntityDoNothing(): void
 {
     $work = UnitOfWork::make();
 
@@ -715,19 +737,21 @@ public function testPersistStageManagedEntityDoNothing()
 
 
 ``` php
-public function testPersistStageRemovedEntity()
+public function testPersistStageRemovedEntity(): void
 {
     $work = UnitOfWork::make();
 
     $connect = $this->createDatabaseConnect();
 
-    $this->assertSame('1', $connect->
-    table('post')->
-    insert([
-        'title'   => 'hello world',
-        'user_id' => 1,
-        'summary' => 'post summary',
-    ]));
+    $this->assertSame(
+        '1',
+        $connect
+            ->table('post')
+            ->insert([
+                'title'   => 'hello world',
+                'user_id' => 1,
+                'summary' => 'post summary',
+            ]));
 
     $post = Post::find(1);
 
@@ -753,7 +777,7 @@ public function testPersistStageRemovedEntity()
 
 
 ``` php
-public function testCreateButAlreadyInUpdates()
+public function testCreateButAlreadyInUpdates(): void
 {
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage(
@@ -775,7 +799,7 @@ public function testCreateButAlreadyInUpdates()
 
 
 ``` php
-public function testCreateButAlreadyInDeletes()
+public function testCreateButAlreadyInDeletes(): void
 {
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage(
@@ -797,7 +821,7 @@ public function testCreateButAlreadyInDeletes()
 
 
 ``` php
-public function testCreateButAlreadyInReplaces()
+public function testCreateButAlreadyInReplaces(): void
 {
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage(
@@ -819,7 +843,7 @@ public function testCreateButAlreadyInReplaces()
 
 
 ``` php
-public function testCreateManyTimes()
+public function testCreateManyTimes(): void
 {
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage(

@@ -1,12 +1,16 @@
 # List 循环
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerListTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerListTest.php)
+:::
+    
 list 标签也是用于循环输出，解析后的本质为 foreach，同时 foreach 比较符合大家的习惯。
 
 ## code
 
 
 ``` php
-public function testCode()
+public function testCode(): void
 {
     $parser = $this->createParser();
 
@@ -32,7 +36,7 @@ public function testCode()
 有时候我们不需要键值，这个时候我们在模板中写下如下的代码：
 
 ``` php
-public function testCodeFull()
+public function testCodeFull(): void
 {
     $parser = $this->createParser();
     $source = <<<'eot'
@@ -56,7 +60,7 @@ public function testCodeFull()
 
 
 ``` php
-public function testNode()
+public function testNode(): void
 {
     $parser = $this->createParser();
     $source = <<<'eot'
@@ -83,7 +87,7 @@ public function testNode()
 有时候我们不需要键值，这个时候我们在模板中写下如下的代码：
 
 ``` php
-public function testNodeFull()
+public function testNodeFull(): void
 {
     $parser = $this->createParser();
     $source = <<<'eot'

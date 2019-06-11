@@ -1,5 +1,9 @@
 # 断言
 
+::: tip 单元测试即文档
+[基于原始文档 tests/Validate/AssertTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/AssertTest.php)
+:::
+    
 这里为系统提供的基础的断言功能。
 
 **引入相关类**
@@ -20,7 +24,7 @@ Assert::foo($value, array $parameter, string $message);
 
 
 ``` php
-public function testBaseUse()
+public function testBaseUse(): void
 {
     Assert::notEmpty(1);
     Assert::notEmpty(55);
@@ -35,7 +39,7 @@ public function testBaseUse()
 
 
 ``` php
-public function testAssertFailedWithDefaultMessage()
+public function testAssertFailedWithDefaultMessage(): void
 {
     $this->expectException(\Leevel\Validate\AssertException::class);
     $this->expectExceptionMessage(
@@ -51,7 +55,7 @@ public function testAssertFailedWithDefaultMessage()
 
 
 ``` php
-public function testAssertFailedWithCustomMessage()
+public function testAssertFailedWithCustomMessage(): void
 {
     $this->expectException(\Leevel\Validate\AssertException::class);
     $this->expectExceptionMessage(
@@ -68,7 +72,7 @@ public function testAssertFailedWithCustomMessage()
 如果值为 `null` 直接返回正确结果。
 
 ``` php
-public function testAssertOptional()
+public function testAssertOptional(): void
 {
     Assert::optionalNotEmpty(null);
 }
@@ -79,7 +83,7 @@ public function testAssertOptional()
 
 
 ``` php
-public function testAssertOptionalFailed()
+public function testAssertOptionalFailed(): void
 {
     $this->expectException(\Leevel\Validate\AssertException::class);
     $this->expectExceptionMessage(
@@ -96,7 +100,7 @@ public function testAssertOptionalFailed()
 必须每一个都满足规则才算校验成功。
 
 ``` php
-public function testAssertMulti()
+public function testAssertMulti(): void
 {
     Assert::multiNotEmpty([3, ['hello'], 'bar', 'yes']);
 }
@@ -108,7 +112,7 @@ public function testAssertMulti()
 必须每一个都满足规则才算校验成功。
 
 ``` php
-public function testAssertMultiFailed()
+public function testAssertMultiFailed(): void
 {
     $this->expectException(\Leevel\Validate\AssertException::class);
     $this->expectExceptionMessage(
@@ -125,7 +129,7 @@ public function testAssertMultiFailed()
 必须每一个都满足规则才算校验成功, 可选会跳过验证，可选必须在最前面，即不支持 `multiOptional` 这种写法。
 
 ``` php
-public function testAssertMultiWithOptional()
+public function testAssertMultiWithOptional(): void
 {
     Assert::optionalMultiNotEmpty([null, ['hello'], 'bar', 'yes', null]);
 }
@@ -148,7 +152,7 @@ Assert::make($value, ?string $message)
 
 
 ``` php
-public function testAssertChain()
+public function testAssertChain(): void
 {
     Assert::make(5, 'Assert success.')
         ->notEmpty()
@@ -173,7 +177,7 @@ Assert::lazy($value, ?string $message, bool $all = true)
 
 
 ``` php
-public function testAssertLazyChain()
+public function testAssertLazyChain(): void
 {
     $result = Assert::lazy(5, 'Assert success.')
         ->notEmpty()
@@ -191,7 +195,7 @@ public function testAssertLazyChain()
 
 
 ``` php
-public function testAssertLazyChainFailed()
+public function testAssertLazyChainFailed(): void
 {
     $this->expectException(\Leevel\Validate\AssertException::class);
     $this->expectExceptionMessage(

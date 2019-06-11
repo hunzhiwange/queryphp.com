@@ -227,6 +227,7 @@ function genSidebarConfigDoc () {
         'component/debug',
         'component/encryption',
         'component/safe',
+        'component/collection',
       ]
     },
     {
