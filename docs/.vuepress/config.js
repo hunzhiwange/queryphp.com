@@ -5,9 +5,14 @@ module.exports = {
   port: 8088,
   locales: {
     '/': {
+      lang: 'en-Us',
+      title: 'QueryPHP',
+      description: 'High Performance PHP Progressive Coroutine Framework Engine.'
+    },
+    '/zh/': {
       lang: 'zh-CN',
       title: 'QueryPHP',
-      description: '渐进式 PHP 7 不仅仅是常驻框架引擎.'
+      description: '高性能 PHP 渐进式协程框架引擎.'
     }
   },
   head: [
@@ -31,16 +36,27 @@ module.exports = {
     //   indexName: ''
     // },
     locales: {
-        '/': {
-          label: '简体中文',
-          selectText: '选择语言',
-          editLinkText: '在 GitHub 上查看此页',
-          lastUpdated: '上次更新',
-          nav: require('./nav/zh'),
-          sidebar: {
-            '/guide/': genSidebarConfig(),
-            '/docs/': genSidebarConfigDoc(),
-          }
+      '/': {
+        label: 'English',
+        selectText: 'Languages',
+        editLinkText: 'View this page on GitHub',
+        lastUpdated: 'Last Updated',
+        nav: require('./nav/en'),
+        sidebar: {
+          '/guide/': genSidebarConfig(),
+          '/docs/': genSidebarConfigDoc(),
+        }
+      },
+      '/zh/': {
+        label: '简体中文',
+        selectText: '选择语言',
+        editLinkText: '在 GitHub 上查看此页',
+        lastUpdated: '上次更新',
+        nav: require('./nav/zh'),
+        sidebar: {
+          '/zh/guide/': genSidebarConfig(),
+          '/zh/docs/': genSidebarConfigDoc(),
+        }
       }
     }
   },
