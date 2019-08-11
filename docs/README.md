@@ -254,17 +254,17 @@ declare(strict_types=1);
 
 namespace App\App\Controller\Coroutine;
 
+use App;
+
 class Database
 {
     public function handle(): string
     {
         go(function () {
-            $time = time();
-
             for ($i = 0; $i < 5; $i++) {
                 go(function () {
                     // .env DATABASE_DRIVER = mysql or mysqlPool.
-                    $result = app('database')->query('SELECT sleep(2)');
+                    $result = App::make('database')->query('SELECT sleep(2)');
                     dump($result);
                 });
             }
@@ -286,6 +286,7 @@ declare(strict_types=1);
 
 namespace App\App\Controller\Coroutine;
 
+use App;
 use Swoole\Coroutine\Channel;
 
 class Redis
@@ -299,8 +300,8 @@ class Redis
             for ($i = 0; $i < 5; $i++) {
                 go(function () use ($chan, $i) {
                     // .env CACHE_DRIVER = redis or redisPool.
-                    app('cache')->set('h'.$i, 'w');
-                    $result = app('cache')->get('h'.$i);
+                    App::make('cache')->set('h'.$i, 'w');
+                    $result = App::make('cache')->get('h'.$i);
                     $chan->push($result);
                     sleep(1);
                 });
