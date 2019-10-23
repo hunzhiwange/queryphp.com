@@ -15,7 +15,6 @@ Leevel 响应转 Swoole 响应后，然后传递给 Swoole 完成响应给用户
 
 ## 转换 Leevel 响应的 header
 
-
 ``` php
 public function testResponseWithHeader(): void
 {
@@ -32,9 +31,7 @@ public function testResponseWithHeader(): void
 }
 ```
     
-
 ## 转换 Leevel 响应的 cookie
-
 
 ``` php
 public function testResponseWithCookie(): void
@@ -52,9 +49,7 @@ public function testResponseWithCookie(): void
 }
 ```
     
-
 ## 转换 Leevel 跳转响应
-
 
 ``` php
 public function testRedirectResponse(): void

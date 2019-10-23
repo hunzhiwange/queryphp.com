@@ -12,7 +12,6 @@
 
 ## 基础格式化
 
-
 ``` php
 public function testBaseUse(): void
 {
@@ -32,9 +31,7 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## 格式化字符串
-
 
 ``` php
 public function testNormalize(): void
@@ -56,9 +53,7 @@ public function testNormalize(): void
 }
 ```
     
-
 ## 格式化分隔字符串
-
 
 ``` php
 public function testNormalizeSplitString(): void
@@ -81,9 +76,7 @@ public function testNormalizeSplitString(): void
 }
 ```
     
-
 ## 格式化数组
-
 
 ``` php
 public function testNormalizeArr(): void
@@ -106,9 +99,7 @@ public function testNormalizeArr(): void
 }
 ```
     
-
 ## 格式化数组过滤空格
-
 
 ``` php
 public function testNormalizeArrFilterEmpty(): void
@@ -131,9 +122,7 @@ public function testNormalizeArrFilterEmpty(): void
 }
 ```
     
-
 ## 格式化数组不过滤空格
-
 
 ``` php
 public function testNormalizeArrNotFilterEmpty(): void
@@ -157,9 +146,7 @@ public function testNormalizeArrNotFilterEmpty(): void
 }
 ```
     
-
 ## 格式化数据即不是数组也不是字符串
-
 
 ``` php
 public function testNormalizeNotArrAndNotString(): void
@@ -170,7 +157,6 @@ public function testNormalizeNotArrAndNotString(): void
 }
 ```
     
-
 ## 允许特定 Key 通过
 
 相当于白名单。
@@ -197,7 +183,6 @@ public function testOnly(): void
 }
 ```
     
-
 ## 排除特定 Key 通过
 
 相当于黑名单。
@@ -222,7 +207,6 @@ public function testExcept(): void
 }
 ```
     
-
 ## 数据过滤
 
 基本的字符串会执行一次清理工作。
@@ -252,9 +236,7 @@ public function testFilter(): void
 }
 ```
     
-
 ## 数据过滤待规则
-
 
 ``` php
 public function testFilterWithRule(): void
@@ -287,9 +269,7 @@ public function testFilterWithRule(): void
 }
 ```
     
-
 ## 数据过滤待规则必须是数组
-
 
 ``` php
 public function testFilterRuleIsNotArr(): void
@@ -308,9 +288,7 @@ public function testFilterRuleIsNotArr(): void
 }
 ```
     
-
 ## 数据过滤待规则不是一个回调
-
 
 ``` php
 public function testFilterRuleItemIsNotACallback(): void

@@ -8,9 +8,7 @@
 
 `f` 是一个超级的全局函数随着 `Support` 包自动加载，可以在业务中随时使用，组件开发中只是标注依赖 `leevel/support` 包也可以使用。
 
-
 ## 字符串调用分组函数
-
 
 ``` php
 public function testGroup(): void
@@ -31,9 +29,7 @@ public function testGroup(): void
 }
 ```
     
-
 ## 字符串调用单个文件函数
-
 
 ``` php
 public function testSingleFn(): void
@@ -48,9 +44,7 @@ public function testSingleFn(): void
 }
 ```
     
-
 ## 字符串调用 index 索引函数
-
 
 ``` php
 public function testIndex(): void

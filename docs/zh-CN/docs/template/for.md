@@ -6,9 +6,7 @@
     
 如果我们需要在模板中使用 for 循环，那么通过 for 标签可以很方便地输出。
 
-
 ## code
-
 
 ``` php
 public function testBaseUse(): void
@@ -31,9 +29,7 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## node 简单版
-
 
 ``` php
 public function testForNode(): void
@@ -56,9 +52,7 @@ public function testForNode(): void
 }
 ```
     
-
 ## node 完整版
-
 
 ``` php
 public function testForNode2(): void
@@ -80,7 +74,6 @@ public function testForNode2(): void
 }
 ```
     
-
 ## JS 风格版: 例 1
 
 最终生成一个 foreach 结果，简单的循环。
@@ -106,7 +99,6 @@ public function testForJsStyle(): void
 }
 ```
     
-
 ## JS 风格版: 例 2
 
 可以使用逗号分割建和值，逗号连接不能有空格。
@@ -132,7 +124,6 @@ public function testForJsStyle2(): void
 }
 ```
     
-
 ## JS 风格版: 例 3
 
 可以使用空格分割建和值。

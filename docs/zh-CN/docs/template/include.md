@@ -6,7 +6,6 @@
     
 可以使用 include 标签来包含外部的模板文件。
 
-
 ## 使用完整文件名包含
 
 使用方法如下：
@@ -36,9 +35,7 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## 使用变量定义完整的文件
-
 
 ``` php
 public function testVar(): void
@@ -59,9 +56,7 @@ public function testVar(): void
 }
 ```
     
-
 ## 包含当前视图目录下的模板文件
-
 
 ``` php
 public function testInViewDir(): void
@@ -80,7 +75,6 @@ public function testInViewDir(): void
 }
 ```
     
-
 ## 包含其他模块的操作模板
 
 其中模块以目录分隔
@@ -112,7 +106,6 @@ public function testOtherModule(): void
 }
 ```
     
-
 ## 函数表达式支持
 
 为了防止 `.` 被解析为 `->`，需要由 `()` 包裹起来，`file` 内容区的解析规则遵循 `if` 标签的 `condition` 特性。

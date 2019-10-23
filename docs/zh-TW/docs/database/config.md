@@ -94,7 +94,6 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## 数据库主从设置
 
 QueryPHP 允许用户一个主数据库作为写入、更新以及删除,外加多个附属从数据库作为只读数据库来共同提供数据库服务。多个数据库需要需要开启 `distributed`，而 `separate` 主要用于读写分离。
@@ -179,7 +178,6 @@ public function testParseDatabaseOptionDistributedIsTrue(): void
 }
 ```
     
-
 ## 附属从数据库支持二维数组
 
 从数据库支持多个，支持二维数组
@@ -281,7 +279,6 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
 }
 ```
     
-
 ## 数据库设置只支持数组
 
 数据库主从连接只支持数组。

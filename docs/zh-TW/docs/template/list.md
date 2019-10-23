@@ -6,9 +6,7 @@
     
 list 标签也是用于循环输出，解析后的本质为 foreach，同时 foreach 比较符合大家的习惯。
 
-
 ## code
-
 
 ``` php
 public function testCode(): void
@@ -31,7 +29,6 @@ public function testCode(): void
 }
 ```
     
-
 ## code 省略键值
 
 有时候我们不需要键值，这个时候我们在模板中写下如下的代码：
@@ -56,9 +53,7 @@ public function testCodeFull(): void
 }
 ```
     
-
 ## node
-
 
 ``` php
 public function testNode(): void
@@ -82,7 +77,6 @@ public function testNode(): void
 }
 ```
     
-
 ## node 省略键值
 
 有时候我们不需要键值，这个时候我们在模板中写下如下的代码：

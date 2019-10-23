@@ -24,7 +24,6 @@ QueryPHP 非常欢迎各位给我们共同的伟大的作品添砖加瓦，实�
 这里以笔者的 Mac 为例子说明，其实 Windows 下面还更简单些。
 
 
-
 ## 克隆 `queryphp` 仓库
 
 QueryPHP 框架的开发来自于从克隆主仓库开始，由于国内访问 Github 网速的问题，只需要等待一小段时间。
@@ -79,7 +78,6 @@ Resolving deltas: 100% (8700/8700), done.
 php leevel server <Visite http://127.0.0.1:9527/>
 ```
     
-
 ## 搭建后台 API 端
 
 首先我们需要创建一个数据库来运行我们的后台，让我们对 QueryPHP 有一个直观的感受，同时方便后期开发调试等。
@@ -214,7 +212,6 @@ php leevel server <http://127.0.0.1:9527/api/entity>
 }
 ```
     
-
 ## 搭建前端
 
 后台 API 搭建好了，我们开始搭建前端了，前端基于 `Vue-cli 3` 和 `IView`，首先需要安装 `node` 才能够跑起来。
@@ -264,7 +261,6 @@ user: admin
 password: 123456
 ```
     
-
 ## 运行测试用例
 
 QueryPHP 推崇通过编写测试用例来让代码变得可维护，所以这里需要本地开发跑通测试用例。
@@ -411,7 +407,6 @@ Time: 391 ms, Memory: 18.00 MB
 OK (26 tests, 43 assertions)
 ```
     
-
 ## 统一团队代码风格
 
 风格统一对保证我们系统一致性非常重要，我们做到开箱即用，支持 `PHP` 和 `JavaScript`。
@@ -497,7 +492,6 @@ create mode 100644 common/Test.php
 create mode 100644 frontend/src/hello.js
 ```
     
-
 ### 格式化后的 PHP
 
 代码干净漂亮了不少，不是吗。
@@ -528,7 +522,6 @@ class Test
 }
 ```
     
-
 ### 格式化后的 JavaScript
 
 代码干净漂亮了不少，不是吗。
@@ -545,7 +538,6 @@ function hello(a, b) {
 }
 ```
     
-
 ### 回滚测试提交
 
 这些测试代码不需要提交到 Git 库，你可以回滚掉刚才测试的这些代码。
@@ -556,7 +548,6 @@ git reset --hard 931f283b0b8847e4a3f2ad86efb3c07cd7974c3b // 或者 git revert x
 HEAD is now at 931f283b Merge branch 'dev'
 ```
     
-
 ## 克隆 `framework` 仓库将框架替换为开发版本
 
 应用层框架全部搭建完毕，接下来我们将框架层代码替换为开发阶段的代码来进行日常框架迭代。
@@ -620,7 +611,6 @@ Resolving deltas: 100% (27594/27594), done.
 php leevel server <Visite http://127.0.0.1:9527/>
 ```
     
-
 ## 运行框架核心测试用例
 
 QueryPHP 底层框架拥有 3000 多例测试用例，这些测试用例需要被维护，所以这里需要本地开发跑通测试用例。
@@ -780,7 +770,6 @@ Time: 19.51 seconds, Memory: 93.19 MB
 Tests: 2978, Assertions: 10031, Failures: 0, Skipped: 6.
 ```
     
-
 ## 统一框架核心团队代码风格
 
 风格统一对保证我们系统一致性非常重要，我们做到开箱即用，核心库只包含 PHP 文件。
@@ -844,7 +833,6 @@ mode change 100644 => 100755 build/composer
 create mode 100644 tests/Name.php
 ```
     
-
 ### 格式化后的 PHP
 
 代码干净漂亮了不少，不是吗。
@@ -884,7 +872,6 @@ class Name
 }
 ```
     
-
 ## 克隆 `queryphp.com` 仓库实现自动化文档搭建
 
 QueryPHP 底层的文档基于单元测试加备注的方式来实现的，通过命名工具全部采用自动化生成 Markdown，这大幅度简化了文档的编写工作，同时保证了文档实时性。
@@ -973,12 +960,9 @@ $yarn run dev # or npx vuepress dev docs
 ```
 
 
-
-
 ## 结尾
 
 到这里为止，我们本地开发环境已经全部搭建完毕，可以愉快地开发了。
-
 
 ::: tip
 值得注意的是，我们通常在 `dev` 分支开发，开发完毕后 `merge` 到 `master` 分支完成开发。

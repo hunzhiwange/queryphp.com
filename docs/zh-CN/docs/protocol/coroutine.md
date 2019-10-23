@@ -14,7 +14,6 @@
 
 ## 普通服务是否处于协程上下文
 
-
 ``` php
 public function testCoroutineContext(): void
 {
@@ -26,7 +25,6 @@ public function testCoroutineContext(): void
 }
 ```
     
-
 ## 类是否处于协程上下文
 
 类可以通过添加静态方法 `coroutineContext` 来自动完成协程上下文标识。
@@ -42,9 +40,7 @@ public function testCoroutineContextForClass(): void
 }
 ```
     
-
 ## 当前协程 ID 和父 ID
-
 
 ``` php
 public function testCoroutineCidAndPcid(): void

@@ -36,9 +36,7 @@ public function testBindClosure(): void
 }
 ```
     
-
 ## 闭包绑定单例
-
 
 ``` php
 public function testSingletonClosure(): void
@@ -56,7 +54,6 @@ public function testSingletonClosure(): void
 }
 ```
     
-
 ## 类直接生成本身
 
 一个独立的类可以直接生成，而不需要提前注册到容器中。
@@ -70,7 +67,6 @@ public function testClass(): void
 }
 ```
     
-
 ## 类单例
 
 类也可以注册为单例。
@@ -86,7 +82,6 @@ public function testSingletonClass(): void
 }
 ```
     
-
 ## 接口绑定
 
 可以为接口绑定实现。
@@ -103,7 +98,6 @@ public function testInterface(): void
 }
 ```
     
-
 ## 接口绑定接口作为构造器参数
 
 接口可以作为控制器参数来做依赖注入。

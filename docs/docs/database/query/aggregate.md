@@ -121,7 +121,6 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## 平均值 avg
 
 计算平均值。
@@ -154,7 +153,6 @@ public function testAvg(): void
 }
 ```
     
-
 ## 最大值 max
 
 计算最大值。
@@ -187,7 +185,6 @@ public function testMax(): void
 }
 ```
     
-
 ## 最小值 min
 
 计算最小值。
@@ -220,7 +217,6 @@ public function testMin(): void
 }
 ```
     
-
 ## 合计 sum
 
 计算合计。

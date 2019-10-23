@@ -6,9 +6,7 @@
     
 变量是最基本的用法，这里模板引擎做了大量的工作支持更好。
 
-
 ## 最简单一个普通变量
-
 
 ``` php
 public function testBaseUse(): void
@@ -34,7 +32,6 @@ public function testBaseUse(): void
     
 ## JS 风格变量
 
-
 ``` php
 public function testJsStyle(): void
 {
@@ -59,7 +56,6 @@ public function testJsStyle(): void
     
 ## 输出一个数组
 
-
 ``` php
 public function testArraySupport(): void
 {
@@ -78,9 +74,7 @@ public function testArraySupport(): void
 }
 ```
     
-
 ## JS 风格输出一个数组
-
 
 ``` php
 public function testJsStyleArraySupport(): void
@@ -100,7 +94,6 @@ public function testJsStyleArraySupport(): void
 }
 ```
     
-
 ## 输出一个对象
 
 我们编写这样子一个简单对象，然后再赋值。
@@ -123,7 +116,6 @@ public function testObject(): void
 }
 ```
     
-
 ## JS 风格输出一个对象
 
 其中 `.` 是一个非常特殊的语法，如果中间没有空格将被解析为对象连接符，否则就是字符串连接符。
@@ -161,7 +153,6 @@ public function testJsStyleObject(): void
     
 ## 无限级支持
 
-
 ``` php
 public function testLevel(): void
 {
@@ -180,7 +171,6 @@ public function testLevel(): void
 }
 ```
     
-
 ## 对象点语法支持
 
 为了方便模板定义，对象还可以支持点语法，例如，上面的模板中：
@@ -209,7 +199,6 @@ public function testObjectSpot(): void
     
 ## 支持无限级对象属性
 
-
 ``` php
 public function testLevelProperty(): void
 {
@@ -228,7 +217,6 @@ public function testLevelProperty(): void
 }
 ```
     
-
 ## 运算符.加减法运算
 
 我们有的时候需要进行一些字符串的操作，以及变量之间的运算，当然直接使用 PHP 可以进行这样子的操作。这里，我们给出的是另一种简单的语法规则。
@@ -253,9 +241,7 @@ public function testOperator(): void
 }
 ```
     
-
 ## 运算符.乘除余数
-
 
 ``` php
 public function testOperator2(): void
@@ -283,9 +269,7 @@ public function testOperator2(): void
 }
 ```
     
-
 ## 运算符.连接字符
-
 
 ``` php
 public function testOperator3(): void
@@ -305,7 +289,6 @@ public function testOperator3(): void
 }
 ```
     
-
 ## JS 风格运算符.加减法运算
 
 JS 风格的运算符也遵循这一个规则，需要注意的 `.` 语法有一定特殊性，周围 `是否有空格` 会影响到解析为 `->` 作为对象或者 `.` 作为连接符。
@@ -330,9 +313,7 @@ public function testJsOperator(): void
 }
 ```
     
-
 ## JS 风格运算符.乘除余数
-
 
 ``` php
 public function testJsOperator2(): void
@@ -360,9 +341,7 @@ public function testJsOperator2(): void
 }
 ```
     
-
 ## JS 风格运算符.连接字符
-
 
 ``` php
 public function testJsOperator3(): void
@@ -382,7 +361,6 @@ public function testJsOperator3(): void
 }
 ```
     
-
 ## 函数支持
 
 仅仅是输出变量并不能满足模板输出的需要，内置模板引擎支持对模板变量使用调节器和格式化功能，其实也就是提供函数支持，并支持多个函数同时使用。
@@ -441,7 +419,6 @@ public function testFunction(): void
     
 ## 函数支持.基本用法
 
-
 ``` php
 public function testFunction2(): void
 {
@@ -460,9 +437,7 @@ public function testFunction2(): void
 }
 ```
     
-
 ## 函数支持.占位符
-
 
 ``` php
 public function testFunction3(): void
@@ -482,7 +457,6 @@ public function testFunction3(): void
 }
 ```
     
-
 ## 函数支持.快捷方法
 
 并且还提供了在模板文件中直接调用函数的快捷方法，无需通过模板变量，包括两种方式：
@@ -505,7 +479,6 @@ public function testFunction4(): void
 }
 ```
     
-
 ## 函数支持.静态方法
 
 使用静态函数来格式化参数。
@@ -530,9 +503,7 @@ public function testFunction5(): void
 }
 ```
     
-
 ## 函数支持.执行方法但不输出
-
 
 ``` php
 public function testFunction6(): void
@@ -563,7 +534,6 @@ public function testFunction6(): void
 }
 ```
     
-
 ## 函数支持.对象方法
 
 如果我们需要在模板中使用对象的方法，那么通过代码版本的变量语法可以很方便地输出。

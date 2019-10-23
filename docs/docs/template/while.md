@@ -6,9 +6,7 @@
     
 QueryPHP 支持 while 语法标签，通过这种方式可以很好地将 PHP 的 while 语法布局出来。
 
-
 ## code
-
 
 ``` php
 public function testCode(): void
@@ -35,9 +33,7 @@ public function testCode(): void
 }
 ```
     
-
 ## node
-
 
 ``` php
 public function testNode(): void

@@ -69,7 +69,6 @@ public function testJson(): void
 }
 ```
     
-
 ## JSON 非关联数组调试
 
 非关联数组结构会在尾部追加一个 `:trace` 用于调试。
@@ -111,9 +110,7 @@ public function testJsonForNotAssociativeArray(): void
 }
 ```
     
-
 ## 关闭调试
-
 
 ``` php
 public function testDisable(): void
@@ -155,9 +152,7 @@ public function testDisable(): void
 }
 ```
     
-
 ## 启用调试
-
 
 ``` php
 public function testEnable(): void
@@ -205,9 +200,7 @@ public function testEnable(): void
 }
 ```
     
-
 ## 启用调试但是未初始化
-
 
 ``` php
 public function testEnableWithoutBootstrap(): void
@@ -249,7 +242,6 @@ public function testEnableWithoutBootstrap(): void
 }
 ```
     
-
 ## 调试消息等级
 
 **支持的消息类型**
@@ -300,9 +292,7 @@ public function testMessageLevelsData(string $level): void
 }
 ```
     
-
 ## 调试 Session
-
 
 ``` php
 public function testWithSession(): void
@@ -330,9 +320,7 @@ public function testWithSession(): void
 }
 ```
     
-
 ## 调试 Log
-
 
 ``` php
 public function testWithLog(): void
@@ -367,9 +355,7 @@ public function testWithLog(): void
 }
 ```
     
-
 ## 调试数据库
-
 
 ``` php
 public function testWithDatabase(): void
@@ -396,9 +382,7 @@ public function testWithDatabase(): void
 }
 ```
     
-
 ## 调试时间
-
 
 ``` php
 public function testTime(): void
@@ -428,9 +412,7 @@ public function testTime(): void
 }
 ```
     
-
 ## 调试带有标签的时间
-
 
 ``` php
 public function testTimeWithLabel(): void

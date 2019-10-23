@@ -36,9 +36,7 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## 断言失败默认错误消息
-
 
 ``` php
 public function testAssertFailedWithDefaultMessage(): void
@@ -52,9 +50,7 @@ public function testAssertFailedWithDefaultMessage(): void
 }
 ```
     
-
 ## 断言失败自定义消息
-
 
 ``` php
 public function testAssertFailedWithCustomMessage(): void
@@ -68,7 +64,6 @@ public function testAssertFailedWithCustomMessage(): void
 }
 ```
     
-
 ## 可选断言支持
 
 如果值为 `null` 直接返回正确结果。
@@ -82,9 +77,7 @@ public function testAssertOptional(): void
 }
 ```
     
-
 ## 可选断言失败
-
 
 ``` php
 public function testAssertOptionalFailed(): void
@@ -98,7 +91,6 @@ public function testAssertOptionalFailed(): void
 }
 ```
     
-
 ## 断言支持多个校验
 
 必须每一个都满足规则才算校验成功。
@@ -112,7 +104,6 @@ public function testAssertMulti(): void
 }
 ```
     
-
 ## 断言支持多个校验
 
 必须每一个都满足规则才算校验成功。
@@ -129,7 +120,6 @@ public function testAssertMultiFailed(): void
 }
 ```
     
-
 ## 断言支持多个校验也支持可选
 
 必须每一个都满足规则才算校验成功, 可选会跳过验证，可选必须在最前面，即不支持 `multiOptional` 这种写法。
@@ -143,7 +133,6 @@ public function testAssertMultiWithOptional(): void
 }
 ```
     
-
 ## 断言支持链式表达式
 
 我们可以使用链式表达式来校验规则。
@@ -170,7 +159,6 @@ public function testAssertChain(): void
 }
 ```
     
-
 ## 断言支持延迟释放
 
 可以将所有错误几种抛出。
@@ -200,9 +188,7 @@ public function testAssertLazyChain(): void
 }
 ```
     
-
 ## 断言失败延迟释放
-
 
 ``` php
 public function testAssertLazyChainFailed(): void
@@ -221,9 +207,7 @@ public function testAssertLazyChainFailed(): void
 }
 ```
     
-
 ## 断言失败延迟释放自定义格式化
-
 
 ``` php
 public function testAssertLazyChainFailedWithCustomFormat(): void

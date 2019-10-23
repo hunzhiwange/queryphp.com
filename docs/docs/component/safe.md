@@ -12,7 +12,6 @@
 
 ## 添加模式转义和移除魔术方法转义
 
-
 ``` php
 public function testBaseUse(): void
 {
@@ -32,9 +31,7 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## 深度过滤
-
 
 ``` php
 public function testDeepReplace(): void
@@ -46,9 +43,7 @@ public function testDeepReplace(): void
 }
 ```
     
-
 ## url 安全过滤
-
 
 ``` php
 public function testEscUrl(): void
@@ -75,9 +70,7 @@ public function testEscUrl(): void
 }
 ```
     
-
 ## 过滤 script
-
 
 ``` php
 public function testFilterScript(): void
@@ -89,9 +82,7 @@ public function testFilterScript(): void
 }
 ```
     
-
 ## 过滤十六进制字符串
-
 
 ``` php
 public function testCleanHex(): void
@@ -103,9 +94,7 @@ public function testCleanHex(): void
 }
 ```
     
-
 ## 签名算法支持
-
 
 ``` php
 public function testSignature(): void
@@ -121,9 +110,7 @@ public function testSignature(): void
 }
 ```
     
-
 ## 签名算法支持忽略字段
-
 
 ``` php
 public function testSignatureWithIgnore(): void
@@ -141,9 +128,7 @@ public function testSignatureWithIgnore(): void
 }
 ```
     
-
 ## 签名算法支持子数组
-
 
 ``` php
 public function testSignatureWithSubArray(): void

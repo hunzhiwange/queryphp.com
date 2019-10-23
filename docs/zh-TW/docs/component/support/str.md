@@ -12,7 +12,6 @@
 
 ## 随机字母数字
 
-
 ``` php
 public function testBaseUse(): void
 {
@@ -32,7 +31,6 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## 随机小写字母和数字
 
 利用本方法可以生成随机数小写字母。
@@ -116,7 +114,6 @@ public function testRandAlpha(): void
     
 ## 随机小写字母
 
-
 ``` php
 public function testRandAlphaLowercase(): void
 {
@@ -136,9 +133,7 @@ public function testRandAlphaLowercase(): void
 }
 ```
     
-
 ## 随机大写字母
-
 
 ``` php
 public function testRandAlphaUppercase(): void
@@ -159,9 +154,7 @@ public function testRandAlphaUppercase(): void
 }
 ```
     
-
 ## 随机数字
-
 
 ``` php
 public function testRandNum(): void
@@ -182,9 +175,7 @@ public function testRandNum(): void
 }
 ```
     
-
 ## 随机字中文
-
 
 ``` php
 public function testRandChinese(): void
@@ -205,9 +196,7 @@ public function testRandChinese(): void
 }
 ```
     
-
 ## 随机字符串
-
 
 ``` php
 public function testRandStr(): void
@@ -222,9 +211,7 @@ public function testRandStr(): void
 }
 ```
     
-
 ## 日期格式化
-
 
 ``` php
 public function testFormatDate(): void
@@ -247,9 +234,7 @@ public function testFormatDate(): void
 }
 ```
     
-
 ## 文件大小格式化
-
 
 ``` php
 public function testFormatBytes(): void
@@ -268,9 +253,7 @@ public function testFormatBytes(): void
 }
 ```
     
-
 ## 下划线转驼峰
-
 
 ``` php
 public function testCamelize(): void
@@ -285,9 +268,7 @@ public function testCamelize(): void
 }
 ```
     
-
 ## 驼峰转下划线
-
 
 ``` php
 public function testUnCamelize(): void
@@ -302,9 +283,7 @@ public function testUnCamelize(): void
 }
 ```
     
-
 ## 判断字符串中是否包含给定的字符开始
-
 
 ``` php
 public function testStartsWith(): void
@@ -315,9 +294,7 @@ public function testStartsWith(): void
 }
 ```
     
-
 ## 判断字符串中是否包含给定的字符结尾
-
 
 ``` php
 public function testEndsWith(): void
@@ -328,9 +305,7 @@ public function testEndsWith(): void
 }
 ```
     
-
 ## 判断字符串中是否包含给定的字符串集合
-
 
 ``` php
 public function testContains(): void

@@ -6,7 +6,6 @@
     
 可以在模板中进行一些变量的赋值，以便于进行后续计算处理。
 
-
 ## node 版本
 
 assign 标签也是用于页面快捷赋值，这个还是用起来比较方便。
@@ -30,9 +29,7 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## node 版本.初始化为 Null 值
-
 
 ``` php
 public function testNode(): void
@@ -51,9 +48,7 @@ public function testNode(): void
 }
 ```
     
-
 ## node 版本.初始化为指定变量
-
 
 ``` php
 public function testNode2(): void
@@ -72,9 +67,7 @@ public function testNode2(): void
 }
 ```
     
-
 ## node 版本.初始化为函数格式化变量
-
 
 ``` php
 public function testNode3(): void
@@ -93,9 +86,7 @@ public function testNode3(): void
 }
 ```
     
-
 ## node 版本.初始化为函数格式化占位变量
-
 
 ``` php
 public function testNode4(): void
@@ -114,9 +105,7 @@ public function testNode4(): void
 }
 ```
     
-
 ## JS 风格版本
-
 
 ``` php
 public function testLet(): void
@@ -137,9 +126,7 @@ public function testLet(): void
 }
 ```
     
-
 ## JS 风格版本.初始化值
-
 
 ``` php
 public function testLet2(): void
@@ -158,9 +145,7 @@ public function testLet2(): void
 }
 ```
     
-
 ## JS 风格版本.初始化为 Null 值
-
 
 ``` php
 public function testLet3(): void
@@ -179,9 +164,7 @@ public function testLet3(): void
 }
 ```
     
-
 ## JS 风格版本.初始化为 Null 值带上等于符
-
 
 ``` php
 public function testLet4(): void

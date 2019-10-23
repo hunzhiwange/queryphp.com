@@ -15,7 +15,6 @@ Swoole 请求转换 Leevel 的请求后，然后传递给 Kernel 完成请求到
 
 ## 转换 Swoole 请求的 header
 
-
 ``` php
 public function testSwooleRequestWithHeader(): void
 {
@@ -63,9 +62,7 @@ public function testSwooleRequestWithHeader(): void
 }
 ```
     
-
 ## 转换 Swoole 请求的 server
-
 
 ``` php
 public function testSwooleRequestWithServer(): void
@@ -126,9 +123,7 @@ public function testSwooleRequestWithServer(): void
 }
 ```
     
-
 ## 转换 Swoole 请求的其它属性
-
 
 ``` php
 public function testSwooleRequestWithOther(): void

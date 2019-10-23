@@ -60,7 +60,6 @@ public function testBaseUse(): void
 }
 ```
     
-
 ## 静态方法 make 创建集合
 
 可以使用 `make` 方法创建一个集合对象。
@@ -107,7 +106,6 @@ public function testMake(): void
 }
 ```
     
-
 ## 集合支持迭代器
 
 集合 `collection` 是一个标准的迭代器，支持迭代器的用法。
@@ -146,7 +144,6 @@ public function testIterator(): void
 }
 ```
     
-
 ## 集合可统计
 
 集合实现了 `\Countable` 可以像普通数组一样统计元素的个数。
@@ -164,7 +161,6 @@ public function testCountable(): void
 }
 ```
     
-
 ## 集合数据支持实现 \Leevel\Support\IArray 的对象
 
 对象实现了 `\Leevel\Support\IArray` 可以转化为集合数据。
@@ -212,7 +208,6 @@ public function testGetArrayElements2(): void
 }
 ```
     
-
 ## 集合数据支持实现 \Leevel\Support\IJson 的对象
 
 对象实现了 `\Leevel\Support\IJson` 可以转化为集合数据。
@@ -264,7 +259,6 @@ public function testGetArrayElements3(): void
 }
 ```
     
-
 ## 集合数据支持实现 \JsonSerializable 的对象
 
 对象实现了 `\JsonSerializable` 可以转化为集合数据。

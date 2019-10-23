@@ -143,7 +143,6 @@ public function testConsturctPropWhite(): void
 }
 ```
     
-
 ## 创建一个实体支持构造器黑名单
 
 **完整模型**

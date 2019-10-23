@@ -20,7 +20,6 @@
 
 ## 保存一个实体
 
-
 ``` php
 public function testBaseUse(): void
 {
@@ -54,7 +53,6 @@ public function testBaseUse(): void
 :::
     
 ## 保存多个实体
-
 
 ``` php
 public function testPersist(): void
@@ -124,7 +122,6 @@ public function testPersist(): void
 :::
     
 ## 新增实体
-
 
 ``` php
 public function testCreate(): void
@@ -208,7 +205,6 @@ public function testCreate(): void
 :::
     
 ## 更新实体
-
 
 ``` php
 public function testUpdate(): void
@@ -333,7 +329,6 @@ public function testUpdate(): void
 :::
     
 ## 删除实体
-
 
 ``` php
 public function testDelete(): void
@@ -472,7 +467,6 @@ public function testDelete(): void
     
 ## 刷新实体
 
-
 ``` php
 public function testRefresh(): void
 {
@@ -534,7 +528,6 @@ public function testRefresh(): void
     
 ## 手工启动事务 beginTransaction
 
-
 ``` php
 public function testBeginTransaction(): void
 {
@@ -582,7 +575,6 @@ public function testBeginTransaction(): void
     
 ## 执行失败事务回滚 rollBack
 
-
 ``` php
 public function testFlushButRollBack(): void
 {
@@ -619,7 +611,6 @@ public function testFlushButRollBack(): void
 :::
     
 ## 事务包裹在闭包中 transaction
-
 
 ``` php
 public function testTransaction(): void
@@ -661,7 +652,6 @@ public function testTransaction(): void
 :::
     
 ## 事务包裹在闭包中失败回滚 transaction 
-
 
 ``` php
 public function testTransactionAndRollBack(): void
@@ -706,7 +696,6 @@ public function testTransactionAndRollBack(): void
 :::
     
 ## 设置根实体 setRootEntity
-
 
 ``` php
 public function testSetRootEntity(): void
@@ -755,7 +744,6 @@ public function testSetRootEntity(): void
     
 ## 更改数据库连接 setConnect
 
-
 ``` php
 public function testSetConnectNotFoundWillUseDefault(): void
 {
@@ -803,7 +791,6 @@ public function testSetConnectNotFoundWillUseDefault(): void
     
 ## 无实体执行 flush 什么都不做
 
-
 ``` php
 public function testFlushButNotFoundAny(): void
 {
@@ -818,7 +805,6 @@ public function testFlushButNotFoundAny(): void
 :::
     
 ## 实体实体支持缓存
-
 
 ``` php
 public function testPersistStageManagedEntityDoNothing(): void
@@ -848,7 +834,6 @@ public function testPersistStageManagedEntityDoNothing(): void
 :::
     
 ## 重新保存已删除的实体实体
-
 
 ``` php
 public function testPersistStageRemovedEntity(): void
@@ -890,7 +875,6 @@ public function testPersistStageRemovedEntity(): void
     
 ## 注册更新的实体不能重新被创建
 
-
 ``` php
 public function testCreateButAlreadyInUpdates(): void
 {
@@ -909,9 +893,7 @@ public function testCreateButAlreadyInUpdates(): void
 }
 ```
     
-
 ## 注册删除的实体不能重新被创建
-
 
 ``` php
 public function testCreateButAlreadyInDeletes(): void
@@ -931,9 +913,7 @@ public function testCreateButAlreadyInDeletes(): void
 }
 ```
     
-
 ## 注册替换的实体不能重新被创建
-
 
 ``` php
 public function testCreateButAlreadyInReplaces(): void
@@ -953,9 +933,7 @@ public function testCreateButAlreadyInReplaces(): void
 }
 ```
     
-
 ## 不能多次创建同一个实体
-
 
 ``` php
 public function testCreateManyTimes(): void
