@@ -48,8 +48,23 @@ module.exports = {
         lastUpdated: 'Last Updated',
         nav: require('./nav/en-US'),
         sidebar: {
-          '/guide/': genSidebarConfig(),
-          '/docs/': genSidebarConfigDoc(),
+          '/guide/': genSidebarConfig({title1:'Guide'}),
+          '/docs/': genSidebarConfigDoc({
+            title1: 'Preface',
+            title2: 'Started',
+            title3:'Architecture', 
+            title4:'Routing',
+            title5:'Template',
+            title6:'Database',
+            title7:'Add',
+            title8:'Delete',
+            title9:'Update',
+            title10:'Query',
+            title11:'Query lang',
+            title12:'ORM',
+            title13:'Component',
+            title14:'Developer',
+          }),
         }
       },
       '/zh-CN/': {
@@ -59,8 +74,23 @@ module.exports = {
         lastUpdated: '上次更新',
         nav: require('./nav/zh-CN'),
         sidebar: {
-          '/zh-CN/guide/': genSidebarConfig(),
-          '/zh-CN/docs/': genSidebarConfigDoc(),
+          '/zh-CN/guide/': genSidebarConfig({title1:'指南'}),
+          '/zh-CN/docs/': genSidebarConfigDoc({
+            title1: '序言',
+            title2: '入门',
+            title3:'架构', 
+            title4:'路由',
+            title5:'模板',
+            title6:'資料庫',
+            title7:'新增',
+            title8:'删除',
+            title9:'更新',
+            title10:'査詢',
+            title11:'査詢語言',
+            title12:'ORM',
+            title13:'組件',
+            title14:'開發者',
+          }),
         }
       },
       '/zh-TW/': {
@@ -70,8 +100,23 @@ module.exports = {
         lastUpdated: '上次更新',
         nav: require('./nav/zh-TW'),
         sidebar: {
-          '/zh-TW/guide/': genSidebarConfig(),
-          '/zh-TW/docs/': genSidebarConfigDoc(),
+          '/zh-TW/guide/': genSidebarConfig({title1:'指南'}),
+          '/zh-TW/docs/': genSidebarConfigDoc({
+            title1: '序言',
+            title2: '入門',
+            title3:'架構', 
+            title4:'路由',
+            title5:'範本',
+            title6:'数据库',
+            title7:'新增',
+            title8:'删除',
+            title9:'更新',
+            title10:'查询',
+            title11:'查询语言',
+            title12:'ORM',
+            title13:'组件',
+            title14:'开发者',
+          }),
         }
       }
     }
@@ -93,22 +138,168 @@ module.exports = {
 function genSidebarConfig (title) {
   return [
     {
-      title,
+      title: title.title1,
       collapsable: false,
       children: [
-        '',
+        ''
       ]
     }
   ]
 }
 
-function genSidebarConfig () {
+function genSidebarConfigDoc (title) {
   return [
     {
-      title: '指南',
+      title: title.title1,
       collapsable: false,
       children: [
         ''
+      ]
+    },
+    {
+      title: title.title2,
+      collapsable: true,
+      children: [
+        'started/',
+        'started/install',
+        'started/specification',
+        'started/directory',
+      ]
+    },
+    {
+      title: title.title3,
+      collapsable: true,
+      children: [
+        'architecture/',
+        'architecture/ioc',
+        'architecture/fn',
+      ]
+    },
+    {
+      title: title.title4,
+      collapsable: true,
+      children: [
+        'router/',
+      ]
+    },
+    {
+      title: title.title5,
+      collapsable: true,
+      children: [
+        'template/',
+        'template/var',
+        'template/assign',
+        'template/quick',
+        'template/if',
+        'template/for',
+        'template/list',
+        'template/lists',
+        'template/while',
+        'template/break',
+        'template/php',
+        'template/include',
+        'template/css',
+        'template/tagself',
+      ]
+    },
+    {
+      title: title.title6,
+      collapsable: true,
+      children: [
+        'database/',
+        'database/config',
+        {
+          title: title.title7 + ' Create',
+          collapsable: true,
+          'children': [
+            'database/create/insert',
+            'database/create/insertall',
+          ],
+        },
+        {
+          title: title.title8 + ' Delete',
+          collapsable: true,
+          'children': [
+            'database/delete/delete',
+            'database/truncate',
+          ],
+        },
+        {
+          title: title.title9 + ' Update',
+          collapsable: true,
+          'children': [
+            'database/update/update',
+            'database/update/updatecolumn',
+            'database/update/updateincrease',
+            'database/update/updatedecrease',
+          ],
+        },
+        {
+          title: title.title10 + ' Read',
+          collapsable: true,
+          'children': [
+            'database/read/aggregate',
+            'database/read/find',
+            'database/read/findall',
+            'database/read/findone',
+            'database/read/finddynamics',
+            'database/read/select',
+            'database/read/lists',
+            'database/read/valuepull',
+          ],
+        },
+        {
+          title: title.title11,
+          collapsable: true,
+          'children': [
+            'database/query/flow',
+            'database/query/sql',
+            'database/query/table',
+            'database/query/columns',
+            'database/query/where',
+            'database/query/prefix',
+            'database/query/forceindex',
+            'database/query/bind',
+            'database/query/join',
+            'database/query/union',
+            'database/query/orderby',
+            'database/query/groupby',
+            'database/query/having',
+            'database/query/distinct',
+            'database/query/aggregate',
+            'database/query/limit',
+            'database/query/forupdate',
+            'database/query/reset',
+          ],
+        },
+      ]
+    },
+    {
+      title: title.title12,
+      collapsable: true,
+      children: [
+        'orm/',
+        'orm/create',
+        'orm/unitofwork',
+      ]
+    },
+    {
+      title: title.title13,
+      collapsable: true,
+      children: [
+        'component/support/str',
+        'component/support/arr',
+        'component/debug',
+        'component/encryption',
+        'component/safe',
+        'component/collection',
+      ]
+    },
+    {
+      title: title.title14,
+      collapsable: true,
+      children: [
+        'developer/',
       ]
     }
   ]
