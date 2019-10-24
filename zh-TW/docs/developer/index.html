@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>如何成为 QueryPHP 开发者 | QueryPHP</title>
+    <meta name="description" content="高性能 PHP 漸進式協程框架引擎.">
+    <link rel="icon" href="/logo.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/0.styles.a55a2053.css" as="style"><link rel="preload" href="/assets/js/app.82f42766.js" as="script"><link rel="preload" href="/assets/js/3.75c2b158.js" as="script"><link rel="preload" href="/assets/js/220.c6328905.js" as="script"><link rel="preload" href="/assets/js/5.65fa139f.js" as="script"><link rel="prefetch" href="/assets/js/10.afbc7dc1.js"><link rel="prefetch" href="/assets/js/100.6911880a.js"><link rel="prefetch" href="/assets/js/101.ed7f1e40.js"><link rel="prefetch" href="/assets/js/102.47def5e0.js"><link rel="prefetch" href="/assets/js/103.b957b2f4.js"><link rel="prefetch" href="/assets/js/104.eadddc0a.js"><link rel="prefetch" href="/assets/js/105.189b6735.js"><link rel="prefetch" href="/assets/js/106.dbc976c4.js"><link rel="prefetch" href="/assets/js/107.dd8a0e24.js"><link rel="prefetch" href="/assets/js/108.25141a92.js"><link rel="prefetch" href="/assets/js/109.648743d4.js"><link rel="prefetch" href="/assets/js/11.eae20ce2.js"><link rel="prefetch" href="/assets/js/110.c0f10f01.js"><link rel="prefetch" href="/assets/js/111.94dab28b.js"><link rel="prefetch" href="/assets/js/112.4c6aaa70.js"><link rel="prefetch" href="/assets/js/113.592bcac7.js"><link rel="prefetch" href="/assets/js/114.c281f019.js"><link rel="prefetch" href="/assets/js/115.4ab2b9f7.js"><link rel="prefetch" href="/assets/js/116.cc598829.js"><link rel="prefetch" href="/assets/js/117.944b8da7.js"><link rel="prefetch" href="/assets/js/118.e27110d6.js"><link rel="prefetch" href="/assets/js/119.c16ef379.js"><link rel="prefetch" href="/assets/js/12.c60736a0.js"><link rel="prefetch" href="/assets/js/120.e4174120.js"><link rel="prefetch" href="/assets/js/121.736fe9ad.js"><link rel="prefetch" href="/assets/js/122.1b5f8dc3.js"><link rel="prefetch" href="/assets/js/123.467339d4.js"><link rel="prefetch" href="/assets/js/124.9385d108.js"><link rel="prefetch" href="/assets/js/125.330b4d3e.js"><link rel="prefetch" href="/assets/js/126.843a8f1c.js"><link rel="prefetch" href="/assets/js/127.9b24eb8a.js"><link rel="prefetch" href="/assets/js/128.6a308504.js"><link rel="prefetch" href="/assets/js/129.568264c9.js"><link rel="prefetch" href="/assets/js/13.587c01f1.js"><link rel="prefetch" href="/assets/js/130.bc030973.js"><link rel="prefetch" href="/assets/js/131.35a3b173.js"><link rel="prefetch" href="/assets/js/132.0fbc3e87.js"><link rel="prefetch" href="/assets/js/133.24a290a2.js"><link rel="prefetch" href="/assets/js/134.1d71a9db.js"><link rel="prefetch" href="/assets/js/135.559336d9.js"><link rel="prefetch" href="/assets/js/136.4d0e437e.js"><link rel="prefetch" href="/assets/js/137.20bd49b4.js"><link rel="prefetch" href="/assets/js/138.3ca701a0.js"><link rel="prefetch" href="/assets/js/139.ade6246e.js"><link rel="prefetch" href="/assets/js/14.e46acd14.js"><link rel="prefetch" href="/assets/js/140.248ea41f.js"><link rel="prefetch" href="/assets/js/141.547c3cdd.js"><link rel="prefetch" href="/assets/js/142.979a843b.js"><link rel="prefetch" href="/assets/js/143.328d7a16.js"><link rel="prefetch" href="/assets/js/144.c2205ebc.js"><link rel="prefetch" href="/assets/js/145.ed8a0521.js"><link rel="prefetch" href="/assets/js/146.ee7c3bbf.js"><link rel="prefetch" href="/assets/js/147.f7fe2aa1.js"><link rel="prefetch" href="/assets/js/148.1158d79f.js"><link rel="prefetch" href="/assets/js/149.265a264c.js"><link rel="prefetch" href="/assets/js/15.a77bf91b.js"><link rel="prefetch" href="/assets/js/150.a06076eb.js"><link rel="prefetch" href="/assets/js/151.de1c56eb.js"><link rel="prefetch" href="/assets/js/152.dc06b227.js"><link rel="prefetch" href="/assets/js/153.652c15a9.js"><link rel="prefetch" href="/assets/js/154.ba57c92e.js"><link rel="prefetch" href="/assets/js/155.d5a15bd4.js"><link rel="prefetch" href="/assets/js/156.b95ba3bf.js"><link rel="prefetch" href="/assets/js/157.3cffec92.js"><link rel="prefetch" href="/assets/js/158.a4b74fc3.js"><link rel="prefetch" href="/assets/js/159.7fb156b5.js"><link rel="prefetch" href="/assets/js/16.178ee864.js"><link rel="prefetch" href="/assets/js/160.38e1e946.js"><link rel="prefetch" href="/assets/js/161.9ce4781a.js"><link rel="prefetch" href="/assets/js/162.02ad3a15.js"><link rel="prefetch" href="/assets/js/163.330ea93b.js"><link rel="prefetch" href="/assets/js/164.78a7c2e1.js"><link rel="prefetch" href="/assets/js/165.c6cde80d.js"><link rel="prefetch" href="/assets/js/166.10fcbb34.js"><link rel="prefetch" href="/assets/js/167.88afd62e.js"><link rel="prefetch" href="/assets/js/168.eada3515.js"><link rel="prefetch" href="/assets/js/169.98e69bea.js"><link rel="prefetch" href="/assets/js/17.0a47ec3e.js"><link rel="prefetch" href="/assets/js/170.c952be52.js"><link rel="prefetch" href="/assets/js/171.4fb6d846.js"><link rel="prefetch" href="/assets/js/172.8201f511.js"><link rel="prefetch" href="/assets/js/173.8e9de382.js"><link rel="prefetch" href="/assets/js/174.1ff727bd.js"><link rel="prefetch" href="/assets/js/175.df0280c9.js"><link rel="prefetch" href="/assets/js/176.17c44898.js"><link rel="prefetch" href="/assets/js/177.8181fc50.js"><link rel="prefetch" href="/assets/js/178.462a6c1d.js"><link rel="prefetch" href="/assets/js/179.30448857.js"><link rel="prefetch" href="/assets/js/18.f4bacb33.js"><link rel="prefetch" href="/assets/js/180.e695845f.js"><link rel="prefetch" href="/assets/js/181.afcf0bbf.js"><link rel="prefetch" href="/assets/js/182.538076f2.js"><link rel="prefetch" href="/assets/js/183.9730979a.js"><link rel="prefetch" href="/assets/js/184.23b6bbb1.js"><link rel="prefetch" href="/assets/js/185.1a834bd0.js"><link rel="prefetch" href="/assets/js/186.d9bdb556.js"><link rel="prefetch" href="/assets/js/187.a86c3dde.js"><link rel="prefetch" href="/assets/js/188.c6812841.js"><link rel="prefetch" href="/assets/js/189.5cfdfbed.js"><link rel="prefetch" href="/assets/js/19.b118de9e.js"><link rel="prefetch" href="/assets/js/190.e04f581f.js"><link rel="prefetch" href="/assets/js/191.0d8ee9de.js"><link rel="prefetch" href="/assets/js/192.7f496b44.js"><link rel="prefetch" href="/assets/js/193.9d0ec285.js"><link rel="prefetch" href="/assets/js/194.7caef246.js"><link rel="prefetch" href="/assets/js/195.10591e17.js"><link rel="prefetch" href="/assets/js/196.c7ecf745.js"><link rel="prefetch" href="/assets/js/197.f848c798.js"><link rel="prefetch" href="/assets/js/198.891c6013.js"><link rel="prefetch" href="/assets/js/199.3984511d.js"><link rel="prefetch" href="/assets/js/20.14fd0942.js"><link rel="prefetch" href="/assets/js/200.6207ab75.js"><link rel="prefetch" href="/assets/js/201.175b339f.js"><link rel="prefetch" href="/assets/js/202.1b58295b.js"><link rel="prefetch" href="/assets/js/203.e23e54ef.js"><link rel="prefetch" href="/assets/js/204.44695ac8.js"><link rel="prefetch" href="/assets/js/205.ef592357.js"><link rel="prefetch" href="/assets/js/206.e8b905e0.js"><link rel="prefetch" href="/assets/js/207.d7e548ad.js"><link rel="prefetch" href="/assets/js/208.ed31e532.js"><link rel="prefetch" href="/assets/js/209.545a4d19.js"><link rel="prefetch" href="/assets/js/21.f12aca4f.js"><link rel="prefetch" href="/assets/js/210.55c0db93.js"><link rel="prefetch" href="/assets/js/211.c3481833.js"><link rel="prefetch" href="/assets/js/212.29644b42.js"><link rel="prefetch" href="/assets/js/213.063d8c08.js"><link rel="prefetch" href="/assets/js/214.ccbe2f91.js"><link rel="prefetch" href="/assets/js/215.a103329f.js"><link rel="prefetch" href="/assets/js/216.aa2cdec1.js"><link rel="prefetch" href="/assets/js/217.03771e53.js"><link rel="prefetch" href="/assets/js/218.03492af2.js"><link rel="prefetch" href="/assets/js/219.33407871.js"><link rel="prefetch" href="/assets/js/22.8b94d099.js"><link rel="prefetch" href="/assets/js/221.f111b775.js"><link rel="prefetch" href="/assets/js/222.e845c85b.js"><link rel="prefetch" href="/assets/js/223.764a0cbc.js"><link rel="prefetch" href="/assets/js/224.f8dc55fc.js"><link rel="prefetch" href="/assets/js/225.fb3e1255.js"><link rel="prefetch" href="/assets/js/226.23a69824.js"><link rel="prefetch" href="/assets/js/227.467f3be6.js"><link rel="prefetch" href="/assets/js/228.9493cbbc.js"><link rel="prefetch" href="/assets/js/229.b0fd2359.js"><link rel="prefetch" href="/assets/js/23.6a4adfda.js"><link rel="prefetch" href="/assets/js/230.ff1b5025.js"><link rel="prefetch" href="/assets/js/231.1769ab71.js"><link rel="prefetch" href="/assets/js/232.9d55f969.js"><link rel="prefetch" href="/assets/js/233.df5035fb.js"><link rel="prefetch" href="/assets/js/234.aa1d3983.js"><link rel="prefetch" href="/assets/js/235.99ff61db.js"><link rel="prefetch" href="/assets/js/236.e9d3377a.js"><link rel="prefetch" href="/assets/js/237.eba14658.js"><link rel="prefetch" href="/assets/js/238.4276e652.js"><link rel="prefetch" href="/assets/js/239.be7df6c0.js"><link rel="prefetch" href="/assets/js/24.e5d1f420.js"><link rel="prefetch" href="/assets/js/240.0c0563a9.js"><link rel="prefetch" href="/assets/js/241.c309cc11.js"><link rel="prefetch" href="/assets/js/242.7299064e.js"><link rel="prefetch" href="/assets/js/243.98b1af86.js"><link rel="prefetch" href="/assets/js/244.113f4d0a.js"><link rel="prefetch" href="/assets/js/245.ffe2d898.js"><link rel="prefetch" href="/assets/js/246.f7216ea4.js"><link rel="prefetch" href="/assets/js/247.efac42fe.js"><link rel="prefetch" href="/assets/js/248.caa0ff97.js"><link rel="prefetch" href="/assets/js/249.d8ec7096.js"><link rel="prefetch" href="/assets/js/25.074e510d.js"><link rel="prefetch" href="/assets/js/250.b5edb0cf.js"><link rel="prefetch" href="/assets/js/251.cf54c42a.js"><link rel="prefetch" href="/assets/js/26.f7f9d41b.js"><link rel="prefetch" href="/assets/js/27.c0b5834b.js"><link rel="prefetch" href="/assets/js/28.27f90c57.js"><link rel="prefetch" href="/assets/js/29.6140807e.js"><link rel="prefetch" href="/assets/js/30.5053207d.js"><link rel="prefetch" href="/assets/js/31.f6798e9e.js"><link rel="prefetch" href="/assets/js/32.d593a29d.js"><link rel="prefetch" href="/assets/js/33.bce7167c.js"><link rel="prefetch" href="/assets/js/34.6b36aa57.js"><link rel="prefetch" href="/assets/js/35.61ce9871.js"><link rel="prefetch" href="/assets/js/36.6fb5d447.js"><link rel="prefetch" href="/assets/js/37.d118f5b6.js"><link rel="prefetch" href="/assets/js/38.2edb903a.js"><link rel="prefetch" href="/assets/js/39.316901d0.js"><link rel="prefetch" href="/assets/js/4.ee6b0a7d.js"><link rel="prefetch" href="/assets/js/40.8b46eec6.js"><link rel="prefetch" href="/assets/js/41.bfcdc857.js"><link rel="prefetch" href="/assets/js/42.8014a201.js"><link rel="prefetch" href="/assets/js/43.8e1d7783.js"><link rel="prefetch" href="/assets/js/44.8f4f731f.js"><link rel="prefetch" href="/assets/js/45.3f93a8c6.js"><link rel="prefetch" href="/assets/js/46.fd440a71.js"><link rel="prefetch" href="/assets/js/47.b87e391f.js"><link rel="prefetch" href="/assets/js/48.24774161.js"><link rel="prefetch" href="/assets/js/49.bf8e1be6.js"><link rel="prefetch" href="/assets/js/50.58538364.js"><link rel="prefetch" href="/assets/js/51.c9ab75d2.js"><link rel="prefetch" href="/assets/js/52.3300a8a8.js"><link rel="prefetch" href="/assets/js/53.97abd8de.js"><link rel="prefetch" href="/assets/js/54.204b66b5.js"><link rel="prefetch" href="/assets/js/55.16102ea5.js"><link rel="prefetch" href="/assets/js/56.7ebbde86.js"><link rel="prefetch" href="/assets/js/57.09f0674e.js"><link rel="prefetch" href="/assets/js/58.4f00edb4.js"><link rel="prefetch" href="/assets/js/59.43e7dc5e.js"><link rel="prefetch" href="/assets/js/6.2432d49d.js"><link rel="prefetch" href="/assets/js/60.ae17a997.js"><link rel="prefetch" href="/assets/js/61.d4eeeca9.js"><link rel="prefetch" href="/assets/js/62.c1047fe8.js"><link rel="prefetch" href="/assets/js/63.ab06c056.js"><link rel="prefetch" href="/assets/js/64.9c39f477.js"><link rel="prefetch" href="/assets/js/65.b454cc2f.js"><link rel="prefetch" href="/assets/js/66.b5512820.js"><link rel="prefetch" href="/assets/js/67.9901bcff.js"><link rel="prefetch" href="/assets/js/68.3011b5a1.js"><link rel="prefetch" href="/assets/js/69.71590902.js"><link rel="prefetch" href="/assets/js/7.aa34596f.js"><link rel="prefetch" href="/assets/js/70.d862f4b6.js"><link rel="prefetch" href="/assets/js/71.3fd64c9e.js"><link rel="prefetch" href="/assets/js/72.38dfca10.js"><link rel="prefetch" href="/assets/js/73.993e4847.js"><link rel="prefetch" href="/assets/js/74.74b4b6cc.js"><link rel="prefetch" href="/assets/js/75.bc55037d.js"><link rel="prefetch" href="/assets/js/76.8b4c346c.js"><link rel="prefetch" href="/assets/js/77.992d0eb4.js"><link rel="prefetch" href="/assets/js/78.07696b11.js"><link rel="prefetch" href="/assets/js/79.385601ee.js"><link rel="prefetch" href="/assets/js/8.a48bc48a.js"><link rel="prefetch" href="/assets/js/80.7c522e09.js"><link rel="prefetch" href="/assets/js/81.b638c08a.js"><link rel="prefetch" href="/assets/js/82.16f128ac.js"><link rel="prefetch" href="/assets/js/83.f1626be5.js"><link rel="prefetch" href="/assets/js/84.454a623b.js"><link rel="prefetch" href="/assets/js/85.8d30b5e1.js"><link rel="prefetch" href="/assets/js/86.5edccde5.js"><link rel="prefetch" href="/assets/js/87.55d824f8.js"><link rel="prefetch" href="/assets/js/88.e3fa49d1.js"><link rel="prefetch" href="/assets/js/89.211c5253.js"><link rel="prefetch" href="/assets/js/9.acaf0336.js"><link rel="prefetch" href="/assets/js/90.751ecde7.js"><link rel="prefetch" href="/assets/js/91.2f02727a.js"><link rel="prefetch" href="/assets/js/92.ed58f202.js"><link rel="prefetch" href="/assets/js/93.ea069161.js"><link rel="prefetch" href="/assets/js/94.a3ebb5bd.js"><link rel="prefetch" href="/assets/js/95.3a74129d.js"><link rel="prefetch" href="/assets/js/96.d30afe3c.js"><link rel="prefetch" href="/assets/js/97.4df8741a.js"><link rel="prefetch" href="/assets/js/98.96227f4f.js"><link rel="prefetch" href="/assets/js/99.683c8f0c.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.a53324eb.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.a55a2053.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/zh-TW/" class="home-link router-link-active"><!----> <span class="site-name">QueryPHP</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh-TW/docs/" class="nav-link router-link-active">开发文档</a></div><div class="nav-item"><a href="https://api.queryphp.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  API 文档
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">社区</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://www.114.ms/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  论坛
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="/zh-TW/ecosystem/" class="nav-link">其它</a></li></ul></div></div><div class="nav-item"><a href="/zh-TW/about/" class="nav-link">关于我们</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/developer/" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/zh-CN/docs/developer/" class="nav-link">简体中文</a></li><li class="dropdown-item"><!----> <a href="/zh-TW/docs/developer/" class="nav-link router-link-exact-active router-link-active">繁体中文</a></li></ul></div></div> <a href="https://github.com/hunzhiwange/queryphp.com" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh-TW/docs/" class="nav-link router-link-active">开发文档</a></div><div class="nav-item"><a href="https://api.queryphp.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  API 文档
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">社区</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://www.114.ms/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  论坛
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="/zh-TW/ecosystem/" class="nav-link">其它</a></li></ul></div></div><div class="nav-item"><a href="/zh-TW/about/" class="nav-link">关于我们</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/developer/" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/zh-CN/docs/developer/" class="nav-link">简体中文</a></li><li class="dropdown-item"><!----> <a href="/zh-TW/docs/developer/" class="nav-link router-link-exact-active router-link-active">繁体中文</a></li></ul></div></div> <a href="https://github.com/hunzhiwange/queryphp.com" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>序言</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh-TW/docs/" class="sidebar-link">QueryPHP</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>入門</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>架構</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>路由</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>範本</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>数据库</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ORM</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>组件</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>开发者</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/zh-TW/docs/developer/" class="active sidebar-link">如何成为 QueryPHP 开发者</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#克隆-queryphp-仓库" class="sidebar-link">克隆 queryphp 仓库</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#搭建后台-api-端" class="sidebar-link">搭建后台 API 端</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#搭建前端" class="sidebar-link">搭建前端</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#运行测试用例" class="sidebar-link">运行测试用例</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#统一团队代码风格" class="sidebar-link">统一团队代码风格</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#克隆-framework-仓库将框架替换为开发版本" class="sidebar-link">克隆 framework 仓库将框架替换为开发版本</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#运行框架核心测试用例" class="sidebar-link">运行框架核心测试用例</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#统一框架核心团队代码风格" class="sidebar-link">统一框架核心团队代码风格</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#克隆-queryphp-com-仓库实现自动化文档搭建" class="sidebar-link">克隆 queryphp.com 仓库实现自动化文档搭建</a></li><li class="sidebar-sub-header"><a href="/zh-TW/docs/developer/#结尾" class="sidebar-link">结尾</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="content default"><h1 id="如何成为-queryphp-开发者"><a href="#如何成为-queryphp-开发者" aria-hidden="true" class="header-anchor">#</a> 如何成为 QueryPHP 开发者</h1> <div class="tip custom-block"><p class="custom-block-title">单元测试即文档</p> <p><a href="https://github.com/hunzhiwange/framework/blob/master/tests/Docs/BecomeAQueryphpDeveloperDoc.php" target="_blank" rel="noopener noreferrer">基于原始文档 tests/Docs/BecomeAQueryphpDeveloperDoc.php 自动构建<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <p>QueryPHP 非常欢迎各位给我们共同的伟大的作品添砖加瓦，实现为 PHP 社区提供一个好框架的美好愿景。</p> <ul><li>文档开发.基于单元测试实现的自动化文档 <a href="https://github.com/hunzhiwange/framework/projects/2" target="_blank" rel="noopener noreferrer">当前文档开发<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>计划功能.开发 <a href="https://github.com/hunzhiwange/framework/projects/6" target="_blank" rel="noopener noreferrer">当前计划功能<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>技术债务.清偿 <a href="https://github.com/hunzhiwange/framework/projects/7" target="_blank" rel="noopener noreferrer">当前技术债务<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>单元测试.尽可能减少 Bug <a href="https://github.com/hunzhiwange/framework/projects/4" target="_blank" rel="noopener noreferrer">当前单元测试<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul> <p>成为开发者需要加入我们的组织，如有相关意愿请发送邮件至 <code>小牛哥 &lt;635750556@qq.com&gt;</code>，我们会联系你的。</p> <p>成为开发者并没有什么任务负担，一切主要以你的意愿，兴趣才是最重要的。</p> <p>本篇指南将带你搭建的 QueryPHP 开发框架的开发环境，使得你可以参与 QueryPHP 底层代码、单元测试和文档等开发工作。</p> <p>这里以笔者的 Mac 为例子说明，其实 Windows 下面还更简单些。</p> <h2 id="克隆-queryphp-仓库"><a href="#克隆-queryphp-仓库" aria-hidden="true" class="header-anchor">#</a> 克隆 <code>queryphp</code> 仓库</h2> <p>QueryPHP 框架的开发来自于从克隆主仓库开始，由于国内访问 Github 网速的问题，只需要等待一小段时间。</p> <p><strong>下载代码</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$cd /data/codes/test
+$git clone git@github.com:hunzhiwange/queryphp.git
+</code></pre></div><p><strong>Composer 安装</strong></p> <div class="language- extra-class"><pre class="language-text"><code>composer install
+</code></pre></div><blockquote><p>如果你电脑没有安装 <code>composer</code>，那么已经为你下载一个版本。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>sudo chmod 777 ./build/composer
+./build/composer install
+</code></pre></div><p>安装过程</p> <div class="language- extra-class"><pre class="language-text"><code>Cloning into 'queryphp'...
+remote: Enumerating objects: 54, done.
+remote: Counting objects: 100% (54/54), done.
+remote: Compressing objects: 100% (39/39), done.
+remote: Total 17821 (delta 19), reused 36 (delta 14), pack-reused 17767
+Receiving objects: 100% (17821/17821), 45.12 MiB | 693.00 KiB/s, done.
+Resolving deltas: 100% (8700/8700), done.
+</code></pre></div><p><strong>测试是否安装成功</strong></p> <p>如果可以访问，那么恭喜你第一阶段即安装完毕。</p> <div class="language-shell extra-class"><pre class="language-text"><code>php leevel server &lt;Visite http://127.0.0.1:9527/&gt;
+</code></pre></div><h2 id="搭建后台-api-端"><a href="#搭建后台-api-端" aria-hidden="true" class="header-anchor">#</a> 搭建后台 API 端</h2> <p>首先我们需要创建一个数据库来运行我们的后台，让我们对 QueryPHP 有一个直观的感受，同时方便后期开发调试等。</p> <p><strong>首先创建一个数据库</strong></p> <p>可以用 Navicat For Mysql 创建一个数据库 <code>queryphp_development_db</code>.</p> <div class="language- extra-class"><pre class="language-text"><code>CREATE DATABASE IF NOT EXISTS queryphp_development_db DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+</code></pre></div><p><strong>修改 .env</strong></p> <div class="language- extra-class"><pre class="language-text"><code>...
+// Database
+DATABASE_DRIVER = mysql
+DATABASE_HOST = 127.0.0.1
+DATABASE_PORT = 3306
+DATABASE_NAME = queryphp_development_db
+DATABASE_USER = root
+DATABASE_PASSWORD =
+...
+
+
+修改为
+
+
+...
+// Database
+DATABASE_DRIVER = mysql
+DATABASE_HOST = 127.0.0.1
+DATABASE_PORT = 3306
+DATABASE_NAME = queryphp_development_db
+DATABASE_USER = root
+DATABASE_PASSWORD = 123456
+...
+</code></pre></div><p><strong>执行数据库迁移命令</strong></p> <div class="language- extra-class"><pre class="language-text"><code>php leevel migrate:migrate
+</code></pre></div><p>安装过程</p> <div class="language- extra-class"><pre class="language-text"><code>using config file ./phinx.php
+using config parser php
+using migration paths
+- /data/codes/test/queryphp/database/migrations
+using seed paths
+- /data/codes/test/queryphp/database/seeds
+warning no environment specified, defaulting to: development
+using adapter mysql
+using database queryphp_development_db
+
+
+== 20181109060739 App: migrating
+== 20181109060739 App: migrated 0.0155s
+
+
+== 20181112023649 Role: migrating
+== 20181112023649 Role: migrated 0.0160s
+
+
+== 20181112024140 User: migrating
+== 20181112024140 User: migrated 0.0166s
+
+
+== 20181112024211 Permission: migrating
+== 20181112024211 Permission: migrated 0.0225s
+
+
+== 20181112024241 UserRole: migrating
+== 20181112024241 UserRole: migrated 0.0155s
+
+
+== 20181112024302 RolePermission: migrating
+== 20181112024302 RolePermission: migrated 0.0206s
+
+
+== 20181112024416 Resource: migrating
+== 20181112024416 Resource: migrated 0.0328s
+
+
+== 20181112024450 PermissionResource: migrating
+== 20181112024450 PermissionResource: migrated 0.0305s
+
+
+== 20181203130724 Option: migrating
+== 20181203130724 Option: migrated 0.0170s
+
+
+== 20181203144731 Test: migrating
+== 20181203144731 Test: migrated 0.0133s
+
+
+All Done. Took 0.2273s
+</code></pre></div><p><strong>测试数据库是否正常</strong></p> <div class="language- extra-class"><pre class="language-text"><code>php leevel server &lt;http://127.0.0.1:9527/api/entity&gt;
+</code></pre></div><p>结果</p> <div class="language-html extra-class"><pre class="language-html"><code>{
+    count: 4,
+    :trace: {
+        ...
+    }
+}
+</code></pre></div><h2 id="搭建前端"><a href="#搭建前端" aria-hidden="true" class="header-anchor">#</a> 搭建前端</h2> <p>后台 API 搭建好了，我们开始搭建前端了，前端基于 <code>Vue-cli 3</code> 和 <code>IView</code>，首先需要安装 <code>node</code> 才能够跑起来。</p> <p>对于开发 QueryPHP 来说，你不需要会 <code>Vue</code> 或者 <code>JavaScript</code>，所以请放心不要有心里负担。</p> <p><strong>安装前端</strong></p> <p>第一步安装前端,细节信息可以在 frontend/README.md 查看.</p> <div class="language- extra-class"><pre class="language-text"><code>cd frontend
+npm install -g cnpm --registry=https://registry.npm.taobao.org // Just once
+cnpm install
+</code></pre></div><p>安装过程</p> <div class="language- extra-class"><pre class="language-text"><code>✔ All packages installed (1264 packages installed from npm registry, used 14s(network 13s), speed 221.08kB/s, json 1086(2.23MB), tarball 501.92kB)
+</code></pre></div><p><strong>运行前端</strong></p> <p>接着访问这个登陆地址.</p> <div class="language- extra-class"><pre class="language-text"><code>npm run serve # npm run dev &lt;http://127.0.0.1:9528/#/login&gt;
+</code></pre></div><p>输入登陆用户名和密码,这个时候 QueryPHP 不再是一个冰冷的代码，而是有一个干净的带有基础权限系统的后台。</p> <div class="language-html extra-class"><pre class="language-html"><code>user: admin
+password: 123456
+</code></pre></div><h2 id="运行测试用例"><a href="#运行测试用例" aria-hidden="true" class="header-anchor">#</a> 运行测试用例</h2> <p>QueryPHP 推崇通过编写测试用例来让代码变得可维护，所以这里需要本地开发跑通测试用例。</p> <p><strong>首先创建一个数据库</strong></p> <p>可以用 Navicat For Mysql 创建一个数据库 <code>queryphp_development_test</code>.</p> <div class="language- extra-class"><pre class="language-text"><code>CREATE DATABASE IF NOT EXISTS queryphp_development_test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+</code></pre></div><p><strong>修改 .env</strong></p> <div class="language- extra-class"><pre class="language-text"><code>...
+// Database
+DATABASE_DRIVER = mysql
+DATABASE_HOST = 127.0.0.1
+DATABASE_PORT = 3306
+DATABASE_NAME = test
+DATABASE_USER = root
+DATABASE_PASSWORD =
+...
+
+
+修改为
+
+
+...
+// Database
+DATABASE_DRIVER = mysql
+DATABASE_HOST = 127.0.0.1
+DATABASE_PORT = 3306
+DATABASE_NAME = queryphp_development_test
+DATABASE_USER = root
+DATABASE_PASSWORD = 123456
+...
+</code></pre></div><p><strong>执行数据库迁移命令</strong></p> <div class="language- extra-class"><pre class="language-text"><code>php leevel migrate:migrate -e testing
+</code></pre></div><p>安装过程</p> <div class="language- extra-class"><pre class="language-text"><code>using config file ./phinx.php
+using config parser php
+using migration paths
+- /data/codes/test/queryphp/database/migrations
+using seed paths
+- /data/codes/test/queryphp/database/seeds
+using environment testing
+using adapter mysql
+using database queryphp_development_test
+
+
+== 20181109060739 App: migrating
+== 20181109060739 App: migrated 0.0155s
+
+
+== 20181112023649 Role: migrating
+== 20181112023649 Role: migrated 0.0160s
+
+
+== 20181112024140 User: migrating
+== 20181112024140 User: migrated 0.0166s
+
+
+== 20181112024211 Permission: migrating
+== 20181112024211 Permission: migrated 0.0225s
+
+
+== 20181112024241 UserRole: migrating
+== 20181112024241 UserRole: migrated 0.0155s
+
+
+== 20181112024302 RolePermission: migrating
+== 20181112024302 RolePermission: migrated 0.0206s
+
+
+== 20181112024416 Resource: migrating
+== 20181112024416 Resource: migrated 0.0328s
+
+
+== 20181112024450 PermissionResource: migrating
+== 20181112024450 PermissionResource: migrated 0.0305s
+
+
+== 20181203130724 Option: migrating
+== 20181203130724 Option: migrated 0.0170s
+
+
+== 20181203144731 Test: migrating
+== 20181203144731 Test: migrated 0.0133s
+
+
+All Done. Took 0.2273s
+</code></pre></div><p><strong>运行测试用例</strong></p> <div class="language- extra-class"><pre class="language-text"><code>php ./build/phpunit
+</code></pre></div><p>结果</p> <blockquote><p>注意随着系统演进，测试用例会增加，输出结果就有所不同。</p></blockquote> <div class="language-html extra-class"><pre class="language-html"><code>PHPUnit Pretty Result Printer 0.26.2 by Codedungeon and contributors.
+PHPUnit 8.1.3 by Sebastian Bergmann and contributors.
+
+
+==&gt; Tests\Admin\Service\Resource\IndexTest       ✓  ✓
+==&gt; Tests\Example\ExampleTest                    ✓
+==&gt; Tests\Example\PHPUnitTest                    ✓
+==&gt; Common\Domain\Service\Search\IndexTest       ✓  ✓  ✓  ✓  ✓  ✓
+==&gt; Common\Infra\Helper\ArrayToFormTest          ✓  ✓  ✓  ✓  ✓  ✓
+==&gt; Common\Infra\Support\WorkflowServiceTest     ✓  ✓  ✓  ✓  ✓
+==&gt; Common\Infra\Support\WorkflowTest            ✓  ✓  ✓  ✓  ✓
+
+Time: 391 ms, Memory: 18.00 MB
+
+OK (26 tests, 43 assertions)
+</code></pre></div><h2 id="统一团队代码风格"><a href="#统一团队代码风格" aria-hidden="true" class="header-anchor">#</a> 统一团队代码风格</h2> <p>风格统一对保证我们系统一致性非常重要，我们做到开箱即用，支持 <code>PHP</code> 和 <code>JavaScript</code>。</p> <p><strong>使用 Git 钩子</strong></p> <div class="language- extra-class"><pre class="language-text"><code>cp ./build/pre-commit.sh ./.git/hooks/pre-commit
+chmod 777 ./.git/hooks/pre-commit
+</code></pre></div><p><strong>测试自动化格式</strong></p> <p><code>common/Test.php</code></p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+
+<span class="token keyword">declare</span><span class="token punctuation">(</span>strict_types<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">namespace</span> <span class="token package">Common</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Test</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">demo</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token variable">$b</span><span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><p><code>frontend/src/hello.js</code></p> <div class="language- extra-class"><pre class="language-text"><code>function hello(a,b) {
+    var c
+        if(a&gt;b) {
+            c=a
+        } else {
+            c=b
+        }
+    console.log(c)
+}
+</code></pre></div><p><strong>Git 提交测试格式化</strong></p> <div class="language- extra-class"><pre class="language-text"><code>git add .
+git commit -m '测试格式化'
+</code></pre></div><p>运行过程</p> <div class="language-shell extra-class"><pre class="language-text"><code>Checking PHP Lint...
+No syntax errors detected in common/Test.php
+Running Code Sniffer...
+Loaded config default from &quot;.php_cs.dist&quot;.
+Paths from configuration file have been overridden by paths provided as command arguments.
+1) common/Test.php Fixed all files in 0.009 seconds, 12.000 MB memory used
+The file has been automatically formatted.
+[13:04:00] Working directory changed to /data/codes/test/queryphp/frontend
+[13:04:00] Using gulpfile /data/codes/test/queryphp/frontend/gulpfile.js
+[13:04:00] Starting 'iview'...
+[13:04:00] Finished 'iview' after 413 μs
+frontend/src/hello.js 53ms
+[master 681d7e29] 测试格式化
+3 files changed, 32 insertions(+)
+mode change 100644 =&gt; 100755 build/composer
+create mode 100644 common/Test.php
+create mode 100644 frontend/src/hello.js
+</code></pre></div><h3 id="格式化后的-php"><a href="#格式化后的-php" aria-hidden="true" class="header-anchor">#</a> 格式化后的 PHP</h3> <p>代码干净漂亮了不少，不是吗。</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">declare</span><span class="token punctuation">(</span>strict_types<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+ * This file is part of the your app package.
+ *
+ * The PHP Application For Code Poem For You.
+ * (c) 2018-2099 http://yourdomian.com All rights reserved.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */</span>
+
+<span class="token keyword">namespace</span> <span class="token package">Common</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Test</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">demo</span><span class="token punctuation">(</span><span class="token variable">$a</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token variable">$b</span> <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><h3 id="格式化后的-javascript"><a href="#格式化后的-javascript" aria-hidden="true" class="header-anchor">#</a> 格式化后的 JavaScript</h3> <p>代码干净漂亮了不少，不是吗。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">function</span> <span class="token function">hello</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> c
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">&gt;</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        c <span class="token operator">=</span> a
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        c <span class="token operator">=</span> b
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="回滚测试提交"><a href="#回滚测试提交" aria-hidden="true" class="header-anchor">#</a> 回滚测试提交</h3> <p>这些测试代码不需要提交到 Git 库，你可以回滚掉刚才测试的这些代码。</p> <div class="language-shell extra-class"><pre class="language-text"><code>git log
+git reset --hard 931f283b0b8847e4a3f2ad86efb3c07cd7974c3b // 或者 git revert xxx
+HEAD is now at 931f283b Merge branch 'dev'
+</code></pre></div><h2 id="克隆-framework-仓库将框架替换为开发版本"><a href="#克隆-framework-仓库将框架替换为开发版本" aria-hidden="true" class="header-anchor">#</a> 克隆 <code>framework</code> 仓库将框架替换为开发版本</h2> <p>应用层框架全部搭建完毕，接下来我们将框架层代码替换为开发阶段的代码来进行日常框架迭代。</p> <p><strong>删除框架层</strong></p> <div class="language- extra-class"><pre class="language-text"><code>rm -rf ./vendor/hunzhiwange/framework
+</code></pre></div><p><strong>克隆框架层开发库</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$cd /data/codes/test
+$git clone git@github.com:hunzhiwange/framework.git ./vendor/hunzhiwange/framework
+cd ./vendor/hunzhiwange/framework
+</code></pre></div><p><strong>Composer 安装</strong></p> <div class="language- extra-class"><pre class="language-text"><code>composer install
+</code></pre></div><blockquote><p>如果你电脑没有安装 <code>composer</code>，那么已经为你下载一个版本。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>sudo chmod 777 ./build/composer
+./build/composer install
+</code></pre></div><p>安装过程</p> <div class="language- extra-class"><pre class="language-text"><code>Cloning into './vendor/hunzhiwange/framework'...
+remote: Enumerating objects: 382, done.
+remote: Counting objects: 100% (382/382), done.
+remote: Compressing objects: 100% (218/218), done.
+remote: Total 39304 (delta 196), reused 262 (delta 125), pack-reused 38922
+Receiving objects: 100% (39304/39304), 14.49 MiB | 12.00 KiB/s, done.
+Resolving deltas: 100% (27594/27594), done.
+</code></pre></div><p><strong>测试是否安装成功</strong></p> <p>从新访问首页，如果可以访问，那么恭喜你第一阶段即安装完毕。</p> <div class="language-shell extra-class"><pre class="language-text"><code>php leevel server &lt;Visite http://127.0.0.1:9527/&gt;
+</code></pre></div><h2 id="运行框架核心测试用例"><a href="#运行框架核心测试用例" aria-hidden="true" class="header-anchor">#</a> 运行框架核心测试用例</h2> <p>QueryPHP 底层框架拥有 3000 多例测试用例，这些测试用例需要被维护，所以这里需要本地开发跑通测试用例。</p> <p><strong>首先创建一个数据库</strong></p> <p>可以用 Navicat For Mysql 创建一个数据库 <code>test</code>.</p> <div class="language- extra-class"><pre class="language-text"><code>CREATE DATABASE IF NOT EXISTS test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+</code></pre></div><p><strong>复制一份配置文件并修改</strong></p> <div class="language- extra-class"><pre class="language-text"><code>cp ./tests/config.php ./tests/config.local.php
+</code></pre></div><p>修改为</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+
+<span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'LEEVEL_ENV'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'DATABASE'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'MYSQL'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token single-quoted-string string">'HOST'</span>     <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token single-quoted-string string">'127.0.0.1'</span><span class="token punctuation">,</span>
+    <span class="token single-quoted-string string">'PORT'</span>     <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">3306</span><span class="token punctuation">,</span>
+    <span class="token single-quoted-string string">'NAME'</span>     <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token single-quoted-string string">'test'</span><span class="token punctuation">,</span>
+    <span class="token single-quoted-string string">'USER'</span>     <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token single-quoted-string string">'root'</span><span class="token punctuation">,</span>
+    <span class="token single-quoted-string string">'PASSWORD'</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token single-quoted-string string">'123456'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+<span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'LEEVEL_ENV'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'CACHE'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'REDIS'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token single-quoted-string string">'HOST'</span>     <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token single-quoted-string string">'127.0.0.1'</span><span class="token punctuation">,</span>
+    <span class="token single-quoted-string string">'PORT'</span>     <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">6380</span><span class="token punctuation">,</span>
+    <span class="token single-quoted-string string">'PASSWORD'</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token single-quoted-string string">'123456'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+<span class="token variable">$GLOBALS</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'LEEVEL_ENV'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'SESSION'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'REDIS'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token single-quoted-string string">'HOST'</span>     <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token single-quoted-string string">'127.0.0.1'</span><span class="token punctuation">,</span>
+    <span class="token single-quoted-string string">'PORT'</span>     <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">6380</span><span class="token punctuation">,</span>
+    <span class="token single-quoted-string string">'PASSWORD'</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token single-quoted-string string">'123456'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</span></code></pre></div><p><strong>执行数据库迁移命令</strong></p> <div class="language- extra-class"><pre class="language-text"><code>php vendor/bin/phinx migrate
+</code></pre></div><p>安装过程</p> <div class="language- extra-class"><pre class="language-text"><code>Phinx by CakePHP - https://phinx.org. 0.9.2
+
+
+using config file ./phinx.php
+using config parser php
+using migration paths
+ - /data/codes/test/queryphp/vendor/hunzhiwange/framework/tests/assert/database/migrations
+using seed paths
+ - /data/codes/test/queryphp/vendor/hunzhiwange/framework/tests/assert/database/seeds
+warning no environment specified, defaulting to: development
+using adapter mysql
+using database test
+
+
+ == 20181010111946 User: migrating
+ == 20181010111946 User: migrated 0.0076s
+
+
+ == 20181011111926 Post: migrating
+ == 20181011111926 Post: migrated 0.0101s
+
+
+ == 20181011111937 Comment: migrating
+ == 20181011111937 Comment: migrated 0.0106s
+
+
+ == 20181011151247 PostContent: migrating
+ == 20181011151247 PostContent: migrated 0.0087s
+
+
+ == 20181011160957 Role: migrating
+ == 20181011160957 Role: migrated 0.0078s
+
+
+ == 20181011161035 UserRole: migrating
+ == 20181011161035 UserRole: migrated 0.0100s
+
+
+ == 20181031094608 CompositeId: migrating
+ == 20181031094608 CompositeId: migrated 0.0094s
+
+
+ == 20181107044153 GuestBook: migrating
+ == 20181107044153 GuestBook: migrated 0.0086s
+
+
+ == 20190424055915 TestUnique: migrating
+ == 20190424055915 TestUnique: migrated 0.0133s
+
+
+All Done. Took 0.1179s
+</code></pre></div><p><strong>运行测试用例</strong></p> <div class="language- extra-class"><pre class="language-text"><code>php ./build/phpunit
+</code></pre></div><p>结果</p> <blockquote><p>注意随着系统演进，测试用例会增加，输出结果就有所不同。</p></blockquote> <div class="language-html extra-class"><pre class="language-html"><code>PHPUnit 8.1.3 by Sebastian Bergmann and contributors.
+
+
+==&gt; Tests\Auth\HashTest                          ✓  ✓
+==&gt; Tests\Auth\ManagerTest                       ✓  ✓  ✓
+==&gt; Tests\Auth\Middleware\AuthTest               ✓  ✓
+==&gt; Tests\Auth\Provider\RegisterTest             ✓
+==&gt; Tests\Auth\SessionTest                       ✓  ✓
+
+...
+
+==&gt; Tests\View\Compiler\CompilerWhileTest        ✓  ✓
+==&gt; Tests\View\HtmlTest                          ✓  ✓  ✓  ✓  ✓  ✓  ✓  ✓  ✓
+==&gt; Tests\View\ManagerTest                       ✓
+==&gt; Tests\View\PhpuiTest                         ✓  ✓  ✓  ✓  ✓  ✓  ✓  ✓
+==&gt; Tests\View\Provider\RegisterTest             ✓
+
+Time: 19.51 seconds, Memory: 93.19 MB
+
+Tests: 2978, Assertions: 10031, Failures: 0, Skipped: 6.
+</code></pre></div><h2 id="统一框架核心团队代码风格"><a href="#统一框架核心团队代码风格" aria-hidden="true" class="header-anchor">#</a> 统一框架核心团队代码风格</h2> <p>风格统一对保证我们系统一致性非常重要，我们做到开箱即用，核心库只包含 PHP 文件。</p> <p><strong>使用 Git 钩子</strong></p> <div class="language- extra-class"><pre class="language-text"><code>cp ./build/pre-commit.sh ./.git/hooks/pre-commit
+chmod 777 ./.git/hooks/pre-commit
+</code></pre></div><p><strong>测试自动化格式</strong></p> <p><code>tests/Name.php</code></p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+
+<span class="token keyword">declare</span><span class="token punctuation">(</span>strict_types<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">namespace</span> <span class="token package">Test</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Name</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">demo</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token variable">$b</span><span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><p><strong>Git 提交测试格式化</strong></p> <div class="language- extra-class"><pre class="language-text"><code>git add .
+git commit -m '测试格式化'
+</code></pre></div><p>运行过程</p> <div class="language-shell extra-class"><pre class="language-text"><code>Checking PHP Lint...
+No syntax errors detected in tests/Name.php
+Running Code Sniffer...
+Loaded config default from &quot;.php_cs.dist&quot;.
+Paths from configuration file have been overridden by paths provided as command arguments.
+1) tests/Name.php Fixed all files in 0.009 seconds, 12.000 MB memory used
+The file has been automatically formatted.
+[master 20f2f845] 测试格式化
+2 files changed, 29 insertions(+)
+mode change 100644 =&gt; 100755 build/composer
+create mode 100644 tests/Name.php
+</code></pre></div><h3 id="格式化后的-php-2"><a href="#格式化后的-php-2" aria-hidden="true" class="header-anchor">#</a> 格式化后的 PHP</h3> <p>代码干净漂亮了不少，不是吗。</p> <p>测试代码回滚请见上面的方法，谢谢。</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">declare</span><span class="token punctuation">(</span>strict_types<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+ * This file is part of the ************************ package.
+ * _____________                           _______________
+ *  ______/     \__  _____  ____  ______  / /_  _________
+ *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
+ *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
+ *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
+ *         \_\                /_/_/         /_/
+ *
+ * The PHP Framework For Code Poem As Free As Wind. &lt;Query Yet Simple&gt;
+ * (c) 2010-2019 http://queryphp.com All rights reserved.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */</span>
+
+<span class="token keyword">namespace</span> <span class="token package">Test</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Name</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">demo</span><span class="token punctuation">(</span><span class="token variable">$a</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token variable">$b</span> <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><h2 id="克隆-queryphp-com-仓库实现自动化文档搭建"><a href="#克隆-queryphp-com-仓库实现自动化文档搭建" aria-hidden="true" class="header-anchor">#</a> 克隆 <code>queryphp.com</code> 仓库实现自动化文档搭建</h2> <p>QueryPHP 底层的文档基于单元测试加备注的方式来实现的，通过命名工具全部采用自动化生成 Markdown，这大幅度简化了文档的编写工作，同时保证了文档实时性。</p> <p><strong>官方文档采用 VuePress 读取 Markdown 来实现的</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$cd /data/codes/test
+$git clone git@github.com:hunzhiwange/queryphp.com.git
+</code></pre></div><p><strong>修改文档工具生成 Markdown 的路径</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$cd /data/codes/test/queryphp
+$vim .env
+
+
+# 修改路径
+FRAMEWORK_DOC_OUTPUTDIR = &quot;/data/codes/test/queryphp.com/docs/docs/&quot;
+</code></pre></div><p><strong>生成文档</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$cd /data/codes/test/queryphp
+$php leevel make:docwithin tests
+</code></pre></div><p>运行过程</p> <div class="language- extra-class"><pre class="language-text"><code>Class Tests\Encryption\EncryptionTest was generate succeed.
+Class Tests\Encryption\SafeTest was generate succeed.
+Class Tests\Database\ManagerTest was generate succeed.
+Class Tests\Database\Ddd\UnitOfWorkTest was generate succeed.
+Class Tests\Database\Ddd\Create\CreateTest was generate succeed.
+Class Tests\Database\Query\AggregateTest was generate succeed.
+Class Tests\Validate\AssertTest was generate succeed.
+Class Tests\Di\ContainerTest was generate succeed.
+Class Tests\Docs\BecomeAQueryphpDeveloperDoc was generate succeed.
+Class Tests\Support\FnTest was generate succeed.
+Class Tests\Support\StrTest was generate succeed.
+Class Tests\Support\ArrTest was generate succeed.
+Class Tests\View\SummaryDoc was generate succeed.
+Class Tests\View\Compiler\CompilerAssignTest was generate succeed.
+Class Tests\View\Compiler\CompilerPhpTest was generate succeed.
+Class Tests\View\Compiler\CompilerBreakTest was generate succeed.
+Class Tests\View\Compiler\CompilerIncludeTest was generate succeed.
+Class Tests\View\Compiler\CompilerTagselfTest was generate succeed.
+Class Tests\View\Compiler\CompilerWhileTest was generate succeed.
+Class Tests\View\Compiler\CompilerCssTest was generate succeed.
+Class Tests\View\Compiler\CompilerForTest was generate succeed.
+Class Tests\View\Compiler\CompilerVarTest was generate succeed.
+Class Tests\View\Compiler\CompilerListTest was generate succeed.
+Class Tests\Debug\DebugTest was generate succeed.
+A total of 24 files generate succeed.
+</code></pre></div><p><strong>修改文档菜单</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$vim docs/.vuepress/config.js
+</code></pre></div><p><strong>运行本地文档网站</strong></p> <p>访问地址 <code>localhost:8088</code> 即可。</p> <div class="language- extra-class"><pre class="language-text"><code>$npm install -g yarn
+$yarn add -D vuepress # or npm install -D vuepress
+$yarn run dev # or npx vuepress dev docs
+</code></pre></div><h2 id="结尾"><a href="#结尾" aria-hidden="true" class="header-anchor">#</a> 结尾</h2> <p>到这里为止，我们本地开发环境已经全部搭建完毕，可以愉快地开发了。</p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>值得注意的是，我们通常在 <code>dev</code> 分支开发，开发完毕后 <code>merge</code> 到 <code>master</code> 分支完成开发。</p></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/hunzhiwange/queryphp.com/edit/master/docs/zh-TW/docs/developer/README.md" target="_blank" rel="noopener noreferrer">在 GitHub 上查看此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2019/10/23 下午10:05:16</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/zh-TW/docs/component/collection.html" class="prev">
+          集合 collection
+        </a></span> <!----></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.82f42766.js" defer></script><script src="/assets/js/3.75c2b158.js" defer></script><script src="/assets/js/220.c6328905.js" defer></script><script src="/assets/js/5.65fa139f.js" defer></script>
+  </body>
+</html>
