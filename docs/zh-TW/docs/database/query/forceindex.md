@@ -1,23 +1,103 @@
 # 查询语言.forceIndex
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Query/ForceIndexTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/ForceIndexTest.php)
+:::
+    
+**引入相关类**
+
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
+## forceIndex,ignoreIndex 基础用法
 
 ``` php
-public function forceIndex($mixIndex, $sType = 'FORCE');
-public function ignoreIndex($mixIndex);
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.* FROM `test_query` FORCE INDEX(nameindex,statusindex) IGNORE INDEX(testindex) WHERE `test_query`.`id` = 5",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query')
+                ->forceIndex('nameindex,statusindex')
+                ->ignoreIndex('testindex')
+                ->where('id', '=', 5)
+                ->findAll(true)
+        )
+    );
+}
 ```
-
-## 用法如下
+    
+## forceIndex 数组支持
 
 ``` php
-# SELECT `test`.* FROM `test` FORCE INDEX (nameindex,statusindex) IGNORE INDEX (testindex) WHERE `test`.`id` = 5
-Db::table('test')->
+public function testForceIndexWithArray(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-forceIndex('nameindex,statusindex')->
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.* FROM `test_query` FORCE INDEX(nameindex,statusindex) WHERE `test_query`.`id` = 2",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-ignoreIndex('testindex')->
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query')
+                ->forceIndex(['nameindex', 'statusindex'])
+                ->where('id', '=', 2)
+                ->findAll(true)
+        )
+    );
+}
+```
+    
+## ignoreIndex 数组支持
 
-where('id', '=', 5)->
+``` php
+public function testIgnoreIndexWithArray(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-getAll();
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.* FROM `test_query` IGNORE INDEX(nameindex,statusindex) WHERE `test_query`.`id` = 6",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query')
+                ->ignoreIndex(['nameindex', 'statusindex'])
+                ->where('id', '=', 6)
+                ->findAll(true)
+        )
+    );
+}
 ```

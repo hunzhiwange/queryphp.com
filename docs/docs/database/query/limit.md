@@ -17,7 +17,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` LIMIT 5,10",
+            "SELECT `test_query`.* FROM `test_query` LIMIT 5,10",
             [],
             false,
             null,
@@ -30,7 +30,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->limit(5, 10)
                 ->find(null, true)
         )
@@ -47,7 +47,7 @@ public function testOne(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` LIMIT 1",
+            "SELECT `test_query`.* FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -60,7 +60,7 @@ public function testOne(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->one()
                 ->find(null, true),
             1
@@ -78,7 +78,7 @@ public function testAll(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test`",
+            "SELECT `test_query`.* FROM `test_query`",
             [],
             false,
             null,
@@ -91,7 +91,7 @@ public function testAll(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->all()
                 ->find(null, true),
             2
@@ -109,7 +109,7 @@ public function testTop(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` LIMIT 0,15",
+            "SELECT `test_query`.* FROM `test_query` LIMIT 0,15",
             [],
             false,
             null,
@@ -122,7 +122,7 @@ public function testTop(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->top(15)
                 ->find(null, true),
             3

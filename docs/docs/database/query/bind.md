@@ -1,180 +1,204 @@
 # 查询语言.bind
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Query/BindTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/BindTest.php)
+:::
+    
+**引入相关类**
+
+ * use PDO;
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
+## 命名参数绑定
 
 ``` php
-public function bind($mixName, $mixValue, $intType = PDO::PARAM_STR);
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :id",
+            {
+                "id": [
+                    1,
+                    2
+                ]
+            },
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query')
+                ->bind('id', 1)
+                ->where('id', '=', '[:id]')
+                ->findAll(true)
+        )
+    );
+}
 ```
-
-## 参数绑定 :id
-
-### 基本使用
-
-#### 例1：
+    
+## 命名参数绑定，支持绑定类型
 
 ``` php
-/*
-array (
-  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = :id',
-  1 => 
-  array (
-    'id' => 
-    array (
-      0 => 1,
-      1 => 2,
-    ),
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
- */
-Db::table('test')->
+public function testBindWithType(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-bind('id', 1)->
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :id",
+            {
+                "id": [
+                    1,
+                    1
+                ]
+            },
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-where('id', '=', '[:id]')->
-
-getAll()
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query')
+                ->bind('id', 1, PDO::PARAM_INT)
+                ->where('id', '=', '[:id]')
+                ->findAll(true),
+            1
+        )
+    );
+}
 ```
-
-#### 例2：
+    
+## 命名参数绑定，绑定值支持类型定义
 
 ``` php
-/*
-array (
-  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = :id',
-  1 => 
-  array (
-    'id' => 
-    array (
-      0 => 1,
-      1 => 1,
-    ),
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
- */
-Db::table('test')->
+public function testWithTypeAndValueCanBeArray(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-bind('id', 1, PDO::PARAM_INT)->
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :id",
+            {
+                "id": [
+                    1,
+                    1
+                ]
+            },
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-where('id', '=', '[:id]')->
-
-getAll()
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query')
+                ->bind('id', [1, PDO::PARAM_INT])
+                ->where('id', '=', '[:id]')
+                ->findAll(true),
+            2
+        )
+    );
+}
 ```
-
-#### 例3：
+    
+## 命名参数绑定，支持多个字段绑定
 
 ``` php
-/*
-array (
-  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = :id',
-  1 => 
-  array (
-    'id' => 
-    array (
-      0 => 1,
-      1 => 1,
-    ),
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
- */
-Db::table('test')->
+public function testNameBind(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-bind('id', [1, PDO::PARAM_INT])->
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :id AND `test_query`.`hello` LIKE :name",
+            {
+                "id": [
+                    1,
+                    1
+                ],
+                "name": [
+                    "小鸭子",
+                    2
+                ]
+            },
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-where('id', '=', '[:id]')->
-
-getAll()
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query')
+                ->bind(['id' => [1, PDO::PARAM_INT], 'name'=>'小鸭子'])
+                ->where('id', '=', '[:id]')
+                ->where('hello', 'like', '[:name]')
+                ->findAll(true),
+            3
+        )
+    );
+}
 ```
-
-### 数组支持
-
-``` php
-/*
-array (
-  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = :id AND `test`.`hello` LIKE :name',
-  1 => 
-  array (
-    'id' => 
-    array (
-      0 => 1,
-      1 => 1,
-    ),
-    'name' => 
-    array (
-      0 => '小鸭子',
-      1 => 2,
-    ),
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-*/
-Db::table('test')->
-
-bind(['id' => [1, \PDO::PARAM_INT], 'name'=>'小鸭子'])->
-
-where('id', '=', '[:id]')->
-
-where('hello', 'like', '[:name]')->
-
-getAll();
-```
-
-## 参数绑定 ?
+    
+## 问号 `?` 参数绑定，支持多个字段绑定
 
 ``` php
-/*
-array (
-  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = ? AND `test`.`hello` LIKE ?',
-  1 => 
-  array (
-    0 => 
-    array (
-      0 => 5,
-      1 => 1,
-    ),
-    1 => 
-    array (
-      0 => '小鸭子',
-      1 => 2,
-    ),
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-*/
-Db::table('test')->
+public function testQuestionMarkBind(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-bind([[5, PDO::PARAM_INT], '小鸭子'])->
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = ? AND `test_query`.`hello` LIKE ?",
+            [
+                [
+                    5,
+                    1
+                ],
+                [
+                    "小鸭子",
+                    2
+                ]
+            ],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-where('id', '=', '[?]')->
-
-where('hello', 'like', '[?]')->
-
-getAll();
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query')
+                ->bind([[5, PDO::PARAM_INT], '小鸭子'])
+                ->where('id', '=', '[?]')
+                ->where('hello', 'like', '[?]')
+                ->findAll(true),
+            4
+        )
+    );
+}
 ```

@@ -1,50 +1,175 @@
-# 查询语言.groupBy
+# Query lang.groupBy
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Query/GroupByTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/GroupByTest.php)
+:::
+    
+## groupBy 函数原型
+
 
 ``` php
-public function order($mixExpr);
+public function groupBy($expression);
 ```
 
- > 说明：参数支持字符串以及它们构成的一维数组，用法和 orderBy 非常相似。
 
-## 用法如下
+ - 参数支持字符串以及它们构成的一维数组，用法和 《查询语言.orderBy》 非常相似。
+
+**引入相关类**
+
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
+## groupBy 基础用法
 
 ``` php
-# SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value`  FROM `test`  GROUP BY `test`.`id`,`test`.`name`
-Db::table('test', 'tid as id,tname as value')->
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-groupBy('id')->
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`id`,`test_query`.`name`",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-groupBy('name')->
-
-getAll();
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query', 'tid as id,tname as value')
+                ->groupBy('id')
+                ->groupBy('name')
+                ->findAll(true)
+        )
+    );
+}
+```
     
-# SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value`  FROM `test`  GROUP BY `post`.`id`
-Db::table('test', 'tid as id,tname as value')->
+## groupBy 字段指定表名
 
-groupBy('post.id')->
+``` php
+public function testWithTable(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-getAll();
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`id`",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-# SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value`  FROM `test`  GROUP BY SUM(`test`.`num`) 
-Db::table('test', 'tid as id,tname as value')->
-
-groupBy('{SUM([num])}')->
-
-getAll();
-   
-# SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value`  FROM `test`  GROUP BY `test`.`title`,`test`.`id`,concat('1234',`test`.`id`,'ttt')
-Db::table('test', 'tid as id,tname as value')->
-
-groupBy("title,id,{concat('1234',[id],'ttt')}")->
-
-getAll();
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query', 'tid as id,tname as value')
+                ->groupBy('test_query.id')
+                ->findAll(true),
+            1
+        )
+    );
+}
+```
     
-# SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value`  FROM `test`  GROUP BY `test`.`title`,`test`.`id`,`test`.`ttt`,`test`.`value`
-Db::table('test', 'tid as id,tname as value')->
+## groupBy 字段表达式
 
-groupBy(['title,id,ttt', 'value'])->
+``` php
+public function testWithExpression(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-getAll();
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`num` HAVING SUM(`test_query`.`num`) > 9 IS NULL",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query', 'tid as id,tname as value')
+                ->groupBy('{[num]}')
+                ->having('{SUM([num]) > 9}')
+                ->findAll(true),
+            2
+        )
+    );
+}
+```
+    
+## groupBy 复合型
+
+``` php
+public function testWithComposite(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`title`,`test_query`.`id`,concat('1234',`test_query`.`id`,'ttt')",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query', 'tid as id,tname as value')
+                ->groupBy("title,id,{concat('1234',[id],'ttt')}")
+                ->findAll(true),
+            3
+        )
+    );
+}
+```
+    
+## groupBy 字段数组支持
+
+``` php
+public function testWithArray(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`title`,`test_query`.`id`,`test_query`.`ttt`,`test_query`.`value`",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->table('test_query', 'tid as id,tname as value')
+                ->groupBy(['title,id,ttt', 'value'])
+                ->findAll(true),
+            4
+        )
+    );
+}
 ```

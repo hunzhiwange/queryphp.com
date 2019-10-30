@@ -34,7 +34,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT COUNT(*) AS row_count FROM `test` LIMIT 1",
+            "SELECT COUNT(*) AS row_count FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -47,7 +47,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->count()
                 ->findOne(true)
         )
@@ -55,7 +55,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT COUNT(`test`.`id`) AS row_count FROM `test` LIMIT 1",
+            "SELECT COUNT(`test_query`.`id`) AS row_count FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -68,7 +68,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->count('id')
                 ->findOne(true),
             1
@@ -77,7 +77,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT COUNT(`test`.`id`) AS count1 FROM `test` LIMIT 1",
+            "SELECT COUNT(`test_query`.`id`) AS count1 FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -90,7 +90,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->count('id', 'count1')
                 ->findOne(true),
             2
@@ -99,7 +99,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT COUNT(`test`.`id`*50) AS count1 FROM `test` LIMIT 1",
+            "SELECT COUNT(`test_query`.`id`*50) AS count1 FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -112,7 +112,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->count('{[id]*50}', 'count1')
                 ->findOne(true),
             3
@@ -132,7 +132,7 @@ public function testAvg(): void
 
     $sql = <<<'eot'
         [
-            "SELECT AVG(`test`.`id`) AS avg_value FROM `test` LIMIT 1",
+            "SELECT AVG(`test_query`.`id`) AS avg_value FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -145,7 +145,7 @@ public function testAvg(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->avg('id')
                 ->findOne(true)
         )
@@ -164,7 +164,7 @@ public function testMax(): void
 
     $sql = <<<'eot'
         [
-            "SELECT MAX(`test`.`num`) AS max_value FROM `test` LIMIT 1",
+            "SELECT MAX(`test_query`.`num`) AS max_value FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -177,7 +177,7 @@ public function testMax(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->max('num')
                 ->findOne(true)
         )
@@ -196,7 +196,7 @@ public function testMin(): void
 
     $sql = <<<'eot'
         [
-            "SELECT MIN(`test`.`num`) AS min_value FROM `test` LIMIT 1",
+            "SELECT MIN(`test_query`.`num`) AS min_value FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -209,7 +209,7 @@ public function testMin(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->min('num')
                 ->findOne(true)
         )
@@ -228,7 +228,7 @@ public function testSum(): void
 
     $sql = <<<'eot'
         [
-            "SELECT SUM(`test`.`num`) AS sum_value FROM `test` LIMIT 1",
+            "SELECT SUM(`test_query`.`num`) AS sum_value FROM `test_query` LIMIT 1",
             [],
             false,
             null,
@@ -241,7 +241,7 @@ public function testSum(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->sum('num')
                 ->findOne(true)
         )

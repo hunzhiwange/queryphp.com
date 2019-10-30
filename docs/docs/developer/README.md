@@ -4,7 +4,7 @@
 [基于原始文档 tests/Docs/BecomeAQueryphpDeveloperDoc.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/BecomeAQueryphpDeveloperDoc.php)
 :::
     
-QueryPHP 非常欢迎各位给我们共同的伟大的作品添砖加瓦，实现为 PHP 社区提供一个好框架的美好愿景。
+QueryPHP 非常欢迎各位给我们共同的充满想象且令人惊叹的完成度的开源作品添砖加瓦，实现为 PHP 社区提供一个好框架的美好愿景。
 
  * 文档开发.基于单元测试实现的自动化文档 [当前文档开发](https://github.com/hunzhiwange/framework/projects/2)
  * 计划功能.开发 [当前计划功能](https://github.com/hunzhiwange/framework/projects/6)

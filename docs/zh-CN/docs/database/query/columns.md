@@ -19,7 +19,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.*,`test`.`id`,`test`.`name`,`test`.`value` FROM `test`",
+            "SELECT `test_query`.*,`test_query`.`id`,`test_query`.`name`,`test_query`.`value` FROM `test_query`",
             [],
             false,
             null,
@@ -32,7 +32,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->columns('id')
                 ->columns('name,value')
                 ->findAll(true)
@@ -52,7 +52,7 @@ public function testSetColumns(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.`remark` FROM `test`",
+            "SELECT `test_query`.`remark` FROM `test_query`",
             [],
             false,
             null,
@@ -65,7 +65,7 @@ public function testSetColumns(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->columns('id')
                 ->columns('name,value')
                 ->setColumns('remark')
@@ -117,7 +117,7 @@ public function testSetColumnsWithTableName(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.`name`,`test`.`value`,`hello`.`name`,`hello`.`value` FROM `test` INNER JOIN `hello` ON `hello`.`name` = `test`.`name`",
+            "SELECT `test_query`.`name`,`test_query`.`value`,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM `test_query` INNER JOIN `test_query_subsql` ON `test_query_subsql`.`name` = `test_query`.`name`",
             [],
             false,
             null,
@@ -130,9 +130,9 @@ public function testSetColumnsWithTableName(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
-                ->setColumns('test.name,test.value')
-                ->join('hello', 'name,value', 'name', '=', '{[test.name]}')
+                ->table('test_query')
+                ->setColumns('test_query.name,test_query.value')
+                ->join('test_query_subsql', 'name,value', 'name', '=', '{[test_query.name]}')
                 ->findAll(true)
         )
     );

@@ -19,7 +19,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` FOR UPDATE",
+            "SELECT `test_query`.* FROM `test_query` FOR UPDATE",
             [],
             false,
             null,
@@ -32,7 +32,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->forUpdate()
                 ->findAll(true)
         )
@@ -49,7 +49,7 @@ public function testCancelUpdate(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test`",
+            "SELECT `test_query`.* FROM `test_query`",
             [],
             false,
             null,
@@ -62,7 +62,7 @@ public function testCancelUpdate(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->forUpdate()
                 ->forUpdate(false)
                 ->findAll(true),

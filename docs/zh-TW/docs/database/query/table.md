@@ -18,7 +18,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `posts`.* FROM `posts`",
+            "SELECT `test_query`.* FROM `test_query`",
             [],
             false,
             null,
@@ -31,7 +31,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('posts')
+                ->table('test_query')
                 ->findAll(true)
         )
     );
@@ -47,7 +47,7 @@ public function testWithDatabaseName(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `posts`.* FROM `mydb`.`posts`",
+            "SELECT `test_query`.* FROM `test`.`test_query`",
             [],
             false,
             null,
@@ -60,7 +60,7 @@ public function testWithDatabaseName(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('mydb.posts')
+                ->table('test.test_query')
                 ->findAll(true),
             1
         )
@@ -77,7 +77,7 @@ public function testWithAlias(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `p`.* FROM `mydb`.`posts` `p`",
+            "SELECT `p`.* FROM `test`.`test_query` `p`",
             [],
             false,
             null,
@@ -90,7 +90,7 @@ public function testWithAlias(): void
         $sql,
         $this->varJson(
             $connect
-                ->table(['p' => 'mydb.posts'])
+                ->table(['p' => 'test.test_query'])
                 ->findAll(true),
             2
         )
@@ -107,7 +107,7 @@ public function testField(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `posts`.`title`,`posts`.`body` FROM `posts`",
+            "SELECT `test_query`.`title`,`test_query`.`body` FROM `test_query`",
             [],
             false,
             null,
@@ -120,7 +120,7 @@ public function testField(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('posts', 'title,body')
+                ->table('test_query', 'title,body')
                 ->findAll(true)
         )
     );
@@ -136,7 +136,7 @@ public function testWithFieldAlias(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `posts`.`title` AS `t`,`posts`.`name`,`posts`.`remark`,`posts`.`value` FROM `mydb`.`posts`",
+            "SELECT `test_query`.`title` AS `t`,`test_query`.`name`,`test_query`.`remark`,`test_query`.`value` FROM `test`.`test_query`",
             [],
             false,
             null,
@@ -149,7 +149,7 @@ public function testWithFieldAlias(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('mydb.posts', [
+                ->table('test.test_query', [
                     't' => 'title', 'name', 'remark,value',
                 ])
                 ->findAll(true),
@@ -165,11 +165,11 @@ public function testWithFieldAlias(): void
 public function testSub(): void
 {
     $connect = $this->createDatabaseConnectMock();
-    $subSql = $connect->table('test')->makeSql(true);
+    $subSql = $connect->table('test_query')->makeSql(true);
 
     $sql = <<<'eot'
         [
-            "SELECT `a`.* FROM (SELECT `test`.* FROM `test`) a",
+            "SELECT `a`.* FROM (SELECT `test_query`.* FROM `test_query`) a",
             [],
             false,
             null,
@@ -195,11 +195,11 @@ public function testSub(): void
 public function testSubIsSelect(): void
 {
     $connect = $this->createDatabaseConnectMock();
-    $subSql = $connect->table('test');
+    $subSql = $connect->table('test_query');
 
     $sql = <<<'eot'
         [
-            "SELECT `bb`.* FROM (SELECT `test`.* FROM `test`) bb",
+            "SELECT `bb`.* FROM (SELECT `test_query`.* FROM `test_query`) bb",
             [],
             false,
             null,
@@ -225,11 +225,11 @@ public function testSubIsSelect(): void
 public function testSubIsCondition(): void
 {
     $connect = $this->createDatabaseConnectMock();
-    $subSql = $connect->table('test')->databaseCondition();
+    $subSql = $connect->table('test_query')->databaseCondition();
 
     $sql = <<<'eot'
         [
-            "SELECT `bb`.* FROM (SELECT `test`.* FROM `test`) bb",
+            "SELECT `bb`.* FROM (SELECT `test_query`.* FROM `test_query`) bb",
             [],
             false,
             null,
@@ -258,7 +258,7 @@ public function testSubIsClosure(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `b`.* FROM (SELECT `world`.* FROM `world`) b",
+            "SELECT `b`.* FROM (SELECT `test_query`.* FROM `test_query`) b",
             [],
             false,
             null,
@@ -272,7 +272,7 @@ public function testSubIsClosure(): void
         $this->varJson(
             $connect
                 ->table(['b'=> function ($select) {
-                    $select->table('world');
+                    $select->table('test_query');
                 }])
                 ->findAll(true)
         )
@@ -320,7 +320,7 @@ public function testSubIsClosureWithJoin(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `world`.`remark`,`hello`.`name`,`hello`.`value` FROM (SELECT `world`.* FROM `world`) world INNER JOIN `hello` ON `hello`.`name` = `world`.`name`",
+            "SELECT `test_query`.`remark`,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM (SELECT `test_query`.* FROM `test_query`) test_query INNER JOIN `test_query_subsql` ON `test_query_subsql`.`name` = `test_query`.`name`",
             [],
             false,
             null,
@@ -334,9 +334,9 @@ public function testSubIsClosureWithJoin(): void
         $this->varJson(
             $connect
                 ->table(function ($select) {
-                    $select->table('world');
+                    $select->table('test_query');
                 }, 'remark')
-                ->join('hello', 'name,value', 'name', '=', '{[world.name]}')
+                ->join('test_query_subsql', 'name,value', 'name', '=', '{[test_query.name]}')
                 ->findAll(true)
         )
     );

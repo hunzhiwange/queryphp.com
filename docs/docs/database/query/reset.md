@@ -17,7 +17,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `newtable`.* FROM `newtable` WHERE `newtable`.`new` = 'world'",
+            "SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`new` = 'world'",
             [],
             false,
             null,
@@ -30,11 +30,11 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->where('id', '=', 5)
                 ->where('name', 'like', 'me')
                 ->reset()
-                ->table('newtable')
+                ->table('test_query_subsql')
                 ->where('new', '=', 'world')
                 ->findAll(true)
         )
@@ -51,7 +51,7 @@ public function testResetItem(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.`name`,`test`.`id` FROM `test` WHERE `test`.`new` LIKE 'new'",
+            "SELECT `test_query`.`name`,`test_query`.`id` FROM `test_query` WHERE `test_query`.`new` LIKE 'new'",
             [],
             false,
             null,
@@ -64,7 +64,7 @@ public function testResetItem(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->where('id', '=', 5)
                 ->where('name', 'like', 'me')
                 ->setColumns('name,id')

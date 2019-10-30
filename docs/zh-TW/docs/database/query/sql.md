@@ -17,7 +17,7 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` ORDER BY `test`.`create_at` DESC LIMIT 1",
+            "SELECT `test_query`.* FROM `test_query` ORDER BY `test_query`.`create_at` DESC LIMIT 1",
             [],
             false,
             null,
@@ -30,7 +30,7 @@ public function testBaseUse(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->sql(true)
                 ->latest()
                 ->findOne()
@@ -69,7 +69,7 @@ public function testFindOne(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` ORDER BY `test`.`create_at` DESC LIMIT 1",
+            "SELECT `test_query`.* FROM `test_query` ORDER BY `test_query`.`create_at` DESC LIMIT 1",
             [],
             false,
             null,
@@ -82,7 +82,7 @@ public function testFindOne(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test')
+                ->table('test_query')
                 ->latest()
                 ->findOne(true),
             2
