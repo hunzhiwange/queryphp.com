@@ -79,7 +79,7 @@ public function testWithExpression(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` ORDER BY SUM(`test_query`.`num`) ASC",
+            "SELECT SUM(`test_query`.`num`),`test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` ORDER BY SUM(`test_query`.`num`) ASC",
             [],
             false,
             null,
@@ -92,7 +92,7 @@ public function testWithExpression(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test_query', 'tid as id,tname as value')
+                ->table('test_query', '{SUM([num])},tid as id,tname as value')
                 ->orderBy('{SUM([num]) ASC}')
                 ->findAll(true),
             2
