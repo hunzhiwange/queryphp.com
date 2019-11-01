@@ -1,72 +1,70 @@
 # 删除数据.delete
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Delete/DeleteTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Delete/DeleteTest.php)
+:::
+    
+**引入相关类**
 
-删除成功后，返回影响行数，没有修改记录返回 0。
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
+## delete 基本用法
+
+删除成功后，返回影响行数。
 
 ``` php
-public function delete($mixData = null, $arrBind = [], $bFlag = false);
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "DELETE FROM `test_query` WHERE `test_query`.`id` = 1 ORDER BY `test_query`.`id` DESC LIMIT 1",
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->where('id', 1)
+                ->limit(1)
+                ->orderBy('id desc')
+                ->delete()
+        )
+    );
+}
 ```
-
-## 用法如下
-
-``` php
-# DELETE FROM `test` WHERE `test`.`id` = 1 ORDER BY `test`.`id` DESC LIMIT 1
-/*
-(
-)
-*/
-Db::table('test')->
-
-where('id', 1)->
-
-limit(1)->
-
-orderBy('id desc')->
-
-delete();
-```
-
-## 支持 join 方式删除数据
+    
+## delete.join 连表删除
 
 ``` php
-# DELETE t FROM `test` `t` INNER JOIN `hello` `h` ON `h`.`name` = '小牛' WHERE `t`.`id` = 1 
-/*
-(
-)
-*/
-Db::table('test as t')->
+public function testJoin(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-innerJoin(['h' => 'hello'], [], 'name', '=', '小牛')->
+    $sql = <<<'eot'
+        [
+            "DELETE t FROM `test_query` `t` INNER JOIN `test_query_subsql` `h` ON `h`.`name` = `t`.`name` WHERE `t`.`id` = 1",
+            []
+        ]
+        eot;
 
-where('id', 1)->
-
-limit(1)->
-
-orderBy('id desc')->
-
-delete();
-```
-
-## 支持 using 方式删除数据
-
-``` php
-# DELETE FROM t1 USING `t2`,`t3`,`test` `t1` WHERE `t1`.`id` = `t2`.`id` AND `t2`.`id` = `t3`.`id` 
-/*
-(
-)
-*/
-Db::table('test as t1')->
-
-where('t1.id', '{[t2.id]}')->
-
-where('t2.id', '{[t3.id]}')->
-
-using('t2,t3')->
-
-limit(1)->
-
-orderBy('id desc')->
-
-delete();
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query as t')
+                ->innerJoin(['h' => 'test_query_subsql'], [], 'name', '=', '{[t.name]}')
+                ->where('id', 1)
+                ->limit(1)
+                ->orderBy('id desc')
+                ->delete()
+        )
+    );
+}
 ```

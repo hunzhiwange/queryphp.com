@@ -1,4 +1,4 @@
-# 查询语言.join
+# Query lang.join
 
 ::: tip 单元测试即文档
 [基于原始文档 tests/Database/Query/JoinTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/JoinTest.php)

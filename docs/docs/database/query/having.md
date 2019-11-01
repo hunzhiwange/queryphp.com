@@ -1,4 +1,4 @@
-# 查询语言.having
+# Query lang.having
 
 ::: tip 单元测试即文档
 [基于原始文档 tests/Database/Query/HavingTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/HavingTest.php)

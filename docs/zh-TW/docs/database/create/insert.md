@@ -1,134 +1,273 @@
 # 插入单条数据.insert
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Create/InsertTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Create/InsertTest.php)
+:::
+    
+**引入相关类**
 
-插入成功后，返回 lastInsertId 。
+ * use Tests\Database\DatabaseTestCase as TestCase;
 
-``` php
-public function insert($mixData, $arrBind = [], $booReplace = false, $bFlag = false);
-```
+## insert 基本用法
 
-## 用法如下：
-
-``` php
-# INSERT INTO `test` (`test`.`name`,`test`.`value`) VALUES (:name,:value)
-/*
-Array
-(
-    [name] => Array
-        (
-            [0] => '小鸭子'
-            [1] => 2
-        )
-
-    [value] => Array
-        (
-            [0] => '吃饭饭'
-            [1] => 2
-        )
-)
-*/
-$data = ['name' => '小鸭子', 'value' => '吃饭饭'];
-
-Db::table('test')->
-
-insert($data);
-```
-
-## 绑定参数
+写入成功后，返回 `lastInsertId`。
 
 ``` php
-# INSERT INTO `test` (`test`.`name`,`test`.`value`) VALUES (:name,:questionmark_0)
-/*
-Array
-(
-    [name] => Array
-        (
-            [0] => 小鸭子
-            [1] => 2
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value)",
+            {
+                "name": [
+                    "小鸭子",
+                    2
+                ],
+                "value": [
+                    "吃饭饭",
+                    2
+                ]
+            }
+        ]
+        eot;
+
+    $data = ['name' => '小鸭子', 'value' => '吃饭饭'];
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->insert($data)
         )
-
-    [questionmark_0] => Array
-        (
-            [0] => 吃肉
-            [1] => 2
-        )
-)
-*/
-$data = ['name' => '小鸭子', 'value' => '[?]'];
-
-Db::table('test')->
-
-insert($data, ['吃肉']);
-
-# INSERT INTO `test` (`test`.`name`,`test`.`value`) VALUES (:name,:value)
-/*
-Array
-(
-    [name] => Array
-        (
-            [0] => 小鸭子
-            [1] => 2
-        )
-    [value] => 呱呱呱
-)
-*/
-$data = ['name' => '小鸭子', 'value' => '[:value]'];
-
-Db::table('test')->
-
-insert($data, ['value' => '呱呱呱']);
+    );
+}
 ```
-
-## 使用 bind 绑定参数
+    
+## insert 绑定参数
 
 ``` php
-# INSERT INTO `test` (`test`.`name`,`test`.`value`) VALUES (:name,:questionmark_0)
-/*
-Array
-(
-    [name] => Array
-        (
-            [0] => 小鸭子
-            [1] => 2
+public function testBind(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:questionmark_0)",
+            {
+                "name": [
+                    "小鸭子",
+                    2
+                ],
+                "questionmark_0": [
+                    "吃肉",
+                    2
+                ]
+            }
+        ]
+        eot;
+
+    $data = ['name' => '小鸭子', 'value' => '[?]'];
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->insert($data, ['吃肉'])
         )
+    );
 
-    [questionmark_0] => Array
-        (
-            [0] => 吃鱼
-            [1] => 2
+    $sql = <<<'eot'
+        [
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value)",
+            {
+                "name": [
+                    "小鸭子",
+                    2
+                ],
+                "value": "呱呱呱"
+            }
+        ]
+        eot;
+
+    $data = ['name' => '小鸭子', 'value' => '[:value]'];
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->insert($data, ['value' => '呱呱呱']),
+            1
         )
-)
-*/
-$data = ['name' => '小鸭子', 'value' => '[?]'];
-
-Db::table('test')->
-
-bind(['吃鱼'])->
-
-insert($data);
+    );
+}
 ```
-
-## replace 支持
+    
+## bind.insert 绑定参数写入数据
 
 ``` php
-# REPLACE INTO `test` (`test`.`name`,`test`.`value`) VALUES (:name,:value)
-/*
-Array
-(
-    [name] => Array
-        (
-            [0] => 小鸭子
-            [1] => 2
+public function testWithBindFunction(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:questionmark_0)",
+            {
+                "name": [
+                    "小鸭子",
+                    2
+                ],
+                "questionmark_0": [
+                    "吃鱼",
+                    2
+                ]
+            }
+        ]
+        eot;
+
+    $data = ['name' => '小鸭子', 'value' => '[?]'];
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->bind(['吃鱼'])
+                ->insert($data)
         )
-    [value] => 呱呱呱
-)
-*/
-$data = ['name' => '小鸭子', 'value' => '[:value]'];
-
-Db::table('test')->
-
-insert($data, ['value' => '呱呱呱'], true);
+    );
+}
 ```
+    
+## insert 支持 replace 用法
 
- > 说明：原生 sql 用法见【执行原生 sql】,方法中的第二个参数将会覆盖 bind 中的方法；
+``` php
+public function testReplace(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "REPLACE INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value)",
+            {
+                "name": [
+                    "小鸭子",
+                    2
+                ],
+                "value": "呱呱呱"
+            }
+        ]
+        eot;
+
+    $data = ['name' => '小鸭子', 'value' => '[:value]'];
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->insert($data, ['value' => '呱呱呱'], true)
+        )
+    );
+}
+```
+    
+## insert 支持字段指定表名
+
+``` php
+public function testInsertSupportTable(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "REPLACE INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value)",
+            {
+                "name": [
+                    "小鸭子",
+                    2
+                ],
+                "value": "呱呱呱"
+            }
+        ]
+        eot;
+
+    $data = ['name' => '小鸭子', 'test_query.value' => '[:value]'];
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->insert($data, ['value' => '呱呱呱'], true)
+        )
+    );
+}
+```
+    
+## insert 空数据写入示例
+
+``` php
+public function testInsertWithEmptyData(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "INSERT INTO `test_query` () VALUES ()",
+            []
+        ]
+        eot;
+
+    $data = [];
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->insert($data)
+        )
+    );
+}
+```
+    
+## insert.replace 空数据写入示例
+
+``` php
+public function testReplaceWithEmptyData(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "REPLACE INTO `test_query` () VALUES ()",
+            []
+        ]
+        eot;
+
+    $data = [];
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->insert($data, [], true)
+        )
+    );
+}
+```

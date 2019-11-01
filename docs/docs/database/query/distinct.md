@@ -1,4 +1,4 @@
-# 查询语言.distinct
+# Query lang.distinct
 
 ::: tip 单元测试即文档
 [基于原始文档 tests/Database/Query/DistinctTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/DistinctTest.php)

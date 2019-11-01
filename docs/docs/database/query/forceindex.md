@@ -1,4 +1,4 @@
-# 查询语言.forceIndex
+# Query lang.forceIndex
 
 ::: tip 单元测试即文档
 [基于原始文档 tests/Database/Query/ForceIndexTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/ForceIndexTest.php)

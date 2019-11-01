@@ -1,4 +1,4 @@
-# 查询语言.flow
+# Query lang.flow
 
 ::: tip 单元测试即文档
 [基于原始文档 tests/Database/Query/FlowTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/FlowTest.php)
