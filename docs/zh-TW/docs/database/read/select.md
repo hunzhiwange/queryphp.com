@@ -1,103 +1,131 @@
 # 查询数据.select
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Read/SelectTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/SelectTest.php)
+:::
+    
+**引入相关类**
+
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
+## select 查询指定 SQL
 
 ``` php
-public function select($mixData = null, $arrBind = [], $bFlag = false);
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+    $sql = <<<'eot'
+        [
+            "select *from test where id = ?",
+            [
+                1
+            ]
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test')
+                ->select('select *from test where id = ?', [1])
+        )
+    );
+}
 ```
-
-## 原生 sql 查询
+    
+## select 直接查询
 
 ``` php
-/*
-Array
-(
-    [0] => select *from test where id = ?
-    [1] => Array
-        (
-            [0] => 1
+public function testSelect(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+    $sql = <<<'eot'
+        [
+            "SELECT `test`.* FROM `test`",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test')
+                ->select(),
+            1
         )
-
-)
-*/
-Db::table('test')->
-
-select('select *from test where id = ?', [1]);
+    );
+}
 ```
-
-## 直接查询 get
+    
+## select 查询支持闭包
 
 ``` php
-/*
-Array
-(
-    [0] => SELECT `test`.* FROM `test` 
-    [1] => Array
-        (
-        )
+public function testSelectClosure(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+    $sql = <<<'eot'
+        [
+            "SELECT `test`.* FROM `test` WHERE `test`.`id` = 1",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-    [2] => 
-    [3] => 5
-    [4] => 
-    [5] => Array
-        (
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test')
+                ->select(function ($select) {
+                    $select->where('id', 1);
+                }),
+            2
         )
-)
-*/
-Db::table('test')->
-
-select();
+    );
+}
 ```
-
-## 回调处理
-
-``` php
-/*
-Array
-(
-    [0] => SELECT `test`.* FROM `test` WHERE `test`.`id` = 1 
-    [1] => Array
-        (
-        )
-
-    [2] => 
-    [3] => 5
-    [4] => 
-    [5] => Array
-        (
-        )
-)
-*/
-datas::table('test')->
-
-select(function($select) {
-    $select->where('id', 1);
-});
-```
-
-
-## 参数为 Leevel\Database\Select
+    
+## select 查询支持 \Leevel\Database\Select 对象
 
 ``` php
-/*
-Array
-(
-    [0] => SELECT `test`.* FROM `test` WHERE `test`.`id` = 5 
-    [1] => Array
-        (
+public function testSelectObject(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+    $sql = <<<'eot'
+        [
+            "SELECT `test`.* FROM `test` WHERE `test`.`id` = 5",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $select = $connect
+        ->table('test')
+        ->where('id', 5);
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->select($select),
+            3
         )
-
-    [2] => 
-    [3] => 5
-    [4] => 
-    [5] => Array
-        (
-        )
-)
-*/
-$select = Db::table('test')->
-
-where('id', 5);
-
-Db::select($select);
+    );
+}
 ```

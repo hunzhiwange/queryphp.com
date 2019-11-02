@@ -244,8 +244,8 @@ function genSidebarConfigDoc (title) {
             'database/read/findone',
             'database/read/finddynamics',
             'database/read/select',
-            'database/read/lists',
-            'database/read/valuepull',
+            'database/read/list',
+            'database/read/value',
           ],
         },
         {

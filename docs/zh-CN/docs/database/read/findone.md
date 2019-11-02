@@ -1,23 +1,68 @@
-# 查询单条数据.getOne
+# 查询单条数据.findOne
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Read/FindOneTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/FindOneTest.php)
+:::
+    
+**引入相关类**
+
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
+## findOne 查询单条数据
 
 ``` php
-public function getOne($bFlag = false);
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+    $sql = <<<'eot'
+        [
+            "SELECT `test`.* FROM `test` LIMIT 1",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test')
+                ->findOne()
+        )
+    );
+}
 ```
-
-## 用法如下
+    
+## one.find 查询单条数据
 
 ``` php
-# SELECT `test`.* FROM `test` LIMIT 1
-Db::table('test')->
+public function testOneFind(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+    $sql = <<<'eot'
+        [
+            "SELECT `test`.* FROM `test` LIMIT 1",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
-getOne();
-
-# SELECT `test`.* FROM `test` LIMIT 1
-Db::table('test')->
-
-one()->
-
-get();
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test')
+                ->one()
+                ->find()
+        )
+    );
+}
 ```

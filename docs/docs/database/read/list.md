@@ -1,14 +1,14 @@
-# 查询数据.select
+# 查询一列数据.list
 
 ::: tip 单元测试即文档
-[基于原始文档 tests/Database/Read/SelectTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/SelectTest.php)
+[基于原始文档 tests/Database/Read/ListTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/ListTest.php)
 :::
     
 **引入相关类**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 
-## select 查询指定 SQL
+## list 查询基础用法
 
 ``` php
 public function testBaseUse(): void
@@ -16,34 +16,7 @@ public function testBaseUse(): void
     $connect = $this->createDatabaseConnectMock();
     $sql = <<<'eot'
         [
-            "select *from test where id = ?",
-            [
-                1
-            ]
-        ]
-        eot;
-
-    $this->assertSame(
-        $sql,
-        $this->varJson(
-            $connect
-                ->sql()
-                ->table('test')
-                ->select('select *from test where id = ?', [1])
-        )
-    );
-}
-```
-    
-## select 直接查询
-
-``` php
-public function testSelect(): void
-{
-    $connect = $this->createDatabaseConnectMock();
-    $sql = <<<'eot'
-        [
-            "SELECT `test`.* FROM `test`",
+            "SELECT `test`.`name` FROM `test`",
             [],
             false,
             null,
@@ -58,22 +31,51 @@ public function testSelect(): void
             $connect
                 ->sql()
                 ->table('test')
-                ->select(),
+                ->list('name')
+        )
+    );
+}
+```
+    
+## list 查询字段逗号分隔
+
+``` php
+public function testStringByCommaSeparation(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+    $sql = <<<'eot'
+        [
+            "SELECT `test`.`name`,`test`.`id` FROM `test`",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test')
+                ->list('name,id'),
             1
         )
     );
 }
 ```
     
-## select 查询支持闭包
+## list 查询字段多个字符串
 
 ``` php
-public function testSelectClosure(): void
+public function testMoreString(): void
 {
     $connect = $this->createDatabaseConnectMock();
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` WHERE `test`.`id` = 1",
+            "SELECT `test`.`name`,`test`.`id` FROM `test`",
             [],
             false,
             null,
@@ -88,24 +90,22 @@ public function testSelectClosure(): void
             $connect
                 ->sql()
                 ->table('test')
-                ->select(function ($select) {
-                    $select->where('id', 1);
-                }),
+                ->list('name', 'id'),
             2
         )
     );
 }
 ```
     
-## select 查询支持 \Leevel\Database\Select 对象
+## list 查询字段数组
 
 ``` php
-public function testSelectObject(): void
+public function testArray(): void
 {
     $connect = $this->createDatabaseConnectMock();
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` WHERE `test`.`id` = 5",
+            "SELECT `test`.`name`,`test`.`id` FROM `test`",
             [],
             false,
             null,
@@ -114,17 +114,44 @@ public function testSelectObject(): void
         ]
         eot;
 
-    $select = $connect
-        ->table('test')
-        ->where('id', 5);
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test')
+                ->list(['name', 'id']),
+            3
+        )
+    );
+}
+```
+    
+## list 查询字段数组和字符串混合
+
+``` php
+public function testArrayAndString(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+    $sql = <<<'eot'
+        [
+            "SELECT `test`.`name`,`test`.`id` FROM `test`",
+            [],
+            false,
+            null,
+            null,
+            []
+        ]
+        eot;
 
     $this->assertSame(
         $sql,
         $this->varJson(
             $connect
                 ->sql()
-                ->select($select),
-            3
+                ->table('test')
+                ->list(['name'], 'id'),
+            4
         )
     );
 }
