@@ -1,7 +1,7 @@
 # 清空数据.truncate
 
 ::: tip 单元测试即文档
-[基于原始文档 tests/Database/TruncateTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/TruncateTest.php)
+[基于原始文档 tests/Database/Delete/TruncateTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Delete/TruncateTest.php)
 :::
     
 **引入相关类**

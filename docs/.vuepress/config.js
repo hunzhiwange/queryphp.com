@@ -221,7 +221,7 @@ function genSidebarConfigDoc (title) {
           collapsable: true,
           'children': [
             'database/delete/delete',
-            'database/truncate',
+            'database/delete/truncate',
           ],
         },
         {

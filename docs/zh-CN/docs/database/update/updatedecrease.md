@@ -1,42 +1,67 @@
 # 更新字段递减.updateDecrease
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Update/UpdateDecreaseTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Update/UpdateDecreaseTest.php)
+:::
+    
+**引入相关类**
 
-更新成功后，返回影响行数，没有修改记录返回 0，updateDecrease 实际上调用的是 update 方法。
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
+## updateDecrease 基本用法
+
+更新成功后，返回影响行数，`updateDecrease` 实际上调用的是 `updateColumn` 方法。
 
 ``` php
-public function updateIncrease($strColumn, $intStep = 1, $arrBind = [], $bFlag = false);
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
+
+    $sql = <<<'eot'
+        [
+            "UPDATE `test_query` SET `test_query`.`num` = `test_query`.`num`-3 WHERE `test_query`.`id` = 503",
+            []
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->where('id', 503)
+                ->updateDecrease('num', 3)
+        )
+    );
+}
 ```
-
-## 用法如下
-
-``` php
-# UPDATE `test` SET `test`.`num` = `test`.`num`-3 WHERE `test`.`id` = 503 
-/*
-Array
-(
-)
-*/
-Db::table('test')->
-
-where('id', 503)->
-
-updateDecrease('num', 3);
-```
-
-## 支持表达式
+    
+## updateDecrease 支持参数绑定
 
 ``` php
-# UPDATE `test` SET `test`.`num` = `test`.`num`-3 WHERE `test`.`id` = ?
-/*
-Array
-(
-    [0] => 503
-)
-*/
-Db::table('test')->
+public function testBind(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-where('id', '[?]')->
+    $sql = <<<'eot'
+        [
+            "UPDATE `test_query` SET `test_query`.`num` = `test_query`.`num`-3 WHERE `test_query`.`id` = ?",
+            [
+                503
+            ]
+        ]
+        eot;
 
-updateDecrease('num', 3, [503]);
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->where('id', '[?]')
+                ->updateDecrease('num', 3, [503])
+        )
+    );
+}
 ```

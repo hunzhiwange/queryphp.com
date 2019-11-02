@@ -1,46 +1,70 @@
 # 更新字段.updateColumn
 
-## 函数原型
+::: tip 单元测试即文档
+[基于原始文档 tests/Database/Update/UpdateColumnTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Update/UpdateColumnTest.php)
+:::
+    
+**引入相关类**
 
-更新成功后，返回影响行数，没有修改记录返回 0，updateColumn 实际上调用的是 update 方法。
+ * use Tests\Database\DatabaseTestCase as TestCase;
+
+## updateColumn 基本用法
+
+更新成功后，返回影响行数，`updateColumn` 实际上调用的是 `update` 方法。
 
 ``` php
-public function updateColumn($strColumn, $mixValue, $arrBind = [], $bFlag = false);
-```
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-## 用法如下
+    $sql = <<<'eot'
+        [
+            "UPDATE `test_query` SET `test_query`.`name` = :name WHERE `test_query`.`id` = 503",
+            {
+                "name": [
+                    "小小小鸟，怎么也飞不高。",
+                    2
+                ]
+            }
+        ]
+        eot;
 
-``` php
-# UPDATE `test` SET `test`.`name` = :name WHERE `test`.`id` = 503 
-/*
-Array
-(
-    [name] => Array
-        (
-            [0] => 小小小鸟，怎么也飞不高。
-            [1] => 2
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->where('id', 503)
+                ->updateColumn('name', '小小小鸟，怎么也飞不高。')
         )
-)
-*/
-Db::table('test')->
-
-where('id', 503)->
-
-updateColumn('name', '小小小鸟，怎么也飞不高。');
+    );
+}
 ```
-
-## 支持表达式
+    
+## updateColumn 支持表达式
 
 ``` php
-# UPDATE `test` SET `test`.`name` = concat(`test`.`value`,`test`.`name`) WHERE `test`.`id` = 503
-/*
-Array
-(
-)
-*/
-Db::table('test')->
+public function testExpression(): void
+{
+    $connect = $this->createDatabaseConnectMock();
 
-where('id', 503)->
+    $sql = <<<'eot'
+        [
+            "UPDATE `test_query` SET `test_query`.`name` = concat(`test_query`.`value`,`test_query`.`name`) WHERE `test_query`.`id` = 503",
+            []
+        ]
+        eot;
 
-updateColumn('name', '{concat([value],[name])}');
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $connect
+                ->sql()
+                ->table('test_query')
+                ->where('id', 503)
+                ->updateColumn('name', '{concat([value],[name])}')
+        )
+    );
+}
 ```
