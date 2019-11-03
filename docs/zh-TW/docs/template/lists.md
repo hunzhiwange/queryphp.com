@@ -1,235 +1,364 @@
 # Lists 循环
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerListsTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerListsTest.php)
+:::
+    
 lists 标签主要用于在模板中循环输出数据集或者多维数组。
 
 ## 普通输出
 
-然后我们在模版中定义如下代码，循环输出名言标题和 IT 名人：
-
-``` html
-<lists name="list" id="vo">
-    {$vo.title}  {$vo.people}
-</lists>
-```
-
-模板编译后的结果：
+lists 标签的 `name` 属性表示模板赋值的变量名称，因此不可随意在模板文件中改变。`id` 表示当前的循环变量，可以随意指定，但确保不要和 name 属性冲突。
 
 ``` php
-<?php if (is_array($list)):
-    $index = 0;
-    $tmp = $list;
-    if (count($tmp) == 0):
-        echo "";
-    else:
-        foreach ($tmp as $key => $vo):
-            ++$index;
-            $mod = $index % 2; ?>
-    <?php echo $vo->title; ?>  <?php echo $vo->people; ?>
-        <?php endforeach;
-    endif;
-else:
-    echo "";
-endif; ?>
+public function testBaseUse(): void
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
+        <lists name="list" id="vo">
+            {$vo.title}  {$vo.people}
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php if (is_array($list)):
+            $index = 0;
+            $tmp = $list;
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$index;
+                    $mod = $index % 2; ?>
+            <?php echo $vo->title; ?>  <?php echo $vo->people; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
 ```
+    
+## 部分输出指定开始位置和长度的记录
 
-<p class="tip">list 标签的 **name** 属性表示模板赋值的变量名称，因此不可随意在模板文件中改变。**id** 表示当前的循环变量，可以随意指定，但确保不要和 name 属性冲突。</p>
-
-## 部分输出
-
-支持输出部分数据，例如输出其中的第 **2～4** 条记录
-
-``` html
-<lists name="list" id="vo" offset="2" length='4'>
-    {$vo.title} {$vo.people}
-</lists>
-```
-
-模板编译后的结果：
+支持输出部分数据，例如输出其中的第 2～4 条记录。
 
 ``` php
-<?php if (is_array($list)):
-    $index = 0;
-    $tmp = array_slice($list, 2, 4);
-    if (count($tmp) == 0):
-        echo "";
-    else:
-        foreach ($tmp as $key => $vo):
-            ++$index;
-            $mod = $index % 2; ?>
-    <?php echo $vo->title; ?> <?php echo $vo->people; ?>
-        <?php endforeach;
-    endif;
-else:
-    echo "";
-endif; ?>
-```
+public function testOffsetLength(): void
+{
+    $parser = $this->createParser();
 
+    $source = <<<'eot'
+        <lists name="list" id="vo" offset="2" length='4'>
+            {$vo.title} {$vo.people}
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php if (is_array($list)):
+            $index = 0;
+            $tmp = array_slice($list, 2, 4);
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$index;
+                    $mod = $index % 2; ?>
+            <?php echo $vo->title; ?> <?php echo $vo->people; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
+```
+    
+## 部分输出指定开始位置到结尾的所有记录
+
+支持输出部分数据，例如输出指定开始位置到结尾的所有记录。
+
+``` php
+public function testOffset(): void
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
+        <lists name="list" id="vo" offset="3">
+            {$vo.title}  {$vo.people}
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php if (is_array($list)):
+            $index = 0;
+            $tmp = array_slice($list, 3);
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$index;
+                    $mod = $index % 2; ?>
+            <?php echo $vo->title; ?>  <?php echo $vo->people; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
+```
+    
 ## 输出偶数记录
 
-lists 还支持按偶数输出，例如，我们在模板中写下如下的代码：   
-
-``` html
-<lists name="list" id="vo" mod="2">
-    <?php if ($mod == 1): ?>
-        {$vo.title} {$vo.people}
-    <?php endif; ?>
-</lists>
-```
-
-模板编译后的结果：
+lists 还支持偶数记录的输出，基于 `mod` 属性来控制。
 
 ``` php
-<?php if (is_array($list)):
-    $index = 0;
-    $tmp = $list;
-    if (count($tmp) == 0):
-        echo "";
-    else:
-        foreach ($tmp as $key => $vo):
-            ++$index;
-            $mod = $index % 2; ?>
-    <?php if ($mod == 1): ?>
-        <?php echo $vo->title; ?> <?php echo $vo->people; ?>
-    <?php endif; ?>
-        <?php endforeach;
-    endif;
-else:
-    echo "";
-endif; ?>
-```
+public function testMod(): void
+{
+    $parser = $this->createParser();
 
+    $source = <<<'eot'
+        <lists name="list" id="vo" mod="2">
+            <?php if ($mod == 1): ?>
+                {$vo.title} {$vo.people}
+            <?php endif; ?>
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php if (is_array($list)):
+            $index = 0;
+            $tmp = $list;
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$index;
+                    $mod = $index % 2; ?>
+            <?php if ($mod == 1): ?>
+                <?php echo $vo->title; ?> <?php echo $vo->people; ?>
+            <?php endif; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
+```
+    
+::: tip
+奇数记录和偶数记录规定如下，我们以数组的 0 为开始，0、2、4为偶记录，其它的都为基数记录。
+:::
+    
 ## 输出奇数记录
 
-lists 还支持奇数记录的输出：
-
-``` html
-<lists name="arrList" id="arrVo" mod="2">
-    <?php if ($mod == 0) : ?>
-        {$arrVo.title} {$arrVo.people}
-    <?php endif; ?>
-</lists>
-```
-
-模板编译后的结果：
+lists 还支持奇数记录的输出，基于 `mod` 属性来控制。
 
 ``` php
-<?php if (is_array($list)):
-    $index = 0;
-    $tmp = $list;
-    if (count($tmp) == 0):
-        echo "";
-    else:
-        foreach ($tmp as $key => $vo):
-            ++$index;
-            $mod = $index % 2; ?>
-    <?php if ($mod == 0): ?>
-        <?php echo $vo->title; ?> <?php echo $vo->people; ?>
-    <?php endif; ?>
-        <?php endforeach;
-    endif;
-else:
-    echo "";
-endif; ?>
+public function testMod2(): void
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
+        <lists name="list" id="vo" mod="2">
+            <?php if (0 === $mod): ?>
+                {$vo.title} {$vo.people}
+            <?php endif; ?>
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php if (is_array($list)):
+            $index = 0;
+            $tmp = $list;
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$index;
+                    $mod = $index % 2; ?>
+            <?php if (0 === $mod): ?>
+                <?php echo $vo->title; ?> <?php echo $vo->people; ?>
+            <?php endif; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
 ```
-
-<p class="tip">奇数记录和偶数记录规定如下，我们以数组的 0 为开始，0、2、4为偶记录，其它的都为基数记录。</p>
-
+    
+::: tip
+奇数记录和偶数记录规定如下，我们以数组索引的 0 为开始，0、2、4 为偶数记录，1、3、5 为基数记录。
+:::
+    
 ## 控制换行
 
-mod 属性还用于控制一定记录的换行，例如：
-
-``` html
-<lists name="arrList" id="arrVo" mod="2">
-    {$arrVo.title} {$arrVo.people}
-    <?php if( $mod == 0 ) : ?>
-        <br>
-    <?php endif; ?>
-</lists>
-```
-
-模板编译后的结果：
+mod 属性还用于控制一定记录的换行。
 
 ``` php
-<?php if (is_array($list)):
-    $index = 0;
-    $tmp = $list;
-    if (count($tmp) == 0):
-        echo "";
-    else:
-        foreach ($tmp as $key => $vo):
-            ++$index;
-            $mod = $index % 2; ?>
-    <?php echo $vo->title; ?> <?php echo $vo->people; ?>
-    <?php if ($mod == 0): ?>
-        <br>
-    <?php endif; ?>
-        <?php endforeach;
-    endif;
-else:
-    echo "";
-endif; ?>
+public function testMod3(): void
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
+        <lists name="list" id="vo" mod="2">
+            {$vo.title} {$vo.people}
+            <?php if (0 === $mod): ?>
+                <br>
+            <?php endif; ?>
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php if (is_array($list)):
+            $index = 0;
+            $tmp = $list;
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$index;
+                    $mod = $index % 2; ?>
+            <?php echo $vo->title; ?> <?php echo $vo->people; ?>
+            <?php if (0 === $mod): ?>
+                <br>
+            <?php endif; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
 ```
+    
+## mod 支持变量
 
-## 输出循环变量
-
-我们在模版中写下如下的代码:
-
-``` html
-<lists name="arrList" id="vo" index="k">
-    {$k} {$vo.people}
-</lists>
-```
-
-模板编译后的结果：
+mod 属性支持变量。
 
 ``` php
-<?php if (is_array($list)):
-    $k = 0;
-    $tmp = $list;
-    if (count($tmp) == 0):
-        echo "";
-    else:
-        foreach ($tmp as $key => $vo):
-            ++$k;
-            $mod = $k % 2; ?>
-    <?php echo $k; ?> <?php echo $vo->people; ?>
-        <?php endforeach;
-    endif;
-else:
-    echo "";
-endif; ?>
+public function testModCanBeVar(): void
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
+        {~$mod = 4}
+        
+        <lists name="list" id="vo" mod="mod">
+            {$vo.title}  {$vo.people}
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php $mod = 4; ?>
+        
+        <?php if (is_array($list)):
+            $index = 0;
+            $tmp = $list;
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$index;
+                    $mod = $index % $mod; ?>
+            <?php echo $vo->title; ?>  <?php echo $vo->people; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
 ```
-
-## 输出数组的索引 
-
-如果要输出数组的索引，可以直接使用 **key** 变量，和循环变量不同的是，这个 key 是由数据本身决定，而不是循环控制的，这个 key 可以通过 key 属性指定。
-
-例如：
-
-``` html
-<lists name="arrList" id="vo">     
-    key: {$key}
-</lists>  
-```
-
-模板编译后的结果：
+    
+## 输出循环索引
 
 ``` php
-<?php if (is_array($list)):
-    $index = 0;
-    $tmp = $list;
-    if (count($tmp) == 0):
-        echo "";
-    else:
-        foreach ($tmp as $key => $vo):
-            ++$index;
-            $mod = $index % 2; ?>
-    key: <?php echo $key; ?>
-        <?php endforeach;
-    endif;
-else:
-    echo "";
-endif; ?>
-```
+public function testIndex(): void
+{
+    $parser = $this->createParser();
 
-<p class="tip">大家看到没有，索引从 0 开始，而不是从 1 开始，这个是数组原始索引。</p>
+    $source = <<<'eot'
+        <lists name="list" id="vo" index="k">
+            {$k} {$vo.people}
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php if (is_array($list)):
+            $k = 0;
+            $tmp = $list;
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$k;
+                    $mod = $k % 2; ?>
+            <?php echo $k; ?> <?php echo $vo->people; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
+```
+    
+## 输出数组的键值
+
+如果要输出数组的键值，可以直接使用 `key` 变量，和循环变量不同的是，这个 `key` 是由数据本身决定，而不是循环控制的，这个 `key` 可以通过 `key` 属性指定。
+
+``` php
+public function testKey(): void
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
+        <lists name="list" id="vo">
+            key: {$key}
+        </lists>
+        eot;
+
+    $compiled = <<<'eot'
+        <?php if (is_array($list)):
+            $index = 0;
+            $tmp = $list;
+            if (0 === count($tmp)):
+                echo "";
+            else:
+                foreach ($tmp as $key => $vo):
+                    ++$index;
+                    $mod = $index % 2; ?>
+            key: <?php echo $key; ?>
+                <?php endforeach;
+            endif;
+        else:
+            echo "";
+        endif; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
+```

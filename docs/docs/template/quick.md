@@ -1,66 +1,75 @@
 # 快捷标签
 
+::: tip 单元测试即文档
+[基于原始文档 tests/View/Compiler/CompilerQuickTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerQuickTest.php)
+:::
+    
 为了使得模板定义更加简洁，系统还支持一些常用的变量输出快捷标签。
 
-## 输出一个注释
+## # 注释标签
 
-我们在模版中写下如下代码：
-
-``` html
-{# 我是一个注释 #}
-
-{#
-    我是两行注释
-  Thank U!
-#}
-```
-
-编译后的 PHP 代码如下：
-
-``` html
-空白
-```
-
-<p class="tip">模板中的注释仅供模板制作人员查看，最终不会显示出来。</p>
-
-## 原样 PHP 脚本
-
-我们在模版中写下如下代码：
-
-``` html
-{~$sValue = 'Make QueryPHP greater !'}   
-{$sValue}  
-```
-
-模板编译后的结果：
+模板中的注释仅供模板制作人员查看，最终不会显示出来。
 
 ``` php
-<?php $sValue = 'Make QueryPHP greater !'; ?>   
-<?php echo $sValue; ?>
+public function testBaseUse(): void
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
+        {# 我是一个注释 #}
+        
+        {#
+            我是两行注释
+          Thank U!
+        #}
+        eot;
+
+    $compiled = <<<'eot'
+         
+        
+         
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
 ```
-
-运行结果如下：
-
-``` html
-Make QueryPHP greater ! 
-```
-
-## Echo 快捷方式
-
-我们在模版中写下如下代码：
-
-``` html
-{:'Hello QueryPHP!'}
-```
-
-模板编译后的结果：
+    
+## ~ 原样 PHP 标签
 
 ``` php
-<?php echo 'Hello QueryPHP!'; ?>
+public function testOriginalPhp(): void
+{
+    $parser = $this->createParser();
+
+    $source = <<<'eot'
+        {~$value = 'Make QueryPHP greater !'}
+        {$value}
+        eot;
+
+    $compiled = <<<'eot'
+        <?php $value = 'Make QueryPHP greater !'; ?>
+        <?php echo $value; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
 ```
+    
+## : echo 快捷方式
 
-运行结果如下：
+``` php
+public function testEcho(): void
+{
+    $parser = $this->createParser();
 
-``` html
-Hello QueryPHP!
+    $source = <<<'eot'
+        {:'Hello QueryPHP!'}
+        eot;
+
+    $compiled = <<<'eot'
+        <?php echo 'Hello QueryPHP!'; ?>
+        eot;
+
+    $this->assertSame($compiled, $parser->doCompile($source, null, true));
+}
 ```

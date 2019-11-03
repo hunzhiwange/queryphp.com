@@ -11,7 +11,7 @@ module.exports = [
     text: '社区',
     items: [
       {
-        text: '论坛',
+        text: 'China mirror',
         link: 'https://www.114.ms/'
       },
       {
