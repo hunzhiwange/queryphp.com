@@ -1,7 +1,7 @@
 # Include 标签
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerIncludeTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerIncludeTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerIncludeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerIncludeTest.php)
 :::
     
 可以使用 include 标签来包含外部的模板文件。
@@ -13,7 +13,6 @@
 ``` html
 <include file="完整模板文件名" />
 ```
-
 
 这种情况下，模板文件名必须包含后缀。
 

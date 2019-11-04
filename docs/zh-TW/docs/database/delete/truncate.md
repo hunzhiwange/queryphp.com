@@ -1,10 +1,10 @@
 # 清空数据.truncate
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Delete/TruncateTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Delete/TruncateTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Delete/TruncateTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Delete/TruncateTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

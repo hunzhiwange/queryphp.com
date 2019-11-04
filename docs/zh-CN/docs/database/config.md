@@ -1,12 +1,12 @@
 # 数据库配置
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/ManagerTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/ManagerTest.php)
+::: tip Testing Is Documentation
+[tests/Database/ManagerTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/ManagerTest.php)
 :::
     
 我们可以在 `option/database.php` 文件中定义数据库连接。
 
-**引入相关类**
+**Uses**
 
  * use PDO;
  * use Tests\Database\DatabaseTestCase as TestCase;
@@ -16,7 +16,6 @@
 数据库配置基本定义功能展示。
 
 `数据库配置`
-
 
 ``` php
 protected function createDatabaseManager(): Manager
@@ -67,7 +66,6 @@ protected function createDatabaseManager(): Manager
 }
 ```
 
-
 请使用这样的格式来定义连接，系统会自动帮你访问数据库。
 系统底层实质上会使用 `\Leevel\Option\Option` 来管理配置信息。
 
@@ -96,7 +94,8 @@ public function testBaseUse(): void
     
 ## 数据库主从设置
 
-QueryPHP 允许用户一个主数据库作为写入、更新以及删除,外加多个附属从数据库作为只读数据库来共同提供数据库服务。多个数据库需要需要开启 `distributed`，而 `separate` 主要用于读写分离。
+QueryPHP 允许用户一个主数据库作为写入、更新以及删除,外加多个附属从数据库作为只读数据库来共同提供数据库服务。
+多个数据库需要需要开启 `distributed`，而 `separate` 主要用于读写分离。
 `master` 为主数据库，`slave` 为附属从数据库设置。
 
 

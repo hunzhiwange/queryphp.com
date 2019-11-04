@@ -1,12 +1,12 @@
 # Query lang.having
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Query/HavingTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/HavingTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Query/HavingTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/HavingTest.php)
 :::
     
 having 和 where 用法几乎一致。
 
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

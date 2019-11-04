@@ -1,12 +1,12 @@
 # 安全过滤
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Encryption/SafeTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Encryption/SafeTest.php)
+::: tip Testing Is Documentation
+[tests/Encryption/SafeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Encryption/SafeTest.php)
 :::
     
 可以对用户输入数据进行过滤。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Encryption\Safe;
 

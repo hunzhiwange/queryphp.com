@@ -1,7 +1,7 @@
 # CSS 标签
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerCssTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerCssTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerCssTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerCssTest.php)
 :::
     
 QueryPHP 支持提供两个简单标签来简化 javascript 和 css 标签输入。

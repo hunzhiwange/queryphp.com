@@ -1,12 +1,12 @@
 # 断言
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Validate/AssertTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/AssertTest.php)
+::: tip Testing Is Documentation
+[tests/Validate/AssertTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/AssertTest.php)
 :::
     
 这里为系统提供的基础的断言功能。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Validate\Assert;
 
@@ -14,9 +14,7 @@
 
 断言和验证器共享规则，所以可以直接参考验证器有哪些规则，排查掉依赖验证器自身的校验规则。
 
-
 **支持格式**
-
 
 ``` php
 Assert::foo($value, string $message);
@@ -139,11 +137,9 @@ public function testAssertMultiWithOptional(): void
 
 **make 原型**
 
-
 ``` php
 Assert::make($value, ?string $message)
 ```
-
 
 第一个参数为待校验的值，第二个为默认校验失败消息，每一条验证规则也支持自己的失败消息。
 
@@ -165,11 +161,9 @@ public function testAssertChain(): void
 
 **lazy 原型**
 
-
 ``` php
 Assert::lazy($value, ?string $message, bool $all = true)
 ```
-
 
 第一个参数为待校验的值，第二个为默认校验失败消息，第三个为是否全部验证，每一条验证规则也支持自己的失败消息。
 

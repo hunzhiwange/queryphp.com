@@ -1,7 +1,7 @@
 # 变量赋值
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerAssignTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerAssignTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerAssignTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerAssignTest.php)
 :::
     
 可以在模板中进行一些变量的赋值，以便于进行后续计算处理。

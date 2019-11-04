@@ -1,7 +1,7 @@
 # For 循环
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerForTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerForTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerForTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerForTest.php)
 :::
     
 如果我们需要在模板中使用 for 循环，那么通过 for 标签可以很方便地输出。

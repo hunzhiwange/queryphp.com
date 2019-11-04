@@ -1,10 +1,10 @@
 # 查询单条数据.findOne
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Read/FindOneTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/FindOneTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Read/FindOneTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/FindOneTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

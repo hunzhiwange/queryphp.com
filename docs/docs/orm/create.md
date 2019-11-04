@@ -1,12 +1,12 @@
 # 保存实体
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Ddd/Create/CreateTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Ddd/Create/CreateTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Ddd/Create/CreateTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Ddd/Create/CreateTest.php)
 :::
     
 将实体持久化到数据库。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Database\Ddd\Entity;
  * use Tests\Database\DatabaseTestCase as TestCase;
@@ -22,13 +22,11 @@
 
 **完整例子**
 
-
 ``` php
 $entity = new TestEntity();
-$entity->name = 'foo';
+$entity->name = \'foo\';
 $entity->save()->flush();
 ```
-
 
 调用 `save` 方法并没有立刻真正持久化到数据库，这一个步骤计算好了待保存的数据。
 
@@ -72,7 +70,6 @@ public function testBaseUse(): void
 ## 创建一个实体支持构造器白名单
 
 **完整模型**
-
 
 ``` php
 namespace Tests\Database\Ddd\Entity;
@@ -126,7 +123,6 @@ class TestConstructPropWhiteEntity extends Entity
 }
 ```
 
-
 调用 `construct_prop_white => true` 来设置字段白名单，一旦设置了白名单只有通过了白名单的数据才能够通过构造器更新模型属性。
 
 
@@ -146,7 +142,6 @@ public function testConsturctPropWhite(): void
 ## 创建一个实体支持构造器黑名单
 
 **完整模型**
-
 
 ``` php
 namespace Tests\Database\Ddd\Entity;
@@ -199,7 +194,6 @@ class TestConstructPropBlackEntity extends Entity
     }
 }
 ```
-
 
 调用 `construct_prop_black => true` 来设置字段黑名单，一旦设置了黑名单处于黑名单的数据无法通过构造器更新模型属性。
 

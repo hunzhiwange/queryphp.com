@@ -1,12 +1,12 @@
 # 投递任务
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Protocol/TaskTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/TaskTest.php)
+::: tip Testing Is Documentation
+[tests/Protocol/TaskTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/TaskTest.php)
 :::
     
 任务投递是对 Swoole 官方的简单封装。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Protocol\Task;
  * use Swoole\Process;

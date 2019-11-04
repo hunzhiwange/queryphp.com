@@ -1,7 +1,7 @@
 # 如何成为 QueryPHP 开发者
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Docs/BecomeAQueryphpDeveloperDoc.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/BecomeAQueryphpDeveloperDoc.php)
+::: tip Testing Is Documentation
+[tests/Docs/BecomeAQueryphpDeveloperDoc.php](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/BecomeAQueryphpDeveloperDoc.php)
 :::
     
 QueryPHP 非常欢迎各位给我们共同的充满想象且令人惊叹的完成度的开源作品添砖加瓦，实现为 PHP 社区提供一个好框架的美好愿景。
@@ -11,15 +11,11 @@ QueryPHP 非常欢迎各位给我们共同的充满想象且令人惊叹的完�
  * 技术债务.清偿 [当前技术债务](https://github.com/hunzhiwange/framework/projects/7)
  * 单元测试.尽可能减少 Bug [当前单元测试](https://github.com/hunzhiwange/framework/projects/4)
 
-
 成为开发者需要加入我们的组织，如有相关意愿请发送邮件至 `小牛哥 <635750556@qq.com>`，我们会联系你的。
-
 
 成为开发者并没有什么任务负担，一切主要以你的意愿，兴趣才是最重要的。
 
-
 本篇指南将带你搭建的 QueryPHP 开发框架的开发环境，使得你可以参与 QueryPHP 底层代码、单元测试和文档等开发工作。
-
 
 这里以笔者的 Mac 为例子说明，其实 Windows 下面还更简单些。
 
@@ -30,35 +26,28 @@ QueryPHP 框架的开发来自于从克隆主仓库开始，由于国内访问 G
 
 **下载代码**
 
-
 ```
 $cd /data/codes/test
 $git clone git@github.com:hunzhiwange/queryphp.git
 ```
 
-
 **Composer 安装**
-
 
 ```
 composer install
 ```
 
-
 > 如果你电脑没有安装 `composer`，那么已经为你下载一个版本。
-
 
 ```
 sudo chmod 777 ./build/composer
 ./build/composer install
 ```
 
-
 安装过程
 
-
 ```
-Cloning into 'queryphp'...
+Cloning into \'queryphp\'...
 remote: Enumerating objects: 54, done.
 remote: Counting objects: 100% (54/54), done.
 remote: Compressing objects: 100% (39/39), done.
@@ -67,9 +56,7 @@ Receiving objects: 100% (17821/17821), 45.12 MiB | 693.00 KiB/s, done.
 Resolving deltas: 100% (8700/8700), done.
 ```
 
-
 **测试是否安装成功**
-
 
 如果可以访问，那么恭喜你第一阶段即安装完毕。
 
@@ -84,17 +71,13 @@ php leevel server <Visite http://127.0.0.1:9527/>
 
 **首先创建一个数据库**
 
-
 可以用 Navicat For Mysql 创建一个数据库 `queryphp_development_db`.
-
 
 ```
 CREATE DATABASE IF NOT EXISTS queryphp_development_db DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 ```
 
-
 **修改 .env**
-
 
 ```
 ...
@@ -107,9 +90,7 @@ DATABASE_USER = root
 DATABASE_PASSWORD =
 ...
 
-
 修改为
-
 
 ...
 // Database
@@ -122,17 +103,13 @@ DATABASE_PASSWORD = 123456
 ...
 ```
 
-
 **执行数据库迁移命令**
-
 
 ```
 php leevel migrate:migrate
 ```
 
-
 安装过程
-
 
 ```
 using config file ./phinx.php
@@ -145,61 +122,46 @@ warning no environment specified, defaulting to: development
 using adapter mysql
 using database queryphp_development_db
 
-
 == 20181109060739 App: migrating
 == 20181109060739 App: migrated 0.0155s
-
 
 == 20181112023649 Role: migrating
 == 20181112023649 Role: migrated 0.0160s
 
-
 == 20181112024140 User: migrating
 == 20181112024140 User: migrated 0.0166s
-
 
 == 20181112024211 Permission: migrating
 == 20181112024211 Permission: migrated 0.0225s
 
-
 == 20181112024241 UserRole: migrating
 == 20181112024241 UserRole: migrated 0.0155s
-
 
 == 20181112024302 RolePermission: migrating
 == 20181112024302 RolePermission: migrated 0.0206s
 
-
 == 20181112024416 Resource: migrating
 == 20181112024416 Resource: migrated 0.0328s
-
 
 == 20181112024450 PermissionResource: migrating
 == 20181112024450 PermissionResource: migrated 0.0305s
 
-
 == 20181203130724 Option: migrating
 == 20181203130724 Option: migrated 0.0170s
-
 
 == 20181203144731 Test: migrating
 == 20181203144731 Test: migrated 0.0133s
 
-
 All Done. Took 0.2273s
 ```
 
-
 **测试数据库是否正常**
-
 
 ```
 php leevel server <http://127.0.0.1:9527/api/entity>
 ```
 
-
 结果
-
 
 
 
@@ -218,12 +180,9 @@ php leevel server <http://127.0.0.1:9527/api/entity>
 
 对于开发 QueryPHP 来说，你不需要会 `Vue` 或者 `JavaScript`，所以请放心不要有心里负担。
 
-
 **安装前端**
 
-
 第一步安装前端,细节信息可以在 frontend/README.md 查看.
-
 
 ```
 cd frontend
@@ -231,28 +190,21 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org // Just once
 cnpm install
 ```
 
-
 安装过程
-
 
 ```
 ✔ All packages installed (1264 packages installed from npm registry, used 14s(network 13s), speed 221.08kB/s, json 1086(2.23MB), tarball 501.92kB)
 ```
 
-
 **运行前端**
 
-
 接着访问这个登陆地址.
-
 
 ```
 npm run serve # npm run dev <http://127.0.0.1:9528/#/login>
 ```
 
-
 输入登陆用户名和密码,这个时候 QueryPHP 不再是一个冰冷的代码，而是有一个干净的带有基础权限系统的后台。
-
 
 
 
@@ -267,17 +219,13 @@ QueryPHP 推崇通过编写测试用例来让代码变得可维护，所以这�
 
 **首先创建一个数据库**
 
-
 可以用 Navicat For Mysql 创建一个数据库 `queryphp_development_test`.
-
 
 ```
 CREATE DATABASE IF NOT EXISTS queryphp_development_test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 ```
 
-
 **修改 .env**
-
 
 ```
 ...
@@ -290,9 +238,7 @@ DATABASE_USER = root
 DATABASE_PASSWORD =
 ...
 
-
 修改为
-
 
 ...
 // Database
@@ -305,17 +251,13 @@ DATABASE_PASSWORD = 123456
 ...
 ```
 
-
 **执行数据库迁移命令**
-
 
 ```
 php leevel migrate:migrate -e testing
 ```
 
-
 安装过程
-
 
 ```
 using config file ./phinx.php
@@ -328,64 +270,48 @@ using environment testing
 using adapter mysql
 using database queryphp_development_test
 
-
 == 20181109060739 App: migrating
 == 20181109060739 App: migrated 0.0155s
-
 
 == 20181112023649 Role: migrating
 == 20181112023649 Role: migrated 0.0160s
 
-
 == 20181112024140 User: migrating
 == 20181112024140 User: migrated 0.0166s
-
 
 == 20181112024211 Permission: migrating
 == 20181112024211 Permission: migrated 0.0225s
 
-
 == 20181112024241 UserRole: migrating
 == 20181112024241 UserRole: migrated 0.0155s
-
 
 == 20181112024302 RolePermission: migrating
 == 20181112024302 RolePermission: migrated 0.0206s
 
-
 == 20181112024416 Resource: migrating
 == 20181112024416 Resource: migrated 0.0328s
-
 
 == 20181112024450 PermissionResource: migrating
 == 20181112024450 PermissionResource: migrated 0.0305s
 
-
 == 20181203130724 Option: migrating
 == 20181203130724 Option: migrated 0.0170s
-
 
 == 20181203144731 Test: migrating
 == 20181203144731 Test: migrated 0.0133s
 
-
 All Done. Took 0.2273s
 ```
 
-
 **运行测试用例**
-
 
 ```
 php ./build/phpunit
 ```
 
-
 结果
 
-
 > 注意随着系统演进，测试用例会增加，输出结果就有所不同。
-
 
 
 
@@ -413,28 +339,21 @@ OK (26 tests, 43 assertions)
 
 **使用 Git 钩子**
 
-
 ```
 cp ./build/pre-commit.sh ./.git/hooks/pre-commit
 chmod 777 ./.git/hooks/pre-commit
 ```
 
-
 **测试自动化格式**
 
-
 `common/Test.php`
-
 
 ``` php
 <?php
 
-
 declare(strict_types=1);
 
-
 namespace Common;
-
 
 class Test{
     public function demo($a=1, $b=4){
@@ -443,9 +362,7 @@ class Test{
 }
 ```
 
-
 `frontend/src/hello.js`
-
 
 ```
 function hello(a,b) {
@@ -459,15 +376,12 @@ function hello(a,b) {
 }
 ```
 
-
 **Git 提交测试格式化**
-
 
 ```
 git add .
-git commit -m '测试格式化'
+git commit -m \'测试格式化\'
 ```
-
 
 运行过程
 
@@ -554,14 +468,11 @@ HEAD is now at 931f283b Merge branch 'dev'
 
 **删除框架层**
 
-
 ```
 rm -rf ./vendor/hunzhiwange/framework
 ```
 
-
 **克隆框架层开发库**
-
 
 ```
 $cd /data/codes/test
@@ -569,29 +480,23 @@ $git clone git@github.com:hunzhiwange/framework.git ./vendor/hunzhiwange/framewo
 cd ./vendor/hunzhiwange/framework
 ```
 
-
 **Composer 安装**
-
 
 ```
 composer install
 ```
 
-
 > 如果你电脑没有安装 `composer`，那么已经为你下载一个版本。
-
 
 ```
 sudo chmod 777 ./build/composer
 ./build/composer install
 ```
 
-
 安装过程
 
-
 ```
-Cloning into './vendor/hunzhiwange/framework'...
+Cloning into \'./vendor/hunzhiwange/framework\'...
 remote: Enumerating objects: 382, done.
 remote: Counting objects: 100% (382/382), done.
 remote: Compressing objects: 100% (218/218), done.
@@ -600,9 +505,7 @@ Receiving objects: 100% (39304/39304), 14.49 MiB | 12.00 KiB/s, done.
 Resolving deltas: 100% (27594/27594), done.
 ```
 
-
 **测试是否安装成功**
-
 
 从新访问首页，如果可以访问，那么恭喜你第一阶段即安装完毕。
 
@@ -617,68 +520,54 @@ QueryPHP 底层框架拥有 3000 多例测试用例，这些测试用例需要�
 
 **首先创建一个数据库**
 
-
 可以用 Navicat For Mysql 创建一个数据库 `test`.
-
 
 ```
 CREATE DATABASE IF NOT EXISTS test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 ```
 
-
 **复制一份配置文件并修改**
-
 
 ```
 cp ./tests/config.php ./tests/config.local.php
 ```
 
-
 修改为
-
 
 ```php
 <?php
 
-
-$GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL'] = [
-    'HOST'     => '127.0.0.1',
-    'PORT'     => 3306,
-    'NAME'     => 'test',
-    'USER'     => 'root',
-    'PASSWORD' => '123456',
+$GLOBALS[\'LEEVEL_ENV\'][\'DATABASE\'][\'MYSQL\'] = [
+    \'HOST\'     => \'127.0.0.1\',
+    \'PORT\'     => 3306,
+    \'NAME\'     => \'test\',
+    \'USER\'     => \'root\',
+    \'PASSWORD\' => \'123456\',
 ];
 
-
-$GLOBALS['LEEVEL_ENV']['CACHE']['REDIS'] = [
-    'HOST'     => '127.0.0.1',
-    'PORT'     => 6380,
-    'PASSWORD' => '123456',
+$GLOBALS[\'LEEVEL_ENV\'][\'CACHE\'][\'REDIS\'] = [
+    \'HOST\'     => \'127.0.0.1\',
+    \'PORT\'     => 6380,
+    \'PASSWORD\' => \'123456\',
 ];
 
-
-$GLOBALS['LEEVEL_ENV']['SESSION']['REDIS'] = [
-    'HOST'     => '127.0.0.1',
-    'PORT'     => 6380,
-    'PASSWORD' => '123456',
+$GLOBALS[\'LEEVEL_ENV\'][\'SESSION\'][\'REDIS\'] = [
+    \'HOST\'     => \'127.0.0.1\',
+    \'PORT\'     => 6380,
+    \'PASSWORD\' => \'123456\',
 ];
 ```
 
-
 **执行数据库迁移命令**
-
 
 ```
 php vendor/bin/phinx migrate
 ```
 
-
 安装过程
-
 
 ```
 Phinx by CakePHP - https://phinx.org. 0.9.2
-
 
 using config file ./phinx.php
 using config parser php
@@ -690,60 +579,45 @@ warning no environment specified, defaulting to: development
 using adapter mysql
 using database test
 
-
  == 20181010111946 User: migrating
  == 20181010111946 User: migrated 0.0076s
-
 
  == 20181011111926 Post: migrating
  == 20181011111926 Post: migrated 0.0101s
 
-
  == 20181011111937 Comment: migrating
  == 20181011111937 Comment: migrated 0.0106s
-
 
  == 20181011151247 PostContent: migrating
  == 20181011151247 PostContent: migrated 0.0087s
 
-
  == 20181011160957 Role: migrating
  == 20181011160957 Role: migrated 0.0078s
-
 
  == 20181011161035 UserRole: migrating
  == 20181011161035 UserRole: migrated 0.0100s
 
-
  == 20181031094608 CompositeId: migrating
  == 20181031094608 CompositeId: migrated 0.0094s
-
 
  == 20181107044153 GuestBook: migrating
  == 20181107044153 GuestBook: migrated 0.0086s
 
-
  == 20190424055915 TestUnique: migrating
  == 20190424055915 TestUnique: migrated 0.0133s
-
 
 All Done. Took 0.1179s
 ```
 
-
 **运行测试用例**
-
 
 ```
 php ./build/phpunit
 ```
 
-
 结果
 
-
 > 注意随着系统演进，测试用例会增加，输出结果就有所不同。
-
 
 
 
@@ -776,28 +650,21 @@ Tests: 2978, Assertions: 10031, Failures: 0, Skipped: 6.
 
 **使用 Git 钩子**
 
-
 ```
 cp ./build/pre-commit.sh ./.git/hooks/pre-commit
 chmod 777 ./.git/hooks/pre-commit
 ```
 
-
 **测试自动化格式**
 
-
 `tests/Name.php`
-
 
 ``` php
 <?php
 
-
 declare(strict_types=1);
 
-
 namespace Test;
-
 
 class Name{
     public function demo($a=1, $b=4){
@@ -806,15 +673,12 @@ class Name{
 }
 ```
 
-
 **Git 提交测试格式化**
-
 
 ```
 git add .
-git commit -m '测试格式化'
+git commit -m \'测试格式化\'
 ```
-
 
 运行过程
 
@@ -878,37 +742,29 @@ QueryPHP 底层的文档基于单元测试加备注的方式来实现的，通�
 
 **官方文档采用 VuePress 读取 Markdown 来实现的**
 
-
 ```
 $cd /data/codes/test
 $git clone git@github.com:hunzhiwange/queryphp.com.git
 ```
 
-
 **修改文档工具生成 Markdown 的路径**
-
 
 ```
 $cd /data/codes/test/queryphp
 $vim .env
 
-
 # 修改路径
 FRAMEWORK_DOC_OUTPUTDIR = "/data/codes/test/queryphp.com/docs/docs/"
 ```
 
-
 **生成文档**
-
 
 ```
 $cd /data/codes/test/queryphp
 $php leevel make:docwithin tests
 ```
 
-
 运行过程
-
 
 ```
 Class Tests\Encryption\EncryptionTest was generate succeed.
@@ -938,20 +794,15 @@ Class Tests\Debug\DebugTest was generate succeed.
 A total of 24 files generate succeed.
 ```
 
-
 **修改文档菜单**
-
 
 ```
 $vim docs/.vuepress/config.js
 ```
 
-
 **运行本地文档网站**
 
-
 访问地址 `localhost:8088` 即可。
-
 
 ```
 $npm install -g yarn

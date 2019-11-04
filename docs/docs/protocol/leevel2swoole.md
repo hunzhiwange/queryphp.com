@@ -1,12 +1,12 @@
 # Leevel 响应转 Swoole 响应
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Protocol/Leevel2SwooleTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/Leevel2SwooleTest.php)
+::: tip Testing Is Documentation
+[tests/Protocol/Leevel2SwooleTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/Leevel2SwooleTest.php)
 :::
     
 Leevel 响应转 Swoole 响应后，然后传递给 Swoole 完成响应给用户。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Http\RedirectResponse;
  * use Leevel\Http\Response;

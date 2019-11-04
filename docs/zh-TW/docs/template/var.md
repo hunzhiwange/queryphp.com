@@ -1,7 +1,7 @@
 # 变量
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerVarTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerVarTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerVarTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerVarTest.php)
 :::
     
 变量是最基本的用法，这里模板引擎做了大量的工作支持更好。
@@ -367,21 +367,17 @@ public function testJsOperator3(): void
 
 用于模板标签的函数可以是PHP 内置函数或者是用户自定义函数，和 smarty 不同的是用于模板的函数不需要特别的定义。
 
-
 ### 函数调用格式
-
 
 ``` php
 {$varName|function1|function2=arg1,arg2,**}
 ```
 
-
 说明：
 
-
-_* “{” 和 “$” 符号之间不能有空格 ，后面参数的空格就没有问题
-_* 表示模板变量本身的参数位置
-_* 支持多个函数，函数之间支持空格
+* “{” 和 “$” 符号之间不能有空格 ，后面参数的空格就没有问题
+* 表示模板变量本身的参数位置
+* 支持多个函数，函数之间支持空格
 
 
 ``` php
@@ -567,7 +563,6 @@ public function testFunction7(): void
 ``` php
 {$变量|default="默认值"}
 ```
-
 
 > 这里的 default 不是函数，而是系统的一个语法规则。
 

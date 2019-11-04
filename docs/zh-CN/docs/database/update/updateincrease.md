@@ -1,10 +1,10 @@
 # 更新字段递增.updateIncrease
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Update/UpdateIncreaseTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Update/UpdateIncreaseTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Update/UpdateIncreaseTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Update/UpdateIncreaseTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

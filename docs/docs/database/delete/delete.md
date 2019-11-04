@@ -1,10 +1,10 @@
 # 删除数据.delete
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Delete/DeleteTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Delete/DeleteTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Delete/DeleteTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Delete/DeleteTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

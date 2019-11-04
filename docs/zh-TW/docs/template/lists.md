@@ -1,14 +1,16 @@
 # Lists 循环
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerListsTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerListsTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerListsTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerListsTest.php)
 :::
     
 lists 标签主要用于在模板中循环输出数据集或者多维数组。
 
 ## 普通输出
 
-lists 标签的 `name` 属性表示模板赋值的变量名称，因此不可随意在模板文件中改变。`id` 表示当前的循环变量，可以随意指定，但确保不要和 name 属性冲突。
+lists 标签的 `name` 属性表示模板赋值的变量名称，因此不可随意在模板文件中改变。
+`id` 表示当前的循环变量，可以随意指定，但确保不要和 name 属性冲突。
+
 
 ``` php
 public function testBaseUse(): void

@@ -1,10 +1,10 @@
 # 查询数据.find
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Read/FindTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/FindTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Read/FindTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/FindTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

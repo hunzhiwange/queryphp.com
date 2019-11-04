@@ -1,7 +1,7 @@
 # 流程控制
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerIfTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerIfTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerIfTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerIfTest.php)
 :::
     
 条件表达式是最基本流程控制语句，这个在任何地方都是相当的实用。

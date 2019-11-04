@@ -1,12 +1,12 @@
 # 协程基础组件
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Protocol/CoroutineTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/CoroutineTest.php)
+::: tip Testing Is Documentation
+[tests/Protocol/CoroutineTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/CoroutineTest.php)
 :::
     
 协程基础组件主要用于返回当前协程状态以及标识一个服务是否处于协程中，以便于将数据注册到当前协程下面，用于协程上下文。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Di\ICoroutine;
  * use Leevel\Protocol\Coroutine;

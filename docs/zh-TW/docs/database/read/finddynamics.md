@@ -1,10 +1,10 @@
 # 动态查询.find.findStart.findBy.findAllBy
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Read/FindDynamicsTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/FindDynamicsTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Read/FindDynamicsTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/FindDynamicsTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

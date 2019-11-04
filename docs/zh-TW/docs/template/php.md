@@ -1,7 +1,7 @@
 # PHP 标签
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerPhpTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerPhpTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerPhpTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerPhpTest.php)
 :::
     
 PHP 代码可以和标签在模板文件中混合使用，可以在模板文件里面书写任意的 PHP 语句代码 ，包括下面两种方式。

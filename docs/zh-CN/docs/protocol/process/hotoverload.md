@@ -1,12 +1,12 @@
 # 代码热重启进程
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Protocol/Process/HotOverloadTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/Process/HotOverloadTest.php)
+::: tip Testing Is Documentation
+[tests/Protocol/Process/HotOverloadTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/Process/HotOverloadTest.php)
 :::
     
 监听某些目录，当代码发生变化，重启服务方便开发调试。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Option\Option;
  * use Leevel\Protocol\IServer;

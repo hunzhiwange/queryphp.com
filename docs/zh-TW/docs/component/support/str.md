@@ -1,12 +1,12 @@
 # 字符串
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Support/StrTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Support/StrTest.php)
+::: tip Testing Is Documentation
+[tests/Support/StrTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Support/StrTest.php)
 :::
     
 这里为系统提供的字符串使用的功能文档说明。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Support\Str;
 

@@ -1,10 +1,10 @@
 # 查询语言.sql
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Query/SqlTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/SqlTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Query/SqlTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/SqlTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

@@ -1,10 +1,10 @@
 # Query lang.bind
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Query/BindTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/BindTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Query/BindTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/BindTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use PDO;
  * use Tests\Database\DatabaseTestCase as TestCase;

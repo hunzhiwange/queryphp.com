@@ -1,12 +1,12 @@
 # 加密解密
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Encryption/EncryptionTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Encryption/EncryptionTest.php)
+::: tip Testing Is Documentation
+[tests/Encryption/EncryptionTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Encryption/EncryptionTest.php)
 :::
     
 字符串加密解密支持。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Encryption\Encryption;
  * use Leevel\Encryption\IEncryption;

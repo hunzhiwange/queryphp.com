@@ -1,21 +1,20 @@
 # 查询语言.join
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Query/JoinTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/JoinTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Query/JoinTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/JoinTest.php)
 :::
     
 ## join 函数原型
-
 
 ``` php
 join($table, $cols, ...$cond);
 ```
 
-
  - 其中 $table 和 $cols 与 《查询语言.table》中的用法一致。
  - $cond 与《查询语言.where》中的用法一致。
 
-**引入相关类**
+
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

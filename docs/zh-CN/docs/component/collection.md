@@ -1,12 +1,12 @@
 # 集合 collection
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Collection/CollectionTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Collection/CollectionTest.php)
+::: tip Testing Is Documentation
+[tests/Collection/CollectionTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Collection/CollectionTest.php)
 :::
     
 集合 `collection` 提供了一些实用方法，数据库查询的数据列表也会转换为集合数据类型。
 
-**引入相关类**
+**Uses**
 
  * use JsonSerializable;
  * use Leevel\Collection\Collection;
@@ -167,7 +167,6 @@ public function testCountable(): void
 
 **例子**
 
-
 ``` php
 namespace Tests\Collection;
 
@@ -189,7 +188,6 @@ class TestIArray implements IArray
     }
 }
 ```
-
 
 > 实现了 `\Leevel\Support\IArray` 的对象的方法 `toArray` 返回集合的数据。
 
@@ -213,7 +211,6 @@ public function testGetArrayElements2(): void
 对象实现了 `\Leevel\Support\IJson` 可以转化为集合数据。
 
 **例子**
-
 
 ``` php
 namespace Tests\Collection;
@@ -241,7 +238,6 @@ class TestIJson implements IJson
 }
 ```
 
-
 > 实现了 `\Leevel\Support\IJson` 的对象的方法 `toJson` 返回集合的数据。
 
 
@@ -265,7 +261,6 @@ public function testGetArrayElements3(): void
 
 **例子**
 
-
 ``` php
 namespace Tests\Collection;
 
@@ -287,7 +282,6 @@ class TestJsonSerializable implements JsonSerializable
     }
 }
 ```
-
 
 > 实现了 `\JsonSerializable` 的对象的方法 `jsonSerialize` 返回集合的数据。
 

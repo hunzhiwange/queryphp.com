@@ -1,20 +1,19 @@
 # Query lang.groupBy
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Query/GroupByTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/GroupByTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Query/GroupByTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/GroupByTest.php)
 :::
     
 ## groupBy 函数原型
-
 
 ``` php
 public function groupBy($expression);
 ```
 
-
  - 参数支持字符串以及它们构成的一维数组，用法和 《查询语言.orderBy》 非常相似。
 
-**引入相关类**
+
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

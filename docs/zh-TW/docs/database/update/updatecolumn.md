@@ -1,10 +1,10 @@
 # 更新字段.updateColumn
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Update/UpdateColumnTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Update/UpdateColumnTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Update/UpdateColumnTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Update/UpdateColumnTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

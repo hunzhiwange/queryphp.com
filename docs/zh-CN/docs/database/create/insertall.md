@@ -1,10 +1,10 @@
 # 批量写入数据.insertAll
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Create/InsertAllTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Create/InsertAllTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Create/InsertAllTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Create/InsertAllTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

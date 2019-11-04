@@ -1,7 +1,7 @@
 # List 循环
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerListTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerListTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerListTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerListTest.php)
 :::
     
 list 标签也是用于循环输出，解析后的本质为 foreach，同时 foreach 比较符合大家的习惯。

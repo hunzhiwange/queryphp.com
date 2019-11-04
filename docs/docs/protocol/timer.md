@@ -1,12 +1,12 @@
 # 毫秒定时器
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Protocol/TimerTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/TimerTest.php)
+::: tip Testing Is Documentation
+[tests/Protocol/TimerTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/TimerTest.php)
 :::
     
 毫秒定时器是对 Swoole 官方的简单封装。
 
-**引入相关类**
+**Uses**
 
  * use Exception;
  * use Leevel\Log\ILog;

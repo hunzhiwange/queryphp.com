@@ -1,10 +1,10 @@
 # 查询语言.limit
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Query/LimitTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/LimitTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Query/LimitTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/LimitTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

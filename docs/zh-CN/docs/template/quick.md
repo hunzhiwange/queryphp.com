@@ -1,7 +1,7 @@
 # 快捷标签
 
-::: tip 单元测试即文档
-[基于原始文档 tests/View/Compiler/CompilerQuickTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerQuickTest.php)
+::: tip Testing Is Documentation
+[tests/View/Compiler/CompilerQuickTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerQuickTest.php)
 :::
     
 为了使得模板定义更加简洁，系统还支持一些常用的变量输出快捷标签。

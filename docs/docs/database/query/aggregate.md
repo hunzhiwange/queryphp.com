@@ -1,12 +1,12 @@
 # Query lang.aggregate
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Query/AggregateTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/AggregateTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Query/AggregateTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/AggregateTest.php)
 :::
     
 数据库聚合查询功能。
 
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 
@@ -16,11 +16,9 @@
 
 `函数原型`
 
-
 ``` php
-public function findCount(string $field = '*', string $alias = 'row_count', bool $flag = false);
+public function findCount(string $field = \'*\', string $alias = \'row_count\', bool $flag = false);
 ```
-
 
 ::: tip
 可使用 `findCount()` 或者 `count()->find()` 来统计记录行。

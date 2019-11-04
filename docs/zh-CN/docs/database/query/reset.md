@@ -1,10 +1,10 @@
 # 查询语言.reset
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Query/ResetTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/ResetTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Query/ResetTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/ResetTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

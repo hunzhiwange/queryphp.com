@@ -1,10 +1,10 @@
 # 查询一列数据.list
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Read/ListTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/ListTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Read/ListTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/ListTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

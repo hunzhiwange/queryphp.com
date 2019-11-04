@@ -1,10 +1,10 @@
 # 查询一个字段的值.value
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Read/ValueTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/ValueTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Read/ValueTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Read/ValueTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

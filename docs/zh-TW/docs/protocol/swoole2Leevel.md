@@ -1,12 +1,12 @@
 # Swoole 请求转 Leevel 请求
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Protocol/Swoole2LeevelTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/Swoole2LeevelTest.php)
+::: tip Testing Is Documentation
+[tests/Protocol/Swoole2LeevelTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Protocol/Swoole2LeevelTest.php)
 :::
     
 Swoole 请求转换 Leevel 的请求后，然后传递给 Kernel 完成请求到响应的过程。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Http\IRequest;
  * use Leevel\Http\Request;

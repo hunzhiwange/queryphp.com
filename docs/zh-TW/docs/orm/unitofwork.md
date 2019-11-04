@@ -1,12 +1,12 @@
 # 事务工作单元
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Ddd/UnitOfWorkTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Ddd/UnitOfWorkTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Ddd/UnitOfWorkTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Ddd/UnitOfWorkTest.php)
 :::
     
 用事务工作单元更好地处理数据库相关工作。
 
-**引入相关类**
+**Uses**
 
  * use Leevel\Database\Ddd\Entity;
  * use Leevel\Database\Ddd\IUnitOfWork;

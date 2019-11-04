@@ -1,7 +1,7 @@
 # Install
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Docs/Started/InstallDoc.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/Started/InstallDoc.php)
+::: tip Testing Is Documentation
+[tests/Docs/Started/InstallDoc.php](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/Started/InstallDoc.php)
 :::
     
 QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式，它既可以运行在 PHP-FPM 场景，同时还支持在 Swoole 服务中运行。
@@ -14,12 +14,9 @@ PHP ^7.3.2
 ext-mbstring [字符处理](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Support/Str.php)
 ext-openssl [加密组件](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Encryption/Encryption.php)
 
-
 我们系统依赖的组件可以通过 [composer.json](https://github.com/hunzhiwange/queryphp/blob/master/composer.json) 找到，我们提供了大量开箱即用的功能。
 
-
 实际上，QueryPHP 对于环境来说`只需要`安装一个 `PHP 7.3.2` 及以上版本即可，这个时候甚至无需安装 Nginx 而使用 PHP 内置 WebServer 即可将 QueryPHP 跑起来。
-
 
 对于每位 PHP 工程师来说，您的电脑早已经运行着一个 PHP 7 版本，接着您可以进行安装了。
 
@@ -30,9 +27,7 @@ QueryPHP 使用 [Composer](https://developer.aliyun.com/composer) 来管理整�
 
 国外镜像访问速度很慢，我们建议使用国内阿里云镜像。
 
-
 镜像 1 <https://developer.aliyun.com/composer>
-
 
 ``` sh
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
@@ -45,30 +40,23 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 ### 安装
 
-
 ``` sh
 composer create-project --prefer-dist hunzhiwange/queryphp myapp
 ```
 
-
 或者体验开发版本
-
 
 ``` sh
 composer create-project hunzhiwange/queryphp myapp dev-master
 ```
 
-
 ### 运行
 
-
 你也可以简单实用 PHP 内置的服务器来运行 QueryPHP,当然更好的选择配置 Nginx 站点。
-
 
 ``` sh
 php leevel server <Visite http://127.0.0.1:9527/>
 ```
-
 
 * 首页 <http://127.0.0.1:9527/>
 * MVC 路由 <http://127.0.0.1:9527/api/test>
@@ -80,7 +68,6 @@ php leevel server <Visite http://127.0.0.1:9527/>
 * php leevel link:storage <http://127.0.0.1:9527/storage/logo.png>
 * php leevel link:apis <http://127.0.0.1:9527/apis/>
 * php leevel link:debugbar <http://127.0.0.1:9527/debugbar/debugbar.css>
-
 
 ::: tip
 QueryPHP 在 composer 安装过程中自动运行了创建软连接的命令将一些非 Web 根目录的站点映射到根目录，
@@ -97,21 +84,16 @@ QueryPHP 在初始化应用程序会自动帮您创建 `.env`、`.env.phpunit` �
 .env.phpunit (单元测试配置文件)
 phinx.yml (Phinx 数据库迁移命令配置，他会读取 .env 或者 .env.phpunit 中的数据库配置)
 
-
 ### 入口目录
 
-
 您必须将 Web 站点的根目录指向 `www` 目录，其中 `index.php` 是整个应用的单一入口文件，例如 Nginx。
-
 
 ```
 root /data/codes/queryphp/www;
 index index.html index.php;
 ```
 
-
 ### 目录权限
-
 
 系统有几个目录需要配置写入权限 `storage`、`bootstrap` 和 `runtime`,一个是资源上传目录，例外的是系统运行过程中的缓存。
 
@@ -132,15 +114,11 @@ index index.html index.php;
   * php-7.2.1
   * redis-2.8.17
 
-
 Windows 开发者如果不需要 Swoole 则可以按照其他普通的 PHP 项目来搭建就是了，如果依赖 Swoole 可以采用上面这种虚拟机的方式来搭建环境。
-
 
 ### Nginx
 
-
 首先需要在 Ubuntu 虚拟机创建一个站点的配置文件,例如 `/server/nginx-1.6.2/vhosts/queryphp.conf`:
-
 
 ```
 server {
@@ -152,11 +130,9 @@ server {
     root /data/codes/queryphp/www;
     index  index.html index.php;
 
-
     location / {
        try_files $uri $uri/ /index.php?$query_string;
     }
-
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
@@ -166,7 +142,6 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
 
-
     location ~ /nginx_status$ {
         stub_status on;
         access_log off;
@@ -175,15 +150,12 @@ server {
 }
 ```
 
-
 ::: tip
 笔者因为会在 Mac 中将端口转发到虚拟机中的 8080 端口，您的开发环境直接配置 80 端口即可。
 :::
 
-
 修改虚拟机 `/etc/hosts`,添加几个测试域名，后面 `vip` 这些主要用于调试路由域名匹配，可以不要 。
 Mac 系统的 `/etc/hosts` 也需要添加这些如下域名。
-
 
 ```
 127.0.0.1      queryphp.cn
@@ -193,25 +165,19 @@ Mac 系统的 `/etc/hosts` 也需要添加这些如下域名。
 127.0.0.1      x.vip.queryphp.cn
 ```
 
-
 刷新虚拟机 Ubuntu 网络使域名生效
-
 
 ``` sh
 /etc/rc.d/init.d/network restart
 ```
 
-
 重启 `Nginx`
-
 
 ``` sh
 service nginx restart
 ```
 
-
 访问地址
-
 
 * 首页 <http://queryphp.cn/>
 * MVC 路由 <http://queryphp.cn/api/test>
@@ -224,12 +190,9 @@ service nginx restart
 * php leevel link:apis <http://queryphp.cn/apis/>
 * php leevel link:debugbar <http://queryphp.cn/debugbar/debugbar.css>
 
-
 ### Apache
 
-
 Web 根目录已经内置了 `www/.htaccess` 文件来为隐藏 index.php,需要启用 mod_rewrite 模块。
-
 
 ```
 <IfModule mod_rewrite.c>
@@ -237,13 +200,10 @@ Web 根目录已经内置了 `www/.htaccess` 文件来为隐藏 index.php,需要
         Options -MultiViews -Indexes
     </IfModule>
 
-
     RewriteEngine On
-
 
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-
 
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

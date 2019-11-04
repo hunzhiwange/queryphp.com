@@ -1,14 +1,15 @@
 # IOC 容器
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Di/ContainerTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Di/ContainerTest.php)
+::: tip Testing Is Documentation
+[tests/Di/ContainerTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Di/ContainerTest.php)
 :::
     
 IOC 容器是整个框架最核心的部分，负责服务的管理和解耦组件。
 
 目前系统所有的关键服务都接入了 IOC 容器，包括控制器、Console 命令行。
 
-**引入相关类**
+
+**Uses**
 
  * use Leevel\Di\Container;
  * use Leevel\Di\ICoroutine;
@@ -20,8 +21,8 @@ IOC 容器是整个框架最核心的部分，负责服务的管理和解耦组�
 
 我们可以通过 `bind` 来绑定一个闭包，通过 `make` 来运行服务，第二次运行如果是单例则直接使用生成后的结果，否则会每次执行闭包的代码。
 
-
 通常来说，系统大部分服务都是单例来提升性能和共享。
+
 
 ``` php
 public function testBindClosure(): void
@@ -104,7 +105,6 @@ public function testInterface(): void
 
 **ITest2 定义**
 
-
 ``` php
 namespace Tests\Di\Fixtures;
 
@@ -113,9 +113,7 @@ interface ITest2
 }
 ```
 
-
 **Test2 定义**
-
 
 ``` php
 namespace Tests\Di\Fixtures;
@@ -125,9 +123,7 @@ class Test2 implements ITest2
 }
 ```
 
-
 **Test3 定义**
-
 
 ``` php
 namespace Tests\Di\Fixtures;
@@ -142,7 +138,6 @@ class Test3 implements ITest3
     }
 }
 ```
-
 
 通过 `Test3` 的构造函数注入 `ITest2` 的实现 `Test2`，通过 IOC 容器可以实现代码解耦。
 

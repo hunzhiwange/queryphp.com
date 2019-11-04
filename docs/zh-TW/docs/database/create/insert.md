@@ -1,10 +1,10 @@
 # 插入单条数据.insert
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Database/Create/InsertTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Create/InsertTest.php)
+::: tip Testing Is Documentation
+[tests/Database/Create/InsertTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Create/InsertTest.php)
 :::
     
-**引入相关类**
+**Uses**
 
  * use Tests\Database\DatabaseTestCase as TestCase;
 

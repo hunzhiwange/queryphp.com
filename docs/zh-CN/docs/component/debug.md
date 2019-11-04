@@ -1,12 +1,12 @@
 # Debug
 
-::: tip 单元测试即文档
-[基于原始文档 tests/Debug/DebugTest.php 自动构建](https://github.com/hunzhiwange/framework/blob/master/tests/Debug/DebugTest.php)
+::: tip Testing Is Documentation
+[tests/Debug/DebugTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Debug/DebugTest.php)
 :::
     
 添加一个组件调试。
 
-**引入相关类**
+**Uses**
 
  * use Error;
  * use Exception;
@@ -34,11 +34,9 @@
 
 **返回结构**
 
-
 ``` php
 $response = ["foo" => "bar", ":trace" => []];
 ```
-
 
 关联数组在尾部追加一个选项作为调试信息，这与非关联数组有所不同。
 
@@ -75,11 +73,9 @@ public function testJson(): void
 
 **返回结构**
 
-
 ``` php
 $response = ["foo", "bar", [":trace" => []]];
 ```
-
 
 非关联数组在尾部追加一个调试信息，将不会破坏返回接口的 JSON 结构。
 
@@ -246,7 +242,6 @@ public function testEnableWithoutBootstrap(): void
 
 **支持的消息类型**
 
-
 ``` php
 public function getMessageLevelsData()
 {
@@ -257,7 +252,6 @@ public function getMessageLevelsData()
     ];
 }
 ```
-
 
 系统支持多种消息类型，可以参考这个进行调试。
 
