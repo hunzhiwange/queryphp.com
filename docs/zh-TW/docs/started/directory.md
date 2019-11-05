@@ -1,6 +1,10 @@
-# 目录结构
+# 目錄結構
 
-QueryPHP 遵循 **“约定优于配置”** 的原则，推荐的目录结构如下：
+::: tip Testing Is Documentation
+[tests/Docs/Started/DirectoryDoc.php](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/Started/DirectoryDoc.php)
+:::
+    
+QueryPHP 遵循 **“约定优于配置”** 的原则，主张通过领域驱动设计来构建更可靠的软件。
 
 ## 基本结构
 
@@ -39,12 +43,13 @@ QueryPHP 遵循 **“约定优于配置”** 的原则，推荐的目录结构�
 │-- www Web 入口目录
 │-- ...
 │-- .env 环境变量
+│-- .env.phpunit 单元测试环境变量
 │-- .php_cs.dist 统一团队风格配置
 │-- .travis.yml Travis 持续集成配置
 │-- composer.json Composer 配置
 │-- leevel 命令行工具集 php leevel
 │-- package.json 前端包
-│-- phinx.yml 数据库迁移配置
+│-- phinx.php 数据库迁移配置
 │-- phpunit.xml.dist PHPUnit 配置
 │-- phpunit.xml.dist PHPUnit 生成 HTML 覆盖率配置，需要安装 xdebug
 └── ...
@@ -55,12 +60,13 @@ QueryPHP 遵循 **“约定优于配置”** 的原则，推荐的目录结构�
 :::
 
 ::: danger
-在 Mac 或者 Linux 环境下面，注意需要设置 `runtime` 和 `storage` 目录权限为 777。
+在 Mac 或者 Linux 环境下面，注意需要设置 `runtime`、`bootstrap` 和 `storage` 目录权限为 0777。
 当然实际上我们在 Mac 开发环境直接给某个目录授权给用户。
 ```
 drwxr-xr-x  62 dyhb  staff   1.9K 11 19 11:14 codes
 ```
 :::
+
 
 ## 多应用
 

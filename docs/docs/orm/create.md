@@ -24,7 +24,7 @@
 
 ``` php
 $entity = new TestEntity();
-$entity->name = \'foo\';
+$entity->name = 'foo';
 $entity->save()->flush();
 ```
 

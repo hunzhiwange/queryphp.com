@@ -47,7 +47,7 @@ sudo chmod 777 ./build/composer
 安装过程
 
 ```
-Cloning into \'queryphp\'...
+Cloning into 'queryphp'...
 remote: Enumerating objects: 54, done.
 remote: Counting objects: 100% (54/54), done.
 remote: Compressing objects: 100% (39/39), done.
@@ -380,7 +380,7 @@ function hello(a,b) {
 
 ```
 git add .
-git commit -m \'测试格式化\'
+git commit -m '测试格式化'
 ```
 
 运行过程
@@ -496,7 +496,7 @@ sudo chmod 777 ./build/composer
 安装过程
 
 ```
-Cloning into \'./vendor/hunzhiwange/framework\'...
+Cloning into './vendor/hunzhiwange/framework'...
 remote: Enumerating objects: 382, done.
 remote: Counting objects: 100% (382/382), done.
 remote: Compressing objects: 100% (218/218), done.
@@ -537,24 +537,24 @@ cp ./tests/config.php ./tests/config.local.php
 ```php
 <?php
 
-$GLOBALS[\'LEEVEL_ENV\'][\'DATABASE\'][\'MYSQL\'] = [
-    \'HOST\'     => \'127.0.0.1\',
-    \'PORT\'     => 3306,
-    \'NAME\'     => \'test\',
-    \'USER\'     => \'root\',
-    \'PASSWORD\' => \'123456\',
+$GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL'] = [
+    'HOST'     => '127.0.0.1',
+    'PORT'     => 3306,
+    'NAME'     => 'test',
+    'USER'     => 'root',
+    'PASSWORD' => '123456',
 ];
 
-$GLOBALS[\'LEEVEL_ENV\'][\'CACHE\'][\'REDIS\'] = [
-    \'HOST\'     => \'127.0.0.1\',
-    \'PORT\'     => 6380,
-    \'PASSWORD\' => \'123456\',
+$GLOBALS['LEEVEL_ENV']['CACHE']['REDIS'] = [
+    'HOST'     => '127.0.0.1',
+    'PORT'     => 6380,
+    'PASSWORD' => '123456',
 ];
 
-$GLOBALS[\'LEEVEL_ENV\'][\'SESSION\'][\'REDIS\'] = [
-    \'HOST\'     => \'127.0.0.1\',
-    \'PORT\'     => 6380,
-    \'PASSWORD\' => \'123456\',
+$GLOBALS['LEEVEL_ENV']['SESSION']['REDIS'] = [
+    'HOST'     => '127.0.0.1',
+    'PORT'     => 6380,
+    'PASSWORD' => '123456',
 ];
 ```
 
@@ -677,7 +677,7 @@ class Name{
 
 ```
 git add .
-git commit -m \'测试格式化\'
+git commit -m '测试格式化'
 ```
 
 运行过程

@@ -17,7 +17,7 @@
 `函数原型`
 
 ``` php
-public function findCount(string $field = \'*\', string $alias = \'row_count\', bool $flag = false);
+public function findCount(string $field = '*', string $alias = 'row_count', bool $flag = false);
 ```
 
 ::: tip

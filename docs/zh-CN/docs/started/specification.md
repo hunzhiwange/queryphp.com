@@ -72,13 +72,13 @@ $php build/php-cs-fixer fix --config=.php_cs.dist
 ### Git Commit
 
 ``` sh
-git commit -m \'pass hook\'
+git commit -m 'pass hook'
 ```
 
 上述脚本就会自动运行帮助你格式化代码,你也可以忽略脚本。
 
 ``` sh
-git commit -n -m \'pass hook\'
+git commit -n -m 'pass hook'
 ```
 
 这样子我们再也不需要浪费时间在无意义的代码风格的讨论上了。

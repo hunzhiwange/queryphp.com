@@ -13,10 +13,10 @@ QueryPHP 有一个非常独特的地方就是路由设计与其它框架有点�
 ### Laravel 5
 
 ``` php
-Route::middleware([\'first\', \'second\'])->group(function () {
-    Route::get(\'/\', function () {
+Route::middleware(['first', 'second'])->group(function () {
+    Route::get('/', function () {
     });
-    Route::get(\'user/profile\', function () {
+    Route::get('user/profile', function () {
     });
 });
 ```
@@ -24,18 +24,18 @@ Route::middleware([\'first\', \'second\'])->group(function () {
 ### ThinkPHP 5
 
 ``` php
-Route::group(\'blog\', function () {
-    Route::rule(\':id\', \'blog/read\');
-    Route::rule(\':name\', \'blog/read\');
-})->ext(\'html\')->pattern([\'id\' => \'\d+\', \'name\' => \'\w+\']);
+Route::group('blog', function () {
+    Route::rule(':id', 'blog/read');
+    Route::rule(':name', 'blog/read');
+})->ext('html')->pattern(['id' => '\d+', 'name' => '\w+']);
 ```
 
 ### FastRoute
 
 ``` php
-$r->addRoute(\'GET\', \'/user/{id:\d+}\', \'handler\');
-$r->addRoute(\'GET\', \'/user/{name}\', \'handler\');
-$r->addRoute(\'GET\', \'/user/{name:.+}\', \'handler\');
+$r->addRoute('GET', '/user/{id:\d+}', 'handler');
+$r->addRoute('GET', '/user/{name}', 'handler');
+$r->addRoute('GET', '/user/{name:.+}', 'handler');
 ```
 
 ::: tip
@@ -146,7 +146,7 @@ Restful 已经是一种开发主流，前后端分离的场景我们通常会定
 我们可以通过 Request 中的 params 来访问参数。
 
 ``` php
-\Leevel::app(\'request\')->params->get(\'_param0\'); // 5
+\Leevel::app('request')->params->get('_param0'); // 5
 ```
 
 ::: warning 数字类数据支持多个和跨目录
@@ -215,7 +215,7 @@ public function petLeevelForApi($petId)
 VS Laravel:
 
 ``` php
-Route::get(\'/\', function () {
+Route::get('/', function () {
 });
 ```
 
@@ -227,11 +227,11 @@ QueryPHP 的注解路由，在标准 Swagger-php 的基础上增加了自定义�
 系统支持一些自定义属性，可以扩展看路由的功能。
 
 ```
-leevelScheme = "https",
-leevelDomain = "{subdomain:[A-Za-z]+}-vip.{domain}",
-leevelParams = {"args1": "hello", "args2": "world"},
-leevelMiddlewares = "api"
-leevelBind = "\XXX\XXX\class@method"
+leevelScheme="https",
+leevelDomain="{subdomain:[A-Za-z]+}-vip.{domain}",
+leevelParams={"args1": "hello", "args2": "world"},
+leevelMiddlewares="api"
+leevelBind="\XXX\XXX\class@method"
 ```
 
 ::: danger
