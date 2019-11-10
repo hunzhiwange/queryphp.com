@@ -64,6 +64,7 @@ module.exports = {
             title12:'ORM',
             title13:'Component',
             title14:'Developer',
+            title15:'Validate',
           }),
         }
       },
@@ -90,6 +91,7 @@ module.exports = {
             title12:'ORM',
             title13:'组件',
             title14:'开发者',
+            title15:'驗證器',
           }),
         }
       },
@@ -116,6 +118,7 @@ module.exports = {
             title12:'ORM',
             title13:'組件',
             title14:'開發者',
+            title15:'验证器',
           }),
         }
       }
@@ -164,6 +167,7 @@ function genSidebarConfigDoc (title) {
         'started/install',
         'started/specification',
         'started/directory',
+        'started/namespace',
       ]
     },
     {
@@ -295,6 +299,14 @@ function genSidebarConfigDoc (title) {
         'component/encryption',
         'component/safe',
         'component/collection',
+        {
+          title: title.title15,
+          collapsable: true,
+          'children': [
+            'component/validate/',
+            'component/validate/assert',
+          ]
+        },
       ]
     },
     {
