@@ -305,6 +305,22 @@ function genSidebarConfigDoc (title) {
           'children': [
             'component/validate/',
             'component/validate/assert',
+            'component/validate/helper',
+            'component/validate/validator/accepted',
+            'component/validate/validator/allowedip',
+            'component/validate/validator/alpha',
+            'component/validate/validator/alphadash',
+            'component/validate/validator/alphalower',
+            'component/validate/validator/alphanum',
+            'component/validate/validator/alphaupper',
+            'component/validate/validator/array',
+            'component/validate/validator/between',
+            'component/validate/validator/betweenequal',
+            'component/validate/validator/boolean',
+            'component/validate/validator/chinese',
+            'component/validate/validator/chinesealphadash',
+            'component/validate/validator/chinesealphanum',
+            'component/validate/validator/dateformat',
           ]
         },
       ]
