@@ -4,7 +4,7 @@
 [tests/Validate/AssertTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/AssertTest.php)
 :::
     
-这里为系统提供的基础的断言功能。
+这里为系统提供的基础的断言功能，断言的规则与验证器共享校验规则。
 
 **Uses**
 
