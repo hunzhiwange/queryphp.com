@@ -203,6 +203,28 @@ public function testSetNodeAsChildren(): void
     
 ## Tree.getChildrenTree 获取节点子树
 
+
+`测试树数据`
+
+``` php
+protected function providerTree(): Tree
+{
+    return new Tree([
+        [1, 0, 'hello'],
+        [2, 1, 'world'],
+        [3, 1, 'foo'],
+        [4, 1, 'bar'],
+        [5, 3, 'subfoo'],
+        [6, 5, 'subsubfoo'],
+    ]);
+}
+```
+
+::: warning
+后面的测试，也会用到这个测试树数据。
+:::
+
+
 ``` php
 public function testGetChildrenTree(): void
 {
