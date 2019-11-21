@@ -375,6 +375,7 @@ function genSidebarConfigDoc (title) {
             'component/validate/validator/zipcode',
           ]
         },
+        'component/tree',
       ]
     },
     {
