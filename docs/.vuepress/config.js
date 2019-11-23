@@ -295,6 +295,7 @@ function genSidebarConfigDoc (title) {
       children: [
         'component/support/str',
         'component/support/arr',
+        'component/support/type',
         'component/debug',
         'component/encryption',
         'component/safe',

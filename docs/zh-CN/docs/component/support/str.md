@@ -202,7 +202,6 @@ public function testRandChinese(): void
 public function testRandStr(): void
 {
     $this->assertSame('', Str::randStr(0, ''));
-
     $this->assertSame('', Str::randStr(5, ''));
 
     $this->assertTrue(
@@ -259,11 +258,8 @@ public function testFormatBytes(): void
 public function testCamelize(): void
 {
     $this->assertSame('helloWorld', Str::camelize('helloWorld'));
-
     $this->assertSame('helloWorld', Str::camelize('helloWorld', '-'));
-
     $this->assertSame('helloWorld', Str::camelize('hello_world'));
-
     $this->assertSame('helloWorld', Str::camelize('hello-world', '-'));
 }
 ```
@@ -274,11 +270,8 @@ public function testCamelize(): void
 public function testUnCamelize(): void
 {
     $this->assertSame('hello_world', Str::unCamelize('hello_world'));
-
     $this->assertSame('hello-world', Str::unCamelize('hello-world', '-'));
-
     $this->assertSame('hello_world', Str::unCamelize('helloWorld'));
-
     $this->assertSame('hello-world', Str::unCamelize('helloWorld', '-'));
 }
 ```
@@ -289,7 +282,6 @@ public function testUnCamelize(): void
 public function testStartsWith(): void
 {
     $this->assertFalse(Str::startsWith('foo', 'hello'));
-
     $this->assertTrue(Str::startsWith('foo bar', 'foo'));
 }
 ```
@@ -300,7 +292,6 @@ public function testStartsWith(): void
 public function testEndsWith(): void
 {
     $this->assertFalse(Str::endsWith('foo', 'hello'));
-
     $this->assertTrue(Str::endsWith('foo bar', 'bar'));
 }
 ```
@@ -311,7 +302,6 @@ public function testEndsWith(): void
 public function testContains(): void
 {
     $this->assertFalse(Str::contains('foo', ''));
-
     $this->assertTrue(Str::contains('foo bar', 'foo'));
 }
 ```
