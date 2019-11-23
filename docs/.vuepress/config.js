@@ -184,6 +184,7 @@ function genSidebarConfigDoc (title) {
       collapsable: true,
       children: [
         'router/',
+        'router/url',
       ]
     },
     {
