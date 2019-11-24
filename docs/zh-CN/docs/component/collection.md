@@ -177,7 +177,7 @@ use Leevel\Support\IJson;
 use stdClass;
 use Tests\TestCase;
 
-class TestIArray implements IArray
+class TestArray implements IArray
 {
     public function toArray(): array
     {
@@ -200,7 +200,7 @@ public function testGetArrayElements2(): void
         'world',
     ];
 
-    $collection = new Collection(new TestIArray());
+    $collection = new Collection(new TestArray());
 
     $this->assertSame($collection->toArray(), $data);
 }
@@ -222,7 +222,7 @@ use Leevel\Support\IJson;
 use stdClass;
 use Tests\TestCase;
 
-class TestIJson implements IJson
+class TestJson implements IJson
 {
     public function toJson(?int $option = null): string
     {
@@ -249,7 +249,7 @@ public function testGetArrayElements3(): void
         'world',
     ];
 
-    $collection = new Collection(new TestIJson());
+    $collection = new Collection(new TestJson());
 
     $this->assertSame($collection->toArray(), $data);
 }
@@ -297,5 +297,268 @@ public function testGetArrayElements4(): void
     $collection = new Collection(new TestJsonSerializable());
 
     $this->assertSame($collection->toArray(), $data);
+}
+```
+    
+## 集合数据支持普通数据转化为数组
+
+``` php
+public function testGetArrayElements5(): void
+{
+    $data = [
+        'hello',
+    ];
+
+    $collection = new Collection('hello');
+
+    $this->assertSame($collection->toArray(), $data);
+}
+```
+    
+## 集合数据支持 \stdClass 的对象
+
+对象为 `\stdClass` 可以转化为集合数据。
+
+> `\stdClass` 的对象返回转化为数组作为集合的数据。
+
+
+``` php
+public function testGetArrayElementsWithStdClass(): void
+{
+    $data = [
+        'hello' => 'world',
+        'foo'   => 'bar',
+    ];
+
+    $std = new stdClass();
+    $std->hello = 'world';
+    $std->foo = 'bar';
+
+    $collection = new Collection($std);
+
+    $this->assertSame($collection->toArray(), $data);
+}
+```
+    
+## 集合数据支持类型验证
+
+比如下面的数据类型为 `string`，只有字符串类型才能加入集合。
+
+
+``` php
+public function testTypeValidate(): void
+{
+    $data = [
+        'hello',
+        'world',
+    ];
+
+    $collection = new Collection($data, ['string']);
+    $this->assertSame($collection->toArray(), $data);
+}
+```
+    
+## 集合数据支持类型验证不符合规则示例
+
+比如下面的数据类型为 `int`，字符串类型就会抛出异常。
+
+``` php
+public function testTypeValidateException(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Collection type int validation failed.'
+    );
+
+    $data = [
+        'hello',
+        'world',
+    ];
+
+    new Collection($data, ['int']);
+}
+```
+    
+## each 集合数据遍历元素项
+
+使用闭包进行遍历，闭包的第一个参数为元素值，第二为元素键。
+
+``` php
+public function testEach(): void
+{
+    $data = [
+        'hello',
+        'world',
+    ];
+
+    $collection = new Collection($data);
+
+    $i = 0;
+    $collection->each(function ($item, $key) use (&$i) {
+        $this->assertSame($i, $key);
+
+        if (0 === $i) {
+            $this->assertSame($item, 'hello');
+        } else {
+            $this->assertSame($item, 'world');
+        }
+
+        $i++;
+    });
+}
+```
+    
+## each 集合数据遍历元素项支持中断
+
+遍历元素项的时候返回 `false` 将会中断后续遍历操作。
+
+``` php
+public function testEachAndBreak(): void
+{
+    $data = [
+        'hello',
+        'world',
+    ];
+
+    $collection = new Collection($data);
+
+    $i = 0;
+
+    $collection->each(function ($item, $key) use (&$i) {
+        $this->assertSame($i, $key);
+
+        if (0 === $i) {
+            $this->assertSame($item, 'hello');
+
+            return false;
+        }
+
+        $i++;
+    });
+
+    $this->assertSame($i, 0);
+}
+```
+    
+## toJson 集合数据支持 JSON 输出
+
+集合实现了 `\Leevel\Support\IJson` 接口，可以通过方法 `toJson` 输出 JSON 字符串。
+
+``` php
+public function testToJson(): void
+{
+    $data = [
+        'hello',
+        'world',
+    ];
+
+    $collection = new Collection($data);
+
+    $data = '["hello","world"]';
+
+    $this->assertSame($data, $collection->toJson());
+}
+```
+    
+## toJson 集合数据支持 JSON 输出默认不要编码 Unicode
+
+JSON_UNESCAPED_UNICODE 可以让有中文的 JSON 字符串更加友好地输出。
+
+``` php
+json_encode('中文', JSON_UNESCAPED_UNICODE);
+```
+
+
+``` php
+public function testToJsonWithCn(): void
+{
+    $data = [
+        '我',
+        '成都',
+    ];
+
+    $collection = new Collection($data);
+
+    $data = '["我","成都"]';
+
+    $this->assertSame($data, $collection->toJson());
+}
+```
+    
+## toJson 集合数据支持 JSON 输出
+
+集合实现了 `\JsonSerializable` 接口，可以通过方法 `toJson` 输出 JSON 字符串。
+
+``` php
+public function testJsonSerialize(): void
+{
+    $std = new stdClass();
+    $std->hello = 'world';
+    $std->foo = 'bar';
+
+    $data = [
+        new TestJsonSerializable(),
+        new TestArray(),
+        new TestJson(),
+        $std,
+        'foo',
+        'bar',
+    ];
+
+    $collection = new Collection($data);
+
+    $data = <<<'eot'
+        [
+            [
+                "hello",
+                "world"
+            ],
+            [
+                "hello",
+                "world"
+            ],
+            [
+                "hello",
+                "world"
+            ],
+            {
+                "hello": "world",
+                "foo": "bar"
+            },
+            "foo",
+            "bar"
+        ]
+        eot;
+
+    $this->assertSame(
+        $data,
+        $this->varJson(
+            $collection->jsonSerialize()
+        )
+    );
+}
+```
+    
+## __toString 集合数据可以转化为字符串
+
+集合实现了 `__toString` 方法，可以强制转化为字符串。
+
+``` php
+public function testGetSetString(): void
+{
+    $data = [
+        'hello' => 'world',
+        'foo'   => 'bar',
+    ];
+
+    $collection = new Collection($data);
+
+    $this->assertSame($collection->hello, 'world');
+    $this->assertSame($collection->foo, 'bar');
+    $collection->hello = 'new world';
+    $collection->foo = 'new bar';
+    $this->assertSame($collection->hello, 'new world');
+    $this->assertSame($collection->foo, 'new bar');
+    $this->assertSame((string) $collection, '{"hello":"new world","foo":"new bar"}');
 }
 ```
