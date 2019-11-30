@@ -11,7 +11,7 @@ module.exports = [
     text: 'Community',
     items: [
       {
-        text: 'BBS',
+        text: 'China mirror',
         link: 'https://www.114.ms/'
       },
       {
