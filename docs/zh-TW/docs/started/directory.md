@@ -8,7 +8,9 @@ QueryPHP 遵循 **“约定优于配置”** 的原则，主张通过领域驱�
 
 ## 基本结构
 
-::: vue
+下面是整个应用基本目录结构，系统结构可以自由定义。
+
+```
 .
 ├── apis Swagger API 目录
 ├── application
@@ -53,7 +55,7 @@ QueryPHP 遵循 **“约定优于配置”** 的原则，主张通过领域驱�
 │-- phpunit.xml.dist PHPUnit 配置
 │-- phpunit.xml.dist PHPUnit 生成 HTML 覆盖率配置，需要安装 xdebug
 └── ...
-:::
+```
 
 ::: warning 注意
 请留意目录名的大写。
