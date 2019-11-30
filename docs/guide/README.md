@@ -134,18 +134,18 @@ INFO[0060] 127.0.0.1 {23.1ms} 200 GET http://127.0.0.1:9601/api/test
 ## 特性
 
 - 框架理念 (值得托付的使命感，让每一个 PHP 应用都有一个好框架。)
-- 组件系统 ([框架底层由独立的高内聚低耦合组件构成，可以轻松无侵入接入现有系统。](https://packagist.org/packages/leevel/))
-- 路由系统 ([框架提供 MVC 自动路由并能够智能解析 Restful 请求和基于 OpenApi 3.0 规范的 swagger-php 注解路由，文档路由一步搞定。](https://www.v2ex.com/t/492979#reply3))
+- 组件系统 (框架底层由独立的高内聚低耦合组件构成，可以轻松无侵入接入现有系统。)
+- 路由系统 (框架提供 MVC 自动路由并能够智能解析 Restful 请求和基于 OpenApi 3.0 规范的 swagger-php 注解路由，文档路由一步搞定。)
 - 整体解决方案 (框架提供了从缓存、Session、IOC 容器、模板引擎、Ddd ORM 等大量开箱即用的功能，提供了基于 Symfony Console 命令行工具集。)
-- 框架常驻 ([Leevel 可选扩展接管底层核心](https://github.com/hunzhiwange/leevel))
-- 业务常驻 (基于 Swoole 4 开发，我们的愿景是少量代码或者无修改，让你的业务撑起更多的用户服务。)
-- 百分之百单元测试覆盖（[单元测试一直是国产 PHP 开源项目的痛](https://github.com/hunzhiwange/framework/tree/master/tests)）
-- 拜师国外现代化框架 ([从 Laravel、Symfony 吸收大量特性，也包含其它的框架.](https://github.com/hunzhiwange/framework/blob/master/LICENSE))
-- PHP 7 严格模式 （每一个 PHP 脚本都是 strict_types = 1）
-- PHP 7 类型提示 (尽可能为每一个方法提供确定的参数类型和返回值类型）
-- 依赖注入 （完整实现，关键 mvc、命令行脚本、事件监听器全部接入 IOC）
-- 领域驱动设计 （在妖怪的 QeePHP 基础上保持创新，提供了 UnitOfWork[事务工作单元]、Repository[仓储]、Specification[查询规约]，Entity getter setter[领域实体或叫模型] ）
-- more...
+- 高品质 (百分之百单元测试覆盖直面 Bug，我们一直致力于创造高品质的产品 level level leevel。)
+- 业务协程化 (基于 Swoole 4 开发，我们的愿景是少量代码或者无修改，让你的业务撑起更多的用户服务。)
+- 百分之百单元测试覆盖（超过 3500 例测试用例保证系统可靠性和可持续维护。）
+- PHP 7 严格模式 （每一个 PHP 脚本都是 strict_types=1，严格模式可以避免很多弱类型带来潜在 BUG。）
+- PHP 7 类型提示 (尽可能为每一个方法提供确定的参数类型和返回值类型，以及类属性的类型支持。）
+- 依赖注入（完整实现，关键 MVC、命令行脚本、事件监听器全部接入 IOC 容器。）
+- 领域驱动设计（支持 UnitOfWork 事务工作单元、Repository 仓储、Specification 查询规约，Entity Getter Setter领域实体等。）
+- 避免闭门造车 (QueryPHP 一直从 Laravel、Symfony 等框架吸收一些优秀的设计，同时我们自身也进行了大量的创新设计。)
+- 更多的特性期待你的发现...
 
 ## Todo
 
