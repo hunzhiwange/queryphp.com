@@ -417,7 +417,7 @@ class WaitGroup
 </div>
 
 ::: warning Warning
-QueryPHP requires PHP >= 7.3.2.
+QueryPHP requires PHP >= 7.4.0.
 :::
 
 <!-- <div id="sponsors">

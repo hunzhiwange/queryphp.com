@@ -77,7 +77,7 @@ public function testSwooleRequestWithServer(): void
     $wooleRequest->server = [
         'SERVER_ADDR'     => '127.0.0.1',
         'SERVER_NAME'     => 'localhost',
-        'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win64) PHP/7.3.2',
+        'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win64) PHP/7.4.0',
         'SERVER_PROTOCOL' => 'HTTP/1.1',
         'REQUEST_METHOD'  => 'GET',
     ];
@@ -92,7 +92,7 @@ public function testSwooleRequestWithServer(): void
             "HTTP_FOO": "bar",
             "SERVER_ADDR": "127.0.0.1",
             "SERVER_NAME": "localhost",
-            "SERVER_SOFTWARE": "Apache\/2.2.22 (Win64) PHP\/7.3.2",
+            "SERVER_SOFTWARE": "Apache\/2.2.22 (Win64) PHP\/7.4.0",
             "SERVER_PROTOCOL": "HTTP\/1.1",
             "REQUEST_METHOD": "GET"
         }

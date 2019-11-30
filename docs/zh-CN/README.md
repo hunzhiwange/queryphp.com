@@ -427,7 +427,7 @@ class WaitGroup
 </div>
 
 ::: warning 注意
-请确保你的 PHP 版本 >= 7.3.2。
+请确保你的 PHP 版本 >= 7.4.0。
 :::
 
 <!-- <div id="sponsors">

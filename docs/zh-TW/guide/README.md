@@ -20,9 +20,9 @@ QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式
 
 ### 运行在 PHP-FPM 场景或者 PHP 内置 webserver
 
-事实上，QueryPHP 也是一个普通的 PHP 框架，目前最低版本要求 PHP 7.3.2，我们对环境并没有特别的要求。
+事实上，QueryPHP 也是一个普通的 PHP 框架，目前最低版本要求 PHP 7.4.0，我们对环境并没有特别的要求。
 
- * PHP ^7.3.2
+ * PHP ^7.4.0
  * ext-mbstring [字符处理](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Support/Str.php)
  * ext-openssl [加密组件](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Encryption/Encryption.php)
 
