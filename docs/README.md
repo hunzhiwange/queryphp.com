@@ -408,7 +408,7 @@ class WaitGroup
  </div>
  <div class="feature">
   <h2>High Quality</h2>
-  <p>A hundred percent coverage of the unit tests to facing the bug,with our continuous commitment to creating high quality products for level level leevel。</p>
+  <p>A hundred percent coverage of the unit tests to facing the bug,with our continuous commitment to creating high quality products for level level leevel.</p>
  </div>
  <div class="feature">
   <h2>Business Coroutine</h2>
