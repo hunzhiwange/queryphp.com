@@ -21,7 +21,7 @@ footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
 
 <div style="color:#212121!important;font-weight:700;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
   <div style="margin-bottom:10px;">QueryPHP is a modern, high performance PHP progressive coroutine framework, we still focus on traditional PHP-FPM scenarios,with engineer user experience as its historical mission, let every PHP application have a good framework.</div>
-  <div>A hundred percent coverage of the unit tests to facing the bug,with our continuous commitment to creating high quality products for level level leevel,,with Swoole coroutine to improving business performance,now or in the future step by step.Our vision is USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>,let your business to support more user services.</div>
+  <div>A hundred percent coverage of the unit tests to facing the bug,with our continuous commitment to creating high quality products for level level leevel,with Swoole coroutine to improving business performance,now or in the future step by step.Our vision is USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>,let your business to support more user services.</div>
 </div>
 
 <div style="margin-top: -50px;margin-bottom: -80px;">

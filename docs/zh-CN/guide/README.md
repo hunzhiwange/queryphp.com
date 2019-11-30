@@ -129,30 +129,8 @@ Swoole 部分在第一个版本被撤下来了，后面回归。
 
 QueryPHP 仍然处于开发中，这里有一些目前还不支持、但已经在计划中的特性：
 
-- 基于 Vue + IView 通用权限系统
 - 完善 Swoole
 - 开发文档
+- 单元测试
 
 我们欢迎你为 QueryPHP 的开发作出贡献。
-
-## 为什么不是...?
-
-### Laravel
-
-Laravel 是一个非常优秀的框架，拥有非常庞大的社区，实际上 QueryPHP 大量吸收了 Laravel 的一些优秀特性。一直以来 Laravel 性能确实为人诟病，QueryPHP 开发了一个 Leevel 来解决这一部分问题，用 Laravel 没错，QueryPHP 只是其中一个选择。
-
-### Symfony
-
-Symfony 实际上是 PHP 社区事实标准，QueryPHP 底层大量使用 Symfony 的基础组件例如 console、finder 等，Symfony 可以与 QueryPHP 更好地结合。
-
-### ThinkPHP
-
-ThinkPHP 是我最佩服的一个国产 PHP 框架，10 多年来还在持续不断的革新，国内很少有生命力这么久的框架。我在 2010 年就通读了 ThinkPHP 2.0 代码，在后面工作中主要也是使用 ThinkPHP 3 系列，有苦也有乐。加油！
-
-### Phalcon & Yaf
-
-Phalcon 与 Yaf 世界上最快的 PHP 框架，Yaf 很轻，Phalcon 很重，它们都是世界级的框架。
-
-QueryPHP 选择一部分由 PHP 编写，一部分编译成扩选扩展 Leevel。
-
-Leevel 位于 Yaf 和 Phalcon 轻重之间，是一种可选的方案。
