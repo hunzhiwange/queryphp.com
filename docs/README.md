@@ -407,8 +407,8 @@ class WaitGroup
   <p>The framework provides a large number of built-in functions from caching, Session, IOC container, template engine, Ddd ORM, and provides a Symfony Console command line toolkit.</p>
  </div>
  <div class="feature">
-  <h2>Framework Core Resident</h2>
-  <p>Based on Zephir, we developed a C-extended version of the core components of the whole system, which is fully consistent with the functions of PHP and can double the performance without modifying any code.</p>
+  <h2>High Quality</h2>
+  <p>A hundred percent coverage of the unit tests to facing the bug,with our continuous commitment to creating high quality products for level level leevel。</p>
  </div>
  <div class="feature">
   <h2>Business Coroutine</h2>

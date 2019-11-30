@@ -417,8 +417,8 @@ class WaitGroup
   <p>框架提供了从缓存、Session、IOC 容器、模板引擎、Ddd ORM 等大量开箱即用的功能，提供了基于 Symfony Console 命令行工具集。</p>
  </div>
  <div class="feature">
-  <h2>框架核心常驻</h2>
-  <p>我们基于 Zephir 开发整个系统核心组件的 C 扩展版本，与 PHP 功能完全一致，无需修改任何代码即可性能加倍。</p>
+  <h2>高品质</h2>
+  <p>百分之百单元测试覆盖直面 Bug，我们一直致力于创造高品质的产品 level level leevel。</p>
  </div>
  <div class="feature">
   <h2>业务协程化</h2>
