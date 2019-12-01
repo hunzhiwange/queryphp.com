@@ -65,6 +65,7 @@ module.exports = {
             title13:'Component',
             title14:'Developer',
             title15:'Validate',
+            title16:'Option',
           }),
         }
       },
@@ -91,7 +92,8 @@ module.exports = {
             title12:'ORM',
             title13:'组件',
             title14:'开发者',
-            title15:'驗證器',
+            title15:'验证器',
+            title16:'配置',
           }),
         }
       },
@@ -118,7 +120,8 @@ module.exports = {
             title12:'ORM',
             title13:'組件',
             title14:'開發者',
-            title15:'验证器',
+            title15:'驗證器',
+            title16:'配寘',
           }),
         }
       }
@@ -378,7 +381,14 @@ function genSidebarConfigDoc (title) {
           ]
         },
         'component/tree',
-        'component/option',
+        {
+          title: title.title16,
+          collapsable: true,
+          'children': [
+            'component/option',
+            'component/option/composer',
+          ],
+        },
       ]
     },
     {

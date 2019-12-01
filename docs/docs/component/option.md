@@ -73,7 +73,7 @@ composer.json 可以扩展目录
 
 系统默认常见配置：
 
-|支持字符|替换字符|
+|配置项|配置描述|
 |:-|:-|
 |app|应用配置|
 |auth|登陆验证|
@@ -125,7 +125,7 @@ Option cache file /data/codes/queryphp/bootstrap/option.php cache clear successe
 
 ::: tip
 配置参数名严格区分大小写，建议是使用小写定义配置参数的规范。
-::: 
+:::
 
 app 应用配置中几个核心的配置项，这是整个系统关键的配置。
 
