@@ -65,8 +65,11 @@ composer.json 可以扩展目录
         }
     }
 }
+```
 
+::: warning
 注意，其它软件包也可以采用这种方式自动注入扩展默认配置。
+:::
 
 系统默认常见配置：
 
@@ -87,7 +90,6 @@ composer.json 可以扩展目录
 |session|Session 配置|
 |throttler|限流配置|
 |view|视图配置|
-```
 
 ## 配置缓存
 
@@ -103,6 +105,8 @@ php leevel option:cache
 Start to cache option.
 Option cache file /data/codes/queryphp/bootstrap/option.php cache successed.
 ```
+
+清理配置缓存
 
 ``` sh
 php leevel option:clear
@@ -438,7 +442,7 @@ public function testReset(): void
     
 ## 数组访问配置对象
 
-配置实现了 \ArrayAccess，可以通过以数组的方式访问配置对象，在服务提供者中经常运用。
+配置实现了 `\ArrayAccess`，可以通过以数组的方式访问配置对象，在服务提供者中经常运用。
 
 ``` php
 public function testArrayAccess(): void

@@ -378,6 +378,7 @@ function genSidebarConfigDoc (title) {
           ]
         },
         'component/tree',
+        'component/option',
       ]
     },
     {
