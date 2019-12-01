@@ -19,3 +19,10 @@ You can publish your modify by use the command:
 ```
 sh ./deploy.sh
 ```
+
+## Node set
+
+``` sh
+npm install -g increase-memory-limit
+increase-memory-limit
+```
