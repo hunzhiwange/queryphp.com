@@ -64,7 +64,7 @@ interface IBlock
      */
     public static function key(array $params = []): string;
 }
-``` 
+```
 
 缓存块实现非常灵活，可以非常轻松地使用。
 
@@ -74,7 +74,7 @@ interface IBlock
 
 ``` php
 \Leevel\Cache\Proxy\Load::data(array $names, array $option = [], bool $force = false): array;
-\Leevel\Cache\Proxy\Load::refresh(array $names): void; 
+\Leevel\Cache\Proxy\Load::refresh(array $names): void;
 ```
 
 
@@ -94,9 +94,7 @@ interface IBlock
 data(array $names, array $option = [], bool $force = false): array;
 ```
 
-::: tip
 配置 `$option` 和 缓存功能中的 `set` 的用法一致。
-:::
 
 
 ``` php
@@ -123,9 +121,7 @@ public function testBaseUse(): void
 refresh(array $names): void;
 ```
 
-::: tip
 刷新缓存块本质是删除缓存块数据，下次请求自动生成。
-:::
 
 
 ``` php
@@ -204,9 +200,7 @@ class Test4 implements IBlock
 }
 ```
 
-::: tip
 参数通过 `:` 冒号进行分割，冒号后边是自定义参数。
-:::
 
 
 ``` php
