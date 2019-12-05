@@ -66,6 +66,7 @@ module.exports = {
             title14:'Developer',
             title15:'Validate',
             title16:'Option',
+            title17:'Cache',
           }),
         }
       },
@@ -94,6 +95,7 @@ module.exports = {
             title14:'开发者',
             title15:'验证器',
             title16:'配置',
+            title17:'缓存',
           }),
         }
       },
@@ -122,6 +124,7 @@ module.exports = {
             title14:'開發者',
             title15:'驗證器',
             title16:'配寘',
+            title17:'緩存',
           }),
         }
       }
@@ -387,6 +390,14 @@ function genSidebarConfigDoc (title) {
           'children': [
             'component/option',
             'component/option/composer',
+          ],
+        },
+        {
+          title: title.title17,
+          collapsable: true,
+          'children': [
+            'component/cache',
+            'component/cache/load',
           ],
         },
       ]
