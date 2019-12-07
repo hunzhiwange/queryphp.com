@@ -1,7 +1,7 @@
-# 验证器.验证是否为浮点数
+# Validator.is_float
 
 ::: tip Testing Is Documentation
-[tests/Validate/Validator/FloatTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/FloatTest.php)
+[tests/Validate/Validator/IsFloatTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsFloatTest.php)
 :::
     
 **Uses**
@@ -36,7 +36,7 @@ public function testBaseUse($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'float',
+            'name'     => 'is_float',
         ]
     );
 
@@ -71,7 +71,7 @@ public function testBad($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'float',
+            'name'     => 'is_float',
         ]
     );
 

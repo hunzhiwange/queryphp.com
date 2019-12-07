@@ -1,7 +1,7 @@
-# Validator.empty
+# 验证器.值是否为空
 
 ::: tip Testing Is Documentation
-[tests/Validate/Validator/EmptyTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/EmptyTest.php)
+[tests/Validate/Validator/IsEmptyTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsEmptyTest.php)
 :::
     
 **Uses**
@@ -42,7 +42,7 @@ public function testBaseUse($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'empty',
+            'name'     => 'is_empty',
         ]
     );
 
@@ -86,7 +86,7 @@ public function testBad($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'empty',
+            'name'     => 'is_empty',
         ]
     );
 

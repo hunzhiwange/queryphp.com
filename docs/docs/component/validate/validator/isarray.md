@@ -1,7 +1,7 @@
-# Validator.array
+# Validator.is_array
 
 ::: tip Testing Is Documentation
-[tests/Validate/Validator/ArrayTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/ArrayTest.php)
+[tests/Validate/Validator/IsArrayTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsArrayTest.php)
 :::
     
 **Uses**
@@ -35,7 +35,7 @@ public function testBaseUse($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'array',
+            'name'     => 'is_array',
         ]
     );
 
@@ -74,7 +74,7 @@ public function testBad($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'array',
+            'name'     => 'is_array',
         ]
     );
 

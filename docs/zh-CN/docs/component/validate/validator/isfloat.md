@@ -1,13 +1,12 @@
-# 验证器.是否为 null
+# 验证器.验证是否为浮点数
 
 ::: tip Testing Is Documentation
-[tests/Validate/Validator/NullTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/NullTest.php)
+[tests/Validate/Validator/IsFloatTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsFloatTest.php)
 :::
     
 **Uses**
 
  * use Leevel\Validate\Validator;
- * use stdClass;
 
 ## 验证通过的数据
 
@@ -16,11 +15,12 @@
 ``` php
 public function baseUseProvider(): array
 {
-    $val = null;
-
     return [
-        [null],
-        [$val],
+        [0],
+        ['12'],
+        [' 0 '],
+        ['0.0'],
+        ['0'],
     ];
 }
 ```
@@ -36,7 +36,7 @@ public function testBaseUse($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'null',
+            'name'     => 'is_float',
         ]
     );
 
@@ -52,19 +52,10 @@ public function testBaseUse($value): void
 public function badProvider(): array
 {
     return [
-        [' '],
-        ['not numeric'],
-        [new stdClass()],
-        [['foo', 'bar']],
-        [[1, 2]],
-        ['this is a string'],
+        ['0,0'],
+        [false],
         ['foo'],
         ['bar'],
-        ['hello'],
-        ['world'],
-        [true],
-        [1],
-        [[[], []]],
     ];
 }
 ```
@@ -80,7 +71,7 @@ public function testBad($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'null',
+            'name'     => 'is_float',
         ]
     );
 

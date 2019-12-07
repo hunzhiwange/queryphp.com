@@ -1,7 +1,7 @@
-# 验证器.值是否为空
+# Validator.is_null
 
 ::: tip Testing Is Documentation
-[tests/Validate/Validator/EmptyTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/EmptyTest.php)
+[tests/Validate/Validator/IsNullTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsNullTest.php)
 :::
     
 **Uses**
@@ -19,13 +19,7 @@ public function baseUseProvider(): array
     $val = null;
 
     return [
-        [''],
-        [0],
-        [0.0],
-        ['0'],
         [null],
-        [false],
-        [[]],
         [$val],
     ];
 }
@@ -42,7 +36,7 @@ public function testBaseUse($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'empty',
+            'name'     => 'is_null',
         ]
     );
 
@@ -86,7 +80,7 @@ public function testBad($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'empty',
+            'name'     => 'is_null',
         ]
     );
 

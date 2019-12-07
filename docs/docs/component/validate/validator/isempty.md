@@ -1,12 +1,13 @@
-# 验证器.验证是否为浮点数
+# Validator.is_empty
 
 ::: tip Testing Is Documentation
-[tests/Validate/Validator/FloatTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/FloatTest.php)
+[tests/Validate/Validator/IsEmptyTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsEmptyTest.php)
 :::
     
 **Uses**
 
  * use Leevel\Validate\Validator;
+ * use stdClass;
 
 ## 验证通过的数据
 
@@ -15,12 +16,17 @@
 ``` php
 public function baseUseProvider(): array
 {
+    $val = null;
+
     return [
+        [''],
         [0],
-        ['12'],
-        [' 0 '],
-        ['0.0'],
+        [0.0],
         ['0'],
+        [null],
+        [false],
+        [[]],
+        [$val],
     ];
 }
 ```
@@ -36,7 +42,7 @@ public function testBaseUse($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'float',
+            'name'     => 'is_empty',
         ]
     );
 
@@ -52,10 +58,19 @@ public function testBaseUse($value): void
 public function badProvider(): array
 {
     return [
-        ['0,0'],
-        [false],
+        [' '],
+        ['not numeric'],
+        [new stdClass()],
+        [['foo', 'bar']],
+        [[1, 2]],
+        ['this is a string'],
         ['foo'],
         ['bar'],
+        ['hello'],
+        ['world'],
+        [true],
+        [1],
+        [[[], []]],
     ];
 }
 ```
@@ -71,7 +86,7 @@ public function testBad($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'float',
+            'name'     => 'is_empty',
         ]
     );
 

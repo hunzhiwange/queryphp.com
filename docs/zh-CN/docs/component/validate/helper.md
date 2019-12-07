@@ -15,8 +15,8 @@
 ``` php
 public function testBaseUse(): void
 {
-    $this->assertTrue(Helper::validateRequired(5));
-    $this->assertTrue(Helper::validateRequired(0));
-    $this->assertFalse(Helper::validateRequired(''));
+    $this->assertTrue(Helper::required(5));
+    $this->assertTrue(Helper::required(0));
+    $this->assertFalse(Helper::required(''));
 }
 ```

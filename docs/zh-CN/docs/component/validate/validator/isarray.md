@@ -1,13 +1,12 @@
-# Validator.null
+# 验证器.验证是否为数组
 
 ::: tip Testing Is Documentation
-[tests/Validate/Validator/NullTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/NullTest.php)
+[tests/Validate/Validator/IsArrayTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsArrayTest.php)
 :::
     
 **Uses**
 
  * use Leevel\Validate\Validator;
- * use stdClass;
 
 ## 验证通过的数据
 
@@ -16,11 +15,11 @@
 ``` php
 public function baseUseProvider(): array
 {
-    $val = null;
-
     return [
-        [null],
-        [$val],
+        [['this', 'is', 'an array']],
+        [['a' => 'aaa', 'b' => 1, 'c' => true]],
+        [['im', 'an', 'array']],
+        [['im' => 'not', 'going' => 'to be', 'an' => 'array']],
     ];
 }
 ```
@@ -36,7 +35,7 @@ public function testBaseUse($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'null',
+            'name'     => 'is_array',
         ]
     );
 
@@ -52,19 +51,14 @@ public function testBaseUse($value): void
 public function badProvider(): array
 {
     return [
-        [' '],
-        ['not numeric'],
-        [new stdClass()],
-        [['foo', 'bar']],
-        [[1, 2]],
         ['this is a string'],
+        [0.52148389816284],
+        ['0.0'],
+        ['-0.0'],
         ['foo'],
         ['bar'],
         ['hello'],
         ['world'],
-        [true],
-        [1],
-        [[[], []]],
     ];
 }
 ```
@@ -80,7 +74,7 @@ public function testBad($value): void
             'name' => $value,
         ],
         [
-            'name'     => 'null',
+            'name'     => 'is_array',
         ]
     );
 
