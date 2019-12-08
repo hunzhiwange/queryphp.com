@@ -400,6 +400,7 @@ function genSidebarConfigDoc (title) {
             'component/cache/load',
           ],
         },
+        'component/session',
       ]
     },
     {
