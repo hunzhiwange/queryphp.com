@@ -238,24 +238,24 @@ public function testTypeInstance(): void
 包括短横线、英文逗号组成，比如日期、千分位等。
 
 ``` php
-public function testTypeNumeric(): void
+public function testTypeNumber(): void
 {
-    $this->assertTrue(Type::typeNumeric(2.2));
-    $this->assertTrue(Type::typeNumeric(4));
-    $this->assertTrue(Type::typeNumeric('2.5'));
-    $this->assertTrue(Type::typeNumeric('2,111,500'));
-    $this->assertTrue(Type::typeNumeric('2018-06-10'));
-    $this->assertTrue(Type::typeNumeric('2,111,500-200'));
+    $this->assertTrue(Type::number(2.2));
+    $this->assertTrue(Type::number(4));
+    $this->assertTrue(Type::number('2.5'));
+    $this->assertTrue(Type::number('2,111,500'));
+    $this->assertTrue(Type::number('2018-06-10'));
+    $this->assertTrue(Type::number('2,111,500-200'));
 }
 ```
     
 ## 判断是否为整型或者字符串整型
 
 ``` php
-public function testTypeStringInt(): void
+public function testTypeStringInteger(): void
 {
-    $this->assertTrue(Type::typeInt(1));
-    $this->assertTrue(Type::typeInt('4'));
+    $this->assertTrue(Type::integer(1));
+    $this->assertTrue(Type::integer('4'));
 }
 ```
     
@@ -264,9 +264,9 @@ public function testTypeStringInt(): void
 ``` php
 public function testTypeThese(): void
 {
-    $this->assertTrue(Type::typeThese('foo', ['string']));
-    $this->assertTrue(Type::typeThese(1, ['string', 'int']));
-    $this->assertTrue(Type::typeThese('foo', 'string'));
+    $this->assertTrue(Type::these('foo', ['string']));
+    $this->assertTrue(Type::these(1, ['string', 'int']));
+    $this->assertTrue(Type::these('foo', 'string'));
 }
 ```
     
@@ -275,10 +275,10 @@ public function testTypeThese(): void
 ``` php
 public function testTypeStrictArray(): void
 {
-    $this->assertFalse(Type::typeArray('foo', ['string']));
-    $this->assertTrue(Type::typeArray(['foo'], ['string']));
-    $this->assertFalse(Type::typeArray([1, 2], ['string']));
-    $this->assertTrue(Type::typeArray(['bar', 'foo'], ['string']));
-    $this->assertTrue(Type::typeArray(['bar', 2], ['string', 'int']));
+    $this->assertFalse(Type::arr('foo', ['string']));
+    $this->assertTrue(Type::arr(['foo'], ['string']));
+    $this->assertFalse(Type::arr([1, 2], ['string']));
+    $this->assertTrue(Type::arr(['bar', 'foo'], ['string']));
+    $this->assertTrue(Type::arr(['bar', 2], ['string', 'int']));
 }
 ```

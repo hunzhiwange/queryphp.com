@@ -79,6 +79,11 @@ public function testTaskCo(): void
     $output = $process->read();
     Process::wait(true);
 
-    $this->assertSame('Exception Thrown: Swoole\\Server::taskCo(): server is not running', $output);
+    $possiableMessage = [
+        'Exception Thrown: Swoole\\Server::taskCo(): server is not running',
+        'Exception Thrown: Swoole\\Server::taskCo(): taskCo method can only be used in the worker process',
+    ];
+
+    $this->assertTrue(in_array($output, $possiableMessage, true));
 }
 ```
