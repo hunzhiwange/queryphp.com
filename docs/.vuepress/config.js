@@ -401,6 +401,7 @@ function genSidebarConfigDoc (title) {
           ],
         },
         'component/session',
+        'component/page',
       ]
     },
     {
