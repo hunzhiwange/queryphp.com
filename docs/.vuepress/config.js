@@ -303,10 +303,10 @@ function genSidebarConfigDoc (title) {
         'component/support/str',
         'component/support/arr',
         'component/support/type',
-        'component/debug',
+        'component/collection',
+        'component/tree',
         'component/encryption',
         'component/safe',
-        'component/collection',
         {
           title: title.title15,
           collapsable: true,
@@ -383,7 +383,6 @@ function genSidebarConfigDoc (title) {
             'component/validate/validator/zipcode',
           ]
         },
-        'component/tree',
         {
           title: title.title16,
           collapsable: true,
@@ -402,6 +401,8 @@ function genSidebarConfigDoc (title) {
         },
         'component/session',
         'component/page',
+        'component/debug',
+        'component/log',
       ]
     },
     {
