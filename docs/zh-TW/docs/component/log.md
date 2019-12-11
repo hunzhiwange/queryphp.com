@@ -202,3 +202,104 @@ QueryPHP 的日志如果启用了缓冲，会在日志数量达到缓冲数量�
  * use Leevel\Filesystem\Fso;
  * use Leevel\Log\File;
  * use Leevel\Log\ILog;
+
+## log 基本使用
+
+除了 PSR-3 支持的方法外，系统还提供了一些额外方法。
+
+**支持的日志类型**
+
+``` php
+public function baseUseProvider(): array
+{
+    return [
+        ['emergency'],
+        ['alert'],
+        ['critical'],
+        ['error'],
+        ['warning'],
+        ['notice'],
+        ['info'],
+        ['debug'],
+    ];
+}
+```
+
+**获取日志记录数量**
+
+``` php
+count(?string $level = null): int;
+```
+
+**获取当前日志记录**
+
+``` php
+all(?string $level = null): array;
+```
+
+**清理日志记录**
+
+``` php
+clear(?string $level = null): void;
+```
+
+除了这些外，还有一些辅助方法如 `isMonolog`，因为 `Monolog` 非常流行，底层进行了一些封装。
+
+
+``` php
+public function testBaseUse(string $level): void
+{
+    $log = $this->createFileConnect();
+
+    $this->assertInstanceof(ILog::class, $log);
+
+    $this->assertNull($log->{$level}('foo', ['hello', 'world']));
+    $this->assertSame([$level => [[$level, 'foo', ['hello', 'world']]]], $log->all());
+    $this->assertSame([[$level, 'foo', ['hello', 'world']]], $log->all($level));
+
+    $this->assertSame(1, $log->count());
+    $this->assertSame(1, $log->count($level));
+
+    $this->assertNull($log->clear($level));
+    $this->assertSame([], $log->all($level));
+
+    $this->assertNull($log->clear());
+    $this->assertSame([], $log->all());
+    $this->assertSame([], $log->all($level));
+
+    $this->assertFalse($log->isMonolog());
+    $this->assertNull($log->getMonolog());
+
+    Fso::deleteDirectory(__DIR__.'/cacheLog', true);
+}
+```
+    
+## 日志支持等级过滤
+
+``` php
+public function testLogFilterLevel(): void
+{
+    $log = $this->createFileConnect();
+    $log->setOption('levels', [ILog::INFO]);
+    $log->log(ILog::INFO, 'foo', ['hello', 'world']);
+    $log->log(ILog::DEBUG, 'foo', ['hello', 'world']);
+
+    $this->assertSame([ILog::INFO => [[ILog::INFO, 'foo', ['hello', 'world']]]], $log->all());
+}
+```
+    
+## 日志支持默认等级 debug
+
+``` php
+public function testLogLevelNotFoundWithDefaultLevel(): void
+{
+    $log = $this->createFileConnect();
+    $log->setOption('levels', [ILog::DEBUG]);
+    $log->log('notfound', 'foo', ['hello', 'world']);
+    $this->assertSame([ILog::DEBUG => [[ILog::DEBUG, 'foo', ['hello', 'world']]]], $log->all());
+
+    $log->flush();
+
+    Fso::deleteDirectory(__DIR__.'/cacheLog', true);
+}
+```
