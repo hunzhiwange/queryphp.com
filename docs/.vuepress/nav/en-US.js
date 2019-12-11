@@ -9,16 +9,7 @@ module.exports = [
   },
   {
     text: 'Community',
-    items: [
-      {
-        text: 'China mirror',
-        link: 'https://www.114.ms/'
-      },
-      {
-        text: 'Other',
-        link: '/ecosystem/'
-      }
-    ]
+    link: '/ecosystem/',
   },
   {
     text: 'About Us',

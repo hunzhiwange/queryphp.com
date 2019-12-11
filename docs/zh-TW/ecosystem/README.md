@@ -9,7 +9,3 @@ sidebar: auto
 ### QQ 群
 
 `288751294`
-
-### 论坛
-
-https://www.114.ms

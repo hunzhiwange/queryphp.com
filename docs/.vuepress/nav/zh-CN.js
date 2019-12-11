@@ -9,16 +9,7 @@ module.exports = [
   },
   {
     text: '社区',
-    items: [
-      {
-        text: '国内镜像',
-        link: 'https://www.114.ms/'
-      },
-      {
-        text: '其它',
-        link: '/zh-CN/ecosystem/'
-      }
-    ]
+    link: '/zh-CN/ecosystem/',
   },
   {
     text: '关于我们',
