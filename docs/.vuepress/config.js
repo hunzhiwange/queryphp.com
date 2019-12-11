@@ -403,6 +403,7 @@ function genSidebarConfigDoc (title) {
         'component/page',
         'component/debug',
         'component/log',
+        'component/seccode',
       ]
     },
     {
