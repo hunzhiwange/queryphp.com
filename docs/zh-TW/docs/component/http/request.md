@@ -4,9 +4,7 @@
 [tests/Http/RequestTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Http/RequestTest.php)
 :::
     
-QueryPHP 基于 Symfony 请求组件二次，保留了大部分的功能，自定义一些功能。之所以会二次开发，因为早期开发 [`zephir` 版本](https://github.com/hunzhiwange/leevel/tree/master/leevel/http) 必须要这样子做。
-
-基本使用方法可以查看 [Symfony Request](https://symfony.com/doc/current/components/http_foundation.html#request)。
+QueryPHP 请求对象基于 Symfony 二次开发，功能非常强大，做了一些精简和优化。 
 
 ## 使用方式
 
@@ -1007,7 +1005,7 @@ public function provideIsMethod()
         ['connect'],
     ];
 }
-``` 
+```
 
 
 ``` php
