@@ -21,7 +21,7 @@ footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
 
 <div style="color:#212121!important;font-weight:700;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
   <div style="margin-bottom:10px;">QueryPHP 是一款现代化的高性能 PHP 渐进式协程框架, 我们还是主要面向传统 PHP-FPM 场景，以工程师用户体验为历史使命，让每一个 PHP 应用都有一个好框架。</div>
-  <div>百分之百单元测试覆盖直面 Bug，我们一直致力于创造高品质的产品 level level leevel，依托 Swoole 协程提升业务性能，此刻未来逐步渐进。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，让您的业务撑起更多的用户服务。</div>
+  <div>百分之百单元测试覆盖直面 Bug，致力于创造高品质的产品 level level leevel，依托 Swoole 协程提升业务性能，此刻未来逐步渐进。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，让您的业务撑起更多的用户服务。</div>
 </div>
 
 <div style="margin-top: -50px;margin-bottom: -80px;">
