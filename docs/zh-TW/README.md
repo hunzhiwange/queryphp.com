@@ -418,7 +418,7 @@ class WaitGroup
  </div>
  <div class="feature">
   <h2>高品質</h2>
-  <p>百分之百單元測試覆蓋直面 Bug，我們一直致力於創造高品質的產品 level level leevel。</p>
+  <p>百分之百單元測試覆蓋直面 Bug，致力於創造高品質的產品 level level leevel。</p>
  </div>
  <div class="feature">
   <h2>业务协程化</h2>
