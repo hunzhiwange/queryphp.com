@@ -4,7 +4,7 @@
 [tests/Http/RequestTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Http/RequestTest.php)
 :::
     
-QueryPHP 请求对象基于 Symfony 二次开发，功能非常强大，做了一些精简和优化。 
+QueryPHP 请求对象基于 Symfony 二次开发，功能非常强大，做了一些精简和优化。
 
 ## 使用方式
 
@@ -47,7 +47,7 @@ class Demo
  * use Leevel\Http\Request;
  * use Leevel\Http\UploadedFile;
 
-## reset 充值请求数据
+## reset 重置请求数据
 
 ``` php
 public function testReset(): void
