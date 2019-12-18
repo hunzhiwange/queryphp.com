@@ -391,9 +391,6 @@ use Tests\TestCase;
 
 class MyArray implements IArray
 {
-    /**
-     * 对象转数组.
-     */
     public function toArray(): array
     {
         return ['hello' => 'IArray'];
@@ -436,11 +433,6 @@ use Tests\TestCase;
 
 class MyJson implements IJson
 {
-    /**
-     * 对象转 JSON.
-     *
-     * @param int $option
-     */
     public function toJson(?int $option = null): string
     {
         if (null === $option) {
