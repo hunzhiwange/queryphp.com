@@ -404,6 +404,16 @@ function genSidebarConfigDoc (title) {
         'component/debug',
         'component/log',
         'component/seccode',
+        {
+          title: 'HTTP',
+          collapsable: true,
+          'children': [
+            'component/http',
+            'component/http/request',
+            'component/http/response',
+            'component/http/jsonresponse',
+          ],
+        },
       ]
     },
     {
