@@ -408,7 +408,7 @@ function genSidebarConfigDoc (title) {
           title: 'HTTP',
           collapsable: true,
           'children': [
-            'component/http',
+            'component/http/',
             'component/http/request',
             'component/http/response',
             'component/http/jsonresponse',
