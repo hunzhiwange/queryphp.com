@@ -433,6 +433,7 @@ function genSidebarConfigDoc (title) {
             'component/http/request',
             'component/http/response',
             'component/http/jsonresponse',
+            'component/http/fileresponse',
           ],
         },
       ]
