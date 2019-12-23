@@ -29,10 +29,6 @@ public function baseUseProvider(): array
 ``` php
 namespace Tests\Validate\Validator;
 
-use Leevel\Validate\Validator;
-use stdClass;
-use Tests\TestCase;
-
 class TestJson
 {
     public function __toString()

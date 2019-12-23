@@ -379,16 +379,6 @@ public function testIsServerOrClientError(): void
 ``` php
 namespace Tests\Http;
 
-use DateTime;
-use DateTimeZone;
-use InvalidArgumentException;
-use JsonSerializable;
-use Leevel\Http\Response;
-use Leevel\Support\IArray;
-use Leevel\Support\IJson;
-use ReflectionProperty;
-use Tests\TestCase;
-
 class MyArray implements IArray
 {
     public function toArray(): array
@@ -420,16 +410,6 @@ public function testSetContentAsJon(): void
 
 ``` php
 namespace Tests\Http;
-
-use DateTime;
-use DateTimeZone;
-use InvalidArgumentException;
-use JsonSerializable;
-use Leevel\Http\Response;
-use Leevel\Support\IArray;
-use Leevel\Support\IJson;
-use ReflectionProperty;
-use Tests\TestCase;
 
 class MyJson implements IJson
 {

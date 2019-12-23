@@ -161,10 +161,6 @@ public function testTypeNull(): void
 ``` php
 namespace Tests\Support;
 
-use Leevel\Support\Type;
-use stdClass;
-use Tests\TestCase;
-
 class Callback1
 {
     public function test(): void
@@ -198,10 +194,6 @@ public function testTypeCallback(): void
 ``` php
 namespace Tests\Support;
 
-use Leevel\Support\Type;
-use stdClass;
-use Tests\TestCase;
-
 class Callback2 implements IInterface
 {
 }
@@ -211,10 +203,6 @@ class Callback2 implements IInterface
 
 ``` php
 namespace Tests\Support;
-
-use Leevel\Support\Type;
-use stdClass;
-use Tests\TestCase;
 
 interface IInterface
 {

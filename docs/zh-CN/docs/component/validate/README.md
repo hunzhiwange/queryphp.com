@@ -1113,13 +1113,6 @@ public function testCallCustom(): void
 ``` php
 namespace Tests\Validate;
 
-use I18nMock;
-use Leevel\Di\Container;
-use Leevel\Validate\IValidator;
-use Leevel\Validate\Validate;
-use Leevel\Validate\Validator;
-use Tests\TestCase;
-
 class ExtendClassTest1
 {
     public function handle($value, array $param, IValidator $validator, string $field): bool
@@ -1175,13 +1168,6 @@ public function testCallExtendClass(): void
 
 ``` php
 namespace Tests\Validate;
-
-use I18nMock;
-use Leevel\Di\Container;
-use Leevel\Validate\IValidator;
-use Leevel\Validate\Validate;
-use Leevel\Validate\Validator;
-use Tests\TestCase;
 
 class ExtendClassTest1
 {

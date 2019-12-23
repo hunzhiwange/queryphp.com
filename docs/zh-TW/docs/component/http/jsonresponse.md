@@ -155,13 +155,6 @@ public function testItAcceptsJsonAsString(): void
 ``` php
 namespace Tests\Http;
 
-use InvalidArgumentException;
-use JsonSerializable;
-use Leevel\Http\JsonResponse;
-use Leevel\Support\IArray;
-use Leevel\Support\IJson;
-use Tests\TestCase;
-
 class JsonResponseMyArray implements IArray
 {
     public function toArray(): array
@@ -175,13 +168,6 @@ class JsonResponseMyArray implements IArray
 
 ``` php
 namespace Tests\Http;
-
-use InvalidArgumentException;
-use JsonSerializable;
-use Leevel\Http\JsonResponse;
-use Leevel\Support\IArray;
-use Leevel\Support\IJson;
-use Tests\TestCase;
 
 class JsonResponseMyJson implements IJson
 {
@@ -200,13 +186,6 @@ class JsonResponseMyJson implements IJson
 
 ``` php
 namespace Tests\Http;
-
-use InvalidArgumentException;
-use JsonSerializable;
-use Leevel\Http\JsonResponse;
-use Leevel\Support\IArray;
-use Leevel\Support\IJson;
-use Tests\TestCase;
 
 class JsonResponseMyJsonSerializable implements JsonSerializable
 {

@@ -170,13 +170,6 @@ public function testCountable(): void
 ``` php
 namespace Tests\Collection;
 
-use JsonSerializable;
-use Leevel\Collection\Collection;
-use Leevel\Support\IArray;
-use Leevel\Support\IJson;
-use stdClass;
-use Tests\TestCase;
-
 class TestArray implements IArray
 {
     public function toArray(): array
@@ -214,13 +207,6 @@ public function testGetArrayElements2(): void
 
 ``` php
 namespace Tests\Collection;
-
-use JsonSerializable;
-use Leevel\Collection\Collection;
-use Leevel\Support\IArray;
-use Leevel\Support\IJson;
-use stdClass;
-use Tests\TestCase;
 
 class TestJson implements IJson
 {
@@ -263,13 +249,6 @@ public function testGetArrayElements3(): void
 
 ``` php
 namespace Tests\Collection;
-
-use JsonSerializable;
-use Leevel\Collection\Collection;
-use Leevel\Support\IArray;
-use Leevel\Support\IJson;
-use stdClass;
-use Tests\TestCase;
 
 class TestJsonSerializable implements JsonSerializable
 {
