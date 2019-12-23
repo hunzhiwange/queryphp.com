@@ -67,6 +67,7 @@ module.exports = {
             title15:'Validate',
             title16:'Option',
             title17:'Cache',
+            title18:'Swoole',
           }),
         }
       },
@@ -96,6 +97,7 @@ module.exports = {
             title15:'验证器',
             title16:'配置',
             title17:'缓存',
+            title18:'Swoole',
           }),
         }
       },
@@ -125,6 +127,7 @@ module.exports = {
             title15:'驗證器',
             title16:'配寘',
             title17:'緩存',
+            title18:'Swoole',
           }),
         }
       }
@@ -294,6 +297,24 @@ function genSidebarConfigDoc (title) {
         'orm/',
         'orm/create',
         'orm/unitofwork',
+      ]
+    },
+    {
+      title: title.title18,
+      collapsable: true,
+      children: [
+        'protocol/coroutine',
+        'protocol/timer', 
+        'protocol/task',
+        'protocol/process/hotoverload',
+        {
+          title: 'HTTP Server',
+          collapsable: true,
+          'children': [
+            'protocol/leevel2swoole',
+            'protocol/swoole2Leevel',
+          ],
+        },
       ]
     },
     {
