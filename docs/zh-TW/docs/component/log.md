@@ -199,9 +199,13 @@ QueryPHP 的日志如果启用了缓冲，会在日志数量达到缓冲数量�
 
 **Uses**
 
- * use Leevel\Filesystem\Fso;
- * use Leevel\Log\File;
- * use Leevel\Log\ILog;
+``` php
+<?php
+
+use Leevel\Filesystem\Fso;
+use Leevel\Log\File;
+use Leevel\Log\ILog;
+```
 
 ## log 基本使用
 

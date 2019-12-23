@@ -8,11 +8,15 @@ QueryPHP 针对 API 开发可以直接返回一个 `\Leevel\Http\JsonResponse` �
 
 **Uses**
 
- * use InvalidArgumentException;
- * use JsonSerializable;
- * use Leevel\Http\JsonResponse;
- * use Leevel\Support\IArray;
- * use Leevel\Support\IJson;
+``` php
+<?php
+
+use InvalidArgumentException;
+use JsonSerializable;
+use Leevel\Http\JsonResponse;
+use Leevel\Support\IArray;
+use Leevel\Support\IJson;
+```
 
 ## JSON 响应基本使用
 

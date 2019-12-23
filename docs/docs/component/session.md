@@ -183,8 +183,12 @@ QueryPHP 并没有使用 PHP 原生 SESSION，而是模拟原生 SESSION 自己�
 
 **Uses**
 
- * use Leevel\Session\File;
- * use Leevel\Session\ISession;
+``` php
+<?php
+
+use Leevel\Session\File;
+use Leevel\Session\ISession;
+```
 
 ## session 基本使用
 

@@ -8,11 +8,15 @@
 
 **Uses**
 
- * use JsonSerializable;
- * use Leevel\Collection\Collection;
- * use Leevel\Support\IArray;
- * use Leevel\Support\IJson;
- * use stdClass;
+``` php
+<?php
+
+use JsonSerializable;
+use Leevel\Collection\Collection;
+use Leevel\Support\IArray;
+use Leevel\Support\IJson;
+use stdClass;
+```
 
 ## 基本使用
 

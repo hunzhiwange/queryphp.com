@@ -8,10 +8,14 @@ Swoole 请求转换 Leevel 的请求后，然后传递给 Kernel 完成请求到
 
 **Uses**
 
- * use Leevel\Http\IRequest;
- * use Leevel\Http\Request;
- * use Leevel\Protocol\Swoole2Leevel;
- * use Swoole\Http\Request as SwooleHttpRequest;
+``` php
+<?php
+
+use Leevel\Http\IRequest;
+use Leevel\Http\Request;
+use Leevel\Protocol\Swoole2Leevel;
+use Swoole\Http\Request as SwooleHttpRequest;
+```
 
 ## 转换 Swoole 请求的 header
 

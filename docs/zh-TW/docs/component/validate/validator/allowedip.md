@@ -6,8 +6,12 @@
     
 **Uses**
 
- * use Leevel\Validate\Validator;
- * use stdClass;
+``` php
+<?php
+
+use Leevel\Validate\Validator;
+use stdClass;
+```
 
 ## 验证通过的数据
 

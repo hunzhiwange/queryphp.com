@@ -6,7 +6,11 @@
     
 **Uses**
 
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## limit 限制条数
 

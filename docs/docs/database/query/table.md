@@ -6,8 +6,12 @@
     
 **Uses**
 
- * use stdClass;
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use stdClass;
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## Table 查询数据库表
 

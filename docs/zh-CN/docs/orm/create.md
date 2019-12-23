@@ -8,15 +8,19 @@
 
 **Uses**
 
- * use Leevel\Database\Ddd\Entity;
- * use Tests\Database\DatabaseTestCase as TestCase;
- * use Tests\Database\Ddd\Entity\CompositeId;
- * use Tests\Database\Ddd\Entity\TestConstructPropBlackEntity;
- * use Tests\Database\Ddd\Entity\TestConstructPropWhiteEntity;
- * use Tests\Database\Ddd\Entity\TestCreateAutoFillEntity;
- * use Tests\Database\Ddd\Entity\TestCreatePropWhiteEntity;
- * use Tests\Database\Ddd\Entity\TestDatabaseEntity;
- * use Tests\Database\Ddd\Entity\TestEntity;
+``` php
+<?php
+
+use Leevel\Database\Ddd\Entity;
+use Tests\Database\DatabaseTestCase as TestCase;
+use Tests\Database\Ddd\Entity\CompositeId;
+use Tests\Database\Ddd\Entity\TestConstructPropBlackEntity;
+use Tests\Database\Ddd\Entity\TestConstructPropWhiteEntity;
+use Tests\Database\Ddd\Entity\TestCreateAutoFillEntity;
+use Tests\Database\Ddd\Entity\TestCreatePropWhiteEntity;
+use Tests\Database\Ddd\Entity\TestDatabaseEntity;
+use Tests\Database\Ddd\Entity\TestEntity;
+```
 
 ## 创建一个实体
 

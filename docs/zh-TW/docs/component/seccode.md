@@ -27,7 +27,11 @@ QueryPHP 提供的验证组件，扩展包内定义了一些常见用法方便�
 
 **Uses**
 
- * use Leevel\Seccode\Seccode;
+``` php
+<?php
+
+use Leevel\Seccode\Seccode;
+```
 
 ## display 验证码基本使用
 

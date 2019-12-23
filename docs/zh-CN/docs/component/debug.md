@@ -8,25 +8,29 @@
 
 **Uses**
 
- * use Error;
- * use Exception;
- * use Leevel\Database\IDatabase;
- * use Leevel\Debug\Debug;
- * use Leevel\Di\Container;
- * use Leevel\Event\Dispatch;
- * use Leevel\Event\IDispatch;
- * use Leevel\Http\JsonResponse;
- * use Leevel\Http\Request;
- * use Leevel\Http\Response;
- * use Leevel\Kernel\App as Apps;
- * use Leevel\Log\File as LogFile;
- * use Leevel\Log\ILog;
- * use Leevel\Option\IOption;
- * use Leevel\Option\Option;
- * use Leevel\Session\File as SessionFile;
- * use Leevel\Session\ISession;
- * use Tests\Database;
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use Error;
+use Exception;
+use Leevel\Database\IDatabase;
+use Leevel\Debug\Debug;
+use Leevel\Di\Container;
+use Leevel\Event\Dispatch;
+use Leevel\Event\IDispatch;
+use Leevel\Http\JsonResponse;
+use Leevel\Http\Request;
+use Leevel\Http\Response;
+use Leevel\Kernel\App as Apps;
+use Leevel\Log\File as LogFile;
+use Leevel\Log\ILog;
+use Leevel\Option\IOption;
+use Leevel\Option\Option;
+use Leevel\Session\File as SessionFile;
+use Leevel\Session\ISession;
+use Tests\Database;
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## JSON 关联数组调试
 

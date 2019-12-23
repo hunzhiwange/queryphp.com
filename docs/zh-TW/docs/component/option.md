@@ -173,7 +173,11 @@ DEBUG_JAVASCRIPT = true
 
 **Uses**
 
- * use Leevel\Option\Option;
+``` php
+<?php
+
+use Leevel\Option\Option;
+```
 
 ## all 返回所有配置
 

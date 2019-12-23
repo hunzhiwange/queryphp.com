@@ -6,8 +6,12 @@
     
 **Uses**
 
- * use PDO;
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use PDO;
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## 命名参数绑定
 

@@ -6,7 +6,11 @@
     
 **Uses**
 
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## find 查询基础用法
 

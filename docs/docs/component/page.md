@@ -9,12 +9,16 @@ QueryPHP 提供的分页组件，可以轻松地对数据进行分页处理，�
 
 **Uses**
 
- * use I18nMock;
- * use Leevel\Di\Container;
- * use Leevel\Page\Bootstrap;
- * use Leevel\Page\IPage;
- * use Leevel\Page\Page;
- * use Leevel\Page\Render;
+``` php
+<?php
+
+use I18nMock;
+use Leevel\Di\Container;
+use Leevel\Page\Bootstrap;
+use Leevel\Page\IPage;
+use Leevel\Page\Page;
+use Leevel\Page\Render;
+```
 
 ## render 分页基本使用
 

@@ -6,13 +6,17 @@
     
 **Uses**
 
- * use Leevel\Di\Container;
- * use Leevel\Validate\IValidator;
- * use Leevel\Validate\UniqueRule;
- * use Leevel\Validate\Validator;
- * use Tests\Database\DatabaseTestCase as TestCase;
- * use Tests\Database\Ddd\Entity\CompositeId;
- * use Tests\Database\Ddd\Entity\Guestbook;
+``` php
+<?php
+
+use Leevel\Di\Container;
+use Leevel\Validate\IValidator;
+use Leevel\Validate\UniqueRule;
+use Leevel\Validate\Validator;
+use Tests\Database\DatabaseTestCase as TestCase;
+use Tests\Database\Ddd\Entity\CompositeId;
+use Tests\Database\Ddd\Entity\Guestbook;
+```
 
 ## 唯一值基本使用方法
 

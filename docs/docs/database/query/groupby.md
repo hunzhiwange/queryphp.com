@@ -15,7 +15,11 @@ public function groupBy($expression);
 
 **Uses**
 
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## groupBy 基础用法
 

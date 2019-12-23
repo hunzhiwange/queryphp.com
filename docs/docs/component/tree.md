@@ -8,7 +8,11 @@
 
 **Uses**
 
- * use Leevel\Tree\Tree;
+``` php
+<?php
+
+use Leevel\Tree\Tree;
+```
 
 ## Tree 基本使用
 

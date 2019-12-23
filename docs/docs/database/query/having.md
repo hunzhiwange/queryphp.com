@@ -8,7 +8,11 @@ having 和 where 用法几乎一致。
 
 **Uses**
 
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## having 查询条件
 

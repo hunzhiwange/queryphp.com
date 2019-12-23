@@ -8,7 +8,11 @@ QueryPHP 系统服务提供者、应用命令、扩展配置和扩展语言包�
 
 **Uses**
 
- * use Leevel\Option\ComposerOption;
+``` php
+<?php
+
+use Leevel\Option\ComposerOption;
+```
 
 ## composer.json 
 

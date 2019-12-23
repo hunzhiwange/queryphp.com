@@ -8,7 +8,11 @@
 
 **Uses**
 
- * use Leevel\Validate\Helper;
+``` php
+<?php
+
+use Leevel\Validate\Helper;
+```
 
 ## 助手基础功能
 

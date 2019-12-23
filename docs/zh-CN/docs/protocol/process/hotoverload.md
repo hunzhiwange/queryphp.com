@@ -8,8 +8,12 @@
 
 **Uses**
 
- * use Leevel\Option\Option;
- * use Leevel\Protocol\IServer;
+``` php
+<?php
+
+use Leevel\Option\Option;
+use Leevel\Protocol\IServer;
+```
 
 ## 测试代码热重启
 

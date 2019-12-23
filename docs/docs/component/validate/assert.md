@@ -8,7 +8,11 @@
 
 **Uses**
 
- * use Leevel\Validate\Assert;
+``` php
+<?php
+
+use Leevel\Validate\Assert;
+```
 
 ## 基本断言测试
 

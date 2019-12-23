@@ -80,11 +80,15 @@ interface IBlock
 
 **Uses**
 
- * use Leevel\Cache\Load;
- * use Leevel\Di\Container;
- * use Tests\Cache\Pieces\Test1;
- * use Tests\Cache\Pieces\Test2;
- * use Tests\Cache\Pieces\Test4;
+``` php
+<?php
+
+use Leevel\Cache\Load;
+use Leevel\Di\Container;
+use Tests\Cache\Pieces\Test1;
+use Tests\Cache\Pieces\Test2;
+use Tests\Cache\Pieces\Test4;
+```
 
 ## data 载入缓存块数据
 

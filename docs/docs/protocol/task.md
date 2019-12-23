@@ -8,10 +8,14 @@
 
 **Uses**
 
- * use Leevel\Protocol\Task;
- * use Swoole\Process;
- * use Swoole\Server;
- * use Throwable;
+``` php
+<?php
+
+use Leevel\Protocol\Task;
+use Swoole\Process;
+use Swoole\Server;
+use Throwable;
+```
 
 ## 投递异步任务
 

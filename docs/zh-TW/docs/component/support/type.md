@@ -8,8 +8,12 @@ QueryPHP 提供了增加 PHP 自身类型的辅助方法。
 
 **Uses**
 
- * use Leevel\Support\Type;
- * use stdClass;
+``` php
+<?php
+
+use Leevel\Support\Type;
+use stdClass;
+```
 
 ## 判断是否为字符串
 

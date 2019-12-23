@@ -8,9 +8,13 @@
 
 **Uses**
 
- * use Exception;
- * use Leevel\Log\ILog;
- * use Leevel\Protocol\Timer;
+``` php
+<?php
+
+use Exception;
+use Leevel\Log\ILog;
+use Leevel\Protocol\Timer;
+```
 
 ## 执行任务
 

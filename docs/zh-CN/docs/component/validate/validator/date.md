@@ -6,8 +6,12 @@
     
 **Uses**
 
- * use DateTime;
- * use Leevel\Validate\Validator;
+``` php
+<?php
+
+use DateTime;
+use Leevel\Validate\Validator;
+```
 
 ## 验证通过的数据
 

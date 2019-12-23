@@ -8,8 +8,12 @@
 
 **Uses**
 
- * use Leevel\Encryption\Encryption;
- * use Leevel\Encryption\IEncryption;
+``` php
+<?php
+
+use Leevel\Encryption\Encryption;
+use Leevel\Encryption\IEncryption;
+```
 
 ## 加密解密基本功能
 

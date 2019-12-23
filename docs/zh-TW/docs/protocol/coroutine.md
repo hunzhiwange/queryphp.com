@@ -8,9 +8,13 @@
 
 **Uses**
 
- * use Leevel\Di\ICoroutine;
- * use Leevel\Protocol\Coroutine;
- * use Throwable;
+``` php
+<?php
+
+use Leevel\Di\ICoroutine;
+use Leevel\Protocol\Coroutine;
+use Throwable;
+```
 
 ## 普通服务是否处于协程上下文
 

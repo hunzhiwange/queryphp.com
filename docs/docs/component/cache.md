@@ -191,8 +191,12 @@ return [
 
 **Uses**
 
- * use Leevel\Cache\File;
- * use Leevel\Filesystem\Fso;
+``` php
+<?php
+
+use Leevel\Cache\File;
+use Leevel\Filesystem\Fso;
+```
 
 ## 缓存基本使用
 

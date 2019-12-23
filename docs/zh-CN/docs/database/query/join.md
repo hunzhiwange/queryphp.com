@@ -16,7 +16,11 @@ join($table, $cols, ...$cond);
 
 **Uses**
 
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## join 基础用法
 

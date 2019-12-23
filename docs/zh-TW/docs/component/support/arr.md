@@ -8,7 +8,11 @@
 
 **Uses**
 
- * use Leevel\Support\Arr;
+``` php
+<?php
+
+use Leevel\Support\Arr;
+```
 
 ## 基础格式化
 

@@ -8,15 +8,19 @@
 
 **Uses**
 
- * use Leevel\Database\Ddd\Entity;
- * use Leevel\Database\Ddd\IUnitOfWork;
- * use Leevel\Database\Ddd\UnitOfWork;
- * use Tests\Database\DatabaseTestCase as TestCase;
- * use Tests\Database\Ddd\Entity\CompositeId;
- * use Tests\Database\Ddd\Entity\Guestbook;
- * use Tests\Database\Ddd\Entity\GuestbookRepository;
- * use Tests\Database\Ddd\Entity\Relation\Post;
- * use Throwable;
+``` php
+<?php
+
+use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\IUnitOfWork;
+use Leevel\Database\Ddd\UnitOfWork;
+use Tests\Database\DatabaseTestCase as TestCase;
+use Tests\Database\Ddd\Entity\CompositeId;
+use Tests\Database\Ddd\Entity\Guestbook;
+use Tests\Database\Ddd\Entity\GuestbookRepository;
+use Tests\Database\Ddd\Entity\Relation\Post;
+use Throwable;
+```
 
 ## 保存一个实体
 

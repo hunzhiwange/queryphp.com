@@ -8,10 +8,14 @@ Leevel 响应转 Swoole 响应后，然后传递给 Swoole 完成响应给用户
 
 **Uses**
 
- * use Leevel\Http\RedirectResponse;
- * use Leevel\Http\Response;
- * use Leevel\Protocol\Leevel2Swoole;
- * use Swoole\Http\Response as SwooleHttpResponse;
+``` php
+<?php
+
+use Leevel\Http\RedirectResponse;
+use Leevel\Http\Response;
+use Leevel\Protocol\Leevel2Swoole;
+use Swoole\Http\Response as SwooleHttpResponse;
+```
 
 ## 转换 Leevel 响应的 header
 

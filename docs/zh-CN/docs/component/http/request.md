@@ -43,9 +43,13 @@ class Demo
 
 **Uses**
 
- * use Leevel\Http\IRequest;
- * use Leevel\Http\Request;
- * use Leevel\Http\UploadedFile;
+``` php
+<?php
+
+use Leevel\Http\IRequest;
+use Leevel\Http\Request;
+use Leevel\Http\UploadedFile;
+```
 
 ## reset 重置请求数据
 

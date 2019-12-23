@@ -6,7 +6,11 @@
     
 **Uses**
 
- * use Leevel\Validate\Validator;
+``` php
+<?php
+
+use Leevel\Validate\Validator;
+```
 
 ## 验证通过的数据
 

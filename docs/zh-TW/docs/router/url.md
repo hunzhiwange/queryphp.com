@@ -21,8 +21,12 @@ QueryPHP 支持路由 URL 地址的统一生成，提供一套简洁的生成方
 
 **Uses**
 
- * use Leevel\Http\IRequest;
- * use Leevel\Router\Url;
+``` php
+<?php
+
+use Leevel\Http\IRequest;
+use Leevel\Router\Url;
+```
 
 ## 基本 URL 生成
 

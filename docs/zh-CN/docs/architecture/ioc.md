@@ -11,9 +11,13 @@ IOC 容器是整个框架最核心的部分，负责服务的管理和解耦组�
 
 **Uses**
 
- * use Leevel\Di\Container;
- * use Leevel\Di\ICoroutine;
- * use stdClass;
+``` php
+<?php
+
+use Leevel\Di\Container;
+use Leevel\Di\ICoroutine;
+use stdClass;
+```
 
 ## 闭包绑定
 

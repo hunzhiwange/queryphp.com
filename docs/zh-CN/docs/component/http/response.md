@@ -13,14 +13,18 @@ QueryPHP 响应对象基于 Symfony 二次开发，功能非常强大，做了�
 
 **Uses**
 
- * use DateTime;
- * use DateTimeZone;
- * use InvalidArgumentException;
- * use JsonSerializable;
- * use Leevel\Http\Response;
- * use Leevel\Support\IArray;
- * use Leevel\Support\IJson;
- * use ReflectionProperty;
+``` php
+<?php
+
+use DateTime;
+use DateTimeZone;
+use InvalidArgumentException;
+use JsonSerializable;
+use Leevel\Http\Response;
+use Leevel\Support\IArray;
+use Leevel\Support\IJson;
+use ReflectionProperty;
+```
 
 ## create 创建一个响应对象
 

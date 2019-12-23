@@ -20,11 +20,15 @@ public function __construct(array $data = [], array $rules = [], array $names = 
 
 **Uses**
 
- * use I18nMock;
- * use Leevel\Di\Container;
- * use Leevel\Validate\IValidator;
- * use Leevel\Validate\Validate;
- * use Leevel\Validate\Validator;
+``` php
+<?php
+
+use I18nMock;
+use Leevel\Di\Container;
+use Leevel\Validate\IValidator;
+use Leevel\Validate\Validate;
+use Leevel\Validate\Validator;
+```
 
 ## 验证器基本使用方法
 

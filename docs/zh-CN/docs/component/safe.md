@@ -8,7 +8,11 @@
 
 **Uses**
 
- * use Leevel\Encryption\Safe;
+``` php
+<?php
+
+use Leevel\Encryption\Safe;
+```
 
 ## 添加模式转义和移除魔术方法转义
 

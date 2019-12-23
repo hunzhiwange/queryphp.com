@@ -8,7 +8,11 @@
 
 **Uses**
 
- * use Leevel\Support\Str;
+``` php
+<?php
+
+use Leevel\Support\Str;
+```
 
 ## 随机字母数字
 

@@ -8,7 +8,11 @@ QueryPHP 数据构造器支持条件运算符，可以根据不同条件做不�
 
 **Uses**
 
- * use Tests\Database\DatabaseTestCase as TestCase;
+``` php
+<?php
+
+use Tests\Database\DatabaseTestCase as TestCase;
+```
 
 ## limit 限制条数
 
