@@ -1,4 +1,4 @@
-# log
+# Log
 
 ::: tip Testing Is Documentation
 [tests/Log/LogTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Log/LogTest.php)
@@ -8,7 +8,7 @@
 
 内置支持的 log 驱动类型包括 file、syslog，未来可能增加其他驱动。
 
-::: tips
+::: tip
 日志遵循 PSR-3 规范，用法与主流框架完全一致。
 :::
 

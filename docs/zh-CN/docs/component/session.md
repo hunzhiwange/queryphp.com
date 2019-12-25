@@ -1,4 +1,4 @@
-# session
+# Session
 
 ::: tip Testing Is Documentation
 [tests/Session/SessionTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Session/SessionTest.php)
