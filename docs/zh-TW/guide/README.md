@@ -1,7 +1,7 @@
 # 介绍
 
 ::: tip The PHP Framework For Code Poem As Free As Wind
-始于二零一零，八年磨一剑
+始于二零一零，十年磨一剑
 :::
 
 QueryPHP 是一款现代化的高性能 PHP 渐进式协程框架, 我们还是主要面向传统 PHP-FPM 场景，以工程师用户体验为历史使命，让每一个 PHP 应用都有一个好框架。
