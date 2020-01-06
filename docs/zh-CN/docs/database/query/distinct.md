@@ -4,6 +4,18 @@
 [tests/Database/Query/DistinctTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Query/DistinctTest.php)
 :::
     
+**函数原型**
+
+``` php
+/**
+ * 创建一个 SELECT DISTINCT 查询.
+ *
+ * @return \Leevel\Database\Condition
+ */
+public function distinct(bool $flag = true): self;
+```
+
+
 **Uses**
 
 ``` php
