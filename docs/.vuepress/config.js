@@ -186,6 +186,7 @@ function genSidebarConfigDoc (title) {
         'architecture/',
         'architecture/ioc',
         'architecture/fn',
+        'architecture/event',
       ]
     },
     {
@@ -326,6 +327,7 @@ function genSidebarConfigDoc (title) {
         'component/support/type',
         'component/collection',
         'component/tree',
+        'component/pipeline',
         'component/encryption',
         'component/safe',
         {
