@@ -246,7 +246,7 @@ class Listener5 extends Listener
         $_SERVER['test'] = 'l5';
     }
 }
-``` 
+```
 
 
 ``` php

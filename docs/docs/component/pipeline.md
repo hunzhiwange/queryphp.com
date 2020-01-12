@@ -38,7 +38,7 @@ class First
         $next($send);
     }
 }
-``` 
+```
 
 **Tests\Pipeline\Second**
 
@@ -53,7 +53,7 @@ class Second
         $next($send);
     }
 }
-``` 
+```
 
 
 ``` php
@@ -151,7 +151,7 @@ class DiConstruct
         $next($send);
     }
 }
-``` 
+```
 
 **Tests\Pipeline\TestClass**
 
@@ -161,7 +161,7 @@ namespace Tests\Pipeline;
 class TestClass
 {
 }
-``` 
+```
 
 
 ``` php
@@ -255,7 +255,7 @@ class WithArgs
         $next();
     }
 }
-``` 
+```
 
 
 ``` php
@@ -290,7 +290,7 @@ class WithAtMethod
         $next($send);
     }
 }
-``` 
+```
 
 
 ``` php
