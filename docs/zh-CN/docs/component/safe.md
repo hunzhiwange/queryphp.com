@@ -98,6 +98,292 @@ public function testCleanHex(): void
 }
 ```
     
+## SQL 过滤
+
+``` php
+public function testSqlFilter(): void
+{
+    $strings = "'myuser' or % # 'foo' = 'foo'";
+    $out = 'myuserorfoo=foo';
+
+    $this->assertSame($out, Safe::sqlFilter($strings));
+}
+```
+    
+## 字段过滤
+
+``` php
+public function testFieldsFilter(): void
+{
+    $strings = "'myuser' or % # 'foo' = 'foo'";
+    $out = 'myuserorfoo=foo';
+
+    $this->assertSame($out, Safe::fieldsFilter($strings));
+
+    $strings = ["'myuser' or % # 'foo' = 'foo'"];
+    $out = 'myuserorfoo=foo';
+
+    $this->assertSame($out, Safe::fieldsFilter($strings));
+}
+```
+    
+## 字符过滤
+
+``` php
+public function testStrFilter(): void
+{
+    $strings = 'This is some <b>bold</b> text.';
+    $out = 'This is some &lt;b&gt;bold&lt;/b&gt; text.';
+
+    $this->assertSame($out, Safe::strFilter($strings));
+    $this->assertSame('', Safe::strFilter($strings, 5));
+
+    $strings = ['This is some <b>bold</b> text.'];
+    $out = ['This is some &lt;b&gt;bold&lt;/b&gt; text.'];
+
+    $this->assertSame($out, Safe::strFilter($strings));
+    $this->assertSame([''], Safe::strFilter($strings, 5));
+}
+```
+    
+## HTML 过滤
+
+``` php
+public function testHtmlFilter(): void
+{
+    $strings = "foo bar<script>.<span onclick='alert(5);'>yes</span>.";
+    $out = 'foo bar&lt;script&gt;.<span >yes</span>.';
+
+    $this->assertSame($out, Safe::htmlFilter($strings));
+    $this->assertSame('', Safe::htmlFilter($strings, 5));
+
+    $strings = ["foo bar<script>.<span onclick='alert(5);'>yes</span>."];
+    $out = ['foo bar&lt;script&gt;.<span >yes</span>.'];
+
+    $this->assertSame($out, Safe::htmlFilter($strings));
+    $this->assertSame([''], Safe::htmlFilter($strings, 5));
+}
+```
+    
+## 字符 HTML 安全显示
+
+``` php
+public function testHtmlView(): void
+{
+    $strings = "i a \n here";
+    $out = 'i a <br />
+e';
+
+    $this->assertSame($out, Safe::htmlView($strings));
+}
+```
+    
+## 整数数组过滤
+
+``` php
+public function testIntArrFilter(): void
+{
+    $strings = '5wb,577,sss66zz';
+    $out = '5,577,0';
+
+    $this->assertSame($out, Safe::intArrFilter($strings));
+    $this->assertSame(0, Safe::intArrFilter(''));
+
+    $strings = ['55wb', '577', 'sss66zz'];
+    $out = '55,577,0';
+
+    $this->assertSame($out, Safe::intArrFilter($strings));
+}
+```
+    
+## 字符串数组过滤
+
+``` php
+public function testStrArrFilter(): void
+{
+    $strings = '5wb,577,sss66zz';
+    $out = "'5wb','577','sss66zz'";
+
+    $this->assertSame($out, Safe::strArrFilter($strings));
+    $this->assertSame('', Safe::strArrFilter(''));
+
+    $strings = ['55wb', '577', 'sss66zz'];
+    $out = "'55wb','577','sss66zz'";
+
+    $this->assertSame($out, Safe::strArrFilter($strings));
+}
+```
+    
+## 访问时间限制
+
+``` php
+public function testLimitTime(): void
+{
+    $this->assertNull(Safe::limitTime([], 0));
+
+    $this->assertNull(Safe::limitTime(['abc'], 0));
+
+    $time = date('Y-m-d');
+
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessage(
+        'You can only before '.$time.' 08:10:00 or after '.$time.' 08:30:00 to access this.'
+    );
+
+    Safe::limitTime(['08:10', '08:30'], strtotime('08:15'));
+}
+```
+    
+## IP 访问限制
+
+``` php
+public function testLimitIp(): void
+{
+    $this->assertNull(Safe::limitIp('', []));
+
+    $this->assertNull(Safe::limitIp('', [0]));
+
+    $this->assertNull(Safe::limitIp('127.0.0.5', ['127.0.0.1']));
+}
+```
+    
+## 检测代理
+
+``` php
+public function testLimitAgent(): void
+{
+    $this->assertNull(Safe::limitAgent());
+}
+```
+    
+## 过滤 JavaScript
+
+``` php
+public function testCleanJs(): void
+{
+    $strings = "i a <script></script> <body> <span onmouse='alert(5);'></span>".
+        '<span window. xxx>'.
+        '<script>window</script> here';
+    $out = 'i a  here';
+
+    $this->assertSame($out, Safe::cleanJs($strings));
+
+    $strings = 'i a <span javascript:></span> here';
+    $out = 'i a <span ></span> here';
+
+    $this->assertSame($out, Safe::cleanJs($strings));
+}
+```
+    
+## 字符串文本化
+
+``` php
+public function testText(): void
+{
+    $strings = "i a <script></script> \n\r<body> <span onmouse='alert(5);'> here";
+    $out = 'iahere';
+
+    $this->assertSame($out, Safe::text($strings));
+}
+```
+    
+## 字符过滤 JS 和 HTML 标签
+
+``` php
+public function testStrip(): void
+{
+    $strings = "i a <script></script> <body> <span onmouse='alert(5);'> here";
+    $out = 'i a    here';
+
+    $this->assertSame($out, Safe::strip($strings));
+}
+```
+    
+## 字符 HTML 安全实体
+
+``` php
+public function testCustomHtmlspecialchars(): void
+{
+    $strings = 'i a < here';
+    $out = 'i a &lt; here';
+
+    $this->assertSame($out, Safe::customHtmlspecialchars($strings));
+
+    $strings = ['i a < here', 'i a > here'];
+    $out = ['i a &lt; here', 'i a &gt; here'];
+
+    $this->assertSame($out, Safe::customHtmlspecialchars($strings));
+}
+```
+    
+## 字符 HTML 实体还原
+
+``` php
+public function testUnHtmlSpecialchars(): void
+{
+    $strings = 'i a &lt; here';
+    $out = 'i a < here';
+
+    $this->assertSame($out, Safe::unHtmlspecialchars($strings));
+
+    $strings = ['i a &lt; here', 'i a &gt; here'];
+    $out = ['i a < here', 'i a > here'];
+
+    $this->assertSame($out, Safe::unHtmlspecialchars($strings));
+}
+```
+    
+## 短字符串长度验证
+
+``` php
+public function testShortLimit(): void
+{
+    $strings = 'i a # > here';
+    $out = 'i a  &gt; here';
+
+    $this->assertSame($out, Safe::shortLimit($strings));
+
+    $strings = 'i a # > here';
+    $out = '';
+
+    $this->assertSame($out, Safe::shortLimit($strings, 5));
+}
+```
+    
+## 长字符串长度验证
+
+``` php
+public function testLongLimit(): void
+{
+    $strings = 'i a # > here';
+    $out = 'i a # &gt; here';
+
+    $this->assertSame($out, Safe::longLimit($strings));
+
+    $strings = 'i a # > here';
+    $out = '';
+
+    $this->assertSame($out, Safe::longLimit($strings, 5));
+}
+```
+    
+## 超长字符串长度验证
+
+``` php
+public function testBigLimit(): void
+{
+    $strings = 'i a <script  # > here';
+    $out = 'i a  # > here';
+
+    $this->assertSame($out, Safe::bigLimit($strings));
+
+    $strings = 'i <script a # > here';
+    $out = ' ';
+
+    $this->assertSame($out, Safe::bigLimit($strings, 5));
+}
+```
+    
 ## 签名算法支持
 
 ``` php
