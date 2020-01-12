@@ -453,6 +453,15 @@ function genSidebarConfigDoc (title) {
             'component/http/psr2leevel',
           ],
         },
+        'component/mail',
+        {
+          title: title.title19,
+          collapsable: true,
+          'children': [
+            'component/auth',
+            'component/auth/hash',
+          ],
+        }
       ]
     },
     {
@@ -462,13 +471,5 @@ function genSidebarConfigDoc (title) {
         'developer/',
       ]
     },
-    {
-      title: title.title19,
-      collapsable: true,
-      'children': [
-        'component/auth',
-        'component/auth/hash',
-      ],
-    }
   ]
 }
