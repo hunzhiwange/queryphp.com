@@ -4,7 +4,7 @@
 [tests/Auth/HashTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Auth/HashTest.php)
 :::
     
-密码哈希主要用于登陆验证密码，功能非常简单，仅提供密码方法 `password` 和校验方法 `verify`。
+密码哈希主要用于登陆验证密码，功能非常简单，仅提供密码加密方法 `password` 和校验方法 `verify`。
 
 **password 原型**
 
@@ -15,7 +15,7 @@
 public function password(string $password, array $option = []): string;
 ```
 
-**verify 原型** 
+**verify 原型**
 
 ``` php
 /**
