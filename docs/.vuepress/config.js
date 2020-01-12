@@ -68,6 +68,7 @@ module.exports = {
             title16:'Option',
             title17:'Cache',
             title18:'Swoole',
+            title19:'Auth',
           }),
         }
       },
@@ -98,6 +99,7 @@ module.exports = {
             title16:'配置',
             title17:'缓存',
             title18:'Swoole',
+            title19:'认证',
           }),
         }
       },
@@ -128,6 +130,7 @@ module.exports = {
             title16:'配寘',
             title17:'緩存',
             title18:'Swoole',
+            title19:'認證',
           }),
         }
       }
@@ -458,6 +461,14 @@ function genSidebarConfigDoc (title) {
       children: [
         'developer/',
       ]
+    },
+    {
+      title: title.title19,
+      collapsable: true,
+      'children': [
+        'component/auth',
+        'component/auth/hash',
+      ],
     }
   ]
 }
