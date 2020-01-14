@@ -119,3 +119,7 @@ public function testBaseUse(): void
     $this->assertStringContainsString('a error message', $result);
 }
 ```
+    
+::: tip
+normalizeCommand 格式化命令，主要用于一个命令可能会调用其它命令，需要预先加载。
+:::

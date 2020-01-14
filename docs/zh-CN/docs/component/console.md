@@ -1,10 +1,13 @@
-# 运行命令代码
+# 命令行脚本
 
 ::: tip Testing Is Documentation
-[tests/Console/RunCommandTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Console/RunCommandTest.php)
+[tests/Console/CommandTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Console/CommandTest.php)
 :::
     
-有时候我们需要在非命令行调用命令，比如在控制器等地方直接运行命令行代码，系统对这种场景进行了简单封装。
+QueryPHP 内置控制台命名，底层采用 `Symfony/console` 开发，用法与 Symfony 一致，对基础命令进行了简单的封装。
+几个简单的封装来自 `Laravel`，是对 Symfony 的基础命令做了一些常用功能的包装，可以完全满足常用开发需求。
+
+Console 组件是 Symfony 里面的一个控制台命令组件，可以轻松地编写出运行在 CLI 上面的命名。
 
 
 **Uses**
@@ -12,14 +15,11 @@
 ``` php
 <?php
 
-use Leevel\Console\Application;
-use Leevel\Console\RunCommand;
-use Leevel\Di\Container;
 use Tests\Console\Command\CallOtherCommand;
 use Tests\Console\Load1\Test1;
 ```
 
-## 运行命令代码基本使用方法
+## 基本使用方法
 
 **fixture 定义**
 
@@ -89,13 +89,11 @@ class CallOtherCommand extends Command
 ``` php
 public function testBaseUse(): void
 {
-    $application = new Application(new Container(), '1.0');
-    $runCommand = new RunCommand($application);
-
-    $runCommand->normalizeCommand(Test1::class);
-    $result = $runCommand->handle(new CallOtherCommand(), [
+    $result = $this->runCommand(new CallOtherCommand(), [
         'command'     => 'call:other',
-    ]);
+    ], function ($container, $application) {
+        $application->normalizeCommands([Test1::class]);
+    });
 
     $this->assertStringContainsString('call other command test.', $result);
     $this->assertStringContainsString('load1 test1', $result);
@@ -119,7 +117,3 @@ public function testBaseUse(): void
     $this->assertStringContainsString('a error message', $result);
 }
 ```
-    
-::: tip
-normalizeCommand 格式化命令，主要用于一个命令可能会调用其它命令，需要预先加载。
-:::

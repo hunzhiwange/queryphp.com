@@ -69,6 +69,9 @@ module.exports = {
             title17:'Cache',
             title18:'Swoole',
             title19:'Auth',
+            title20:'Encryption',
+            title21:'Filesystem',
+            title22:'Console',
           }),
         }
       },
@@ -100,6 +103,9 @@ module.exports = {
             title17:'缓存',
             title18:'Swoole',
             title19:'认证',
+            title20:'加密',
+            title21:'文件系统',
+            title22:'命令行',
           }),
         }
       },
@@ -131,6 +137,9 @@ module.exports = {
             title17:'緩存',
             title18:'Swoole',
             title19:'認證',
+            title20:'加密',
+            title21:'文件系統',
+            title22:'命令行',
           }),
         }
       }
@@ -190,6 +199,7 @@ function genSidebarConfigDoc (title) {
         'architecture/ioc',
         'architecture/fn',
         'architecture/event',
+        'architecture/manager',
       ]
     },
     {
@@ -331,8 +341,14 @@ function genSidebarConfigDoc (title) {
         'component/collection',
         'component/tree',
         'component/pipeline',
-        'component/encryption',
-        'component/safe',
+        {
+          title: title.title20,
+          collapsable: true,
+          'children': [
+            'component/encryption',
+            'component/encryption/safe',
+          ],
+        },
         {
           title: title.title15,
           collapsable: true,
@@ -460,6 +476,23 @@ function genSidebarConfigDoc (title) {
           'children': [
             'component/auth',
             'component/auth/hash',
+          ],
+        },
+        {
+          title: title.title21,
+          collapsable: true,
+          'children': [
+            'component/filesystem',
+            'component/filesystem/fso',
+          ],
+        },
+        {
+          title: title.title22,
+          collapsable: true,
+          'children': [
+            'component/console',
+            'component/console/makecommand',
+            'component/console/runcommand',
           ],
         }
       ]

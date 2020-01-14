@@ -14,7 +14,7 @@
 use Leevel\Encryption\Safe;
 ```
 
-## 添加模式转义和移除魔术方法转义
+## custom_addslashes 添加模式转义和移除魔术方法转义
 
 ``` php
 public function testBaseUse(): void
@@ -35,7 +35,7 @@ public function testBaseUse(): void
 }
 ```
     
-## 深度过滤
+## deep_replace 深度过滤
 
 ``` php
 public function testDeepReplace(): void
@@ -47,7 +47,7 @@ public function testDeepReplace(): void
 }
 ```
     
-## url 安全过滤
+## esc_url URL 安全过滤
 
 ``` php
 public function testEscUrl(): void
@@ -74,7 +74,7 @@ public function testEscUrl(): void
 }
 ```
     
-## 过滤 script
+## filter_script 过滤 script
 
 ``` php
 public function testFilterScript(): void
@@ -86,7 +86,7 @@ public function testFilterScript(): void
 }
 ```
     
-## 过滤十六进制字符串
+## clean_hex 过滤十六进制字符串
 
 ``` php
 public function testCleanHex(): void
@@ -98,7 +98,7 @@ public function testCleanHex(): void
 }
 ```
     
-## SQL 过滤
+## sql_filter SQL 过滤
 
 ``` php
 public function testSqlFilter(): void
@@ -110,7 +110,7 @@ public function testSqlFilter(): void
 }
 ```
     
-## 字段过滤
+## fields_filter 字段过滤
 
 ``` php
 public function testFieldsFilter(): void
@@ -127,7 +127,7 @@ public function testFieldsFilter(): void
 }
 ```
     
-## 字符过滤
+## str_filter 字符过滤
 
 ``` php
 public function testStrFilter(): void
@@ -146,7 +146,7 @@ public function testStrFilter(): void
 }
 ```
     
-## HTML 过滤
+## html_filter HTML 过滤
 
 ``` php
 public function testHtmlFilter(): void
@@ -165,7 +165,7 @@ public function testHtmlFilter(): void
 }
 ```
     
-## 字符 HTML 安全显示
+## html_view 字符 HTML 安全显示
 
 ``` php
 public function testHtmlView(): void
@@ -178,7 +178,7 @@ e';
 }
 ```
     
-## 整数数组过滤
+## int_arr_filter 整数数组过滤
 
 ``` php
 public function testIntArrFilter(): void
@@ -196,7 +196,7 @@ public function testIntArrFilter(): void
 }
 ```
     
-## 字符串数组过滤
+## str_arr_filter 字符串数组过滤
 
 ``` php
 public function testStrArrFilter(): void
@@ -214,7 +214,7 @@ public function testStrArrFilter(): void
 }
 ```
     
-## 访问时间限制
+## limit_time 访问时间限制
 
 ``` php
 public function testLimitTime(): void
@@ -234,7 +234,7 @@ public function testLimitTime(): void
 }
 ```
     
-## IP 访问限制
+## limit_ip IP 访问限制
 
 ``` php
 public function testLimitIp(): void
@@ -247,7 +247,7 @@ public function testLimitIp(): void
 }
 ```
     
-## 检测代理
+## limit_agent 检测代理
 
 ``` php
 public function testLimitAgent(): void
@@ -256,7 +256,7 @@ public function testLimitAgent(): void
 }
 ```
     
-## 过滤 JavaScript
+## clean_js 过滤 JavaScript
 
 ``` php
 public function testCleanJs(): void
@@ -275,7 +275,7 @@ public function testCleanJs(): void
 }
 ```
     
-## 字符串文本化
+## text 字符串文本化
 
 ``` php
 public function testText(): void
@@ -287,7 +287,7 @@ public function testText(): void
 }
 ```
     
-## 字符过滤 JS 和 HTML 标签
+## strip 字符过滤 JS 和 HTML 标签
 
 ``` php
 public function testStrip(): void
@@ -299,7 +299,7 @@ public function testStrip(): void
 }
 ```
     
-## 字符 HTML 安全实体
+## custom_htmlspecialchars 字符 HTML 安全实体
 
 ``` php
 public function testCustomHtmlspecialchars(): void
@@ -316,7 +316,7 @@ public function testCustomHtmlspecialchars(): void
 }
 ```
     
-## 字符 HTML 实体还原
+## un_htmlspecialchars 字符 HTML 实体还原
 
 ``` php
 public function testUnHtmlSpecialchars(): void
@@ -333,7 +333,7 @@ public function testUnHtmlSpecialchars(): void
 }
 ```
     
-## 短字符串长度验证
+## short_limit 短字符串长度验证
 
 ``` php
 public function testShortLimit(): void
@@ -350,7 +350,7 @@ public function testShortLimit(): void
 }
 ```
     
-## 长字符串长度验证
+## long_limit 长字符串长度验证
 
 ``` php
 public function testLongLimit(): void
@@ -367,7 +367,7 @@ public function testLongLimit(): void
 }
 ```
     
-## 超长字符串长度验证
+## big_limit 超长字符串长度验证
 
 ``` php
 public function testBigLimit(): void
@@ -384,7 +384,7 @@ public function testBigLimit(): void
 }
 ```
     
-## 签名算法支持
+## signature 签名算法支持
 
 ``` php
 public function testSignature(): void
@@ -395,12 +395,11 @@ public function testSignature(): void
     ];
 
     $signature = Safe::signature($query, '123456');
-
     $this->assertSame('dc6cfa1e1f6eaf29c73622f4d4c54be57d545c1d7c377dade88faccb5a79d2d8', $signature);
 }
 ```
     
-## 签名算法支持忽略字段
+## signature 签名算法支持忽略字段
 
 ``` php
 public function testSignatureWithIgnore(): void
@@ -413,12 +412,11 @@ public function testSignatureWithIgnore(): void
     ];
 
     $signature = Safe::signature($query, '123456', ['signature', 'timestamp']);
-
     $this->assertSame('dc6cfa1e1f6eaf29c73622f4d4c54be57d545c1d7c377dade88faccb5a79d2d8', $signature);
 }
 ```
     
-## 签名算法支持子数组
+## signature 签名算法支持子数组
 
 ``` php
 public function testSignatureWithSubArray(): void
@@ -432,7 +430,6 @@ public function testSignatureWithSubArray(): void
     ];
 
     $signature = Safe::signature($query, '123456');
-
     $this->assertSame('2bd98c89629fae202c680b33430eb9c909b25f4e8a8dca91752fabd1e14735d1', $signature);
 }
 ```
