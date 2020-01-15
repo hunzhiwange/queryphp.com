@@ -20,7 +20,7 @@ QueryPHP 请求对象基于 Symfony 二次开发，功能非常强大，做了�
 ``` php
 class Demo
 {
-    private $request;
+    private \Leevel\Http\IRequest $request;
 
     public function __construct(\Leevel\Http\IRequest $request)
     {

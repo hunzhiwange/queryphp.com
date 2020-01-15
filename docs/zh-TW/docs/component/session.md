@@ -32,7 +32,7 @@ QueryPHP 提供了 Session (会话) 可以用于保存用户登录状态。
 ``` php
 class Demo
 {
-    private $session;
+    private \Leevel\Session\Manager $session;
 
     public function __construct(\Leevel\Session\Manager $session)
     {

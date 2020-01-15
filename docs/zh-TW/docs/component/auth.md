@@ -21,7 +21,7 @@ QueryPHP 提供了一组简单的认证组件用于登陆验证，通常我们�
 ``` php
 class Demo
 {
-    private $auth;
+    private \Leevel\Auth\Manager $auth;
 
     public function __construct(\Leevel\Auth\Manager $auth)
     {

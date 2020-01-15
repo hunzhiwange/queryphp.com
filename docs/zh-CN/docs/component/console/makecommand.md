@@ -79,7 +79,7 @@ class MakeFile extends Make
 
 **tests/Console/Command/template**
 
-``` html 
+``` html
 hello make file
 
 {{key1}}

@@ -28,7 +28,7 @@ QueryPHP 为系统提供了灵活的配置，通常来说通过服务提供者�
 ``` php
 class Demo
 {
-    private $option;
+    private \Leevel\Option\IOption $option;
 
     public function __construct(\Leevel\Option\IOption $option)
     {

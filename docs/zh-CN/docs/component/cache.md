@@ -30,7 +30,7 @@ QueryPHP 为系统提供了灵活的缓存功能，提供了多种缓存驱动�
 ``` php
 class Demo
 {
-    private $cache;
+    private \Leevel\Cache\Manager $cache;
 
     public function __construct(\Leevel\Cache\Manager $cache)
     {

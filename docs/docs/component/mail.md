@@ -23,7 +23,7 @@ QueryPHP 的邮件底层为 `swiftmailer/swiftmailer`，系统进行了简单的
 ``` php
 class Demo
 {
-    private $mail;
+    private \Leevel\Mail\Manager $mail;
 
     public function __construct(\Leevel\Mail\Manager $mail)
     {

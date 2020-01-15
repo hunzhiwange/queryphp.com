@@ -40,7 +40,7 @@
 ``` php
 class Demo
 {
-    private $log;
+    private \Leevel\Log\Manager $log;
 
     public function __construct(\Leevel\Log\Manager $log)
     {
