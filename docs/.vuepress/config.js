@@ -341,6 +341,10 @@ function genSidebarConfigDoc (title) {
         'component/collection',
         'component/tree',
         'component/pipeline',
+        'component/flow',
+        'component/linkedlist',
+        'component/queue',
+        'component/stack',
         {
           title: title.title20,
           collapsable: true,
@@ -494,7 +498,8 @@ function genSidebarConfigDoc (title) {
             'component/console/makecommand',
             'component/console/runcommand',
           ],
-        }
+        },
+        'component/view',
       ]
     },
     {
