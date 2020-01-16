@@ -197,6 +197,7 @@ function genSidebarConfigDoc (title) {
       children: [
         'architecture/',
         'architecture/ioc',
+        'architecture/provider',
         'architecture/fn',
         'architecture/event',
         'architecture/manager',
