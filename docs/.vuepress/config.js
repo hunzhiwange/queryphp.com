@@ -488,7 +488,7 @@ function genSidebarConfigDoc (title) {
           collapsable: true,
           'children': [
             'component/filesystem',
-            'component/filesystem/fso',
+            'component/filesystem/helper',
           ],
         },
         {
