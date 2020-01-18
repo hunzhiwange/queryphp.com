@@ -11,7 +11,7 @@ QueryPHP 提供了一个文件管理 `\Leevel\Http\File` 对象。
 ``` php
 <?php
 
-use Leevel\Filesystem\Fso;
+use Leevel\Filesystem\Helper;
 use Leevel\Http\File;
 ```
 

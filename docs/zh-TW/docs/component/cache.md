@@ -10,14 +10,6 @@ QueryPHP 为系统提供了灵活的缓存功能，提供了多种缓存驱动�
 
 ## 使用方式
 
-使用助手函数
-
-``` php
-\Leevel\Cache\Helper::get(string $key, $defaults = null, array $option = []);
-\Leevel\Cache\Helper::get(string $key, $defaults = null, array $option = []);
-\Leevel\Cache\Helper::function cache(): \Leevel\Cache\Manager;
-```
-
 使用容器 caches 服务
 
 ``` php
@@ -195,7 +187,7 @@ return [
 <?php
 
 use Leevel\Cache\File;
-use Leevel\Filesystem\Fso;
+use Leevel\Filesystem\Helper;
 ```
 
 ## 缓存基本使用

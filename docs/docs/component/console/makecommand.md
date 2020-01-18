@@ -14,7 +14,7 @@
 <?php
 
 use Leevel\Console\Make;
-use Leevel\Filesystem\Fso;
+use Leevel\Filesystem\Helper;
 use Tests\Console\Command\MakeFile;
 use Tests\Console\Command\MakeFileWithGlobalReplace;
 ```

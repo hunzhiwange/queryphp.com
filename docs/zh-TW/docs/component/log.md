@@ -14,13 +14,6 @@
 
 ## 使用方式
 
-使用助手函数
-
-``` php
-\Leevel\Log\Helper::record(string $message, array $context = [], string $level = \Leevel\Log\ILog::INFO): void;
-\Leevel\Log\Helper::log(): \Leevel\Log\Manager;
-```
-
 使用容器 logs 服务
 
 ``` php
@@ -202,7 +195,7 @@ QueryPHP 的日志如果启用了缓冲，会在日志数量达到缓冲数量�
 ``` php
 <?php
 
-use Leevel\Filesystem\Fso;
+use Leevel\Filesystem\Helper;
 use Leevel\Log\File;
 use Leevel\Log\ILog;
 ```
@@ -274,7 +267,7 @@ public function testBaseUse(string $level): void
     $this->assertFalse($log->isMonolog());
     $this->assertNull($log->getMonolog());
 
-    Fso::deleteDirectory(__DIR__.'/cacheLog', true);
+    Helper::deleteDirectory(__DIR__.'/cacheLog', true);
 }
 ```
     
@@ -304,6 +297,6 @@ public function testLogLevelNotFoundWithDefaultLevel(): void
 
     $log->flush();
 
-    Fso::deleteDirectory(__DIR__.'/cacheLog', true);
+    Helper::deleteDirectory(__DIR__.'/cacheLog', true);
 }
 ```

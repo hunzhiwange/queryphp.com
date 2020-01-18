@@ -10,16 +10,6 @@ QueryPHP 提供了 Session (会话) 可以用于保存用户登录状态。
 
 ## 使用方式
 
-使用助手函数
-
-``` php
-\Leevel\Session\Helper::get(string $name, $defaults = null);
-\Leevel\Session\Helper::set(string $name, $value): void;
-\Leevel\Session\Helper::session(): \Leevel\Session\Manager;
-\Leevel\Session\Helper::getFlash(string $key, $defaults = null);
-\Leevel\Session\Helper::flash(string $key, $value): void;
-```
-
 使用容器 sessions 服务
 
 ``` php
