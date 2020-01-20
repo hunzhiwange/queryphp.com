@@ -134,7 +134,7 @@ use Leevel\Auth\Manager;
 use Leevel\Cache\File as CacheFile;
 use Leevel\Di\Container;
 use Leevel\Di\IContainer;
-use Leevel\Http\IRequest;
+use Leevel\Http\Request;
 use Leevel\Option\Option;
 use Leevel\Session\File as SessionFile;
 ```

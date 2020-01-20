@@ -768,7 +768,7 @@ $php leevel make:docwithin tests
 
 ```
 Class Tests\Encryption\EncryptionTest was generate succeed.
-Class Tests\Encryption\SafeTest was generate succeed.
+Class Tests\Encryption\HelperTest was generate succeed.
 Class Tests\Database\ManagerTest was generate succeed.
 Class Tests\Database\Ddd\UnitOfWorkTest was generate succeed.
 Class Tests\Database\Ddd\Create\CreateTest was generate succeed.

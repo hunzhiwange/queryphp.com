@@ -351,7 +351,7 @@ function genSidebarConfigDoc (title) {
           collapsable: true,
           'children': [
             'component/encryption',
-            'component/encryption/safe',
+            'component/encryption/helper',
           ],
         },
         {

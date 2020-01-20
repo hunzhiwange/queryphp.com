@@ -11,8 +11,8 @@ QueryPHP 针对页面重定向可以直接返回一个 `\Leevel\Http\RedirectRes
 ``` php
 <?php
 
-use Leevel\Http\IRequest;
 use Leevel\Http\RedirectResponse;
+use Leevel\Http\Request;
 use Leevel\Session\ISession;
 ```
 
@@ -113,7 +113,7 @@ public function testSetRequest(): void
     $this->assertNull($response->getRequest());
 
     $response->setRequest($this->mockRequest([], []));
-    $this->assertInstanceOf(IRequest::class, $response->getRequest());
+    $this->assertInstanceOf(Request::class, $response->getRequest());
 }
 ```
     
@@ -128,7 +128,7 @@ public function testOnlyInput(): void
     $this->assertNull($response->getRequest());
 
     $response->setRequest($this->mockRequest(['foo' => 'bar'], []));
-    $this->assertInstanceOf(IRequest::class, $request = $response->getRequest());
+    $this->assertInstanceOf(Request::class, $request = $response->getRequest());
     $response->onlyInput('foo');
     $this->assertSame(['foo' => 'bar'], $request->only(['foo']));
     $this->assertSame($response->getSession()->getFlash('foo'), 'bar');
@@ -146,7 +146,7 @@ public function testExceptInput(): void
     $this->assertNull($response->getRequest());
 
     $response->setRequest($this->mockRequest(['foo' => 'bar'], []));
-    $this->assertInstanceOf(IRequest::class, $request = $response->getRequest());
+    $this->assertInstanceOf(Request::class, $request = $response->getRequest());
     $response->exceptInput('hello');
     $this->assertSame(['foo' => 'bar'], $request->only(['foo']));
     $this->assertSame($response->getSession()->getFlash('foo'), 'bar');

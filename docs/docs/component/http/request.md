@@ -20,9 +20,9 @@ QueryPHP 请求对象基于 Symfony 二次开发，功能非常强大，做了�
 ``` php
 class Demo
 {
-    private \Leevel\Http\IRequest $request;
+    private \Leevel\Http\Request $request;
 
-    public function __construct(\Leevel\Http\IRequest $request)
+    public function __construct(\Leevel\Http\Request $request)
     {
         $this->request = $request;
     }
@@ -46,7 +46,6 @@ class Demo
 ``` php
 <?php
 
-use Leevel\Http\IRequest;
 use Leevel\Http\Request;
 use Leevel\Http\UploadedFile;
 ```
@@ -274,20 +273,20 @@ public function testGetSetMethod(): void
     $request->setMethod('PURGE');
     $this->assertSame('PURGE', $request->getMethod(), '->getMethod() returns the method even if it is not a standard one');
     $request->setMethod('POST');
-    $this->assertSame('POST', $request->getMethod(), '->getMethod() returns the method POST if no '.IRequest::VAR_METHOD.' is defined');
+    $this->assertSame('POST', $request->getMethod(), '->getMethod() returns the method POST if no '.Request::VAR_METHOD.' is defined');
     $request->setMethod('POST');
-    $request->request->set(IRequest::VAR_METHOD, 'purge');
-    $this->assertSame('PURGE', $request->getMethod(), '->getMethod() does not return the method from '.IRequest::VAR_METHOD.' if defined and POST but support not enabled');
+    $request->request->set(Request::VAR_METHOD, 'purge');
+    $this->assertSame('PURGE', $request->getMethod(), '->getMethod() does not return the method from '.Request::VAR_METHOD.' if defined and POST but support not enabled');
 
     $request = new Request();
     $request->setMethod('POST');
-    $request->request->set(IRequest::VAR_METHOD, 'purge');
+    $request->request->set(Request::VAR_METHOD, 'purge');
     $this->assertTrue('PURGE' === $request->getMethod(), '');
 
     $request = new Request();
     $request->setMethod('POST');
     $request->headers->set('X-HTTP-METHOD-OVERRIDE', 'delete');
-    $this->assertSame('DELETE', $request->getMethod(), '->getMethod() returns the method from X-HTTP-Method-Override even though '.IRequest::VAR_METHOD.' is set if defined and POST');
+    $this->assertSame('DELETE', $request->getMethod(), '->getMethod() returns the method from X-HTTP-Method-Override even though '.Request::VAR_METHOD.' is set if defined and POST');
 }
 ```
     
@@ -1018,7 +1017,7 @@ public function testIsMethodCheckWillReturnTrue(string $method): void
     $request = new Request();
     $isMethod = 'is'.ucfirst($method);
     $constMethod = 'METHOD_'.strtoupper($method);
-    $request->setMethod(constant(IRequest::class.'::'.$constMethod));
+    $request->setMethod(constant(Request::class.'::'.$constMethod));
     $this->assertTrue($request->{$isMethod}());
 }
 ```

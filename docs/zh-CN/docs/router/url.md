@@ -18,7 +18,7 @@ QueryPHP 支持路由 URL 地址的统一生成，提供一套简洁的生成方
 ``` php
 <?php
 
-use Leevel\Http\IRequest;
+use Leevel\Http\Request;
 use Leevel\Router\Url;
 ```
 
@@ -29,7 +29,7 @@ public function testMakeUrl(): void
 {
     $request = $this->makeRequest();
     $url = new Url($request);
-    $this->assertInstanceof(IRequest::class, $url->getRequest());
+    $this->assertInstanceof(Request::class, $url->getRequest());
 
     // 开始不带斜线，自动添加
     $this->assertSame($url->make('test/hello'), '/test/hello');
@@ -132,7 +132,7 @@ public function testSecureWithDomainTop(): void
         'domain' => 'queryphp.cn',
     ]);
 
-    $this->assertInstanceof(IRequest::class, $url->getRequest());
+    $this->assertInstanceof(Request::class, $url->getRequest());
     $this->assertSame($url->make('hello/world'), 'https://www.queryphp.cn/hello/world');
 }
 ```

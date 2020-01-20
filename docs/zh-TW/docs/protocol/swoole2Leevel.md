@@ -11,7 +11,6 @@ Swoole 请求转换 Leevel 的请求后，然后传递给 Kernel 完成请求到
 ``` php
 <?php
 
-use Leevel\Http\IRequest;
 use Leevel\Http\Request;
 use Leevel\Protocol\Swoole2Leevel;
 use Swoole\Http\Request as SwooleHttpRequest;
@@ -30,7 +29,6 @@ public function testSwooleRequestWithHeader(): void
         'foo'     => 'bar',
     ];
     $request = $swoole2Leevel->createRequest($wooleRequest);
-    $this->assertInstanceOf(IRequest::class, $request);
     $this->assertInstanceOf(Request::class, $request);
 
     $data = <<<'eot'
@@ -86,7 +84,6 @@ public function testSwooleRequestWithServer(): void
         'REQUEST_METHOD'  => 'GET',
     ];
     $request = $swoole2Leevel->createRequest($wooleRequest);
-    $this->assertInstanceOf(IRequest::class, $request);
     $this->assertInstanceOf(Request::class, $request);
 
     $data = <<<'eot'
@@ -141,7 +138,6 @@ public function testSwooleRequestWithOther(): void
         'hello' => 'world',
     ];
     $request = $swoole2Leevel->createRequest($wooleRequest);
-    $this->assertInstanceOf(IRequest::class, $request);
     $this->assertInstanceOf(Request::class, $request);
 
     $data = <<<'eot'

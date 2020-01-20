@@ -1,7 +1,7 @@
 # 安全过滤
 
 ::: tip Testing Is Documentation
-[tests/Encryption/SafeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Encryption/SafeTest.php)
+[tests/Encryption/HelperTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Encryption/HelperTest.php)
 :::
     
 可以对用户输入数据进行过滤。
@@ -11,7 +11,7 @@
 ``` php
 <?php
 
-use Leevel\Encryption\Safe;
+use Leevel\Encryption\Helper;
 ```
 
 ## custom_addslashes 添加模式转义和移除魔术方法转义
@@ -22,16 +22,16 @@ public function testBaseUse(): void
     $strings = "O'Reilly?";
     $out = "O\\'Reilly?";
 
-    $this->assertSame($out, Safe::customAddslashes($strings));
+    $this->assertSame($out, Helper::customAddslashes($strings));
 
-    $this->assertSame($strings, Safe::customStripslashes($out));
+    $this->assertSame($strings, Helper::customStripslashes($out));
 
     $arrays = ["O'Reilly?" => "O'Reilly?"];
     $outs = ["O\\'Reilly?" => "O\\'Reilly?"];
 
-    $this->assertSame($outs, Safe::customAddslashes($arrays));
+    $this->assertSame($outs, Helper::customAddslashes($arrays));
 
-    $this->assertSame($arrays, Safe::customStripslashes($outs));
+    $this->assertSame($arrays, Helper::customStripslashes($outs));
 }
 ```
     
@@ -43,7 +43,7 @@ public function testDeepReplace(): void
     $strings = 'You should eat fruits, vegetables, and fiber every day.';
     $out = 'You should eat fruits, vegetables, and fiber every .';
 
-    $this->assertSame($out, Safe::deepReplace(['shoule', 'day'], $strings));
+    $this->assertSame($out, Helper::deepReplace(['shoule', 'day'], $strings));
 }
 ```
     
@@ -55,7 +55,7 @@ public function testFilterScript(): void
     $strings = '<script>hello world.';
     $out = '&lt;script>hello world.';
 
-    $this->assertSame($out, Safe::filterScript($strings));
+    $this->assertSame($out, Helper::filterScript($strings));
 }
 ```
     
@@ -67,7 +67,7 @@ public function testCleanHex(): void
     $strings = '0x63hello 0x6f world.';
     $out = '0hello 0 world.';
 
-    $this->assertSame($out, Safe::cleanHex($strings));
+    $this->assertSame($out, Helper::cleanHex($strings));
 }
 ```
     
@@ -78,11 +78,11 @@ public function testStrFilter(): void
 {
     $strings = 'This is some <b>bold</b> text.';
     $out = 'This is some &lt;b&gt;bold&lt;/b&gt; text.';
-    $this->assertSame($out, Safe::strFilter($strings));
+    $this->assertSame($out, Helper::strFilter($strings));
 
     $strings = ['This is some <b>bold</b> text.'];
     $out = ['This is some &lt;b&gt;bold&lt;/b&gt; text.'];
-    $this->assertSame($out, Safe::strFilter($strings));
+    $this->assertSame($out, Helper::strFilter($strings));
 }
 ```
     
@@ -93,11 +93,11 @@ public function testHtmlFilter(): void
 {
     $strings = "foo bar<script>.<span onclick='alert(5);'>yes</span>.";
     $out = 'foo bar&lt;script&gt;.<span >yes</span>.';
-    $this->assertSame($out, Safe::htmlFilter($strings));
+    $this->assertSame($out, Helper::htmlFilter($strings));
 
     $strings = ["foo bar<script>.<span onclick='alert(5);'>yes</span>."];
     $out = ['foo bar&lt;script&gt;.<span >yes</span>.'];
-    $this->assertSame($out, Safe::htmlFilter($strings));
+    $this->assertSame($out, Helper::htmlFilter($strings));
 }
 ```
     
@@ -110,7 +110,7 @@ public function testHtmlView(): void
     $out = 'i a <br />
 e';
 
-    $this->assertSame($out, Safe::htmlView($strings));
+    $this->assertSame($out, Helper::htmlView($strings));
 }
 ```
     
@@ -124,12 +124,12 @@ public function testCleanJs(): void
         '<script>window</script> here';
     $out = 'i a  here';
 
-    $this->assertSame($out, Safe::cleanJs($strings));
+    $this->assertSame($out, Helper::cleanJs($strings));
 
     $strings = 'i a <span javascript:></span> here';
     $out = 'i a <span ></span> here';
 
-    $this->assertSame($out, Safe::cleanJs($strings));
+    $this->assertSame($out, Helper::cleanJs($strings));
 }
 ```
     
@@ -141,7 +141,7 @@ public function testText(): void
     $strings = "i a <script></script> \n\r<body> <span onmouse='alert(5);'> here";
     $out = 'iahere';
 
-    $this->assertSame($out, Safe::text($strings));
+    $this->assertSame($out, Helper::text($strings));
 }
 ```
     
@@ -153,7 +153,7 @@ public function testStrip(): void
     $strings = "i a <script></script> <body> <span onmouse='alert(5);'> here";
     $out = 'i a    here';
 
-    $this->assertSame($out, Safe::strip($strings));
+    $this->assertSame($out, Helper::strip($strings));
 }
 ```
     
@@ -165,12 +165,12 @@ public function testCustomHtmlspecialchars(): void
     $strings = 'i a < here';
     $out = 'i a &lt; here';
 
-    $this->assertSame($out, Safe::customHtmlspecialchars($strings));
+    $this->assertSame($out, Helper::customHtmlspecialchars($strings));
 
     $strings = ['i a < here', 'i a > here'];
     $out = ['i a &lt; here', 'i a &gt; here'];
 
-    $this->assertSame($out, Safe::customHtmlspecialchars($strings));
+    $this->assertSame($out, Helper::customHtmlspecialchars($strings));
 }
 ```
     
@@ -182,11 +182,11 @@ public function testUnHtmlSpecialchars(): void
     $strings = 'i a &lt; here';
     $out = 'i a < here';
 
-    $this->assertSame($out, Safe::unHtmlspecialchars($strings));
+    $this->assertSame($out, Helper::unHtmlspecialchars($strings));
 
     $strings = ['i a &lt; here', 'i a &gt; here'];
     $out = ['i a < here', 'i a > here'];
 
-    $this->assertSame($out, Safe::unHtmlspecialchars($strings));
+    $this->assertSame($out, Helper::unHtmlspecialchars($strings));
 }
 ```
