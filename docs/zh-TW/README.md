@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: /hero.png
-actionText: 设计理念指南 →
+actionText: 設計理念指南 →
 actionLink: /guide/
 features-bak:
 - title: 框架理念
@@ -20,8 +20,8 @@ footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
 ---
 
 <div style="color:#212121!important;font-weight:700;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
-  <div style="margin-bottom:10px;">QueryPHP 是一款现代化的高性能 PHP 渐进式协程框架, 我们还是主要面向传统 PHP-FPM 场景，以工程师用户体验为历史使命，让每一个 PHP 应用都有一个好框架。</div>
-  <div>百分之百单元测试覆盖直面 Bug，致力于创造高品质的产品 level level leevel，依托 Swoole 协程提升业务性能，此刻未来逐步渐进。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，让您的业务撑起更多的用户服务。</div>
+  <div style="margin-bottom:10px;">QueryPHP 是一款現代化的高性能 PHP 漸進式協程框架，我們還是主要面向傳統 PHP-FPM 場景，以工程師用戶體驗為歷史使命，讓每一個 PHP 應用都有一個好框架。</div>
+  <div>百分之百單元測試覆蓋直面 Bug，致力於創造高品質產品 Level Level Leevel，依託 Swoole 開啟未來更多可能，此刻未來逐步漸進。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，讓您的業務撐起更多的用戶服務。</div>
 </div>
 
 <div style="margin-top: -50px;margin-bottom: -80px;">
@@ -397,37 +397,37 @@ class WaitGroup
   </h2>
   <p>We just want to write code</p>
   <p>simply and happily</p>
-  <p>我们只想简单快乐</p>
-  <p>左手代码右手年华</p>
+  <p>我們只想簡單快樂</p>
+  <p>左手程式碼右手年華</p>
  </div>
  <div class="feature">
   <h2>框架理念</h2>
-  <p>值得托付的使命感，让每一个 PHP 应用都有一个好框架。</p>
+  <p>值得託付的使命感，讓每一個PHP應用都有一個好框架。</p>
  </div>
  <div class="feature">
-  <h2>组件系统</h2>
-  <p>框架底层由独立的高内聚低耦合组件构成，可以轻松无侵入接入现有系统。</p>
+  <h2>組件系統</h2>
+  <p>框架底層由獨立的高內聚低耦合組件構成，可以輕鬆無侵入接入現有系統。</p>
  </div>
  <div class="feature">
-  <h2>路由系统</h2>
-  <p>框架提供 MVC 自动路由并能够智能解析 Restful 请求和基于 OpenApi 3.0 规范的 swagger-php 注解路由，文档路由一步搞定。</p>
+  <h2>路由系統</h2>
+  <p>框架提供 MVC 自動路由並能够智慧解析 Restful 請求和基於 OpenApi 3.0 規範的 swagger-php 注解路由，檔案路由一步搞定。</p>
  </div>
  <div class="feature">
-  <h2>整体解决方案</h2>
-  <p>框架提供了从缓存、Session、IOC 容器、模板引擎、Ddd ORM 等大量开箱即用的功能，提供了基于 Symfony Console 命令行工具集。</p>
+  <h2>整體解決方案</h2>
+  <p>框架提供了從緩存、Session、IOC 容器、範本引擎、Ddd ORM 等大量開箱即用的功能，提供了基於 Symfony Console 命令列工具集。</p>
  </div>
  <div class="feature">
   <h2>高品質</h2>
-  <p>百分之百單元測試覆蓋直面 Bug，致力於創造高品質的產品 level level leevel。</p>
+  <p>百分之百單元測試覆蓋直面 Bug，致力於創造高品質產品 Level Level Leevel。</p>
  </div>
  <div class="feature">
-  <h2>业务协程化</h2>
-  <p>基于 Swoole 4 提供的全新协程编程模式让业务性能更好，我们的愿景是少量代码修改或者无修改，让你的业务撑起更多的用户服务。</p>
+  <h2>業務協程化</h2>
+  <p>基於 Swoole 4 提供的全新協程程式設計模式讓業務效能更好，我們的願景是少量程式碼修改或者無修改，讓你的業務撐起更多的用戶服務。</p>
  </div>
 </div>
 
 ::: warning 注意
-请确保你的 PHP 版本 >= 7.4.0。
+請確保你的 PHP 版本 >= 7.4.0。
 :::
 
 <!-- <div id="sponsors">
