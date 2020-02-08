@@ -13,7 +13,7 @@
 使用容器 view 服务
 
 ``` php
-\App::make('view')->setVar($name, $value = null): \Leevel\Router\IView;
+\App::make('view')->setVar($name, $value = null): void;
 ```
 
 依赖注入
@@ -33,7 +33,7 @@ class Demo
 使用静态代理
 
 ``` php
-\Leevel\Router\Proxy\View::->setVar($name, $value = null): \Leevel\Router\IView;
+\Leevel\Router\Proxy\View::->setVar($name, $value = null): void;
 ```
 
 ## view 配置

@@ -9,7 +9,7 @@ QueryPHP 支持路由 URL 地址的统一生成，提供一套简洁的生成方
 使用容器 url 服务
 
 ``` php
-\App::make('url')->make(string $url, array $params = [], string $subdomain = 'www', $suffix = null): string;
+\App::make('url')->make(string $url, array $attributes = [], string $subdomain = 'www', $suffix = null): string;
 ```
 
 

@@ -167,7 +167,7 @@ public function testDeferred(): void
 ``` php
 public function testBootstrap(): void
 {
-    $test = new PrividerTest($container = new Container());
+    $test = new PrividerTest(new Container());
 
     $this->assertInstanceof(IContainer::class, $test->container());
     $this->assertInstanceof(Container::class, $test->container());

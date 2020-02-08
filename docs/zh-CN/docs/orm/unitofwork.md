@@ -12,7 +12,6 @@
 <?php
 
 use Leevel\Database\Ddd\Entity;
-use Leevel\Database\Ddd\IUnitOfWork;
 use Leevel\Database\Ddd\UnitOfWork;
 use Tests\Database\DatabaseTestCase as TestCase;
 use Tests\Database\Ddd\Entity\CompositeId;
@@ -30,7 +29,6 @@ public function testBaseUse(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $post = new Post([
         'title'   => 'hello world',
@@ -64,7 +62,6 @@ public function testPersist(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $post = new Post([
         'title'   => 'hello world',
@@ -133,7 +130,6 @@ public function testCreate(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $post = new Post([
         'title'   => 'hello world',
@@ -216,7 +212,6 @@ public function testUpdate(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
 
@@ -340,7 +335,6 @@ public function testDelete(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
 
@@ -477,7 +471,6 @@ public function testRefresh(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
 
@@ -538,7 +531,6 @@ public function testBeginTransaction(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
 
@@ -622,7 +614,6 @@ public function testTransaction(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
 
@@ -668,7 +659,6 @@ public function testTransactionAndRollBack(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
 
@@ -707,7 +697,6 @@ public function testSetRootEntity(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
 
@@ -754,7 +743,6 @@ public function testSetConnectNotFoundWillUseDefault(): void
     $work = UnitOfWork::make();
 
     $this->assertInstanceof(UnitOfWork::class, $work);
-    $this->assertInstanceof(IUnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
 

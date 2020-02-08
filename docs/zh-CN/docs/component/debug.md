@@ -342,13 +342,10 @@ public function testWithLog(): void
     $log->debug('test_log_debug');
 
     $debug->handle($request, $response);
-
     $content = $response->getContent();
 
     $this->assertStringContainsString('"logs":{"count":2,', $content);
-
     $this->assertStringContainsString('test_log info: {\"exends\":\"bar\"}', $content);
-
     $this->assertStringContainsString('test_log_debug debug: []', $content);
 }
 ```

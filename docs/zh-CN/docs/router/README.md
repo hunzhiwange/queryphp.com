@@ -140,13 +140,13 @@ Restful 已经是一种开发主流，前后端分离的场景我们通常会定
 /car/5 | DELETE | App\App\Controller\Car::destroy() |
 /car/5 | PUT    | App\App\Controller\Car::update()  |
 
-我们系统会分析 pathInfo，会将`数字类数据`扔进 params，其它字符将会合并进行上面的 `自动 MVC 路由`，这个时候没有方法，系统根据
+我们系统会分析 pathInfo，会将`数字类数据`扔进 attributes，其它字符将会合并进行上面的 `自动 MVC 路由`，这个时候没有方法，系统根据
 请求类型自动补全方法完成 Restful 请求.
 
-我们可以通过 Request 中的 params 来访问参数。
+我们可以通过 Request 中的 attributes 来访问参数。
 
 ``` php
-\Leevel::app('request')->params->get('_param0'); // 5
+\Leevel::app('request')->attributes->get('_param0'); // 5
 ```
 
 ::: warning 数字类数据支持多个和跨目录
@@ -201,7 +201,7 @@ Hi you,i am petLeevelForApi and it petId is helloworld
  *     security={
  *         {"petstore_auth": {"write:pets", "read:pets"}}
  *     },
- *     leevelParams={"args1": "hello", "args2": "world"}
+ *     leevelAttributes={"args1": "hello", "args2": "world"}
  * )
  *
  * @param mixed $petId
@@ -229,7 +229,7 @@ QueryPHP 的注解路由，在标准 Swagger-php 的基础上增加了自定义�
 ```
 leevelScheme="https",
 leevelDomain="{subdomain:[A-Za-z]+}-vip.{domain}",
-leevelParams={"args1": "hello", "args2": "world"},
+leevelAttributes={"args1": "hello", "args2": "world"},
 leevelMiddlewares="api"
 leevelBind="\XXX\XXX\class@method"
 ```

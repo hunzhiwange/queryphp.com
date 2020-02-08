@@ -1,4 +1,4 @@
-# 验证器.验证是否为正常的 JSON 字符串
+# 验证器.验证是否为正常的 JSON 数据
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/JsonTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/JsonTest.php)

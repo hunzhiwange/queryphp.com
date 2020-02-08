@@ -101,7 +101,9 @@ public function testBaseUse(): void
         'name'        => 'test',
     ]);
 
-    $this->assertStringContainsString('test <test> created successfully.', $result);
+    $result = $this->normalizeContent($result);
+
+    $this->assertStringContainsString($this->normalizeContent('test <test> created successfully.'), $result);
 
     $file = __DIR__.'/Command/cache/test';
 

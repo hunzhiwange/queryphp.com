@@ -11,10 +11,14 @@
 ``` php
 <?php
 
+use Exception;
+use JsonSerializable;
 use Leevel\Support\Arr;
+use Leevel\Support\IArray;
+use Leevel\Support\IJson;
 ```
 
-## 基础格式化
+## normalize 基础格式化
 
 ``` php
 public function testBaseUse(): void
@@ -29,7 +33,7 @@ public function testBaseUse(): void
 }
 ```
     
-## 格式化字符串
+## normalize 格式化字符串
 
 ``` php
 public function testNormalize(): void
@@ -51,7 +55,7 @@ public function testNormalize(): void
 }
 ```
     
-## 格式化分隔字符串
+## normalize 格式化分隔字符串
 
 ``` php
 public function testNormalizeSplitString(): void
@@ -74,7 +78,7 @@ public function testNormalizeSplitString(): void
 }
 ```
     
-## 格式化数组
+## normalize 格式化数组
 
 ``` php
 public function testNormalizeArr(): void
@@ -97,7 +101,7 @@ public function testNormalizeArr(): void
 }
 ```
     
-## 格式化数组过滤空格
+## normalize 格式化数组过滤空格
 
 ``` php
 public function testNormalizeArrFilterEmpty(): void
@@ -120,7 +124,7 @@ public function testNormalizeArrFilterEmpty(): void
 }
 ```
     
-## 格式化数组不过滤空格
+## normalize 格式化数组不过滤空格
 
 ``` php
 public function testNormalizeArrNotFilterEmpty(): void
@@ -144,7 +148,7 @@ public function testNormalizeArrNotFilterEmpty(): void
 }
 ```
     
-## 格式化数据即不是数组也不是字符串
+## normalize 格式化数据即不是数组也不是字符串
 
 ``` php
 public function testNormalizeNotArrAndNotString(): void
@@ -155,7 +159,7 @@ public function testNormalizeNotArrAndNotString(): void
 }
 ```
     
-## 允许特定 Key 通过
+## only 允许特定 Key 通过
 
 相当于白名单。
 
@@ -181,7 +185,7 @@ public function testOnly(): void
 }
 ```
     
-## 排除特定 Key 通过
+## except 排除特定 Key 通过
 
 相当于黑名单。
 
@@ -205,7 +209,7 @@ public function testExcept(): void
 }
 ```
     
-## 数据过滤
+## filter 数据过滤
 
 基本的字符串会执行一次清理工作。
 
@@ -234,7 +238,7 @@ public function testFilter(): void
 }
 ```
     
-## 数据过滤待规则
+## filter 数据过滤待规则
 
 ``` php
 public function testFilterWithRule(): void
@@ -267,7 +271,7 @@ public function testFilterWithRule(): void
 }
 ```
     
-## 数据过滤待规则必须是数组
+## filter 数据过滤待规则必须是数组
 
 ``` php
 public function testFilterRuleIsNotArr(): void
@@ -286,7 +290,7 @@ public function testFilterRuleIsNotArr(): void
 }
 ```
     
-## 数据过滤待规则不是一个回调
+## filter 数据过滤待规则不是一个回调
 
 ``` php
 public function testFilterRuleItemIsNotACallback(): void
@@ -305,7 +309,7 @@ public function testFilterRuleItemIsNotACallback(): void
 }
 ```
     
-## 数据过滤默认不处理 NULL 值
+## filter 数据过滤默认不处理 NULL 值
 
 ``` php
 public function testFilterWithoutMust(): void
@@ -330,7 +334,7 @@ public function testFilterWithoutMust(): void
 }
 ```
     
-## 数据过滤强制处理 NULL 值
+## filter 数据过滤强制处理 NULL 值
 
 ``` php
 public function testFilterWithMust(): void
@@ -352,5 +356,79 @@ public function testFilterWithMust(): void
             $result
         )
     );
+}
+```
+    
+## shouldJson 数据过滤强制处理 NULL 值
+
+测试实现了 `\Leevel\Support\IArray` 的对象
+
+``` php
+namespace Tests\Support;
+
+class ArrMyArray implements IArray
+{
+    public function toArray(): array
+    {
+        return ['hello' => 'IArray'];
+    }
+}
+```
+
+测试实现了 `\Leevel\Support\IJson` 的对象
+
+``` php
+namespace Tests\Support;
+
+class ArrMyJson implements IJson
+{
+    public function toJson(?int $option = null): string
+    {
+        if (null === $option) {
+            $option = JSON_UNESCAPED_UNICODE;
+        }
+
+        return json_encode(['hello' => 'IJson'], $option);
+    }
+}
+```
+
+测试实现了 `\JsonSerializable` 的对象
+
+``` php
+namespace Tests\Support;
+
+class ArrMyJsonSerializable implements JsonSerializable
+{
+    public function jsonSerialize()
+    {
+        return ['hello' => 'JsonSerializable'];
+    }
+}
+```
+
+
+``` php
+public function testShouldJson(): void
+{
+    $this->assertTrue(Arr::shouldJson(['foo' => 'bar']));
+    $this->assertTrue(Arr::shouldJson(new ArrMyArray()));
+    $this->assertTrue(Arr::shouldJson(new ArrMyJson()));
+    $this->assertTrue(Arr::shouldJson(new ArrMyJsonSerializable()));
+}
+```
+    
+## convertJson 转换 JSON 数据
+
+``` php
+public function testConvertJson(): void
+{
+    $this->assertSame('{"foo":"bar"}', Arr::convertJson(['foo' => 'bar']));
+    $this->assertSame('{"foo":"bar"}', Arr::convertJson(['foo' => 'bar'], JSON_THROW_ON_ERROR));
+    $this->assertSame('{"hello":"IArray"}', Arr::convertJson(new ArrMyArray()));
+    $this->assertSame('{"hello":"IJson"}', Arr::convertJson(new ArrMyJson()));
+    $this->assertSame('{"hello":"JsonSerializable"}', Arr::convertJson(new ArrMyJsonSerializable()));
+    $this->assertSame('{"成":"都"}', Arr::convertJson(['成' => '都']));
+    $this->assertSame('{"\u6210":"\u90fd"}', Arr::convertJson(['成' => '都'], 0));
 }
 ```

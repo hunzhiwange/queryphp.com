@@ -48,16 +48,22 @@ public function testSwooleRequestWithHeader(): void
 
     $data = <<<'eot'
         {
-            "host": "127.0.0.1",
-            "referer": "https:\/\/www.queryphp.com",
-            "foo": "bar"
+            "host": [
+                "127.0.0.1"
+            ],
+            "referer": [
+                "https:\/\/www.queryphp.com"
+            ],
+            "foo": [
+                "bar"
+            ]
         }
         eot;
 
     $this->assertSame(
         $data,
         $this->varJson(
-            $request->headers->all(),
+            $this->getFilterHeaders($request->headers->all()),
             1
         )
     );
@@ -108,16 +114,22 @@ public function testSwooleRequestWithServer(): void
 
     $data = <<<'eot'
         {
-            "host": "127.0.0.1",
-            "referer": "https:\/\/www.queryphp.com",
-            "foo": "bar"
+            "host": [
+                "127.0.0.1"
+            ],
+            "referer": [
+                "https:\/\/www.queryphp.com"
+            ],
+            "foo": [
+                "bar"
+            ]
         }
         eot;
 
     $this->assertSame(
         $data,
         $this->varJson(
-            $request->headers->all(),
+            $this->getFilterHeaders($request->headers->all()),
             1
         )
     );
