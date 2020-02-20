@@ -4,7 +4,7 @@
 [tests/Kernel/Bootstrap/LoadOptionTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Kernel/Bootstrap/LoadOptionTest.php)
 :::
     
-QueryPHP 在内核执行过程中会执行初始化，分为 4 个步骤，载入配置、载入语言包、注册异常运行时和遍历服务提供者。
+QueryPHP 在内核执行过程中会执行初始化，分为 4 个步骤，载入配置、载入语言包、注册异常运行时和遍历服务提供者注册服务。
 
 内核初始化，包括 `\Leevel\Kernel\IKernel::bootstrap` 和 `\Leevel\Kernel\IKernelConsole::bootstrap` 均会执行上述 4 个步骤。
 
@@ -170,7 +170,7 @@ public function testWithRuntimeEnv(): void
 }
 ```
     
-## 配置文件支持缓存
+## 配置支持缓存
 
 配置文件支持缓存，通过缓存可以降低开销提高性能，适合生产环境。
 
