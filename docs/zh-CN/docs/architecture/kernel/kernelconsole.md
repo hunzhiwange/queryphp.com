@@ -163,6 +163,114 @@ class KernelConsole1 extends KernelConsole
 }
 ```
 
+**Tests\Kernel\Commands\Test**
+
+``` php
+namespace Tests\Kernel\Commands;
+
+use Leevel\Console\Command;
+
+class Test extends Command
+{
+    protected string $name = 'test';
+
+    protected string $description = 'This is a test command';
+
+    protected string $help = <<<'EOF'
+        The <info>%command.name%</info> command to show how to make a command:
+        
+          <info>php %command.full_name%</info>
+        EOF;
+
+    public function handle()
+    {
+        $this->info('Hello my test command.');
+    }
+
+    protected function getArguments(): array
+    {
+        return [];
+    }
+
+    protected function getOptions(): array
+    {
+        return [];
+    }
+}
+```
+
+**Tests\Kernel\Commands\Console\Foo**
+
+``` php
+namespace Tests\Kernel\Commands\Console;
+
+use Leevel\Console\Command;
+
+class Foo extends Command
+{
+    protected string $name = 'console:foo';
+
+    protected string $description = 'This is a foo command';
+
+    protected string $help = <<<'EOF'
+        The <info>%command.name%</info> command to show how to make a command:
+        
+          <info>php %command.full_name%</info>
+        EOF;
+
+    public function handle()
+    {
+        $this->info('Hello my foo command.');
+    }
+
+    protected function getArguments(): array
+    {
+        return [];
+    }
+
+    protected function getOptions(): array
+    {
+        return [];
+    }
+}
+```
+
+**Tests\Kernel\Commands\Console\Bar**
+
+``` php
+namespace Tests\Kernel\Commands\Console;
+
+use Leevel\Console\Command;
+
+class Bar extends Command
+{
+    protected string $name = 'console:bar';
+
+    protected string $description = 'This is a foo command';
+
+    protected string $help = <<<'EOF'
+        The <info>%command.name%</info> command to show how to make a command:
+        
+          <info>php %command.full_name%</info>
+        EOF;
+
+    public function handle()
+    {
+        $this->info('Hello my foo command.');
+    }
+
+    protected function getArguments(): array
+    {
+        return [];
+    }
+
+    protected function getOptions(): array
+    {
+        return [];
+    }
+}
+```
+
 
 ``` php
 public function testBaseUse(): void
