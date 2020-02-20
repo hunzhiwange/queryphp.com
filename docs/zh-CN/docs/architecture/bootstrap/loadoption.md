@@ -22,7 +22,7 @@ use Leevel\Kernel\Bootstrap\LoadOption;
 use Leevel\Kernel\IApp;
 ```
 
-## 基本使用
+## 基本使用方法
 
 **fixture 定义**
 

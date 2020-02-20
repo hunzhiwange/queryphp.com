@@ -23,7 +23,7 @@ use Leevel\Kernel\IApp;
 use Leevel\Option\Option;
 ```
 
-## 基本使用
+## 基本使用方法
 
 ``` php
 public function testBaseUse(): void
