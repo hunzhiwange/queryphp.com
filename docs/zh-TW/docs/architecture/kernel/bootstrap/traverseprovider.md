@@ -77,7 +77,7 @@ class ProviderDeferTest1 extends Provider
     {
         return [
             'foo' => [
-                ProviderDeferTest1::class,
+                self::class,
             ],
         ];
     }

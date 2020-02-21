@@ -72,6 +72,7 @@ module.exports = {
             title20:'Encryption',
             title21:'Filesystem',
             title22:'Console',
+            title23:'Kernel',
           }),
         }
       },
@@ -106,6 +107,7 @@ module.exports = {
             title20:'加密',
             title21:'文件系统',
             title22:'命令行',
+            title23:'内核',
           }),
         }
       },
@@ -140,6 +142,7 @@ module.exports = {
             title20:'加密',
             title21:'文件系統',
             title22:'命令行',
+            title23:'內核',
           }),
         }
       }
@@ -201,6 +204,20 @@ function genSidebarConfigDoc (title) {
         'architecture/fn',
         'architecture/event',
         'architecture/manager',
+        {
+          title: title.title23,
+          collapsable: true,
+          'children': [
+            'architecture/kernel',
+            'architecture/kernel/kernelconsole',
+            'architecture/kernel/app',
+            'architecture/kernel/functions',
+            'architecture/kernel/bootstrap/loadoption',
+            'architecture/kernel/bootstrap/loadi18n',
+            'architecture/kernel/bootstrap/registerexceptionruntime',
+            'architecture/kernel/bootstrap/traverseprovider',
+          ],
+        },
       ]
     },
     {
