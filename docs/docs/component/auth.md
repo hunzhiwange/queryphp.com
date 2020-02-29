@@ -185,14 +185,14 @@ public function testWithToken(): void
 }
 ```
     
-## setDefaultDriver 设置默认驱动
+## setDefaultConnect 设置默认驱动
 
 ``` php
 public function testSetDefaultDriver(): void
 {
     $manager = $this->createManagerWithTokenAndSession();
 
-    $manager->setDefaultDriver('token');
+    $manager->setDefaultConnect('token');
 
     $manager->setTokenName('token');
 

@@ -11,6 +11,7 @@
 ``` php
 <?php
 
+use Exception;
 use Leevel\Database\Ddd\Entity;
 use Leevel\Database\Ddd\UnitOfWork;
 use Tests\Database\DatabaseTestCase as TestCase;
@@ -712,8 +713,7 @@ public function testSetRootEntity(): void
             ]));
 
     $post = Post::select()->findEntity(1);
-
-    $work->setRootEntity($post, []);
+    $work->setRootEntity($post, 'password_right');
 
     $work->update($post);
 
@@ -728,6 +728,8 @@ public function testSetRootEntity(): void
 
     $this->assertSame(1, $newPost->getId());
     $this->assertSame('new title', $newPost->getTitle());
+
+    $work->setRootEntity($post, null);
 }
 ```
     
@@ -738,10 +740,12 @@ public function testSetRootEntity(): void
 ## 更改数据库连接 setConnect
 
 ``` php
-public function testSetConnectNotFoundWillUseDefault(): void
+public function testSetConnectNotFoundWillThrowException(): void
 {
-    $work = UnitOfWork::make();
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage('Connection hello option is not an array.');
 
+    $work = UnitOfWork::make();
     $this->assertInstanceof(UnitOfWork::class, $work);
 
     $connect = $this->createDatabaseConnect();
@@ -758,27 +762,22 @@ public function testSetConnectNotFoundWillUseDefault(): void
             ]));
 
     $post = Post::select()->findEntity(1);
-
     $work->setConnect('hello');
-
     $work->update($post);
-
     $post->title = 'new title';
 
-    $work->flush();
+    try {
+        $work->flush();
+    } catch (Exception $e) {
+        $work->setConnect(null);
 
-    $this->assertSame(1, $post->getId());
-    $this->assertSame('new title', $post->getTitle());
-
-    $newPost = Post::select()->findEntity(1);
-
-    $this->assertSame(1, $newPost->getId());
-    $this->assertSame('new title', $newPost->getTitle());
+        throw $e;
+    }
 }
 ```
     
 ::: tip
-如果没有存在的连接，则会使用默认的连接。
+如果没有存在的连接，则会报错。
 :::
     
 ## 无实体执行 flush 什么都不做

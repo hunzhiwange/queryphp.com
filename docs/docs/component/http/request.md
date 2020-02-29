@@ -117,25 +117,25 @@ public function testExcept(): void
 }
 ```
     
-## isCli 是否为 PHP 运行模式命令行, 兼容 Swoole HTTP Service
+## isConsole 是否为 PHP 运行模式命令行, 兼容 Swoole HTTP Service
 
 Swoole HTTP 服务器也以命令行运行，也就是 Swoole 情况下会返回 false。
 
 ``` php
-public function testIsCli(): void
+public function testIsConsole(): void
 {
     $request = new Request();
-    $this->assertTrue($request->isCli());
+    $this->assertTrue($request->isConsole());
 }
 ```
     
-## isCli 是否为 PHP 运行模式命令行，Swoole 场景测试
+## isConsole 是否为 PHP 运行模式命令行，Swoole 场景测试
 
 ``` php
-public function testIsCliForSwoole(): void
+public function testIsConsoleForSwoole(): void
 {
     $request = new Request([], [], [], [], [], ['SERVER_SOFTWARE' => 'swoole-http-server']);
-    $this->assertFalse($request->isCli());
+    $this->assertFalse($request->isConsole());
 }
 ```
     

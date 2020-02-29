@@ -98,7 +98,7 @@ class TestConstructPropWhiteEntity extends Entity
 
     private array $data = [];
 
-    private static $connect;
+    private static ?string $connect = null;
 
     public function setter(string $prop, $value): self
     {
@@ -112,12 +112,12 @@ class TestConstructPropWhiteEntity extends Entity
         return $this->data[$this->realProp($prop)] ?? null;
     }
 
-    public static function withConnect($connect): void
+    public static function withConnect(?string $connect = null): void
     {
         static::$connect = $connect;
     }
 
-    public static function connect()
+    public static function connect(): ?string
     {
         return static::$connect;
     }
@@ -167,7 +167,7 @@ class TestConstructPropBlackEntity extends Entity
 
     private array $data = [];
 
-    private static $connect;
+    private static ?string $connect = null;
 
     public function setter(string $prop, $value): self
     {
@@ -181,12 +181,12 @@ class TestConstructPropBlackEntity extends Entity
         return $this->data[$this->realProp($prop)] ?? null;
     }
 
-    public static function withConnect($connect): void
+    public static function withConnect(?string $connect = null): void
     {
         static::$connect = $connect;
     }
 
-    public static function connect()
+    public static function connect(): ?string
     {
         return static::$connect;
     }

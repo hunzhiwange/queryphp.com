@@ -55,6 +55,14 @@ protected function createDatabaseManager(): Manager
                     'master'             => [],
                     'slave'              => [],
                 ],
+                'password_right' => [
+                    'driver'   => 'mysql',
+                    'password' => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PASSWORD'],
+                ],
+                'password_not_right' => [
+                    'driver'   => 'mysql',
+                    'password' => 'not right',
+                ],
             ],
         ],
     ]);
@@ -130,7 +138,7 @@ public function testParseDatabaseOptionDistributedIsTrue(): void
         'slave'              => ['host' => '127.0.0.1'],
     ];
 
-    $optionNew = $this->invokeTestMethod($manager, 'parseDatabaseOption', [$option]);
+    $optionNew = $this->invokeTestMethod($manager, 'normalizeDatabaseOption', [$option]);
 
     $data = <<<'eot'
         {
@@ -215,7 +223,7 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
         ],
     ];
 
-    $optionNew = $this->invokeTestMethod($manager, 'parseDatabaseOption', [$option]);
+    $optionNew = $this->invokeTestMethod($manager, 'normalizeDatabaseOption', [$option]);
 
     $data = <<<'eot'
         {
@@ -318,6 +326,6 @@ public function testParseDatabaseOptionMasterAndSlaveMustBeAnArray(): void
         'slave'              => 'notarray',
     ];
 
-    $this->invokeTestMethod($manager, 'parseDatabaseOption', [$option]);
+    $this->invokeTestMethod($manager, 'normalizeDatabaseOption', [$option]);
 }
 ```

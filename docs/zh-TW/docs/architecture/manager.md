@@ -31,30 +31,24 @@ namespace Tests\Manager;
 
 class Test1 extends Manager
 {
-    protected function normalizeOptionNamespace(): string
+    protected function getOptionNamespace(): string
     {
         return 'test1';
     }
 
-    protected function makeConnectFoo($options = []): Foo
+    protected function makeConnectFoo(): Foo
     {
-        $options = $this->normalizeConnectOption('foo', $options);
-
-        return new Foo($options);
+        return new Foo($this->normalizeConnectOption('foo'));
     }
 
     protected function makeConnectBar($options = []): Bar
     {
-        $options = $this->normalizeConnectOption('bar', $options);
-
-        return new Bar($options);
+        return new Bar($this->normalizeConnectOption('bar'));
     }
 
     protected function getConnectOption(string $connect): array
     {
-        return $this->filterNullOfOption(
-            parent::getConnectOption($connect)
-        );
+        return $this->filterNullOfOption(parent::getConnectOption($connect));
     }
 }
 ```
@@ -150,8 +144,8 @@ public function testBaseUse(): void
     $this->assertSame([
         'driver'  => 'foo',
         'option1' => 'world',
-        'null1'   => null,
     ], $foo->option());
+
     $this->assertSame('hello foo', $foo->foo());
     $this->assertSame('hello foo bar', $foo->bar('bar'));
     $this->assertSame('hello foo 1', $foo->bar('1'));
@@ -214,10 +208,8 @@ public function testExtend(): void
     $this->assertSame('hello foo', $foo->foo());
     $this->assertSame('hello foo bar', $foo->bar('bar'));
 
-    $manager->extend('foo', function (array $options, Manager $manager): FooExtend {
-        $options = $manager->normalizeConnectOption('foo', $options);
-
-        return new FooExtend($options);
+    $manager->extend('foo', function (Manager $manager): FooExtend {
+        return new FooExtend($manager->normalizeConnectOption('foo'));
     });
 
     $manager->disconnect('foo');
@@ -320,7 +312,7 @@ public function testGetConnects(): void
 }
 ```
     
-## setDefaultDriver 设置默认驱动
+## setDefaultConnect 设置默认驱动
 
 ``` php
 public function testSetDefaultDriver(): void
@@ -333,7 +325,7 @@ public function testSetDefaultDriver(): void
     $this->assertSame('hello foo 2', $manager->bar('2'));
 
     $manager->disconnect();
-    $manager->setDefaultDriver('bar');
+    $manager->setDefaultConnect('bar');
 
     $this->assertSame('hello bar', $manager->foo());
     $this->assertSame('hello bar bar', $manager->bar('bar'));

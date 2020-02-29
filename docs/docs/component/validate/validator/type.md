@@ -20,8 +20,7 @@ use stdClass;
 ``` php
 public function baseUseProvider(): array
 {
-    $testFile = __DIR__.'/test.txt';
-    file_put_contents($testFile, 'foo');
+    $testFile = __DIR__.'/../assert/test.txt';
     $resource = fopen($testFile, 'r');
 
     // http://www.php.net/manual/zh/function.gettype.php

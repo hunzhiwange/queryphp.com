@@ -20,10 +20,8 @@ use stdClass;
 ``` php
 public function testTypeString(): void
 {
-    // string
-    $this->assertTrue(Type::type('foo', 'str'));
     $this->assertTrue(Type::type('foo', 'string'));
-    $this->assertFalse(Type::type(1, 'str'));
+    $this->assertFalse(Type::type(1, 'string'));
 }
 ```
     
@@ -32,7 +30,6 @@ public function testTypeString(): void
 ``` php
 public function testTypeInt(): void
 {
-    // int
     $this->assertTrue(Type::type(1, 'int'));
     $this->assertTrue(Type::type(3, 'integer'));
     $this->assertFalse(Type::type(true, 'int'));
@@ -44,7 +41,6 @@ public function testTypeInt(): void
 ``` php
 public function testTypeFloat(): void
 {
-    // float
     $this->assertTrue(Type::type(1.1, 'float'));
     $this->assertTrue(Type::type(3.14, 'double'));
     $this->assertFalse(Type::type(true, 'double'));
@@ -56,20 +52,18 @@ public function testTypeFloat(): void
 ``` php
 public function testTypeBool(): void
 {
-    // bool
     $this->assertTrue(Type::type(true, 'bool'));
-    $this->assertTrue(Type::type(false, 'boolean'));
-    $this->assertFalse(Type::type(4, 'boolean'));
+    $this->assertTrue(Type::type(false, 'bool'));
+    $this->assertFalse(Type::type(4, 'bool'));
 }
 ```
     
 ## 判断是否为数字
 
 ``` php
-public function testTypeNum(): void
+public function testTypeNumeric(): void
 {
-    // num
-    $this->assertTrue(Type::type(1.2, 'num'));
+    $this->assertTrue(Type::type(1.2, 'numeric'));
     $this->assertTrue(Type::type(2, 'numeric'));
     $this->assertTrue(Type::type('2.5', 'numeric'));
     $this->assertFalse(Type::type(false, 'numeric'));
@@ -79,14 +73,13 @@ public function testTypeNum(): void
 ## 判断是否为标量
 
 ``` php
-public function testTypeBase(): void
+public function testTypeScalar(): void
 {
-    // base
-    $this->assertTrue(Type::type(1, 'base'));
+    $this->assertTrue(Type::type(1, 'scalar'));
     $this->assertTrue(Type::type('hello world', 'scalar'));
-    $this->assertTrue(Type::type(0, 'base'));
+    $this->assertTrue(Type::type(0, 'scalar'));
     $this->assertTrue(Type::type(false, 'scalar'));
-    $this->assertTrue(Type::type(1.1, 'base'));
+    $this->assertTrue(Type::type(1.1, 'scalar'));
     $this->assertTrue(Type::type(false, 'scalar'));
     $this->assertFalse(Type::type([], 'scalar'));
     $this->assertFalse(Type::type(null, 'scalar'));
@@ -98,11 +91,10 @@ public function testTypeBase(): void
 ``` php
 public function testTypeResource(): void
 {
-    // resource
     $testFile = __DIR__.'/test.txt';
     file_put_contents($testFile, 'foo');
     $resource = fopen($testFile, 'r');
-    $this->assertTrue(Type::type($resource, 'handle'));
+    $this->assertTrue(Type::type($resource, 'resource'));
     $this->assertFalse(Type::type(4, 'resource'));
     fclose($resource);
     unlink($testFile);
@@ -114,24 +106,35 @@ public function testTypeResource(): void
 ``` php
 public function testTypeClosure(): void
 {
-    // closure
     $this->assertTrue(Type::type(function () {
-    }, 'closure'));
-    $this->assertFalse(Type::type(true, 'closure'));
+    }, 'Closure'));
+    $this->assertFalse(Type::type(true, 'Closure'));
 }
 ```
     
 ## 判断是否为数组
 
+格式支持
+
+支持 PHP 内置或者自定义的 is_array,is_int,is_custom 等函数
+数组支持 array:int,string 格式，值类型
+数组支持 array:int:string,string:array 格式，键类型:值类型
+数组支持 array:string:array:string:array:string:int 无限层级格式，键类型:值类型:键类型:值类型...(值类型|键类型:值类型)
+
+
 ``` php
 public function testTypeArray(): void
 {
-    // array
-    $this->assertTrue(Type::type([], 'arr'));
     $this->assertTrue(Type::type([], 'array'));
-    $this->assertFalse(Type::type(null, 'arr'));
-    $this->assertFalse(Type::type(null, 'arr:int'));
-    $this->assertTrue(Type::type([1, 2], 'arr:int'));
+    $this->assertTrue(Type::type([1, 2], 'array:int'));
+    $this->assertFalse(Type::type([1, 2], 'array:'));
+    $this->assertTrue(Type::type([1, 2], 'array:int:int'));
+    $this->assertTrue(Type::type(['foo' => 1, 'bar' => 2], 'array:string:int'));
+    $this->assertTrue(Type::type(['foo' => [], 'bar' => []], 'array:string:array'));
+    $this->assertTrue(Type::type(['foo' => [1, 2, 3], 'bar' => [4, 5, 6]], 'array:string:array:int'));
+    $this->assertFalse(Type::type(['foo' => [1, 2, 3], 'bar' => [4, 5, 6]], 'array:string:array:string'));
+    $this->assertTrue(Type::type(['foo' => ['hello' => 1], 'bar' => ['hello' => 4]], 'array:string:array:string:int'));
+    $this->assertTrue(Type::type(['foo' => ['hello' => ['foo' => 2]], 'bar' => ['hello' => ['foo' => 2]]], 'array:string:array:string:array:string:int'));
 }
 ```
     
@@ -140,8 +143,6 @@ public function testTypeArray(): void
 ``` php
 public function testTypeObject(): void
 {
-    // object
-    $this->assertTrue(Type::type(new stdClass(), 'obj'));
     $this->assertTrue(Type::type(new stdClass(), 'object'));
     $this->assertFalse(Type::type(null, 'object'));
 }
@@ -152,7 +153,6 @@ public function testTypeObject(): void
 ``` php
 public function testTypeNull(): void
 {
-    // null
     $this->assertTrue(Type::type(null, 'null'));
     $this->assertFalse(Type::type(1, 'null'));
 }
@@ -181,13 +181,12 @@ class Callback1
 ``` php
 public function testTypeCallback(): void
 {
-    // callback
     $this->assertTrue(Type::type(function () {
-    }, 'callback'));
-    $this->assertTrue(Type::type('md5', 'callback'));
-    $this->assertTrue(Type::type([new Callback1(), 'test'], 'callback'));
-    $this->assertTrue(Type::type([Callback1::class, 'test2'], 'callback'));
-    $this->assertFalse(Type::type(1, 'callback'));
+    }, 'callable'));
+    $this->assertTrue(Type::type('md5', 'callable'));
+    $this->assertTrue(Type::type([new Callback1(), 'test'], 'callable'));
+    $this->assertTrue(Type::type([Callback1::class, 'test2'], 'callable'));
+    $this->assertFalse(Type::type(1, 'callable'));
 }
 ```
     
@@ -217,37 +216,10 @@ interface IInterface
 ``` php
 public function testTypeInstance(): void
 {
-    // instance
     $this->assertTrue(Type::type(new stdClass(), stdClass::class));
     $this->assertTrue(Type::type(new Callback1(), Callback1::class));
     $this->assertTrue(Type::type(new Callback2(), IInterface::class));
     $this->assertFalse(Type::type(1, 'callback'));
-}
-```
-    
-## 判断是否为数字或者字符串数字
-
-包括短横线、英文逗号组成，比如日期、千分位等。
-
-``` php
-public function testTypeNumber(): void
-{
-    $this->assertTrue(Type::number(2.2));
-    $this->assertTrue(Type::number(4));
-    $this->assertTrue(Type::number('2.5'));
-    $this->assertTrue(Type::number('2,111,500'));
-    $this->assertTrue(Type::number('2018-06-10'));
-    $this->assertTrue(Type::number('2,111,500-200'));
-}
-```
-    
-## 判断是否为整型或者字符串整型
-
-``` php
-public function testTypeStringInteger(): void
-{
-    $this->assertTrue(Type::integer(1));
-    $this->assertTrue(Type::integer('4'));
 }
 ```
     
@@ -258,19 +230,30 @@ public function testTypeThese(): void
 {
     $this->assertTrue(Type::these('foo', ['string']));
     $this->assertTrue(Type::these(1, ['string', 'int']));
-    $this->assertTrue(Type::these('foo', 'string'));
 }
 ```
     
 ## 判断是否为数组元素类型
 
+格式支持
+
+数组支持 int,string 格式，值类型
+数组支持 int:string,string:array 格式，键类型:值类型
+数组支持 string:array:string:array:string:int 无限层级格式，键类型:值类型:键类型:值类型...(值类型|键类型:值类型)
+
+
 ``` php
 public function testTypeStrictArray(): void
 {
-    $this->assertFalse(Type::arr('foo', ['string']));
     $this->assertTrue(Type::arr(['foo'], ['string']));
     $this->assertFalse(Type::arr([1, 2], ['string']));
     $this->assertTrue(Type::arr(['bar', 'foo'], ['string']));
     $this->assertTrue(Type::arr(['bar', 2], ['string', 'int']));
+    $this->assertTrue(Type::arr(['hello' => 'bar', 2], ['string:string', 'int']));
+    $this->assertTrue(Type::arr(['hello' => 'bar', 'foo' => 'bar'], ['string:string']));
+    $this->assertFalse(Type::arr(['hello' => 'bar', 2], ['string:string']));
+    $this->assertFalse(Type::arr(['foo' => [1, 2, 3], 'bar' => [4, 5, 6]], ['string:array:string']));
+    $this->assertTrue(Type::arr(['foo' => ['hello' => 1], 'bar' => ['hello' => 4]], ['string:array:string:int']));
+    $this->assertTrue(Type::arr(['foo' => ['hello' => ['foo' => 2]], 'bar' => ['hello' => ['foo' => 2]]], ['string:array:string:array:string:int']));
 }
 ```
