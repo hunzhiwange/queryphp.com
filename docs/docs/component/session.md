@@ -89,15 +89,6 @@ return [
 
     /*
      * ---------------------------------------------------------------
-     * expire
-     * ---------------------------------------------------------------
-     *
-     * 默认过期时间
-     */
-    'expire' => 86400,
-
-    /*
-     * ---------------------------------------------------------------
      * session 驱动连接参数
      * ---------------------------------------------------------------
      *
@@ -109,43 +100,16 @@ return [
             // driver
             'driver' => 'file',
 
-            // 文件缓存路径
-            'path' => Leevel::runtimePath('session'),
-
-            // 是否 serialize 格式化
-            'serialize' => true,
-
-            // 默认过期时间
-            'expire' => null,
+            // 文件缓存驱动
+            'file_driver' => Leevel::env('SESSION_FILE_DRIVER', 'file_session'),
         ],
 
         'redis' => [
             // driver
             'driver' => 'redis',
 
-            // 默认缓存服务器
-            'host' => Leevel::env('SESSION_REDIS_HOST', '127.0.0.1'),
-
-            // 默认缓存服务器端口
-            'port' => (int) Leevel::env('SESSION_REDIS_PORT', 6379),
-
-            // 认证密码
-            'password' => Leevel::env('SESSION_REDIS_PASSWORD', ''),
-
-            // redis 数据库索引
-            'select' => 0,
-
-            // 超时设置
-            'timeout' => 0,
-
-            // 是否使用持久连接
-            'persistent' => false,
-
-            // 是否使用 serialize 编码
-            'serialize' => true,
-
-            // 默认过期时间
-            'expire' => null,
+            // Redis 缓存驱动
+            'redis_driver' => Leevel::env('SESSION_REDIS_DRIVER', 'redis_session'),
         ],
 
         'test' => [
@@ -163,8 +127,6 @@ session 参数根据不同的连接会有所区别，通用的 sesion 参数如�
 |:-|:-|
 |id|相当于 session_id|
 |name|相当于 session_name|
-|expire|设置好缓存时间（小与等于 0 表示永不过期，单位时间为秒）|
-|serialize|是否使用 serialize 编码|
 
 ::: warning 注意
 QueryPHP 并没有使用 PHP 原生 SESSION，而是模拟原生 SESSION 自己实现的一套，使用方法与原生用法几乎一致。与原生 SESSION 不一样的是，QueryPHP 会在最后通过 session 中间件统一写入。
@@ -176,6 +138,8 @@ QueryPHP 并没有使用 PHP 原生 SESSION，而是模拟原生 SESSION 自己�
 ``` php
 <?php
 
+use Leevel\Cache\File as CacheFile;
+use Leevel\Filesystem\Helper;
 use Leevel\Session\File;
 use Leevel\Session\ISession;
 ```
@@ -235,6 +199,35 @@ public function testBaseUse(): void
 }
 ```
     
+## setExpire 设置过期时间
+
+过期时间规则如下：
+
+  * null 表示默认 session 缓存时间
+  * 小与等于 0 表示永久缓存
+  * 其它表示缓存多少时间，单位秒
+
+
+``` php
+public function testSetExpire(): void
+{
+    $session = $this->createFileSessionHandler();
+
+    $session->setExpire(50);
+    $session->set('hello', 'world');
+    $this->assertSame(['hello' => 'world'], $session->all());
+
+    $session->start();
+    $session->save();
+
+    $sessionId = $session->getId();
+    $dirPath = __DIR__.'/cache';
+    $filePath = $dirPath.'/'.$sessionId.'.php';
+    $this->assertFileExists($filePath);
+    $this->assertStringContainsString('[50,', file_get_contents($filePath));
+}
+```
+    
 ## put 批量插入
 
 ``` php
@@ -250,24 +243,6 @@ public function testPut(): void
 
     $session->put(['foo' => 'bar']);
     $this->assertSame(['hello' => 'world', 'foo' => 'bar'], $session->all());
-}
-```
-    
-## getPart 返回数组部分数据
-
-``` php
-public function testGetPart(): void
-{
-    $session = $this->createFileSessionHandler();
-
-    $session->set('hello', ['sub' => 'me', 'foo' => 'bar', 'hello' => 'world', 'sub2' => ['foo' => ['foo' => 'bar']]]);
-    $this->assertSame(['hello' => ['sub' => 'me', 'foo' => 'bar', 'hello' => 'world', 'sub2' => ['foo' => ['foo' => 'bar']]]], $session->all());
-
-    $this->assertSame('me', $session->getPart('hello\\sub'));
-    $this->assertSame(['foo' => 'bar'], $session->getPart('hello\\sub2.foo'));
-    $this->assertNull($session->getPart('hello\\sub2.foo.notFound'));
-    $this->assertNull($session->getPart('hello\\notFound'));
-    $this->assertSame(123, $session->getPart('hello\\notFound', 123));
 }
 ```
     
@@ -537,7 +512,6 @@ public function testGetFlash(): void
 
     $session->flash('test', ['foo', 'bar']);
     $this->assertSame(['foo', 'bar'], $session->getFlash('test'));
-    $this->assertSame('foo', $session->getFlash('test\\0'));
     $this->assertNull($session->getFlash('notFound'));
 
     $session->flash('bar', ['sub' => ['foo' => 'bar']]);

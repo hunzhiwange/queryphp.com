@@ -25,8 +25,15 @@ declare(strict_types=1);
 
 namespace Common\Infra\Provider;
 
+use Admin\App\Middleware\Auth as AdminAuth;
+use Admin\App\Middleware\Cors;
+use Leevel\Auth\Middleware\Auth;
+use Leevel\Debug\Middleware\Debug;
 use Leevel\Di\IContainer;
+use Leevel\Log\Middleware\Log;
 use Leevel\Router\RouterProvider;
+use Leevel\Session\Middleware\Session;
+use Leevel\Throttler\Middleware\Throttler;
 
 /**
  * 路由服务提供者.
@@ -56,7 +63,7 @@ class Router extends RouterProvider
         // api 请求中间件
         'api' => [
             // API 限流，可以通过网关来做限流更高效，如果需要去掉注释即可
-            // 'throttler:60,1',
+            // 'throttler:60,60',
         ],
 
         // 公共请求中间件
@@ -74,13 +81,13 @@ class Router extends RouterProvider
      * @var array
      */
     protected array $middlewareAlias = [
-        'auth'              => 'Leevel\\Auth\\Middleware\\Auth',
-        'cors'              => 'Admin\\App\\Middleware\\Cors',
-        'admin_auth'        => 'Admin\\App\\Middleware\\Auth',
-        'debug'             => 'Leevel\\Debug\\Middleware\\Debug',
-        'log'               => 'Leevel\\Log\\Middleware\\Log',
-        'session'           => 'Leevel\\Session\\Middleware\\Session',
-        'throttler'         => 'Leevel\\Throttler\\Middleware\\Throttler',
+        'auth'              => Auth::class,
+        'cors'              => Cors::class,
+        'admin_auth'        => AdminAuth::class,
+        'debug'             => Debug::class,
+        'log'               => Log::class,
+        'session'           => Session::class,
+        'throttler'         => Throttler::class,
     ];
 
     /**
@@ -170,6 +177,7 @@ class Router extends RouterProvider
 
 use Leevel\Cache\File;
 use Leevel\Cache\ICache;
+use Leevel\Filesystem\Helper;
 use Leevel\Http\Request;
 use Leevel\Throttler\Throttler;
 ```
@@ -201,7 +209,6 @@ public function tooManyAttempt(): bool;
 public function testBaseUse(): void
 {
     $throttler = $this->createRateLimiter();
-
     $rateLimiter = $throttler->create('baseuse');
 
     $this->assertFalse($rateLimiter->attempt());
@@ -214,10 +221,6 @@ public function testBaseUse(): void
     $this->assertFalse($rateLimiter2->attempt());
     $this->assertFalse($rateLimiter2->tooManyAttempt());
     $this->assertCount(1, $this->getTestProperty($throttler, 'rateLimiter'));
-
-    $path = __DIR__.'/cache2';
-
-    unlink($path.'/baseuse.php');
 }
 ```
     
@@ -227,18 +230,12 @@ public function testBaseUse(): void
 public function testAttempt(): void
 {
     $throttler = $this->createRateLimiter();
-
     $rateLimiter = $throttler->create('attempt', 2, 1);
-
     for ($i = 0; $i < 10; $i++) {
         $rateLimiter->hit();
     }
 
     $this->assertTrue($rateLimiter->attempt());
     $this->assertTrue($rateLimiter->tooManyAttempt());
-
-    $path = __DIR__.'/cache2';
-
-    unlink($path.'/attempt.php');
 }
 ```

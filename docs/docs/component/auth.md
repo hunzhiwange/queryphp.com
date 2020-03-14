@@ -13,7 +13,7 @@ QueryPHP 提供了一组简单的认证组件用于登陆验证，通常我们�
 使用容器 auths 服务
 
 ``` php
-\App::make('auths')->login(array $data, int $loginTime = 0): void;
+\App::make('auths')->login(array $data, ?int $loginTime = null): void;
 ```
 
 依赖注入
@@ -33,7 +33,7 @@ class Demo
 使用静态代理
 
 ``` php
-\Leevel\Auth\Proxy\Auth::login(array $data, int $loginTime = 0): void;
+\Leevel\Auth\Proxy\Auth::login(array $data, ?int $loginTime = null): void;
 ```
 
 ## auth 配置
@@ -140,6 +140,22 @@ use Leevel\Session\File as SessionFile;
 ```
 
 ## 认证基本使用
+
+**login 原型**
+
+``` php
+/**
+ * 登录写入数据.
+ */
+public function login(array $data, ?int $loginTime = null): void;;
+```
+
+`$loginTime` 过期时间规则如下：
+
+  * null 表示默认登陆缓存时间
+  * 小与等于 0 表示永久缓存
+  * 其它表示缓存多少时间，单位
+
 
 ``` php
 public function testBaseUse(): void

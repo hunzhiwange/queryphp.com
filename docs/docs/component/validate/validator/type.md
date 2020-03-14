@@ -4,6 +4,9 @@
 [tests/Validate/Validator/TypeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/TypeTest.php)
 :::
     
+数据类型验证底层核心为函数 `Leevel\Support\Type\type`，相对于 PHP 提供的 `gettype` 更加强大。
+
+
 **Uses**
 
 ``` php
@@ -23,16 +26,20 @@ public function baseUseProvider(): array
     $testFile = __DIR__.'/../assert/test.txt';
     $resource = fopen($testFile, 'r');
 
-    // http://www.php.net/manual/zh/function.gettype.php
+    // 主要为 is_xxx 系列
+    // https://www.php.net/manual/zh/function.is-array.php
     return [
-        [true, 'boolean'],
-        [false, 'boolean'],
+        [true, 'bool'],
+        [true, 'bool'],
         [1.5, 'double'],
         [6.00, 'double'],
         ['中国', 'string'],
         ['成都no1', 'string'],
         [['foo', 'bar'], 'array'],
         [['hello', 'world'], 'array'],
+        [['hello', 'world'], 'array:string'],
+        [['hello', 'world'], 'array:int:string'],
+        [['hello' => 'world', 'world' => 'world'], 'array:string:string'],
         [new stdClass(), 'object'],
         [new Type1(), 'object'],
         [$resource, 'resource'],
@@ -79,6 +86,7 @@ public function badProvider(): array
         ['urn:oasis:names:specification:docbook:dtd:xml:4.1.2', 'errorType'],
         ['world', 'errorType'],
         [null, 'errorType'],
+        ['errorType', 1],
     ];
 }
 ```
@@ -87,7 +95,7 @@ public function badProvider(): array
 
 
 ``` php
-public function testBad($value, string $type): void
+public function testBad($value, $type): void
 {
     $validate = new Validator(
         [

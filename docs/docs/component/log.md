@@ -225,19 +225,30 @@ public function baseUseProvider(): array
 **获取日志记录数量**
 
 ``` php
-count(?string $level = null): int;
+/**
+ * 获取日志记录数量.
+ */
+public function count(?string $level = null): int;;
 ```
 
 **获取当前日志记录**
 
 ``` php
-all(?string $level = null): array;
+/**
+ * 获取当前日志记录.
+ *
+ * - 每次 IO 写入后会执行一次清理
+ */
+public function all(?string $level = null): array;;
 ```
 
 **清理日志记录**
 
 ``` php
-clear(?string $level = null): void;
+/**
+ * 清理日志记录.
+ */
+public function clear(?string $level = null): void;;
 ```
 
 除了这些外，还有一些辅助方法如 `isMonolog`，因为 `Monolog` 非常流行，底层进行了一些封装。
@@ -280,7 +291,6 @@ public function testLogFilterLevel(): void
     $log->setOption('levels', [ILog::INFO]);
     $log->log(ILog::INFO, 'foo', ['hello', 'world']);
     $log->log(ILog::DEBUG, 'foo', ['hello', 'world']);
-
     $this->assertSame([ILog::INFO => [[ILog::INFO, 'foo', ['hello', 'world']]]], $log->all());
 }
 ```
@@ -294,9 +304,46 @@ public function testLogLevelNotFoundWithDefaultLevel(): void
     $log->setOption('levels', [ILog::DEBUG]);
     $log->log('notfound', 'foo', ['hello', 'world']);
     $this->assertSame([ILog::DEBUG => [[ILog::DEBUG, 'foo', ['hello', 'world']]]], $log->all());
-
     $log->flush();
+}
+```
+    
+## 日志支持消息分类
 
-    Helper::deleteDirectory(__DIR__.'/cacheLog', true);
+系统提供的等级 `level` 无法满足大型项目的日志需求，于是对消息 `message` 定义了一套规则来满足更精细的分类。
+
+**日志消息分类规则**
+
+``` php
+public static function parseMessageCategory(string $message): string
+{
+    if (preg_match('/^\[([a-zA-Z_0-9\-:.\/]+)\]/', $message, $matches)) {
+        return str_replace(':', '/', $matches[1]);
+    }
+
+    return '';
+}
+```
+
+::: tip
+消息开头满足 `[大小写字母|数字|下划线|中横线|点号|斜杆|冒号]` 会被识别为消息分类，其中冒号会被转化为斜杆。
+
+目前消息分类会作为文件类日志目录，支持无限层级目录。
+::
+
+
+``` php
+public function testLogMessageCategory(): void
+{
+    $log = $this->createFileConnect();
+    $log->log(ILog::INFO, '[SQL] foo', ['hello', 'world']);
+    $log->log(ILog::INFO, '[SQL:FAILED] foo', ['hello', 'world']);
+    $this->assertSame([
+        ILog::INFO => [
+            [ILog::INFO, '[SQL] foo', ['hello', 'world']],
+            [ILog::INFO, '[SQL:FAILED] foo', ['hello', 'world']],
+        ],
+    ], $log->all());
+    $log->flush();
 }
 ```

@@ -73,7 +73,7 @@ interface IBlock
 缓存载入服务 `cache.load` 被系统注册到服务容器中了，可以使用代理 `proxy` 来调用。
 
 ``` php
-\Leevel\Cache\Proxy\Load::data(array $names, array $option = [], bool $force = false): array;
+\Leevel\Cache\Proxy\Load::data(array $names, ?int $expire = null, bool $force = false): array;
 \Leevel\Cache\Proxy\Load::refresh(array $names): void;
 ```
 
@@ -95,10 +95,15 @@ use Tests\Cache\Pieces\Test4;
 通过 `data` 即可载入缓存块数据，缓存直接传递缓存块的类名字即可。
 
 ``` php
-data(array $names, array $option = [], bool $force = false): array;
+/**
+ * 载入缓存数据.
+ *
+ * - 系统自动存储缓存到内存，可重复执行不会重复载入数据.
+ */
+public function data(array $names, ?int $expire = null, bool $force = false): array;;
 ```
 
-配置 `$option` 和 缓存功能中的 `set` 的用法一致。
+配置 `$expire` 和缓存功能中的 `set` 的用法一致。
 
 
 ``` php
@@ -122,7 +127,10 @@ public function testBaseUse(): void
 通过 `refresh` 即可刷新缓存块数据，缓存直接传递缓存块的类名字即可。
 
 ``` php
-refresh(array $names): void;
+/**
+ * 刷新缓存数据.
+ */
+public function refresh(array $names): void;;
 ```
 
 刷新缓存块本质是删除缓存块数据，下次请求自动生成。
@@ -161,7 +169,7 @@ public function testDataForce(): void
     $result = $load->data([Test1::class]);
     $this->assertSame(['foo' => 'bar'], $result);
 
-    $result = $load->data([Test1::class], [], true);
+    $result = $load->data([Test1::class], null, true);
     $this->assertSame(['foo' => 'bar'], $result);
 }
 ```

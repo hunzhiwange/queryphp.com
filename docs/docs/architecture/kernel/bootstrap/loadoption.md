@@ -29,13 +29,13 @@ use Leevel\Kernel\IApp;
 **环境变量 tests/Kernel/Bootstrap/app/.env**
 
 ``` php
-// Environment production、testing and development
+# Environment production、testing and development
 ENVIRONMENT = development
 
-// Debug
+# Debug
 DEBUG = true
 
-// Encryption key
+# Encryption key
 AUTH_KEY = 7becb888f518b20224a988906df51e05
 ```
 
@@ -130,13 +130,13 @@ public function testBaseUse(): void
 **环境变量 tests/Kernel/Bootstrap/app/.fooenv**
 
 ``` php
-// Environment production、testing and development
+# Environment production、testing and development
 ENVIRONMENT = testing
 
-// Debug
+# Debug
 DEBUG = true
 
-// Encryption key
+# Encryption key
 AUTH_KEY = 7becb888f518b20224a988906df51e05
 
 ```

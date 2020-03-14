@@ -13,8 +13,8 @@ QueryPHP 为系统提供了灵活的缓存功能，提供了多种缓存驱动�
 使用容器 caches 服务
 
 ``` php
-\App::make('caches')->set(string $name, $data, array $option = []): void;
-\App::make('caches')->get(string $name, $defaults = false, array $option = []);
+\App::make('caches')->set(string $name, $data, ?int $expire = null): void;
+\App::make('caches')->get(string $name, $defaults = false, ?int $expire = null);
 ```
 
 依赖注入
@@ -34,8 +34,8 @@ class Demo
 使用静态代理
 
 ``` php
-\Leevel\Cache\Proxy\Cache::set(string $name, $data, array $option = []): void;
-\Leevel\Cache\Proxy\Cache::get(string $name, $defaults = false, array $option = []);
+\Leevel\Cache\Proxy\Cache::set(string $name, $data, ?int $expire = null): void;
+\Leevel\Cache\Proxy\Cache::get(string $name, $defaults = false, ?int $expire = null);
 ```
 
 ## 缓存配置
@@ -107,9 +107,6 @@ return [
             // 文件缓存路径
             'path' => Leevel::runtimePath('file'),
 
-            // 是否 serialize 格式化
-            'serialize' => true,
-
             // 默认过期时间
             'expire' => null,
         ],
@@ -136,12 +133,10 @@ return [
             // 是否使用持久连接
             'persistent' => false,
 
-            // 是否使用 serialize 编码
-            'serialize' => true,
-
             // 默认过期时间
             'expire' => null,
         ],
+
         'redisPool' => [
             // driver
             'driver' => 'redisPool',
@@ -167,6 +162,80 @@ return [
             // 最大尝试次数
             'retry_times' => 3,
         ],
+
+        'file_throttler' => [
+            // driver
+            'driver' => 'file',
+
+            // 文件缓存路径
+            'path' => Leevel::runtimePath('throttler'),
+
+            // 默认过期时间
+            'expire' => null,
+        ],
+
+        'redis_throttler' => [
+            // driver
+            'driver' => 'redis',
+
+            // 默认缓存服务器
+            'host' => Leevel::env('THROTTLER_REDIS_HOST', '127.0.0.1'),
+
+            // 默认缓存服务器端口
+            'port' => (int) Leevel::env('THROTTLER_REDIS_PORT', 6379),
+
+            // 认证密码
+            'password' => Leevel::env('THROTTLER_REDIS_PASSWORD', ''),
+
+            // redis 数据库索引
+            'select' => 0,
+
+            // 超时设置
+            'timeout' => 0,
+
+            // 是否使用持久连接
+            'persistent' => false,
+
+            // 默认过期时间
+            'expire' => null,
+        ],
+
+        'file_session' => [
+            // driver
+            'driver' => 'file',
+
+            // 文件缓存路径
+            'path' => Leevel::runtimePath('session'),
+
+            // 默认过期时间
+            'expire' => null,
+        ],
+
+        'redis_session' => [
+            // driver
+            'driver' => 'redis',
+
+            // 默认缓存服务器
+            'host' => Leevel::env('SESSION_REDIS_HOST', '127.0.0.1'),
+
+            // 默认缓存服务器端口
+            'port' => (int) Leevel::env('SESSION_REDIS_PORT', 6379),
+
+            // 认证密码
+            'password' => Leevel::env('SESSION_REDIS_PASSWORD', ''),
+
+            // redis 数据库索引
+            'select' => 0,
+
+            // 超时设置
+            'timeout' => 0,
+
+            // 是否使用持久连接
+            'persistent' => false,
+
+            // 默认过期时间
+            'expire' => null,
+        ],
     ],
 ];
 
@@ -178,7 +247,6 @@ return [
 |:-|:-|
 |expire|设置好缓存时间（小与等于 0 表示永不过期，单位时间为秒）|
 |time_preset|缓存时间预置|
-|serialize|是否使用 serialize 编码|
 
 
 **Uses**
@@ -195,7 +263,12 @@ use Leevel\Filesystem\Helper;
 ### 设置缓存
 
 ``` php
-set(string $name, $data, array $option = []): void;
+/**
+ * 设置缓存.
+ *
+ * @param mixed $data
+ */
+public function set(string $name, $data, ?int $expire = null): void;;
 ```
 
 缓存配置 `$option` 根据不同缓存驱动支持不同的一些配置。
@@ -206,7 +279,6 @@ set(string $name, $data, array $option = []): void;
 |:-|:-|
 |expire|设置好缓存时间（小与等于 0 表示永不过期，单位时间为秒）|
 |time_preset|缓存时间预置|
-|serialize|是否使用 serialize 编码|
 |path|缓存路径|
 
 **redis 驱动**
@@ -215,12 +287,18 @@ set(string $name, $data, array $option = []): void;
 |:-|:-|
 |expire|设置好缓存时间（小与等于 0 表示永不过期，单位时间为秒）|
 |time_preset|缓存时间预置|
-|serialize|是否使用 serialize 编码|
 
 ### 获取缓存
 
 ``` php
-get(string $name, $defaults = false, array $option = []);
+/**
+ * 获取缓存.
+ *
+ * @param mixed $defaults
+ *
+ * @return mixed
+ */
+public function get(string $name, $defaults = false);;
 ```
 
 缓存不存在或者过期返回 `false`，可以根据这个判断缓存是否可用。
@@ -228,7 +306,10 @@ get(string $name, $defaults = false, array $option = []);
 ### 删除缓存
 
 ``` php
-delete(string $name): void;
+/**
+ * 清除缓存.
+ */
+public function delete(string $name): void;;
 ```
 
 直接指定缓存 `key` 即可，无返回。
@@ -257,11 +338,17 @@ public function testBaseUse(): void
 函数签名
 
 ``` php
-put($keys, $value = null, array $option = []): void;
+/**
+ * 批量设置缓存.
+ *
+ * @param array|string $keys
+ * @param null|mixed   $value
+ */
+public function put($keys, $value = null, ?int $expire = null): void;;
 ```
 
 ::: tip
-缓存配置 `$option` 和 `set` 的用法一致。
+缓存配置 `$expire` 和 `set` 的用法一致。
 :::
 
 
@@ -289,10 +376,31 @@ public function testPut(): void
 }
 ```
     
-## put 批量设置缓存支持配置
+## set 值 false 不允许作为缓存值
+
+因为 `false` 会作为判断缓存是否存在的一个依据，所以 `false` 不能够作为缓存，否则会引起缓存穿透。
+
 
 ``` php
-public function testPutWithOption(): void
+public function testSetNotAllowedFalse(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Data `false` not allowed to avoid cache penetration.'
+    );
+
+    $cache = new File([
+        'path' => __DIR__.'/cache',
+    ]);
+
+    $cache->set('hello', false);
+}
+```
+    
+## put 批量设置缓存支持过期时间
+
+``` php
+public function testPutWithExpire(): void
 {
     $cache = new File([
         'path' => __DIR__.'/cache',
@@ -300,18 +408,14 @@ public function testPutWithOption(): void
 
     $filePath = __DIR__.'/cache/hello.php';
 
-    $cache->put('hello', 'world', [
-        'serialize' => true,
-    ]);
-    $cache->put(['hello2' => 'world', 'foo' => 'bar'], [
-        'serialize' => true,
-    ]);
+    $cache->put('hello', 'world', 33);
+    $cache->put(['hello2' => 'world', 'foo' => 'bar'], 22);
 
     $this->assertSame('world', $cache->get('hello'));
     $this->assertSame('world', $cache->get('hello2'));
     $this->assertSame('bar', $cache->get('foo'));
     $this->assertTrue(is_file($filePath));
-    $this->assertStringContainsString('s:5:"world"', file_get_contents($filePath));
+    $this->assertStringContainsString('[33,', file_get_contents($filePath));
 
     $cache->delete('hello');
     $cache->delete('hello2');
@@ -328,11 +432,18 @@ public function testPutWithOption(): void
 函数签名
 
 ``` php
-remember(string $name, $data, array $option = []);
+/**
+ * 缓存存在读取否则重新设置.
+ *
+ * @param mixed $data
+ *
+ * @return mixed
+ */
+public function remember(string $name, $data, ?int $expire = null);;
 ```
 
 ::: tip
-缓存配置 `$option` 和 `set` 的用法一致。
+缓存配置 `$expire` 和 `set` 的用法一致。
 :::
 
 
@@ -357,10 +468,10 @@ public function testRemember(): void
 }
 ```
     
-## remember 缓存存在读取否则重新设置支持配置
+## remember 缓存存在读取否则重新设置支持过期时间
 
 ``` php
-public function testRememberWithOption(): void
+public function testRememberWithExpire(): void
 {
     $cache = new File([
         'path' => __DIR__.'/cache',
@@ -372,14 +483,10 @@ public function testRememberWithOption(): void
     }
 
     $this->assertFalse(is_file($filePath));
-    $this->assertSame('123456', $cache->remember('hello', '123456', [
-        'serialize' => true,
-    ]));
+    $this->assertSame('123456', $cache->remember('hello', '123456', 33));
 
     $this->assertTrue(is_file($filePath));
-    $this->assertSame('123456', $cache->remember('hello', '123456', [
-        'serialize' => true,
-    ]));
+    $this->assertSame('123456', $cache->remember('hello', '123456', 4));
     $this->assertSame('123456', $cache->get('hello'));
 
     $cache->delete('hello');
@@ -415,6 +522,84 @@ public function testRememberWithClosure(): void
 }
 ```
     
+## has 缓存是否存在
+
+``` php
+public function testHas(): void
+{
+    $cache = new File([
+        'path' => __DIR__.'/cache',
+    ]);
+    $filePath = __DIR__.'/cache/has.php';
+
+    $this->assertFalse($cache->has('has'));
+    $cache->set('has', 'world');
+    $this->assertTrue(is_file($filePath));
+    $this->assertTrue($cache->has('has'));
+}
+```
+    
+## increase 自增
+
+``` php
+public function testIncrease(): void
+{
+    $cache = new File([
+        'path' => __DIR__.'/cache',
+    ]);
+    $filePath = __DIR__.'/cache/increase.php';
+
+    $this->assertSame(1, $cache->increase('increase'));
+    $this->assertTrue(is_file($filePath));
+    $this->assertSame(101, $cache->increase('increase', 100));
+}
+```
+    
+## decrease 自减
+
+``` php
+public function testDecrease(): void
+{
+    $cache = new File([
+        'path' => __DIR__.'/cache',
+    ]);
+    $filePath = __DIR__.'/cache/decrease.php';
+
+    $this->assertSame(-1, $cache->decrease('decrease'));
+    $this->assertTrue(is_file($filePath));
+    $this->assertSame(-101, $cache->decrease('decrease', 100));
+}
+```
+    
+## ttl 获取缓存剩余时间
+
+剩余时间存在 3 种情况。
+
+不存在的 key:-2
+key 存在，但没有设置剩余生存时间:-1
+有剩余生存时间的 key:剩余时间
+
+
+``` php
+public function testTtl(): void
+{
+    $cache = new File([
+        'path' => __DIR__.'/cache',
+    ]);
+    $filePath = __DIR__.'/cache/ttl.php';
+
+    $this->assertFalse($cache->has('ttl'));
+    $this->assertSame(-2, $cache->ttl('ttl'));
+    $cache->set('ttl', 'world');
+    $this->assertTrue(is_file($filePath));
+    $this->assertSame(86400, $cache->ttl('ttl'));
+    $cache->set('ttl', 'world', 1);
+    $this->assertSame(1, $cache->ttl('ttl'));
+    $cache->set('ttl', 'world', 0);
+    $this->assertSame(-1, $cache->ttl('ttl'));
+}
+```
+    
 ## 缓存时间预置
 
 不同场景下面的缓存可能支持不同的时间，我们可以在配置中预设时间而不是在使用时通过第三个参数传递 `expire` 过期时间，这种做法非常灵活。
@@ -444,11 +629,11 @@ public function testCacheTime(): void
     $file->set('haha', 'what about others?');
 
     $this->assertSame('bar', $file->get('foo'));
-    $this->assertFalse($file->get('bar'));
+    $this->assertSame('hello', $file->get('bar'));
     $this->assertSame('helloworld1', $file->get('hello123456world'));
     $this->assertSame('helloworld2', $file->get('hello789world'));
-    $this->assertFalse($file->get('foo123456bar'));
-    $this->assertFalse($file->get('foo789bar'));
+    $this->assertSame('foobar1', $file->get('foo123456bar'));
+    $this->assertSame('foobar2', $file->get('foo789bar'));
     $this->assertSame('what about others?', $file->get('haha'));
 
     $file->delete('foo');
@@ -458,5 +643,44 @@ public function testCacheTime(): void
     $file->delete('foo123456bar');
     $file->delete('foo789bar');
     $file->delete('haha');
+}
+```
+    
+::: tip
+缓存时间预设小与等于 0 表示永不过期，单位时间为秒。
+:::
+    
+## 键值命名规范
+
+缓存键值默认支持正则 `/^[A-Za-z0-9\-\_:.]+$/`，可以通过 `setKeyRegex` 修改。
+
+
+``` php
+public function testInvalidCacheKey(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage('Cache key must be `/^[A-Za-z0-9\-\_:.]+$/`.');
+
+    $cache = new File([
+        'path' => __DIR__.'/cache',
+    ]);
+    $cache->set('hello+world', 1);
+}
+```
+    
+## setKeyRegex 设置缓存键值正则
+
+缓存键值默认支持正则 `/^[A-Za-z0-9\-\_:.]+$/`，可以通过 `setKeyRegex` 修改。
+
+
+``` php
+public function testSetKeyRegex(): void
+{
+    $cache = new File([
+        'path' => __DIR__.'/cache',
+    ]);
+    $cache->setKeyRegex('/^[a-z+]+$/');
+    $cache->set('hello+world', 1);
+    $this->assertSame(1, $cache->get('hello+world'));
 }
 ```

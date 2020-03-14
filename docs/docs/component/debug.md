@@ -13,6 +13,7 @@
 
 use Error;
 use Exception;
+use Leevel\Cache\File as CacheFile;
 use Leevel\Database\IDatabase;
 use Leevel\Debug\Debug;
 use Leevel\Di\Container;
