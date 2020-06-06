@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -24,12 +25,13 @@ public function testBaseUse(): void
     // 字段 （表达式） 值
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    1
+                ]
+            },
+            false
         ]
         eot;
 
@@ -54,12 +56,13 @@ public function testBaseUse2(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 2",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    2
+                ]
+            },
+            false
         ]
         eot;
 
@@ -85,12 +88,19 @@ public function testBaseUse3(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 2 AND `test_query`.`name` > '狗蛋' AND `test_query`.`value` LIKE '小鸭子'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id AND `test_query`.`name` > :test_query_name AND `test_query`.`value` LIKE :test_query_value",
+            {
+                "test_query_id": [
+                    2
+                ],
+                "test_query_name": [
+                    "狗蛋"
+                ],
+                "test_query_value": [
+                    "小鸭子"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -118,12 +128,13 @@ public function testArray(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` LIKE '技术'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` LIKE :test_query_name",
+            {
+                "test_query_name": [
+                    "技术"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -148,12 +159,16 @@ public function testMultiDimensionalArray(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` LIKE '技术' AND `test_query`.`value` <> '结局'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` LIKE :test_query_name AND `test_query`.`value` <> :test_query_value",
+            {
+                "test_query_name": [
+                    "技术"
+                ],
+                "test_query_value": [
+                    "结局"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -182,12 +197,16 @@ public function testOrWhere(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` LIKE '技术' OR `test_query`.`value` <> '结局'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` LIKE :test_query_name OR `test_query`.`value` <> :test_query_value",
+            {
+                "test_query_name": [
+                    "技术"
+                ],
+                "test_query_value": [
+                    "结局"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -213,12 +232,16 @@ public function testWhereBetween(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` BETWEEN 1 AND 100",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` BETWEEN :test_query_id_between0 AND :test_query_id_between1",
+            {
+                "test_query_id_between0": [
+                    1
+                ],
+                "test_query_id_between1": [
+                    100
+                ]
+            },
+            false
         ]
         eot;
 
@@ -234,12 +257,16 @@ public function testWhereBetween(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` BETWEEN 1 AND 10",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` BETWEEN :test_query_id_between0 AND :test_query_id_between1",
+            {
+                "test_query_id_between0": [
+                    1
+                ],
+                "test_query_id_between1": [
+                    10
+                ]
+            },
+            false
         ]
         eot;
 
@@ -256,12 +283,22 @@ public function testWhereBetween(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` BETWEEN 1 AND 100 AND `test_query`.`name` BETWEEN 5 AND 22",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` BETWEEN :test_query_id_between0 AND :test_query_id_between1 AND `test_query`.`name` BETWEEN :test_query_name_between0 AND :test_query_name_between1",
+            {
+                "test_query_id_between0": [
+                    1
+                ],
+                "test_query_id_between1": [
+                    100
+                ],
+                "test_query_name_between0": [
+                    5
+                ],
+                "test_query_name_between1": [
+                    22
+                ]
+            },
+            false
         ]
         eot;
 
@@ -290,12 +327,16 @@ public function testWhereNotBetween(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT BETWEEN 1 AND 10",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT BETWEEN :test_query_id_notbetween0 AND :test_query_id_notbetween1",
+            {
+                "test_query_id_notbetween0": [
+                    1
+                ],
+                "test_query_id_notbetween1": [
+                    10
+                ]
+            },
+            false
         ]
         eot;
 
@@ -311,12 +352,16 @@ public function testWhereNotBetween(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT BETWEEN 1 AND 10",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT BETWEEN :test_query_id_notbetween0 AND :test_query_id_notbetween1",
+            {
+                "test_query_id_notbetween0": [
+                    1
+                ],
+                "test_query_id_notbetween1": [
+                    10
+                ]
+            },
+            false
         ]
         eot;
 
@@ -342,12 +387,16 @@ public function testWhereIn(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IN (2,50)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IN (:test_query_id_in0,:test_query_id_in1)",
+            {
+                "test_query_id_in0": [
+                    2
+                ],
+                "test_query_id_in1": [
+                    50
+                ]
+            },
+            false
         ]
         eot;
 
@@ -363,12 +412,16 @@ public function testWhereIn(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IN ('1','10')",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IN (:test_query_id_in0,:test_query_id_in1)",
+            {
+                "test_query_id_in0": [
+                    "1"
+                ],
+                "test_query_id_in1": [
+                    "10"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -385,12 +438,16 @@ public function testWhereIn(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IN (2,50)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IN (:test_query_id_in0,:test_query_id_in1)",
+            {
+                "test_query_id_in0": [
+                    2
+                ],
+                "test_query_id_in1": [
+                    50
+                ]
+            },
+            false
         ]
         eot;
 
@@ -416,12 +473,16 @@ public function testWhereNotIn(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT IN (2,50)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT IN (:test_query_id_in0,:test_query_id_in1)",
+            {
+                "test_query_id_in0": [
+                    2
+                ],
+                "test_query_id_in1": [
+                    50
+                ]
+            },
+            false
         ]
         eot;
 
@@ -437,12 +498,16 @@ public function testWhereNotIn(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT IN ('1','10')",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT IN (:test_query_id_in0,:test_query_id_in1)",
+            {
+                "test_query_id_in0": [
+                    "1"
+                ],
+                "test_query_id_in1": [
+                    "10"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -470,10 +535,7 @@ public function testWhereNull(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IS NULL",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -511,10 +573,7 @@ public function testWhereNotNull(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IS NOT NULL",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -552,10 +611,7 @@ public function testWhereDefaultNull(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IS NULL",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -582,10 +638,7 @@ public function testWhereEqualNull(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IS NULL",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -610,12 +663,13 @@ public function testWhereLike(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` LIKE '5'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` LIKE :test_query_id",
+            {
+                "test_query_id": [
+                    "5"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -651,12 +705,13 @@ public function testWhereNotLike(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT LIKE '5'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` NOT LIKE :test_query_id",
+            {
+                "test_query_id": [
+                    "5"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -692,12 +747,13 @@ public function testWhereExists(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE EXISTS (SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = 1)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE EXISTS (SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = :test_query_exists_test_query_subsql_id)",
+            {
+                "test_query_exists_test_query_subsql_id": [
+                    1
+                ]
+            },
+            false
         ]
         eot;
 
@@ -719,10 +775,7 @@ public function testWhereExists(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE EXISTS (SELECT `test_query_subsql`.* FROM `test_query_subsql`)",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -743,10 +796,7 @@ public function testWhereExists(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE EXISTS (select *from test_query_subsql)",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -763,12 +813,13 @@ public function testWhereExists(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE EXISTS (SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = 1)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE EXISTS (SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = :test_query_exists_test_query_subsql_id)",
+            {
+                "test_query_exists_test_query_subsql_id": [
+                    1
+                ]
+            },
+            false
         ]
         eot;
 
@@ -802,12 +853,13 @@ public function testWhereNotExists(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE NOT EXISTS (SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = 1)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE NOT EXISTS (SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = :test_query_notexists_test_query_subsql_id)",
+            {
+                "test_query_notexists_test_query_subsql_id": [
+                    1
+                ]
+            },
+            false
         ]
         eot;
 
@@ -838,12 +890,19 @@ public function testWhereGroup(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 5 OR (`test_query`.`votes` > 100 AND `test_query`.`title` <> 'Admin')",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id OR (`test_query`.`votes` > :test_query_votes AND `test_query`.`title` <> :test_query_title)",
+            {
+                "test_query_votes": [
+                    100
+                ],
+                "test_query_title": [
+                    "Admin"
+                ],
+                "test_query_id": [
+                    5
+                ]
+            },
+            false
         ]
         eot;
 
@@ -864,12 +923,22 @@ public function testWhereGroup(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 5 OR `test_query`.`name` = '小牛' AND (`test_query`.`votes` > 100 OR `test_query`.`title` <> 'Admin')",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id OR `test_query`.`name` = :test_query_name AND (`test_query`.`votes` > :test_query_votes OR `test_query`.`title` <> :test_query_title)",
+            {
+                "test_query_votes": [
+                    100
+                ],
+                "test_query_title": [
+                    "Admin"
+                ],
+                "test_query_id": [
+                    5
+                ],
+                "test_query_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -903,10 +972,7 @@ public function testConditionalExpression(): void
         [
             "SELECT `test_query`.`post`,`test_query`.`value`,concat(\"tt_\",`test_query`.`id`) FROM `test_query` WHERE concat(\"hello_\",`test_query`.`posts`) = `test_query`.`id`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -914,8 +980,8 @@ public function testConditionalExpression(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test_query', 'post,value,{concat("tt_",[id])}')
-                ->where('{concat("hello_",[posts])}', '=', '{[id]}')
+                ->table('test_query', 'post,value,'.Condition::raw('concat("tt_",[id])'))
+                ->where(Condition::raw('concat("hello_",[posts])'), '=', Condition::raw('[id]'))
                 ->findAll(true)
         )
     );
@@ -931,12 +997,34 @@ public function testArrayKeyAsField(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = '故事' AND `test_query`.`name` IN (1,2,3) AND `test_query`.`weidao` BETWEEN '40' AND '100' AND `test_query`.`value` IS NULL AND `test_query`.`remark` IS NOT NULL AND `test_query`.`goods` = '东亚商品' AND `test_query`.`hello` = 'world'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id AND `test_query`.`name` IN (:test_query_name_in0,:test_query_name_in1,:test_query_name_in2) AND `test_query`.`weidao` BETWEEN :test_query_weidao_between0 AND :test_query_weidao_between1 AND `test_query`.`value` IS NULL AND `test_query`.`remark` IS NOT NULL AND `test_query`.`goods` = :test_query_goods AND `test_query`.`hello` = :test_query_hello",
+            {
+                "test_query_id": [
+                    "故事"
+                ],
+                "test_query_name_in0": [
+                    1
+                ],
+                "test_query_name_in1": [
+                    2
+                ],
+                "test_query_name_in2": [
+                    3
+                ],
+                "test_query_weidao_between0": [
+                    "40"
+                ],
+                "test_query_weidao_between1": [
+                    "100"
+                ],
+                "test_query_goods": [
+                    "东亚商品"
+                ],
+                "test_query_hello": [
+                    "world"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -971,10 +1059,7 @@ public function testSupportString(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` = 11 and `test_query`.`value` = 22 and concat(\"tt_\",`test_query`.`id`)",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -983,7 +1068,7 @@ public function testSupportString(): void
         $this->varJson(
             $connect
                 ->table('test_query')
-                ->where([':string' => '{[name] = 11 and [test_query.value] = 22 and concat("tt_",[id])}'])
+                ->where([':string' => Condition::raw('[name] = 11 and [test_query.value] = 22 and concat("tt_",[id])')])
                 ->findAll(true)
         )
     );
@@ -999,12 +1084,16 @@ public function testSupportSubandSubor(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`hello` = 'world' OR (`test_query`.`id` LIKE '你好')",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`hello` = :test_query_hello OR (`test_query`.`id` LIKE :test_query_subor_test_query_id)",
+            {
+                "test_query_subor_test_query_id": [
+                    "你好"
+                ],
+                "test_query_hello": [
+                    "world"
+                ]
+            },
+            false
         ]
         eot;
     $this->assertSame(
@@ -1031,12 +1120,31 @@ public function testSupportSubandSuborMore(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`hello` = '111' OR (`test_query`.`id` LIKE '你好' AND `test_query`.`value` = 'helloworld') AND (`test_query`.`id2` LIKE '你好2' OR `test_query`.`value2` = 'helloworld2' OR (`test_query`.`child_one` > '123' AND `test_query`.`child_two` LIKE '123'))",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`hello` = :test_query_hello OR (`test_query`.`id` LIKE :test_query_subor_test_query_id AND `test_query`.`value` = :test_query_subor_test_query_value) AND (`test_query`.`id2` LIKE :test_query_suband_test_query_id2 OR `test_query`.`value2` = :test_query_suband_test_query_value2 OR (`test_query`.`child_one` > :test_query_subor_test_query_child_one AND `test_query`.`child_two` LIKE :test_query_subor_test_query_child_two))",
+            {
+                "test_query_subor_test_query_child_one": [
+                    "123"
+                ],
+                "test_query_subor_test_query_child_two": [
+                    "123"
+                ],
+                "test_query_suband_test_query_id2": [
+                    "你好2"
+                ],
+                "test_query_suband_test_query_value2": [
+                    "helloworld2"
+                ],
+                "test_query_subor_test_query_id": [
+                    "你好"
+                ],
+                "test_query_subor_test_query_value": [
+                    "helloworld"
+                ],
+                "test_query_hello": [
+                    "111"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -1079,12 +1187,13 @@ public function testWhereFieldWithTable(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` = 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`name` = :test_query_name",
+            {
+                "test_query_name": [
+                    1
+                ]
+            },
+            false
         ]
         eot;
 
@@ -1109,12 +1218,16 @@ public function testWhereInArrayItemIsClosure(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IN ((SELECT `test_query_subsql`.`id` FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = 1),100)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` IN ((SELECT `test_query_subsql`.`id` FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = :test_query_id_test_query_subsql_id),:test_query_id_in1)",
+            {
+                "test_query_id_test_query_subsql_id": [
+                    1
+                ],
+                "test_query_id_in1": [
+                    100
+                ]
+            },
+            false
         ]
         eot;
 
@@ -1145,10 +1258,7 @@ public function testWhereRaw(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE FIND_IN_SET(1, id)",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -1175,10 +1285,7 @@ public function testOrWhereRaw(): void
         [
             "SELECT `test_query`.* FROM `test_query` WHERE FIND_IN_SET(1, id) OR FIND_IN_SET(1, id)",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

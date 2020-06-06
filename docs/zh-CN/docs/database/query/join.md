@@ -19,6 +19,7 @@ join($table, $cols, ...$cond);
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -31,12 +32,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM `test_query` INNER JOIN `test_query_subsql` ON `test_query_subsql`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM `test_query` INNER JOIN `test_query_subsql` ON `test_query_subsql`.`name` = :test_query_subsql_name",
+            {
+                "test_query_subsql_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -61,12 +63,13 @@ public function testWithCondition(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` INNER JOIN `test_query_subsql` `t` ON `t`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` INNER JOIN `test_query_subsql` `t` ON `t`.`name` = :t_name",
+            {
+                "t_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -94,12 +97,13 @@ public function testWithConditionSupportArrayAndExpression(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM `test_query` INNER JOIN `test_query_subsql` ON `test_query_subsql`.`hello` = 'world' AND `test_query_subsql`.`test` > `test_query_subsql`.`name`",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM `test_query` INNER JOIN `test_query_subsql` ON `test_query_subsql`.`hello` = :test_query_subsql_hello AND `test_query_subsql`.`test` > `test_query_subsql`.`name`",
+            {
+                "test_query_subsql_hello": [
+                    "world"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -108,7 +112,7 @@ public function testWithConditionSupportArrayAndExpression(): void
         $this->varJson(
             $connect
                 ->table('test_query')
-                ->join('test_query_subsql', 'name,value', ['hello' => 'world', ['test', '>', '{[name]}']])
+                ->join('test_query_subsql', 'name,value', ['hello' => 'world', ['test', '>', Condition::raw('[name]')]])
                 ->findAll(true),
             2
         )
@@ -125,12 +129,16 @@ public function testWithConditionIsClosure(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM `test_query` INNER JOIN `test_query_subsql` ON (`test_query_subsql`.`id` < 5 AND `test_query_subsql`.`name` LIKE 'hello')",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM `test_query` INNER JOIN `test_query_subsql` ON (`test_query_subsql`.`id` < :test_query_subsql_id AND `test_query_subsql`.`name` LIKE :test_query_subsql_name)",
+            {
+                "test_query_subsql_id": [
+                    5
+                ],
+                "test_query_subsql_name": [
+                    "hello"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -160,12 +168,13 @@ public function testInnerJoin(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` INNER JOIN `test_query_subsql` `t` ON `t`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` INNER JOIN `test_query_subsql` `t` ON `t`.`name` = :t_name",
+            {
+                "t_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -190,12 +199,13 @@ public function testLeftJoin(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` LEFT JOIN `test_query_subsql` `t` ON `t`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` LEFT JOIN `test_query_subsql` `t` ON `t`.`name` = :t_name",
+            {
+                "t_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -220,12 +230,13 @@ public function testRightJoin(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` RIGHT JOIN `test_query_subsql` `t` ON `t`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` RIGHT JOIN `test_query_subsql` `t` ON `t`.`name` = :t_name",
+            {
+                "t_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -250,12 +261,13 @@ public function testFullJoin(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` FULL JOIN `test_query_subsql` `t` ON `t`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` FULL JOIN `test_query_subsql` `t` ON `t`.`name` = :t_name",
+            {
+                "t_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -288,10 +300,7 @@ public function testCrossJoin(): void
         [
             "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` CROSS JOIN `test_query_subsql` `t`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -320,10 +329,7 @@ public function testNaturalJoin(): void
         [
             "SELECT `test_query`.*,`t`.`name` AS `nikename`,`t`.`value` AS `tt` FROM `test_query` NATURAL JOIN `test_query_subsql` `t`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -348,12 +354,13 @@ public function testInnerJoinWithTableIsSelect(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`b`.`name` AS `nikename`,`b`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT `b`.* FROM `test_query_subsql` `b`) b ON `b`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`b`.`name` AS `nikename`,`b`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT `b`.* FROM `test_query_subsql` `b`) b ON `b`.`name` = :b_name",
+            {
+                "b_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -380,12 +387,13 @@ public function testInnerJoinWithTableIsCondition(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`b`.`name` AS `nikename`,`b`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT `b`.* FROM `test_query_subsql` `b`) b ON `b`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`b`.`name` AS `nikename`,`b`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT `b`.* FROM `test_query_subsql` `b`) b ON `b`.`name` = :b_name",
+            {
+                "b_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -414,12 +422,13 @@ public function testInnerJoinWithTableIsClosure(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`b`.`name` AS `nikename`,`b`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT `b`.* FROM `test_query_subsql` `b`) b ON `b`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`b`.`name` AS `nikename`,`b`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT `b`.* FROM `test_query_subsql` `b`) b ON `b`.`name` = :b_name",
+            {
+                "b_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -446,12 +455,13 @@ public function testInnerJoinWithTableIsArrayCondition(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.*,`foo`.`name` AS `nikename`,`foo`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT `b`.* FROM `test_query_subsql` `b`) foo ON `foo`.`name` = '小牛'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.*,`foo`.`name` AS `nikename`,`foo`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT `b`.* FROM `test_query_subsql` `b`) foo ON `foo`.`name` = :foo_name",
+            {
+                "foo_name": [
+                    "小牛"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -482,10 +492,7 @@ public function testInnerJsonWithTableNameIsExpression(): void
         [
             "SELECT `test_query`.*,`a`.`name` AS `nikename`,`a`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT * FROM test_query_subsql) a ON `a`.`name` = `test_query`.`name`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -494,7 +501,7 @@ public function testInnerJsonWithTableNameIsExpression(): void
         $this->varJson(
             $connect
                 ->table('test_query')
-                ->innerJoin('(SELECT * FROM test_query_subsql)', ['name as nikename', 'tt' => 'value'], 'name', '=', '{[test_query.name]}')
+                ->innerJoin('(SELECT * FROM test_query_subsql)', ['name as nikename', 'tt' => 'value'], 'name', '=', Condition::raw('[test_query.name]'))
                 ->findAll(true)
         )
     );
@@ -512,10 +519,7 @@ public function testInnerJsonWithTableNameIsExpressionWithAsCustomAlias(): void
         [
             "SELECT `test_query`.*,`bar`.`name` AS `nikename`,`bar`.`value` AS `tt` FROM `test_query` INNER JOIN (SELECT * FROM test_query_subsql) bar ON `bar`.`name` = `test_query`.`name`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -524,7 +528,7 @@ public function testInnerJsonWithTableNameIsExpressionWithAsCustomAlias(): void
         $this->varJson(
             $connect
                 ->table('test_query')
-                ->innerJoin('(SELECT * FROM test_query_subsql) as bar', ['name as nikename', 'tt' => 'value'], 'name', '=', '{[test_query.name]}')
+                ->innerJoin('(SELECT * FROM test_query_subsql) as bar', ['name as nikename', 'tt' => 'value'], 'name', '=', Condition::raw('[test_query.name]'))
                 ->findAll(true)
         )
     );

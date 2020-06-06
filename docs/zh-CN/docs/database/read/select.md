@@ -49,10 +49,7 @@ public function testSelect(): void
         [
             "SELECT `test`.* FROM `test`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -77,12 +74,13 @@ public function testSelectClosure(): void
     $connect = $this->createDatabaseConnectMock();
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` WHERE `test`.`id` = 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test`.* FROM `test` WHERE `test`.`id` = :test_id",
+            {
+                "test_id": [
+                    1
+                ]
+            },
+            false
         ]
         eot;
 
@@ -109,12 +107,13 @@ public function testSelectObject(): void
     $connect = $this->createDatabaseConnectMock();
     $sql = <<<'eot'
         [
-            "SELECT `test`.* FROM `test` WHERE `test`.`id` = 5",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test`.* FROM `test` WHERE `test`.`id` = :test_id",
+            {
+                "test_id": [
+                    5
+                ]
+            },
+            false
         ]
         eot;
 

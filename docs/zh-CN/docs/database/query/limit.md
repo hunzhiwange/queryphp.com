@@ -23,10 +23,7 @@ public function testBaseUse(): void
         [
             "SELECT `test_query`.* FROM `test_query` LIMIT 5,10",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -53,10 +50,7 @@ public function testOne(): void
         [
             "SELECT `test_query`.* FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -84,10 +78,7 @@ public function testAll(): void
         [
             "SELECT `test_query`.* FROM `test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -115,10 +106,7 @@ public function testTop(): void
         [
             "SELECT `test_query`.* FROM `test_query` LIMIT 0,15",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

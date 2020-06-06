@@ -75,6 +75,7 @@ return [
      * ---------------------------------------------------------------
      *
      * 相当于 session_id
+     * null 表示自动生成随机字符串
      */
     'id' => null,
 
@@ -86,6 +87,17 @@ return [
      * 相当于 session_name
      */
     'name' => 'UID',
+
+    /*
+     * ---------------------------------------------------------------
+     * COOKIE 过期时间
+     * ---------------------------------------------------------------
+     *
+     * SESSION 依赖 COOKIE
+     * COOKIE 默认过期时间
+     * 小于等于 0 表示关闭浏览器即失效
+     */
+    'cookie_expire' => 86400,
 
     /*
      * ---------------------------------------------------------------
@@ -127,6 +139,7 @@ session 参数根据不同的连接会有所区别，通用的 sesion 参数如�
 |:-|:-|
 |id|相当于 session_id|
 |name|相当于 session_name|
+|cookie_expire|COOKIE 过期时间|
 
 ::: warning 注意
 QueryPHP 并没有使用 PHP 原生 SESSION，而是模拟原生 SESSION 自己实现的一套，使用方法与原生用法几乎一致。与原生 SESSION 不一样的是，QueryPHP 会在最后通过 session 中间件统一写入。
@@ -174,7 +187,7 @@ public function testBaseUse(): void
 
     $this->assertInstanceof(ISession::class, $session);
     $this->assertFalse($session->isStart());
-    $this->assertNull($session->getId());
+    $this->assertSame('', $session->getId());
     $this->assertSame('UID', $session->getName());
 
     $session->start();
@@ -589,7 +602,7 @@ public function testDestroy(): void
     $session = $this->createFileSessionHandler();
 
     $this->assertFalse($session->isStart());
-    $this->assertNull($session->getId());
+    $this->assertSame('', $session->getId());
     $this->assertSame('UID', $session->getName());
 
     $session->start();
@@ -599,7 +612,7 @@ public function testDestroy(): void
 
     $session->destroySession();
     $this->assertFalse($session->isStart());
-    $this->assertNull($session->getId());
+    $this->assertSame('', $session->getId());
     $this->assertSame('UID', $session->getName());
 }
 ```

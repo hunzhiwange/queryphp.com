@@ -22,6 +22,7 @@ use Tests\Database\DatabaseTestCase as TestCase;
 `数据库配置`
 
 ``` php
+# Tests\Database::createDatabaseManager
 protected function createDatabaseManager(): Manager
 {
     $container = new Container();
@@ -45,7 +46,6 @@ protected function createDatabaseManager(): Manager
                     'options'  => [
                         PDO::ATTR_PERSISTENT        => false,
                         PDO::ATTR_CASE              => PDO::CASE_NATURAL,
-                        PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
                         PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
                         PDO::ATTR_STRINGIFY_FETCHES => false,
                         PDO::ATTR_EMULATE_PREPARES  => false,
@@ -127,7 +127,6 @@ public function testParseDatabaseOptionDistributedIsTrue(): void
         'options'  => [
             PDO::ATTR_PERSISTENT        => false,
             PDO::ATTR_CASE              => PDO::CASE_NATURAL,
-            PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
             PDO::ATTR_STRINGIFY_FETCHES => false,
             PDO::ATTR_EMULATE_PREPARES  => false,
@@ -155,7 +154,6 @@ public function testParseDatabaseOptionDistributedIsTrue(): void
                 "options": {
                     "12": false,
                     "8": 0,
-                    "3": 2,
                     "11": 0,
                     "17": false,
                     "20": false
@@ -172,7 +170,6 @@ public function testParseDatabaseOptionDistributedIsTrue(): void
                     "options": {
                         "12": false,
                         "8": 0,
-                        "3": 2,
                         "11": 0,
                         "17": false,
                         "20": false
@@ -209,7 +206,6 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
         'options'  => [
             PDO::ATTR_PERSISTENT        => false,
             PDO::ATTR_CASE              => PDO::CASE_NATURAL,
-            PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
             PDO::ATTR_STRINGIFY_FETCHES => false,
             PDO::ATTR_EMULATE_PREPARES  => false,
@@ -240,7 +236,6 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
                 "options": {
                     "12": false,
                     "8": 0,
-                    "3": 2,
                     "11": 0,
                     "17": false,
                     "20": false
@@ -257,7 +252,6 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
                     "options": {
                         "12": false,
                         "8": 0,
-                        "3": 2,
                         "11": 0,
                         "17": false,
                         "20": false
@@ -273,7 +267,6 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
                     "options": {
                         "12": false,
                         "8": 0,
-                        "3": 2,
                         "11": 0,
                         "17": false,
                         "20": false
@@ -315,7 +308,6 @@ public function testParseDatabaseOptionMasterAndSlaveMustBeAnArray(): void
         'options'  => [
             PDO::ATTR_PERSISTENT        => false,
             PDO::ATTR_CASE              => PDO::CASE_NATURAL,
-            PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
             PDO::ATTR_STRINGIFY_FETCHES => false,
             PDO::ATTR_EMULATE_PREPARES  => false,

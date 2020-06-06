@@ -338,6 +338,7 @@ public function testTypeValidate(): void
 
     $collection = new Collection($data, ['string']);
     $this->assertSame($collection->toArray(), $data);
+    $this->assertSame(['string'], $collection->getType());
 }
 ```
     

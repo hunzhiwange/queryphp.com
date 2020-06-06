@@ -66,19 +66,21 @@ interface IExceptionRuntime
 **getHttpExceptionView 原型**
 
 ``` php
+# Leevel\Kernel\ExceptionRuntime::getHttpExceptionView
 /**
  * 获取 HTTP 状态的异常模板.
  */
-abstract public function getHttpExceptionView(Exception $e): string;;
+abstract public function getHttpExceptionView(HttpException $e): string;
 ```
 
 **getDefaultHttpExceptionView 原型**
 
 ``` php
+# Leevel\Kernel\ExceptionRuntime::getDefaultHttpExceptionView
 /**
  * 获取 HTTP 状态的默认异常模板.
  */
-abstract public function getDefaultHttpExceptionView(): string;;
+abstract public function getDefaultHttpExceptionView(): string;
 ```
 
 只需要实现，即可轻松接入，例如应用中的 `\Common\App\ExceptionRuntime` 实现。
@@ -103,6 +105,7 @@ namespace Common\App;
 use Exception;
 use Leevel;
 use Leevel\Http\Request;
+use Leevel\Kernel\Exception\HttpException;
 use Leevel\Kernel\ExceptionRuntime as BaseExceptionRuntime;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -130,7 +133,7 @@ class ExceptionRuntime extends BaseExceptionRuntime
     /**
      * 获取 HTTP 状态的异常模板.
      */
-    public function getHttpExceptionView(Exception $e): string
+    public function getHttpExceptionView(HttpException $e): string
     {
         return Leevel::commonPath('ui/exception/'.$e->getStatusCode().'.php');
     }
@@ -158,6 +161,7 @@ use Leevel\Di\Container;
 use Leevel\Di\IContainer;
 use Leevel\Http\Request;
 use Leevel\Kernel\App as Apps;
+use Leevel\Kernel\Exception\HttpException;
 use Leevel\Kernel\Exception\InternalServerErrorHttpException;
 use Leevel\Kernel\Exception\MethodNotAllowedHttpException;
 use Leevel\Kernel\Exception\NotFoundHttpException;
@@ -191,7 +195,7 @@ namespace Tests\Kernel;
 
 class Runtime11 extends ExceptionRuntime
 {
-    public function getHttpExceptionView(Exception $e): string
+    public function getHttpExceptionView(HttpException $e): string
     {
         return '';
     }
@@ -557,7 +561,7 @@ namespace Tests\Kernel;
 
 class Runtime22 extends ExceptionRuntime
 {
-    public function getHttpExceptionView(Exception $e): string
+    public function getHttpExceptionView(HttpException $e): string
     {
         return __DIR__.'/assert/'.$e->getStatusCode().'.php';
     }
@@ -644,7 +648,7 @@ public function testRendorWithHttpExceptionView(): void
 
     $e = new Exception6('hello world');
 
-    $this->assertInstanceof(Response::class, $resultResponse = $runtime->rendorWithHttpExceptionView($e));
+    $this->assertInstanceof(Response::class, $resultResponse = $this->invokeTestMethod($runtime, 'rendorWithHttpExceptionView', [$e]));
 
     $content = $resultResponse->getContent();
 
@@ -725,7 +729,7 @@ public function testRendorWithHttpExceptionViewFor404(): void
 
     $e = new Exception7('hello world');
 
-    $this->assertInstanceof(Response::class, $resultResponse = $runtime->rendorWithHttpExceptionView($e));
+    $this->assertInstanceof(Response::class, $resultResponse = $this->invokeTestMethod($runtime, 'rendorWithHttpExceptionView', [$e]));
 
     $content = $resultResponse->getContent();
 
@@ -749,7 +753,7 @@ namespace Tests\Kernel;
 
 class Runtime3 extends ExceptionRuntime
 {
-    public function getHttpExceptionView(Exception $e): string
+    public function getHttpExceptionView(HttpException $e): string
     {
         return __DIR__.'/assert/notFound.php';
     }
@@ -832,7 +836,7 @@ public function testRendorWithHttpExceptionViewButNotFoundViewAndWithDefaultView
 
     $e = new Exception8('hello world');
 
-    $this->assertInstanceof(Response::class, $resultResponse = $runtime->rendorWithHttpExceptionView($e));
+    $this->assertInstanceof(Response::class, $resultResponse = $this->invokeTestMethod($runtime, 'rendorWithHttpExceptionView', [$e]));
 
     $content = $resultResponse->getContent();
 

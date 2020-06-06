@@ -665,6 +665,7 @@ public function testInstanceWithArray(): void
 比如说系统中中间件注册。
 
 ``` php
+# Leevel\Session\Provider\Register::middleware
 /**
  * 注册 middleware 服务.
  */

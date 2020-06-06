@@ -207,6 +207,7 @@ use Leevel\Log\ILog;
 **支持的日志类型**
 
 ``` php
+# Tests\Log\LogTest::baseUseProvider
 public function baseUseProvider(): array
 {
     return [
@@ -225,30 +226,33 @@ public function baseUseProvider(): array
 **获取日志记录数量**
 
 ``` php
+# Leevel\Log\ILog::count
 /**
  * 获取日志记录数量.
  */
-public function count(?string $level = null): int;;
+public function count(?string $level = null): int;
 ```
 
 **获取当前日志记录**
 
 ``` php
+# Leevel\Log\ILog::all
 /**
  * 获取当前日志记录.
  *
  * - 每次 IO 写入后会执行一次清理
  */
-public function all(?string $level = null): array;;
+public function all(?string $level = null): array;
 ```
 
 **清理日志记录**
 
 ``` php
+# Leevel\Log\ILog::clear
 /**
  * 清理日志记录.
  */
-public function clear(?string $level = null): void;;
+public function clear(?string $level = null): void;
 ```
 
 除了这些外，还有一些辅助方法如 `isMonolog`，因为 `Monolog` 非常流行，底层进行了一些封装。
@@ -315,6 +319,7 @@ public function testLogLevelNotFoundWithDefaultLevel(): void
 **日志消息分类规则**
 
 ``` php
+# Leevel\Log\Log::parseMessageCategory
 public static function parseMessageCategory(string $message): string
 {
     if (preg_match('/^\[([a-zA-Z_0-9\-:.\/]+)\]/', $message, $matches)) {

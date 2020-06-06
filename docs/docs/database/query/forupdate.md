@@ -25,10 +25,7 @@ public function testBaseUse(): void
         [
             "SELECT `test_query`.* FROM `test_query` FOR UPDATE",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -55,10 +52,7 @@ public function testCancelUpdate(): void
         [
             "SELECT `test_query`.* FROM `test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

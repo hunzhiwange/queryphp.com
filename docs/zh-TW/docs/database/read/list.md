@@ -22,10 +22,7 @@ public function testBaseUse(): void
         [
             "SELECT `test`.`name` FROM `test`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -51,10 +48,7 @@ public function testStringByCommaSeparation(): void
         [
             "SELECT `test`.`name`,`test`.`id` FROM `test`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -81,10 +75,7 @@ public function testMoreString(): void
         [
             "SELECT `test`.`name`,`test`.`id` FROM `test`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -111,10 +102,7 @@ public function testArray(): void
         [
             "SELECT `test`.`name`,`test`.`id` FROM `test`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -141,10 +129,7 @@ public function testArrayAndString(): void
         [
             "SELECT `test`.`name`,`test`.`id` FROM `test`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

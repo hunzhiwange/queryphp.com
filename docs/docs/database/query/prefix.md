@@ -21,12 +21,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT SQL_CALC_FOUND_ROWS `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 5",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT SQL_CALC_FOUND_ROWS `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    5
+                ]
+            },
+            false
         ]
         eot;
 
@@ -52,12 +53,13 @@ public function testSqlNoCache(): void
 
     $sql = <<<'eot'
         [
-            "SELECT SQL_NO_CACHE `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 5",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT SQL_NO_CACHE `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    5
+                ]
+            },
+            false
         ]
         eot;
 

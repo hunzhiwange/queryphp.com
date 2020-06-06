@@ -18,6 +18,7 @@ public function groupBy($expression);
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -32,10 +33,7 @@ public function testBaseUse(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`id`,`test_query`.`name`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -63,10 +61,7 @@ public function testWithTable(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`id`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -92,12 +87,13 @@ public function testWithExpression(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`num` HAVING SUM(`test_query`.`num`) > 9",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`num` HAVING SUM(`test_query`.`num`) > :SUM_test_query_num",
+            {
+                "SUM_test_query_num": [
+                    9
+                ]
+            },
+            false
         ]
         eot;
 
@@ -106,8 +102,8 @@ public function testWithExpression(): void
         $this->varJson(
             $connect
                 ->table('test_query', 'tid as id,tname as value')
-                ->groupBy('{[num]}')
-                ->having('{SUM([num])}', '>', 9)
+                ->groupBy(Condition::raw('[num]'))
+                ->having(Condition::raw('SUM([num])'), '>', 9)
                 ->findAll(true),
             2
         )
@@ -126,10 +122,7 @@ public function testWithComposite(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`title`,`test_query`.`id`,concat('1234',`test_query`.`id`,'ttt')",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -138,7 +131,7 @@ public function testWithComposite(): void
         $this->varJson(
             $connect
                 ->table('test_query', 'tid as id,tname as value')
-                ->groupBy("title,id,{concat('1234',[id],'ttt')}")
+                ->groupBy('title,id,'.Condition::raw("concat('1234',[id],'ttt')"))
                 ->findAll(true),
             3
         )
@@ -157,10 +150,7 @@ public function testWithArray(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`title`,`test_query`.`id`,`test_query`.`ttt`,`test_query`.`value`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

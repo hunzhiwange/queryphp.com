@@ -23,12 +23,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 2 ORDER BY `test_query`.`name` DESC LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id ORDER BY `test_query`.`name` DESC LIMIT 1",
+            {
+                "test_query_id": [
+                    2
+                ]
+            },
+            false
         ]
         eot;
 
@@ -56,12 +57,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 1 LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id LIMIT 1",
+            {
+                "test_query_id": [
+                    1
+                ]
+            },
+            false
         ]
         eot;
 
@@ -90,12 +92,16 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 3 AND `test_query`.`id` = 1111 LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id AND `test_query`.`id` = :test_query_id_1 LIMIT 1",
+            {
+                "test_query_id": [
+                    3
+                ],
+                "test_query_id_1": [
+                    1111
+                ]
+            },
+            false
         ]
         eot;
 
@@ -124,12 +130,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 4 LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id LIMIT 1",
+            {
+                "test_query_id": [
+                    4
+                ]
+            },
+            false
         ]
         eot;
 
@@ -169,12 +176,16 @@ public function testElse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 2 AND `test_query`.`id` = 4 ORDER BY `test_query`.`name` DESC LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id AND `test_query`.`id` = :test_query_id_1 ORDER BY `test_query`.`name` DESC LIMIT 1",
+            {
+                "test_query_id": [
+                    2
+                ],
+                "test_query_id_1": [
+                    4
+                ]
+            },
+            false
         ]
         eot;
 
@@ -202,12 +213,16 @@ public function testElse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 3 AND `test_query`.`id` = 1111 LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id AND `test_query`.`id` = :test_query_id_1 LIMIT 1",
+            {
+                "test_query_id": [
+                    3
+                ],
+                "test_query_id_1": [
+                    1111
+                ]
+            },
+            false
         ]
         eot;
 
@@ -236,12 +251,13 @@ public function testElse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = 4 LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :test_query_id LIMIT 1",
+            {
+                "test_query_id": [
+                    4
+                ]
+            },
+            false
         ]
         eot;
 

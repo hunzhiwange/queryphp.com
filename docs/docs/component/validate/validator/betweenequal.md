@@ -17,6 +17,7 @@ use Leevel\Validate\Validator;
 以下是通过的校验数据示例。
 
 ``` php
+# Tests\Validate\Validator\BetweenEqualTest::baseUseProvider
 public function baseUseProvider(): array
 {
     return [
@@ -59,6 +60,7 @@ public function testBaseUse($value, string $param): void
 以下是未通过的校验数据示例。
 
 ``` php
+# Tests\Validate\Validator\BetweenEqualTest::badProvider
 public function badProvider(): array
 {
     return [

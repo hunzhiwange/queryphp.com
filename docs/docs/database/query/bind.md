@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use PDO;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
@@ -25,14 +26,10 @@ public function testBaseUse(): void
             "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`id` = :id",
             {
                 "id": [
-                    1,
-                    2
+                    1
                 ]
             },
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -42,7 +39,7 @@ public function testBaseUse(): void
             $connect
                 ->table('test_query')
                 ->bind('id', 1)
-                ->where('id', '=', '[:id]')
+                ->where('id', '=', Condition::raw(':id'))
                 ->findAll(true)
         )
     );
@@ -65,10 +62,7 @@ public function testBindWithType(): void
                     1
                 ]
             },
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -78,7 +72,7 @@ public function testBindWithType(): void
             $connect
                 ->table('test_query')
                 ->bind('id', 1, PDO::PARAM_INT)
-                ->where('id', '=', '[:id]')
+                ->where('id', '=', Condition::raw(':id'))
                 ->findAll(true),
             1
         )
@@ -102,10 +96,7 @@ public function testWithTypeAndValueCanBeArray(): void
                     1
                 ]
             },
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -115,7 +106,7 @@ public function testWithTypeAndValueCanBeArray(): void
             $connect
                 ->table('test_query')
                 ->bind('id', [1, PDO::PARAM_INT])
-                ->where('id', '=', '[:id]')
+                ->where('id', '=', Condition::raw(':id'))
                 ->findAll(true),
             2
         )
@@ -139,14 +130,10 @@ public function testNameBind(): void
                     1
                 ],
                 "name": [
-                    "小鸭子",
-                    2
+                    "小鸭子"
                 ]
             },
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -156,8 +143,8 @@ public function testNameBind(): void
             $connect
                 ->table('test_query')
                 ->bind(['id' => [1, PDO::PARAM_INT], 'name'=>'小鸭子'])
-                ->where('id', '=', '[:id]')
-                ->where('hello', 'like', '[:name]')
+                ->where('id', '=', Condition::raw(':id'))
+                ->where('hello', 'like', Condition::raw(':name'))
                 ->findAll(true),
             3
         )
@@ -181,14 +168,10 @@ public function testQuestionMarkBind(): void
                     1
                 ],
                 [
-                    "小鸭子",
-                    2
+                    "小鸭子"
                 ]
             ],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -198,8 +181,8 @@ public function testQuestionMarkBind(): void
             $connect
                 ->table('test_query')
                 ->bind([[5, PDO::PARAM_INT], '小鸭子'])
-                ->where('id', '=', '[?]')
-                ->where('hello', 'like', '[?]')
+                ->where('id', '=', Condition::raw('?'))
+                ->where('hello', 'like', Condition::raw('?'))
                 ->findAll(true),
             4
         )

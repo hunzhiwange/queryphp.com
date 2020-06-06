@@ -378,6 +378,7 @@ HTML 邮件内容与纯文本邮件内容同时存在，系统优先采用前者
 **flush 函数原型**
 
 ``` php
+# Leevel\Mail\Mail::flush
 /**
  * 发送邮件.
  */

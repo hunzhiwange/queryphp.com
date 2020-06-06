@@ -21,12 +21,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`new` = 'world'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query_subsql`.* FROM `test_query_subsql` WHERE `test_query_subsql`.`new` = :test_query_subsql_new",
+            {
+                "test_query_subsql_new": [
+                    "world"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -55,12 +56,13 @@ public function testResetItem(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`name`,`test_query`.`id` FROM `test_query` WHERE `test_query`.`new` LIKE 'new'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.`name`,`test_query`.`id` FROM `test_query` WHERE `test_query`.`new` LIKE :test_query_new",
+            {
+                "test_query_new": [
+                    "new"
+                ]
+            },
+            false
         ]
         eot;
 

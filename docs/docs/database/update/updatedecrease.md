@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -23,8 +24,12 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`num` = `test_query`.`num`-3 WHERE `test_query`.`id` = 503",
-            []
+            "UPDATE `test_query` SET `test_query`.`num` = `test_query`.`num`-3 WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    503
+                ]
+            }
         ]
         eot;
 
@@ -63,7 +68,7 @@ public function testBind(): void
             $connect
                 ->sql()
                 ->table('test_query')
-                ->where('id', '[?]')
+                ->where('id', Condition::raw('?'))
                 ->updateDecrease('num', 3, [503])
         )
     );

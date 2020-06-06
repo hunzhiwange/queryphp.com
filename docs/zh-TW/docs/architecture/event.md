@@ -26,6 +26,7 @@ use Leevel\Event\Observer;
 **register 函数原型**
 
 ``` php
+# Leevel\Event\Dispatch::register
 /**
  * 注册监听器.
  *
@@ -38,6 +39,7 @@ public function register($event, $listener, int $priority = 500): void;
 **handle 函数原型**
 
 ``` php
+# Leevel\Event\Dispatch::handle
 /**
  * 执行一个事件.
  *

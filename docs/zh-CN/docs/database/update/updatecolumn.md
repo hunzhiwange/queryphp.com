@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -23,11 +24,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`name` = :name WHERE `test_query`.`id` = 503",
+            "UPDATE `test_query` SET `test_query`.`name` = :pdonamedparameter_name WHERE `test_query`.`id` = :test_query_id",
             {
-                "name": [
-                    "小小小鸟，怎么也飞不高。",
-                    2
+                "pdonamedparameter_name": [
+                    "小小小鸟，怎么也飞不高。"
+                ],
+                "test_query_id": [
+                    503
                 ]
             }
         ]
@@ -55,8 +58,12 @@ public function testExpression(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`name` = concat(`test_query`.`value`,`test_query`.`name`) WHERE `test_query`.`id` = 503",
-            []
+            "UPDATE `test_query` SET `test_query`.`name` = concat(`test_query`.`value`,`test_query`.`name`) WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    503
+                ]
+            }
         ]
         eot;
 
@@ -67,7 +74,7 @@ public function testExpression(): void
                 ->sql()
                 ->table('test_query')
                 ->where('id', 503)
-                ->updateColumn('name', '{concat([value],[name])}')
+                ->updateColumn('name', Condition::raw('concat([value],[name])'))
         )
     );
 }

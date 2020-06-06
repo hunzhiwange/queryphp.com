@@ -22,10 +22,7 @@ public function testBaseUse(): void
         [
             "SELECT `test`.`id` FROM `test` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

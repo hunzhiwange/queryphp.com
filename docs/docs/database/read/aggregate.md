@@ -22,10 +22,7 @@ public function testCount(): void
         [
             "SELECT COUNT(*) AS row_count FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -51,10 +48,7 @@ public function testCount2(): void
         [
             "SELECT COUNT(*) AS row_count FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -82,10 +76,7 @@ public function testCount3(): void
         [
             "SELECT COUNT(*) AS row_count2 FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -112,10 +103,7 @@ public function testAvg(): void
         [
             "SELECT AVG(`test_query`.`num`) AS avg_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -141,10 +129,7 @@ public function testAvg2(): void
         [
             "SELECT AVG(`test_query`.`num`) AS avg_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -172,10 +157,7 @@ public function testAvg3(): void
         [
             "SELECT AVG(`test_query`.`num`) AS avg_value2 FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -202,10 +184,7 @@ public function testMax(): void
         [
             "SELECT MAX(`test_query`.`num`) AS max_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -231,10 +210,7 @@ public function testMax2(): void
         [
             "SELECT MAX(`test_query`.`num`) AS max_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -262,10 +238,7 @@ public function testMax3(): void
         [
             "SELECT MAX(`test_query`.`num`) AS max_value2 FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -292,10 +265,7 @@ public function testMin(): void
         [
             "SELECT MIN(`test_query`.`num`) AS min_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -321,10 +291,7 @@ public function testMin2(): void
         [
             "SELECT MIN(`test_query`.`num`) AS min_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -352,10 +319,7 @@ public function testMin3(): void
         [
             "SELECT MIN(`test_query`.`num`) AS min_value2 FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -382,10 +346,7 @@ public function testSum(): void
         [
             "SELECT SUM(`test_query`.`num`) AS sum_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -411,10 +372,7 @@ public function testSum2(): void
         [
             "SELECT SUM(`test_query`.`num`) AS sum_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -442,10 +400,7 @@ public function testSum3(): void
         [
             "SELECT SUM(`test_query`.`num`) AS sum_value2 FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -472,10 +427,7 @@ public function testAvgWithTable(): void
         [
             "SELECT AVG(`test_query`.`num`) AS avg_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -501,10 +453,7 @@ public function testAvgWithTable2(): void
         [
             "SELECT AVG(`test_query`.`num`) AS avg_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

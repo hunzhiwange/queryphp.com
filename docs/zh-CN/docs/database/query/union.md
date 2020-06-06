@@ -21,12 +21,16 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` \nUNION SELECT `test_query`.`tid` AS `id`,`test_query`.`name` AS `value` FROM `test_query` WHERE `test_query`.`first_name` = '222'\nUNION SELECT id,value FROM test_query WHERE id > 3\nUNION SELECT `test_query`.`tid` AS `id`,`test_query`.`name` AS `value` FROM `test_query` WHERE `test_query`.`first_name` = '222'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` \nUNION SELECT `test_query`.`tid` AS `id`,`test_query`.`name` AS `value` FROM `test_query` WHERE `test_query`.`first_name` = :test_query_first_name\nUNION SELECT id,value FROM test_query WHERE id > 3\nUNION SELECT `test_query`.`tid` AS `id`,`test_query`.`name` AS `value` FROM `test_query` WHERE `test_query`.`first_name` = :test_query_first_name_1",
+            {
+                "test_query_first_name": [
+                    "222"
+                ],
+                "test_query_first_name_1": [
+                    "222"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -47,8 +51,23 @@ public function testBaseUse(): void
         )
     );
 
+    $sql2 = <<<'eot'
+        [
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` \nUNION SELECT `test_query`.`tid` AS `id`,`test_query`.`name` AS `value` FROM `test_query` WHERE `test_query`.`first_name` = :test_query_first_name_2\nUNION SELECT id,value FROM test_query WHERE id > 3\nUNION SELECT `test_query`.`tid` AS `id`,`test_query`.`name` AS `value` FROM `test_query` WHERE `test_query`.`first_name` = :test_query_first_name_3",
+            {
+                "test_query_first_name_2": [
+                    "222"
+                ],
+                "test_query_first_name_3": [
+                    "222"
+                ]
+            },
+            false
+        ]
+        eot;
+
     $this->assertSame(
-        $sql,
+        $sql2,
         $this->varJson(
             $connect
                 ->table('test_query', 'tid as id,tname as value')
@@ -74,10 +93,7 @@ public function testUnionAll(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` \nUNION ALL SELECT id,value FROM test_query WHERE id > 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

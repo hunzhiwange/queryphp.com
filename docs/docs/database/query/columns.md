@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -25,10 +26,7 @@ public function testBaseUse(): void
         [
             "SELECT `test_query`.*,`test_query`.`id`,`test_query`.`name`,`test_query`.`value` FROM `test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -58,10 +56,7 @@ public function testSetColumns(): void
         [
             "SELECT `test_query`.`remark` FROM `test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -91,10 +86,7 @@ public function testColumnsExpressionForSelectString(): void
             [
                 "SELECT 'foo'",
                 [],
-                false,
-                null,
-                null,
-                []
+                false
             ]
         ]
         eot;
@@ -123,10 +115,7 @@ public function testSetColumnsWithTableName(): void
         [
             "SELECT `test_query`.`name`,`test_query`.`value`,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM `test_query` INNER JOIN `test_query_subsql` ON `test_query_subsql`.`name` = `test_query`.`name`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -136,7 +125,7 @@ public function testSetColumnsWithTableName(): void
             $connect
                 ->table('test_query')
                 ->setColumns('test_query.name,test_query.value')
-                ->join('test_query_subsql', 'name,value', 'name', '=', '{[test_query.name]}')
+                ->join('test_query_subsql', 'name,value', 'name', '=', Condition::raw('[test_query.name]'))
                 ->findAll(true)
         )
     );

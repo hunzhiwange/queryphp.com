@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -23,11 +24,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`name` = :name WHERE `test_query`.`id` = 503",
+            "UPDATE `test_query` SET `test_query`.`name` = :pdonamedparameter_name WHERE `test_query`.`id` = :test_query_id",
             {
-                "name": [
-                    "小猪",
-                    2
+                "pdonamedparameter_name": [
+                    "小猪"
+                ],
+                "test_query_id": [
+                    503
                 ]
             }
         ]
@@ -55,11 +58,13 @@ public function testWithLimit(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`name` = :name WHERE `test_query`.`id` = 503 LIMIT 5",
+            "UPDATE `test_query` SET `test_query`.`name` = :pdonamedparameter_name WHERE `test_query`.`id` = :test_query_id LIMIT 5",
             {
-                "name": [
-                    "小猪",
-                    2
+                "pdonamedparameter_name": [
+                    "小猪"
+                ],
+                "test_query_id": [
+                    503
                 ]
             }
         ]
@@ -88,11 +93,13 @@ public function testWithOrderBy(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`name` = :name WHERE `test_query`.`id` = 503 ORDER BY `test_query`.`id` DESC",
+            "UPDATE `test_query` SET `test_query`.`name` = :pdonamedparameter_name WHERE `test_query`.`id` = :test_query_id ORDER BY `test_query`.`id` DESC",
             {
-                "name": [
-                    "小猪",
-                    2
+                "pdonamedparameter_name": [
+                    "小猪"
+                ],
+                "test_query_id": [
+                    503
                 ]
             }
         ]
@@ -121,11 +128,13 @@ public function testWithOrderAndLimit(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`name` = :name WHERE `test_query`.`id` = 503 ORDER BY `test_query`.`id` DESC LIMIT 2",
+            "UPDATE `test_query` SET `test_query`.`name` = :pdonamedparameter_name WHERE `test_query`.`id` = :test_query_id ORDER BY `test_query`.`id` DESC LIMIT 2",
             {
-                "name": [
-                    "小猪",
-                    2
+                "pdonamedparameter_name": [
+                    "小猪"
+                ],
+                "test_query_id": [
+                    503
                 ]
             }
         ]
@@ -155,11 +164,13 @@ public function testWithJoin(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` `t` INNER JOIN `test_query_subsql` `h` ON `t`.`id` = `h`.`value` SET `t`.`name` = :name WHERE `t`.`id` = 503",
+            "UPDATE `test_query` `t` INNER JOIN `test_query_subsql` `h` ON `t`.`id` = `h`.`value` SET `t`.`name` = :pdonamedparameter_name WHERE `t`.`id` = :t_id",
             {
-                "name": [
-                    "小猪",
-                    2
+                "pdonamedparameter_name": [
+                    "小猪"
+                ],
+                "t_id": [
+                    503
                 ]
             }
         ]
@@ -171,7 +182,7 @@ public function testWithJoin(): void
             $connect
                 ->sql()
                 ->table('test_query as t')
-                ->join('test_query_subsql as h', '', 't.id', '=', '{[value]}')
+                ->join('test_query_subsql as h', '', 't.id', '=', Condition::raw('[value]'))
                 ->where('id', 503)
                 ->update(['name' => '小猪'])
         )
@@ -188,11 +199,13 @@ public function testBind(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`name` = :hello,`test_query`.`value` = :questionmark_0 WHERE `test_query`.`id` = 503",
+            "UPDATE `test_query` SET `test_query`.`name` = :hello,`test_query`.`value` = :pdopositional2namedparameter_0 WHERE `test_query`.`id` = :test_query_id",
             {
-                "questionmark_0": [
-                    "小牛逼",
-                    2
+                "pdopositional2namedparameter_0": [
+                    "小牛逼"
+                ],
+                "test_query_id": [
+                    503
                 ],
                 "hello": "hello world!"
             }
@@ -209,8 +222,8 @@ public function testBind(): void
                 ->bind(['小牛逼'])
                 ->update(
                     [
-                        'name'  => '[:hello]',
-                        'value' => '[?]',
+                        'name'  => Condition::raw(':hello'),
+                        'value' => Condition::raw('?'),
                     ],
                     [
                         'hello' => 'hello world!',
@@ -230,8 +243,12 @@ public function testExpression(): void
 
     $sql = <<<'eot'
         [
-            "UPDATE `test_query` SET `test_query`.`name` = concat(`test_query`.`value`,`test_query`.`name`) WHERE `test_query`.`id` = 503",
-            []
+            "UPDATE `test_query` SET `test_query`.`name` = concat(`test_query`.`value`,`test_query`.`name`) WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    503
+                ]
+            }
         ]
         eot;
 
@@ -243,7 +260,7 @@ public function testExpression(): void
                 ->table('test_query')
                 ->where('id', 503)
                 ->update([
-                    'name' => '{concat([value],[name])}',
+                    'name' => Condition::raw('concat([value],[name])'),
                 ])
         )
     );

@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -23,10 +24,7 @@ public function testBaseUse(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` ORDER BY `test_query`.`id` DESC,`test_query`.`name` ASC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -54,10 +52,7 @@ public function testWithTable(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` ORDER BY `test_query`.`id` DESC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -85,10 +80,7 @@ public function testWithExpression(): void
         [
             "SELECT SUM(`test_query`.`num`),`test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` ORDER BY SUM(`test_query`.`num`) ASC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -97,7 +89,7 @@ public function testWithExpression(): void
         $this->varJson(
             $connect
                 ->table('test_query', '{SUM([num])},tid as id,tname as value')
-                ->orderBy('{SUM([num]) ASC}')
+                ->orderBy(Condition::raw('SUM([num]) ASC'))
                 ->findAll(true),
             2
         )
@@ -116,10 +108,7 @@ public function testWithExpressionAndNormal(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` ORDER BY `test_query`.`title` ASC,`test_query`.`id` ASC,concat('1234',`test_query`.`id`,'ttt') DESC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -128,7 +117,7 @@ public function testWithExpressionAndNormal(): void
         $this->varJson(
             $connect
                 ->table('test_query', 'tid as id,tname as value')
-                ->orderBy("title,id,{concat('1234',[id],'ttt') desc}")
+                ->orderBy('title,id,'.Condition::raw("concat('1234',[id],'ttt') desc"))
                 ->findAll(true),
             4
         )
@@ -147,10 +136,7 @@ public function testWithArray(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` ORDER BY `test_query`.`title` ASC,`test_query`.`id` ASC,`test_query`.`ttt` ASC,`test_query`.`value` DESC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -178,10 +164,7 @@ public function testWithArrayAndSetType(): void
         [
             "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` ORDER BY `test_query`.`title` DESC,`test_query`.`id` DESC,`test_query`.`ttt` ASC,`test_query`.`value` DESC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -209,10 +192,7 @@ public function testLatest(): void
         [
             "SELECT `test_query`.* FROM `test_query` ORDER BY `test_query`.`create_at` DESC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -239,10 +219,7 @@ public function testLatestWithCustomField(): void
         [
             "SELECT `test_query`.* FROM `test_query` ORDER BY `test_query`.`foo` DESC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -270,10 +247,7 @@ public function testOldest(): void
         [
             "SELECT `test_query`.* FROM `test_query` ORDER BY `test_query`.`create_at` ASC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -301,10 +275,7 @@ public function testOldestWithCustomField(): void
         [
             "SELECT `test_query`.* FROM `test_query` ORDER BY `test_query`.`bar` ASC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -332,10 +303,7 @@ public function testOrderByExpressionNotSetWithDefaultAsc(): void
         [
             "SELECT `test_query`.* FROM `test_query` ORDER BY foo ASC",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -344,7 +312,7 @@ public function testOrderByExpressionNotSetWithDefaultAsc(): void
         $this->varJson(
             $connect
                 ->table('test_query')
-                ->orderBy('{foo}')
+                ->orderBy(Condition::raw('foo'))
                 ->findAll(true)
         )
     );

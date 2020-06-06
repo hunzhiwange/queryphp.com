@@ -113,6 +113,7 @@ public function testChinese(): void
 **支持的类型**
 
 ``` php
+# Tests\Seccode\SeccodeTest::getAutoCodeData
 public function getAutoCodeData(): array
 {
     return [

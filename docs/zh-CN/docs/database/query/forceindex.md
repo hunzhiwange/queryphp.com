@@ -21,12 +21,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` FORCE INDEX(nameindex,statusindex) IGNORE INDEX(testindex) WHERE `test_query`.`id` = 5",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` FORCE INDEX(nameindex,statusindex) IGNORE INDEX(testindex) WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    5
+                ]
+            },
+            false
         ]
         eot;
 
@@ -53,12 +54,13 @@ public function testForceIndexWithArray(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` FORCE INDEX(nameindex,statusindex) WHERE `test_query`.`id` = 2",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` FORCE INDEX(nameindex,statusindex) WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    2
+                ]
+            },
+            false
         ]
         eot;
 
@@ -84,12 +86,13 @@ public function testIgnoreIndexWithArray(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` IGNORE INDEX(nameindex,statusindex) WHERE `test_query`.`id` = 6",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` IGNORE INDEX(nameindex,statusindex) WHERE `test_query`.`id` = :test_query_id",
+            {
+                "test_query_id": [
+                    6
+                ]
+            },
+            false
         ]
         eot;
 

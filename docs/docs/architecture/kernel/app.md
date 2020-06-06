@@ -798,6 +798,7 @@ public function testSetThemesPath(): void
 测试数据
 
 ``` php
+# Tests\Kernel\AppTest::envProvider
 public function envProvider(): array
 {
     return [

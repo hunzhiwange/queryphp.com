@@ -144,10 +144,11 @@ use Leevel\Session\File as SessionFile;
 **login 原型**
 
 ``` php
+# Leevel\Auth\IAuth::login
 /**
  * 登录写入数据.
  */
-public function login(array $data, ?int $loginTime = null): void;;
+public function login(array $data, ?int $loginTime = null): void;
 ```
 
 `$loginTime` 过期时间规则如下：

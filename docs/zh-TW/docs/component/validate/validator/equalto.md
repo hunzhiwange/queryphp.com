@@ -18,6 +18,7 @@ use stdClass;
 以下是通过的校验数据示例。
 
 ``` php
+# Tests\Validate\Validator\EqualToTest::baseUseProvider
 public function baseUseProvider(): array
 {
     return [
@@ -54,6 +55,7 @@ public function testBaseUse($value, $valueCompare, string $param): void
 以下是未通过的校验数据示例。
 
 ``` php
+# Tests\Validate\Validator\EqualToTest::badProvider
 public function badProvider(): array
 {
     return [

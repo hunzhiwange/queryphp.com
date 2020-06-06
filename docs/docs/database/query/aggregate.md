@@ -11,6 +11,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -38,10 +39,7 @@ public function testBaseUse(): void
         [
             "SELECT COUNT(*) AS row_count FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -59,10 +57,7 @@ public function testBaseUse(): void
         [
             "SELECT COUNT(`test_query`.`id`) AS row_count FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -81,10 +76,7 @@ public function testBaseUse(): void
         [
             "SELECT COUNT(`test_query`.`id`) AS count1 FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -103,10 +95,7 @@ public function testBaseUse(): void
         [
             "SELECT COUNT(`test_query`.`id`*50) AS count1 FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -115,7 +104,7 @@ public function testBaseUse(): void
         $this->varJson(
             $connect
                 ->table('test_query')
-                ->count('{[id]*50}', 'count1')
+                ->count(Condition::raw('[id]*50'), 'count1')
                 ->findOne(true),
             3
         )
@@ -136,10 +125,7 @@ public function testAvg(): void
         [
             "SELECT AVG(`test_query`.`id`) AS avg_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -168,10 +154,7 @@ public function testMax(): void
         [
             "SELECT MAX(`test_query`.`num`) AS max_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -200,10 +183,7 @@ public function testMin(): void
         [
             "SELECT MIN(`test_query`.`num`) AS min_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -232,10 +212,7 @@ public function testSum(): void
         [
             "SELECT SUM(`test_query`.`num`) AS sum_value FROM `test_query` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

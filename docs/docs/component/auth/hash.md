@@ -9,6 +9,7 @@
 **password 原型**
 
 ``` php
+# Leevel\Auth\Hash::password
 /**
  * 生成密码.
  */
@@ -18,6 +19,7 @@ public function password(string $password, array $option = []): string;
 **verify 原型**
 
 ``` php
+# Leevel\Auth\Hash::verify
 /**
  * 校验密码.
  */

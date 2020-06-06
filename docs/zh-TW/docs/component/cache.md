@@ -263,12 +263,13 @@ use Leevel\Filesystem\Helper;
 ### 设置缓存
 
 ``` php
+# Leevel\Cache\ICache::set
 /**
  * 设置缓存.
  *
  * @param mixed $data
  */
-public function set(string $name, $data, ?int $expire = null): void;;
+public function set(string $name, $data, ?int $expire = null): void;
 ```
 
 缓存配置 `$option` 根据不同缓存驱动支持不同的一些配置。
@@ -291,6 +292,7 @@ public function set(string $name, $data, ?int $expire = null): void;;
 ### 获取缓存
 
 ``` php
+# Leevel\Cache\ICache::get
 /**
  * 获取缓存.
  *
@@ -298,7 +300,7 @@ public function set(string $name, $data, ?int $expire = null): void;;
  *
  * @return mixed
  */
-public function get(string $name, $defaults = false);;
+public function get(string $name, $defaults = false);
 ```
 
 缓存不存在或者过期返回 `false`，可以根据这个判断缓存是否可用。
@@ -306,10 +308,11 @@ public function get(string $name, $defaults = false);;
 ### 删除缓存
 
 ``` php
+# Leevel\Cache\ICache::delete
 /**
  * 清除缓存.
  */
-public function delete(string $name): void;;
+public function delete(string $name): void;
 ```
 
 直接指定缓存 `key` 即可，无返回。
@@ -338,13 +341,14 @@ public function testBaseUse(): void
 函数签名
 
 ``` php
+# Leevel\Cache\ICache::put
 /**
  * 批量设置缓存.
  *
  * @param array|string $keys
  * @param null|mixed   $value
  */
-public function put($keys, $value = null, ?int $expire = null): void;;
+public function put($keys, $value = null, ?int $expire = null): void;
 ```
 
 ::: tip
@@ -432,6 +436,7 @@ public function testPutWithExpire(): void
 函数签名
 
 ``` php
+# Leevel\Cache\ICache::remember
 /**
  * 缓存存在读取否则重新设置.
  *
@@ -439,7 +444,7 @@ public function testPutWithExpire(): void
  *
  * @return mixed
  */
-public function remember(string $name, $data, ?int $expire = null);;
+public function remember(string $name, $data, ?int $expire = null);
 ```
 
 ::: tip

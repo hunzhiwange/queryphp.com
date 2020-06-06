@@ -7,6 +7,7 @@
 **函数原型**
 
 ``` php
+# Leevel\Database\Condition::distinct
 /**
  * 创建一个 SELECT DISTINCT 查询.
  *
@@ -35,10 +36,7 @@ public function testBaseUse(): void
         [
             "SELECT DISTINCT `test_query`.* FROM `test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -65,10 +63,7 @@ public function testCancelDistinct(): void
         [
             "SELECT `test_query`.* FROM `test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

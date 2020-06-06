@@ -22,10 +22,7 @@ public function testBaseUse(): void
         [
             "SELECT `test`.* FROM `test`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -51,10 +48,7 @@ public function testFindLimit(): void
         [
             "SELECT `test`.* FROM `test` LIMIT 0,5",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

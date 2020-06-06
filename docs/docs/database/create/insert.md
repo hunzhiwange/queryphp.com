@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -23,15 +24,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value)",
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:pdonamedparameter_value)",
             {
-                "name": [
-                    "小鸭子",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子"
                 ],
-                "value": [
-                    "吃饭饭",
-                    2
+                "pdonamedparameter_value": [
+                    "吃饭饭"
                 ]
             }
         ]
@@ -60,21 +59,19 @@ public function testBind(): void
 
     $sql = <<<'eot'
         [
-            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:questionmark_0)",
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:pdopositional2namedparameter_0)",
             {
-                "name": [
-                    "小鸭子",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子"
                 ],
-                "questionmark_0": [
-                    "吃肉",
-                    2
+                "pdopositional2namedparameter_0": [
+                    "吃肉"
                 ]
             }
         ]
         eot;
 
-    $data = ['name' => '小鸭子', 'value' => '[?]'];
+    $data = ['name' => '小鸭子', 'value' => Condition::raw('?')];
 
     $this->assertSame(
         $sql,
@@ -88,18 +85,17 @@ public function testBind(): void
 
     $sql = <<<'eot'
         [
-            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value)",
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:value)",
             {
-                "name": [
-                    "小鸭子",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子"
                 ],
                 "value": "呱呱呱"
             }
         ]
         eot;
 
-    $data = ['name' => '小鸭子', 'value' => '[:value]'];
+    $data = ['name' => '小鸭子', 'value' => Condition::raw(':value')];
 
     $this->assertSame(
         $sql,
@@ -114,6 +110,10 @@ public function testBind(): void
 }
 ```
     
+::: tip
+位置占位符会自动转为命名占位符，以增强灵活性。
+:::
+    
 ## bind.insert 绑定参数写入数据
 
 ``` php
@@ -123,21 +123,19 @@ public function testWithBindFunction(): void
 
     $sql = <<<'eot'
         [
-            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:questionmark_0)",
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:pdopositional2namedparameter_0)",
             {
-                "name": [
-                    "小鸭子",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子"
                 ],
-                "questionmark_0": [
-                    "吃鱼",
-                    2
+                "pdopositional2namedparameter_0": [
+                    "吃鱼"
                 ]
             }
         ]
         eot;
 
-    $data = ['name' => '小鸭子', 'value' => '[?]'];
+    $data = ['name' => '小鸭子', 'value' => Condition::raw('?')];
 
     $this->assertSame(
         $sql,
@@ -161,18 +159,17 @@ public function testReplace(): void
 
     $sql = <<<'eot'
         [
-            "REPLACE INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value)",
+            "REPLACE INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:value)",
             {
-                "name": [
-                    "小鸭子",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子"
                 ],
                 "value": "呱呱呱"
             }
         ]
         eot;
 
-    $data = ['name' => '小鸭子', 'value' => '[:value]'];
+    $data = ['name' => '小鸭子', 'value' => Condition::raw(':value')];
 
     $this->assertSame(
         $sql,
@@ -195,18 +192,17 @@ public function testInsertSupportTable(): void
 
     $sql = <<<'eot'
         [
-            "REPLACE INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value)",
+            "REPLACE INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:value)",
             {
-                "name": [
-                    "小鸭子",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子"
                 ],
                 "value": "呱呱呱"
             }
         ]
         eot;
 
-    $data = ['name' => '小鸭子', 'test_query.value' => '[:value]'];
+    $data = ['name' => '小鸭子', 'test_query.value' => Condition::raw(':value')];
 
     $this->assertSame(
         $sql,

@@ -18,6 +18,7 @@ use stdClass;
 以下是通过的校验数据示例。
 
 ``` php
+# Tests\Validate\Validator\UrlTest::baseUseProvider
 public function baseUseProvider(): array
 {
     // http://php.net/manual/en/filter.filters.validate.php#110411
@@ -64,6 +65,7 @@ public function testBaseUse($value): void
 以下是未通过的校验数据示例。
 
 ``` php
+# Tests\Validate\Validator\UrlTest::badProvider
 public function badProvider(): array
 {
     return [

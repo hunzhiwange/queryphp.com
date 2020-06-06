@@ -225,6 +225,7 @@ function genSidebarConfigDoc (title) {
       collapsable: true,
       children: [
         'router/',
+        'component/router',
         'router/url',
       ]
     },
@@ -304,6 +305,7 @@ function genSidebarConfigDoc (title) {
             'database/query/columns',
             'database/query/where',
             'database/query/wheredate',
+            'database/query/comment',
             'database/query/prefix',
             'database/query/forceindex',
             'database/query/bind',

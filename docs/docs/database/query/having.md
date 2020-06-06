@@ -11,6 +11,7 @@ having 和 where 用法几乎一致。
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -26,12 +27,13 @@ public function testBaseUse(): void
     // 字段 （表达式） 值
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`tid` HAVING `test_query`.`tid` > 5",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.`tid` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`tid` HAVING `test_query`.`tid` > :test_query_tid",
+            {
+                "test_query_tid": [
+                    5
+                ]
+            },
+            false
         ]
         eot;
 
@@ -57,12 +59,13 @@ public function testArray(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` LIKE '技术'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` LIKE :test_query_name",
+            {
+                "test_query_name": [
+                    "技术"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -88,12 +91,16 @@ public function testOrHaving(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` LIKE '技术' OR `test_query`.`tname` LIKE '技术'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` LIKE :test_query_name OR `test_query`.`tname` LIKE :test_query_tname",
+            {
+                "test_query_name": [
+                    "技术"
+                ],
+                "test_query_tname": [
+                    "技术"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -120,12 +127,22 @@ public function testHavingBetween(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` BETWEEN 1 AND 10 AND `test_query`.`name` BETWEEN 1 AND 100",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` BETWEEN :test_query_name_between0 AND :test_query_name_between1 AND `test_query`.`name` BETWEEN :test_query_name_1_between0 AND :test_query_name_1_between1",
+            {
+                "test_query_name_between0": [
+                    1
+                ],
+                "test_query_name_between1": [
+                    10
+                ],
+                "test_query_name_1_between0": [
+                    1
+                ],
+                "test_query_name_1_between1": [
+                    100
+                ]
+            },
+            false
         ]
         eot;
 
@@ -143,12 +160,22 @@ public function testHavingBetween(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` BETWEEN 1 AND 100 AND `test_query`.`tname` BETWEEN 5 AND 22",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value` FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` BETWEEN :test_query_name_between0 AND :test_query_name_between1 AND `test_query`.`tname` BETWEEN :test_query_tname_between0 AND :test_query_tname_between1",
+            {
+                "test_query_name_between0": [
+                    1
+                ],
+                "test_query_name_between1": [
+                    100
+                ],
+                "test_query_tname_between0": [
+                    5
+                ],
+                "test_query_tname_between1": [
+                    22
+                ]
+            },
+            false
         ]
         eot;
 
@@ -178,12 +205,22 @@ public function testHavingNotBetween(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` NOT BETWEEN 1 AND 10 AND `test_query`.`id` NOT BETWEEN 1 AND 100",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` NOT BETWEEN :test_query_id_notbetween0 AND :test_query_id_notbetween1 AND `test_query`.`id` NOT BETWEEN :test_query_id_1_notbetween0 AND :test_query_id_1_notbetween1",
+            {
+                "test_query_id_notbetween0": [
+                    1
+                ],
+                "test_query_id_notbetween1": [
+                    10
+                ],
+                "test_query_id_1_notbetween0": [
+                    1
+                ],
+                "test_query_id_1_notbetween1": [
+                    100
+                ]
+            },
+            false
         ]
         eot;
 
@@ -210,12 +247,22 @@ public function testHavingIn(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` IN (2,50) AND `test_query`.`num` IN (2,50)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` IN (:test_query_id_in0,:test_query_id_in1) AND `test_query`.`num` IN (:test_query_num_in0,:test_query_num_in1)",
+            {
+                "test_query_id_in0": [
+                    2
+                ],
+                "test_query_id_in1": [
+                    50
+                ],
+                "test_query_num_in0": [
+                    2
+                ],
+                "test_query_num_in1": [
+                    50
+                ]
+            },
+            false
         ]
         eot;
 
@@ -242,12 +289,22 @@ public function testHavingNotIn(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` NOT IN (2,50) AND `test_query`.`num` NOT IN (2,50)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` NOT IN (:test_query_id_in0,:test_query_id_in1) AND `test_query`.`num` NOT IN (:test_query_num_in0,:test_query_num_in1)",
+            {
+                "test_query_id_in0": [
+                    2
+                ],
+                "test_query_id_in1": [
+                    50
+                ],
+                "test_query_num_in0": [
+                    2
+                ],
+                "test_query_num_in1": [
+                    50
+                ]
+            },
+            false
         ]
         eot;
 
@@ -276,10 +333,7 @@ public function testHavingNull(): void
         [
             "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` IS NULL AND `test_query`.`num` IS NULL",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -308,10 +362,7 @@ public function testHavingNotNull(): void
         [
             "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` IS NOT NULL AND `test_query`.`num` IS NOT NULL",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -340,10 +391,7 @@ public function testHavingDefaultNull(): void
         [
             "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` IS NULL",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -371,10 +419,7 @@ public function testHavingEqualNull(): void
         [
             "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` IS NULL",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -400,12 +445,16 @@ public function testHavingLike(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` LIKE '123' AND `test_query`.`num` LIKE '55'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` LIKE :test_query_id AND `test_query`.`num` LIKE :test_query_num",
+            {
+                "test_query_id": [
+                    "123"
+                ],
+                "test_query_num": [
+                    "55"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -432,12 +481,16 @@ public function testHavingNotLike(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` NOT LIKE '123' AND `test_query`.`num` NOT LIKE '55'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` NOT LIKE :test_query_id AND `test_query`.`num` NOT LIKE :test_query_num",
+            {
+                "test_query_id": [
+                    "123"
+                ],
+                "test_query_num": [
+                    "55"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -464,12 +517,19 @@ public function testHavingGroup(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`id` = 5 OR (`test_query`.`votes` > 100 AND `test_query`.`title` <> 'Admin')",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`id` = :test_query_id OR (`test_query`.`votes` > :test_query_votes AND `test_query`.`title` <> :test_query_title)",
+            {
+                "test_query_votes": [
+                    100
+                ],
+                "test_query_title": [
+                    "Admin"
+                ],
+                "test_query_id": [
+                    5
+                ]
+            },
+            false
         ]
         eot;
 
@@ -502,10 +562,7 @@ public function testConditionalExpression(): void
         [
             "SELECT `test_query`.`posts`,`test_query`.`value`,concat(\"tt_\",`test_query`.`id`) FROM `test_query` GROUP BY `test_query`.`id` HAVING concat(\"hello_\",`test_query`.`posts`) = `test_query`.`id`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -513,9 +570,9 @@ public function testConditionalExpression(): void
         $sql,
         $this->varJson(
             $connect
-                ->table('test_query', 'posts,value,{concat("tt_",[id])}')
+                ->table('test_query', 'posts,value,'.Condition::raw('concat("tt_",[id])'))
                 ->groupBy('id')
-                ->having('{concat("hello_",[posts])}', '=', '{[id]}')
+                ->having(Condition::raw('concat("hello_",[posts])'), '=', Condition::raw('[id]'))
                 ->findAll(true)
         )
     );
@@ -531,12 +588,34 @@ public function testArrayKeyAsField(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`id` = '故事' AND `test_query`.`name` IN (1,2,3) AND `test_query`.`weidao` BETWEEN '40' AND '100' AND `test_query`.`value` IS NULL AND `test_query`.`remark` IS NOT NULL AND `test_query`.`goods` = '东亚商品' AND `test_query`.`hello` = 'world'",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`id` = :test_query_id AND `test_query`.`name` IN (:test_query_name_in0,:test_query_name_in1,:test_query_name_in2) AND `test_query`.`weidao` BETWEEN :test_query_weidao_between0 AND :test_query_weidao_between1 AND `test_query`.`value` IS NULL AND `test_query`.`remark` IS NOT NULL AND `test_query`.`goods` = :test_query_goods AND `test_query`.`hello` = :test_query_hello",
+            {
+                "test_query_id": [
+                    "故事"
+                ],
+                "test_query_name_in0": [
+                    1
+                ],
+                "test_query_name_in1": [
+                    2
+                ],
+                "test_query_name_in2": [
+                    3
+                ],
+                "test_query_weidao_between0": [
+                    "40"
+                ],
+                "test_query_weidao_between1": [
+                    "100"
+                ],
+                "test_query_goods": [
+                    "东亚商品"
+                ],
+                "test_query_hello": [
+                    "world"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -572,10 +651,7 @@ public function testSupportString(): void
         [
             "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`name` = 11 and `test_query`.`value` = 22 and concat(\"tt_\",`test_query`.`id`)",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -585,7 +661,7 @@ public function testSupportString(): void
             $connect
                 ->table('test_query')
                 ->groupBy('id')
-                ->having([':string' => '{[name] = 11 and [test_query.value] = 22 and concat("tt_",[id])}'])
+                ->having([':string' => Condition::raw('[name] = 11 and [test_query.value] = 22 and concat("tt_",[id])')])
                 ->findAll(true)
         )
     );
@@ -601,12 +677,16 @@ public function testSupportSubandSubor(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`hello` = 'world' OR (`test_query`.`id` LIKE '你好')",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`hello` = :test_query_hello OR (`test_query`.`id` LIKE :test_query_subor_test_query_id)",
+            {
+                "test_query_subor_test_query_id": [
+                    "你好"
+                ],
+                "test_query_hello": [
+                    "world"
+                ]
+            },
+            false
         ]
         eot;
     $this->assertSame(
@@ -636,12 +716,31 @@ public function testSupportSubandSuborMore(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`hello` = '111' OR (`test_query`.`id` LIKE '你好' AND `test_query`.`value` = 'helloworld') AND (`test_query`.`id` LIKE '你好' OR `test_query`.`value` = 'helloworld' OR (`test_query`.`child_one` > '123' AND `test_query`.`child_two` LIKE '123'))",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`id` HAVING `test_query`.`hello` = :test_query_hello OR (`test_query`.`id` LIKE :test_query_subor_test_query_id AND `test_query`.`value` = :test_query_subor_test_query_value) AND (`test_query`.`id` LIKE :test_query_suband_test_query_id OR `test_query`.`value` = :test_query_suband_test_query_value OR (`test_query`.`child_one` > :test_query_subor_test_query_child_one AND `test_query`.`child_two` LIKE :test_query_subor_test_query_child_two))",
+            {
+                "test_query_subor_test_query_child_one": [
+                    "123"
+                ],
+                "test_query_subor_test_query_child_two": [
+                    "123"
+                ],
+                "test_query_suband_test_query_id": [
+                    "你好"
+                ],
+                "test_query_suband_test_query_value": [
+                    "helloworld"
+                ],
+                "test_query_subor_test_query_id": [
+                    "你好"
+                ],
+                "test_query_subor_test_query_value": [
+                    "helloworld"
+                ],
+                "test_query_hello": [
+                    "111"
+                ]
+            },
+            false
         ]
         eot;
 
@@ -687,12 +786,13 @@ public function testHavingFieldWithTable(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` = 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`name` = :test_query_name",
+            {
+                "test_query_name": [
+                    1
+                ]
+            },
+            false
         ]
         eot;
 
@@ -718,12 +818,16 @@ public function testHavingInArrayItemIsClosure(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` IN ((SELECT `test_query_subsql`.`id` FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = 1),100)",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` GROUP BY `test_query`.`name` HAVING `test_query`.`id` IN ((SELECT `test_query_subsql`.`id` FROM `test_query_subsql` WHERE `test_query_subsql`.`id` = :test_query_id_test_query_subsql_id),:test_query_id_in1)",
+            {
+                "test_query_id_test_query_subsql_id": [
+                    1
+                ],
+                "test_query_id_in1": [
+                    100
+                ]
+            },
+            false
         ]
         eot;
 
@@ -755,10 +859,7 @@ public function testHavingRaw(): void
         [
             "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value`,`test_query`.`id` FROM `test_query` GROUP BY `test_query`.`name` HAVING FIND_IN_SET(1, `test_query`.`id`)",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -786,10 +887,7 @@ public function testOrHavingRaw(): void
         [
             "SELECT `test_query`.`name` AS `id`,`test_query`.`tname` AS `value`,`test_query`.`id`,`test_query`.`value` FROM `test_query` GROUP BY `test_query`.`name` HAVING FIND_IN_SET(1, `test_query`.`id`) OR FIND_IN_SET(1, `test_query`.`value`)",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

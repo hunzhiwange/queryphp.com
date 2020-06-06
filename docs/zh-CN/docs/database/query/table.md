@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use stdClass;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
@@ -24,10 +25,7 @@ public function testBaseUse(): void
         [
             "SELECT `test_query`.* FROM `test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -53,10 +51,7 @@ public function testWithDatabaseName(): void
         [
             "SELECT `test_query`.* FROM `test`.`test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -83,10 +78,7 @@ public function testWithAlias(): void
         [
             "SELECT `p`.* FROM `test`.`test_query` `p`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -113,10 +105,7 @@ public function testField(): void
         [
             "SELECT `test_query`.`title`,`test_query`.`body` FROM `test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -142,10 +131,7 @@ public function testWithFieldAlias(): void
         [
             "SELECT `test_query`.`title` AS `t`,`test_query`.`name`,`test_query`.`remark`,`test_query`.`value` FROM `test`.`test_query`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -175,10 +161,7 @@ public function testSub(): void
         [
             "SELECT `a`.* FROM (SELECT `test_query`.* FROM `test_query`) a",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -205,10 +188,7 @@ public function testSubIsSelect(): void
         [
             "SELECT `bb`.* FROM (SELECT `test_query`.* FROM `test_query`) bb",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -235,10 +215,7 @@ public function testSubIsCondition(): void
         [
             "SELECT `bb`.* FROM (SELECT `test_query`.* FROM `test_query`) bb",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -264,10 +241,7 @@ public function testSubIsClosure(): void
         [
             "SELECT `b`.* FROM (SELECT `test_query`.* FROM `test_query`) b",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -295,10 +269,7 @@ public function testSubIsClosureWithItSeltAsAlias(): void
         [
             "SELECT `guest_book`.* FROM (SELECT `guest_book`.* FROM `guest_book`) guest_book",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -326,10 +297,7 @@ public function testSubIsClosureWithJoin(): void
         [
             "SELECT `test_query`.`remark`,`test_query_subsql`.`name`,`test_query_subsql`.`value` FROM (SELECT `test_query`.* FROM `test_query`) test_query INNER JOIN `test_query_subsql` ON `test_query_subsql`.`name` = `test_query`.`name`",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -340,7 +308,7 @@ public function testSubIsClosureWithJoin(): void
                 ->table(function ($select) {
                     $select->table('test_query');
                 }, 'remark')
-                ->join('test_query_subsql', 'name,value', 'name', '=', '{[test_query.name]}')
+                ->join('test_query_subsql', 'name,value', 'name', '=', Condition::raw('[test_query.name]'))
                 ->findAll(true)
         )
     );

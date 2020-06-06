@@ -22,10 +22,7 @@ public function testBaseUse(): void
         [
             "SELECT `test`.* FROM `test` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 
@@ -51,10 +48,7 @@ public function testOneFind(): void
         [
             "SELECT `test`.* FROM `test` LIMIT 1",
             [],
-            false,
-            null,
-            null,
-            []
+            false
         ]
         eot;
 

@@ -81,6 +81,7 @@ exit($status);
 **handle 原型**
 
 ``` php
+# Leevel\Kernel\KernelConsole::handle
 /**
  * 响应命令行请求.
  */

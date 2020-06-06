@@ -189,6 +189,7 @@ use Leevel\Throttler\Throttler;
 **attempt 原型**
 
 ``` php
+# Leevel\Throttler\RateLimiter::attempt
 /**
  * 验证并执行请求.
  */
@@ -198,6 +199,7 @@ public function attempt(): bool;
 **tooManyAttempt 原型**
 
 ``` php
+# Leevel\Throttler\RateLimiter::tooManyAttempt
 /**
  * 判断资源是否被耗尽.
  */

@@ -77,6 +77,7 @@ $kernel->terminate($request, $response);
 **handle 原型**
 
 ``` php
+# Leevel\Kernel\Kernel::handle
 /**
  * 响应 HTTP 请求.
  */
@@ -96,6 +97,7 @@ use Leevel\Di\IContainer;
 use Leevel\Http\JsonResponse;
 use Leevel\Http\Request;
 use Leevel\Kernel\App as Apps;
+use Leevel\Kernel\Exception\HttpException;
 use Leevel\Kernel\ExceptionRuntime;
 use Leevel\Kernel\IApp;
 use Leevel\Kernel\IExceptionRuntime;
@@ -177,6 +179,7 @@ public function testWithResponseIsJson(): void
 路由抛出异常，返回异常响应。
 
 ``` php
+# Tests\Kernel\KernelTest::createRouterWithException
 protected function createRouterWithException(): IRouter
 {
     $request = $this->createMock(Request::class);
@@ -218,6 +221,7 @@ public function testRouterWillThrowException(): void
 路由出现错误，返回错误响应。
 
 ``` php
+# Tests\Kernel\KernelTest::createRouterWithError
 protected function createRouterWithError(): IRouter
 {
     $request = $this->createMock(Request::class);

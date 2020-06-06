@@ -21,12 +21,13 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 
@@ -57,12 +58,13 @@ public function testWhereDay(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 
@@ -94,12 +96,13 @@ public function testWhereMonth(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 
@@ -131,12 +134,13 @@ public function testWhereYear(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 
@@ -167,12 +171,13 @@ public function testTime(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 
@@ -205,12 +210,13 @@ public function testTimeDateIsDefault(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 
@@ -243,12 +249,13 @@ public function testTimeDay(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 
@@ -282,12 +289,13 @@ public function testTimeMonth(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 
@@ -321,12 +329,13 @@ public function testTimeYear(): void
 
     $sql = <<<'eot'
         [
-            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = %d LIMIT 1",
-            [],
-            false,
-            null,
-            null,
-            []
+            "SELECT `test_query`.* FROM `test_query` WHERE `test_query`.`create_date` = :test_query_create_date LIMIT 1",
+            {
+                "test_query_create_date": [
+                    %d
+                ]
+            },
+            false
         ]
         eot;
 

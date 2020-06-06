@@ -9,6 +9,7 @@
 ``` php
 <?php
 
+use Leevel\Database\Condition;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
 
@@ -23,39 +24,31 @@ public function testBaseUse(): void
 
     $sql = <<<'eot'
         [
-            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value),(:name_1,:value_1),(:name_2,:value_2),(:name_3,:value_3)",
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:pdonamedparameter_value),(:pdonamedparameter_name_1,:pdonamedparameter_value_1),(:pdonamedparameter_name_2,:pdonamedparameter_value_2),(:pdonamedparameter_name_3,:pdonamedparameter_value_3)",
             {
-                "name": [
-                    "小鸭子1",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子1"
                 ],
-                "value": [
-                    "呱呱呱1",
-                    2
+                "pdonamedparameter_value": [
+                    "呱呱呱1"
                 ],
-                "name_1": [
-                    "小鸭子2",
-                    2
+                "pdonamedparameter_name_1": [
+                    "小鸭子2"
                 ],
-                "value_1": [
-                    "呱呱呱2",
-                    2
+                "pdonamedparameter_value_1": [
+                    "呱呱呱2"
                 ],
-                "name_2": [
-                    "小鸭子3",
-                    2
+                "pdonamedparameter_name_2": [
+                    "小鸭子3"
                 ],
-                "value_2": [
-                    "呱呱呱3",
-                    2
+                "pdonamedparameter_value_2": [
+                    "呱呱呱3"
                 ],
-                "name_3": [
-                    "小鸭子4",
-                    2
+                "pdonamedparameter_name_3": [
+                    "小鸭子4"
                 ],
-                "value_3": [
-                    "呱呱呱4",
-                    2
+                "pdonamedparameter_value_3": [
+                    "呱呱呱4"
                 ]
             }
         ]
@@ -89,39 +82,31 @@ public function testBind(): void
 
     $sql = <<<'eot'
         [
-            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value),(:name_1,:questionmark_0_1),(:name_2,:value_2),(:name_3,:questionmark_1_3)",
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:pdonamedparameter_value),(:pdonamedparameter_name_1,:pdopositional2namedparameter_0_1),(:pdonamedparameter_name_2,:pdonamedparameter_value_2),(:pdonamedparameter_name_3,:pdopositional2namedparameter_1_3)",
             {
-                "name": [
-                    "小鸭子1",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子1"
                 ],
-                "value": [
-                    "呱呱呱1",
-                    2
+                "pdonamedparameter_value": [
+                    "呱呱呱1"
                 ],
-                "name_1": [
-                    "小鸭子2",
-                    2
+                "pdonamedparameter_name_1": [
+                    "小鸭子2"
                 ],
-                "questionmark_0_1": [
-                    "吃肉1",
-                    2
+                "pdopositional2namedparameter_0_1": [
+                    "吃肉1"
                 ],
-                "name_2": [
-                    "小鸭子3",
-                    2
+                "pdonamedparameter_name_2": [
+                    "小鸭子3"
                 ],
-                "value_2": [
-                    "呱呱呱3",
-                    2
+                "pdonamedparameter_value_2": [
+                    "呱呱呱3"
                 ],
-                "name_3": [
-                    "小鸭子4",
-                    2
+                "pdonamedparameter_name_3": [
+                    "小鸭子4"
                 ],
-                "questionmark_1_3": [
-                    "吃肉2",
-                    2
+                "pdopositional2namedparameter_1_3": [
+                    "吃肉2"
                 ]
             }
         ]
@@ -129,9 +114,9 @@ public function testBind(): void
 
     $data = [
         ['name' => '小鸭子1', 'value' => '呱呱呱1'],
-        ['name' => '小鸭子2', 'value' => '[?]'],
+        ['name' => '小鸭子2', 'value' => Condition::raw('?')],
         ['name' => '小鸭子3', 'value' => '呱呱呱3'],
-        ['name' => '小鸭子4', 'value' => '[?]'],
+        ['name' => '小鸭子4', 'value' => Condition::raw('?')],
     ];
 
     $this->assertSame(
@@ -146,31 +131,25 @@ public function testBind(): void
 
     $sql = <<<'eot'
         [
-            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value),(:name_1,:hello),(:name_2,:value_2),(:name_3,:world)",
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:pdonamedparameter_value),(:pdonamedparameter_name_1,:hello),(:pdonamedparameter_name_2,:pdonamedparameter_value_2),(:pdonamedparameter_name_3,:world)",
             {
-                "name": [
-                    "小鸭子1",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子1"
                 ],
-                "value": [
-                    "呱呱呱1",
-                    2
+                "pdonamedparameter_value": [
+                    "呱呱呱1"
                 ],
-                "name_1": [
-                    "小鸭子2",
-                    2
+                "pdonamedparameter_name_1": [
+                    "小鸭子2"
                 ],
-                "name_2": [
-                    "小鸭子3",
-                    2
+                "pdonamedparameter_name_2": [
+                    "小鸭子3"
                 ],
-                "value_2": [
-                    "呱呱呱3",
-                    2
+                "pdonamedparameter_value_2": [
+                    "呱呱呱3"
                 ],
-                "name_3": [
-                    "小鸭子4",
-                    2
+                "pdonamedparameter_name_3": [
+                    "小鸭子4"
                 ],
                 "hello": "hello 吃肉",
                 "world": "world 喝汤"
@@ -180,9 +159,9 @@ public function testBind(): void
 
     $data = [
         ['name' => '小鸭子1', 'value' => '呱呱呱1'],
-        ['name' => '小鸭子2', 'value' => '[:hello]'],
+        ['name' => '小鸭子2', 'value' => Condition::raw(':hello')],
         ['name' => '小鸭子3', 'value' => '呱呱呱3'],
-        ['name' => '小鸭子4', 'value' => '[:world]'],
+        ['name' => '小鸭子4', 'value' => Condition::raw(':world')],
     ];
 
     $this->assertSame(
@@ -207,39 +186,31 @@ public function testWithBindFunction(): void
 
     $sql = <<<'eot'
         [
-            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value),(:name_1,:questionmark_0_1),(:name_2,:value_2),(:name_3,:questionmark_1_3)",
+            "INSERT INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:pdonamedparameter_value),(:pdonamedparameter_name_1,:pdopositional2namedparameter_0_1),(:pdonamedparameter_name_2,:pdonamedparameter_value_2),(:pdonamedparameter_name_3,:pdopositional2namedparameter_1_3)",
             {
-                "name": [
-                    "小鸭子1",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子1"
                 ],
-                "value": [
-                    "呱呱呱1",
-                    2
+                "pdonamedparameter_value": [
+                    "呱呱呱1"
                 ],
-                "name_1": [
-                    "小鸭子2",
-                    2
+                "pdonamedparameter_name_1": [
+                    "小鸭子2"
                 ],
-                "questionmark_0_1": [
-                    "吃鱼",
-                    2
+                "pdopositional2namedparameter_0_1": [
+                    "吃鱼"
                 ],
-                "name_2": [
-                    "小鸭子3",
-                    2
+                "pdonamedparameter_name_2": [
+                    "小鸭子3"
                 ],
-                "value_2": [
-                    "呱呱呱3",
-                    2
+                "pdonamedparameter_value_2": [
+                    "呱呱呱3"
                 ],
-                "name_3": [
-                    "小鸭子4",
-                    2
+                "pdonamedparameter_name_3": [
+                    "小鸭子4"
                 ],
-                "questionmark_1_3": [
-                    "吃肉",
-                    2
+                "pdopositional2namedparameter_1_3": [
+                    "吃肉"
                 ]
             }
         ]
@@ -247,9 +218,9 @@ public function testWithBindFunction(): void
 
     $data = [
         ['name' => '小鸭子1', 'value' => '呱呱呱1'],
-        ['name' => '小鸭子2', 'value' => '[?]'],
+        ['name' => '小鸭子2', 'value' => Condition::raw('?')],
         ['name' => '小鸭子3', 'value' => '呱呱呱3'],
-        ['name' => '小鸭子4', 'value' => '[?]'],
+        ['name' => '小鸭子4', 'value' => Condition::raw('?')],
     ];
 
     $this->assertSame(
@@ -274,39 +245,31 @@ public function testReplace(): void
 
     $sql = <<<'eot'
         [
-            "REPLACE INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:name,:value),(:name_1,:questionmark_0_1),(:name_2,:value_2),(:name_3,:questionmark_1_3)",
+            "REPLACE INTO `test_query` (`test_query`.`name`,`test_query`.`value`) VALUES (:pdonamedparameter_name,:pdonamedparameter_value),(:pdonamedparameter_name_1,:pdopositional2namedparameter_0_1),(:pdonamedparameter_name_2,:pdonamedparameter_value_2),(:pdonamedparameter_name_3,:pdopositional2namedparameter_1_3)",
             {
-                "name": [
-                    "小鸭子1",
-                    2
+                "pdonamedparameter_name": [
+                    "小鸭子1"
                 ],
-                "value": [
-                    "呱呱呱1",
-                    2
+                "pdonamedparameter_value": [
+                    "呱呱呱1"
                 ],
-                "name_1": [
-                    "小鸭子2",
-                    2
+                "pdonamedparameter_name_1": [
+                    "小鸭子2"
                 ],
-                "questionmark_0_1": [
-                    "吃鱼",
-                    2
+                "pdopositional2namedparameter_0_1": [
+                    "吃鱼"
                 ],
-                "name_2": [
-                    "小鸭子3",
-                    2
+                "pdonamedparameter_name_2": [
+                    "小鸭子3"
                 ],
-                "value_2": [
-                    "呱呱呱3",
-                    2
+                "pdonamedparameter_value_2": [
+                    "呱呱呱3"
                 ],
-                "name_3": [
-                    "小鸭子4",
-                    2
+                "pdonamedparameter_name_3": [
+                    "小鸭子4"
                 ],
-                "questionmark_1_3": [
-                    "吃肉",
-                    2
+                "pdopositional2namedparameter_1_3": [
+                    "吃肉"
                 ]
             }
         ]
@@ -314,9 +277,9 @@ public function testReplace(): void
 
     $data = [
         ['name' => '小鸭子1', 'value' => '呱呱呱1'],
-        ['name' => '小鸭子2', 'value' => '[?]'],
+        ['name' => '小鸭子2', 'value' => Condition::raw('?')],
         ['name' => '小鸭子3', 'value' => '呱呱呱3'],
-        ['name' => '小鸭子4', 'value' => '[?]'],
+        ['name' => '小鸭子4', 'value' => Condition::raw('?')],
     ];
 
     $this->assertSame(

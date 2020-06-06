@@ -21,6 +21,7 @@ use stdClass;
 以下是通过的校验数据示例。
 
 ``` php
+# Tests\Validate\Validator\TypeTest::baseUseProvider
 public function baseUseProvider(): array
 {
     $testFile = __DIR__.'/../assert/test.txt';
@@ -72,6 +73,7 @@ public function testBaseUse($value, string $type): void
 以下是未通过的校验数据示例。
 
 ``` php
+# Tests\Validate\Validator\TypeTest::badProvider
 public function badProvider(): array
 {
     return [
