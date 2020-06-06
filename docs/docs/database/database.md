@@ -1,0 +1,884 @@
+# 数据库连接
+
+::: tip Testing Is Documentation
+[tests/Database/DatabaseTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/DatabaseTest.php)
+:::
+    
+**Uses**
+
+``` php
+<?php
+
+use Exception;
+use Leevel\Database\IDatabase;
+use Leevel\Database\Mysql;
+use Leevel\Database\Select;
+use PDO;
+use PDOException;
+use Tests\Database\DatabaseTestCase as TestCase;
+use Tests\MysqlNeedReconnectMock;
+use Throwable;
+```
+
+## 基本使用
+
+``` php
+public function testBaseUse(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $database = $connect;
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    $this->assertSame(
+        1,
+        $database
+            ->table('guest_book')
+            ->insert($data),
+    );
+
+    $result = $database
+        ->table('guest_book', 'name,content')
+        ->where('id', 1)
+        ->findOne();
+
+    $this->assertSame('tom', $result->name);
+    $this->assertSame('I love movie.', $result->content);
+}
+```
+    
+## query 查询数据记录
+
+``` php
+public function testQuery(): void
+{
+    $connect = $this->createDatabaseConnect();
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('guest_book')
+            ->insert($data),
+    );
+
+    $insertData = $connect->query('select * from guest_book where id=?', [1]);
+    $insertData = (array) $insertData[0];
+
+    $this->assertSame(1, $insertData['id']);
+    $this->assertSame('tom', $insertData['name']);
+    $this->assertSame('I love movie.', $insertData['content']);
+    $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+}
+```
+    
+## execute 执行 SQL 语句
+
+``` php
+public function testExecute(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(1, $connect->execute('insert into guest_book (name, content) values (?, ?)', ['小鸭子', '喜欢游泳']));
+    $insertData = $connect->query('select * from guest_book where id=?', [1]);
+    $insertData = (array) $insertData[0];
+
+    $this->assertSame(1, $insertData['id']);
+    $this->assertSame('小鸭子', $insertData['name']);
+    $this->assertSame('喜欢游泳', $insertData['content']);
+    $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+}
+```
+    
+## select 原生 SQL 查询数据
+
+``` php
+public function testSelect(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('guest_book')
+            ->insert($data),
+    );
+
+    $insertData = $connect->select('select * from guest_book where id = ?', [1]);
+    $insertData = (array) $insertData[0];
+
+    $this->assertSame(1, $insertData['id']);
+    $this->assertSame('tom', $insertData['name']);
+    $this->assertSame('I love movie.', $insertData['content']);
+    $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+}
+```
+    
+## select 原生 SQL 查询数据支持参数绑定
+
+``` php
+public function testSelectWithBind(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('guest_book')
+            ->insert($data),
+    );
+
+    $insertData = $connect->select('select * from guest_book where id = :id', ['id' => 1]);
+    $insertData = (array) $insertData[0];
+
+    $this->assertSame(1, $insertData['id']);
+    $this->assertSame('tom', $insertData['name']);
+    $this->assertSame('I love movie.', $insertData['content']);
+    $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+}
+```
+    
+## insert 插入数据 insert (支持原生 SQL)
+
+``` php
+public function testInsert(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(1, $connect->insert('insert into guest_book (name, content) values (?, ?)', ['tom', 'I love movie.']));
+
+    $insertData = $connect->select('select * from guest_book where id = :id', ['id' => 1]);
+    $insertData = (array) $insertData[0];
+
+    $this->assertSame(1, $insertData['id']);
+    $this->assertSame('tom', $insertData['name']);
+    $this->assertSame('I love movie.', $insertData['content']);
+    $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+}
+```
+    
+## update 更新数据 update (支持原生 SQL)
+
+``` php
+public function testUpdate(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(1, $connect->insert('insert into guest_book (name, content) values (?, ?)', ['tom', 'I love movie.']));
+
+    $insertData = $connect->select('select * from guest_book where id = :id', ['id' => 1]);
+    $insertData = (array) $insertData[0];
+
+    $this->assertSame(1, $insertData['id']);
+    $this->assertSame('tom', $insertData['name']);
+    $this->assertSame('I love movie.', $insertData['content']);
+    $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+
+    $this->assertSame(1, $connect->update('update guest_book set name = "小牛" where id = ?', [1]));
+
+    $insertData = $connect->select('select * from guest_book where id = :id', ['id' => 1]);
+    $insertData = (array) $insertData[0];
+
+    $this->assertSame(1, $insertData['id']);
+    $this->assertSame('小牛', $insertData['name']);
+    $this->assertSame('I love movie.', $insertData['content']);
+    $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+}
+```
+    
+## delete 删除数据 delete (支持原生 SQL)
+
+``` php
+public function testDelete(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(1, $connect->insert('insert into guest_book (name, content) values (?, ?)', ['tom', 'I love movie.']));
+
+    $insertData = $connect->select('select * from guest_book where id = :id', ['id' => 1]);
+    $insertData = (array) $insertData[0];
+
+    $this->assertSame(1, $insertData['id']);
+    $this->assertSame('tom', $insertData['name']);
+    $this->assertSame('I love movie.', $insertData['content']);
+    $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+
+    $this->assertSame(1, $connect->delete('delete from guest_book where id = ?', [1]));
+    $this->assertSame(0, $connect->table('guest_book')->findCount());
+}
+```
+    
+## transaction 执行数据库事务
+
+``` php
+public function testTransaction(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 1; $n++) {
+        $connect
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $this->assertSame(2, $connect->table('guest_book')->findCount());
+
+    $connect->transaction(function ($connect) {
+        $connect
+            ->table('guest_book')
+            ->where('id', 1)
+            ->delete();
+
+        $this->assertSame(1, $connect->table('guest_book')->findCount());
+
+        $connect
+            ->table('guest_book')
+            ->where('id', 2)
+            ->delete();
+
+        $this->assertSame(0, $connect->table('guest_book')->findCount());
+    });
+
+    $this->assertSame(0, $connect->table('guest_book')->findCount());
+}
+```
+    
+## transaction 执行数据库事务回滚例子
+
+``` php
+public function testTransactionRollback(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 1; $n++) {
+        $connect
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $this->assertSame(2, $connect->table('guest_book')->findCount());
+
+    $this->assertFalse($connect->inTransaction());
+
+    try {
+        $connect->transaction(function ($connect) {
+            $connect->table('guest_book')->where('id', 1)->delete();
+
+            $this->assertSame(1, $connect->table('guest_book')->findCount());
+
+            $this->assertTrue($connect->inTransaction());
+
+            throw new Exception('Will rollback');
+            $connect->table('guest_book')->where('id', 2)->delete();
+        });
+    } catch (Throwable $e) {
+        $this->assertSame('Will rollback', $e->getMessage());
+    }
+
+    $this->assertFalse($connect->inTransaction());
+
+    $this->assertSame(2, $connect->table('guest_book')->findCount());
+}
+```
+    
+## beginTransaction.commit 启动事务和用于非自动提交状态下面的查询提交
+
+``` php
+public function testTransactionByCustom(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 1; $n++) {
+        $connect
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $this->assertSame(2, $connect->table('guest_book')->findCount());
+
+    $connect->beginTransaction();
+
+    $connect->table('guest_book')->where('id', 1)->delete();
+
+    $this->assertSame(1, $connect->table('guest_book')->findCount());
+
+    $connect->table('guest_book')->where('id', 2)->delete();
+
+    $this->assertSame(0, $connect->table('guest_book')->findCount());
+
+    $connect->commit();
+
+    $this->assertSame(0, $connect->table('guest_book')->findCount());
+}
+```
+    
+## beginTransaction.rollBack 启动事务和事务回滚
+
+``` php
+public function testTransactionRollbackByCustom(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 1; $n++) {
+        $connect
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $this->assertSame(2, $connect->table('guest_book')->findCount());
+
+    $this->assertFalse($connect->inTransaction());
+
+    try {
+        $connect->beginTransaction();
+
+        $connect
+            ->table('guest_book')
+            ->where('id', 1)
+            ->delete();
+
+        $this->assertSame(1, $connect->table('guest_book')->findCount());
+
+        $this->assertTrue($connect->inTransaction());
+
+        throw new Exception('Will rollback');
+        $connect->table('guest_book')->where('id', 2)->delete();
+
+        $connect->commit();
+    } catch (Throwable $e) {
+        $this->assertSame('Will rollback', $e->getMessage());
+
+        $connect->rollBack();
+    }
+
+    $this->assertFalse($connect->inTransaction());
+
+    $this->assertSame(2, $connect->table('guest_book')->findCount());
+}
+```
+    
+## procedure 查询存储过程数据记录
+
+``` php
+public function testCallProcedure(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 1; $n++) {
+        $connect
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $result = $connect->procedure('CALL test_procedure(0)');
+
+    $sql = <<<'eot'
+        [
+            [
+                {
+                    "name": "tom"
+                },
+                {
+                    "name": "tom"
+                }
+            ],
+            [
+                {
+                    "content": "I love movie."
+                }
+            ]
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $result
+        )
+    );
+}
+```
+    
+## procedure 查询存储过程数据记录支持参数绑定
+
+``` php
+public function testCallProcedure2(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 1; $n++) {
+        $connect
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $result = $connect->procedure('CALL test_procedure2(0,:name)', [
+        'name' => [null, PDO::PARAM_STR | PDO::PARAM_INPUT_OUTPUT, 200],
+    ]);
+
+    $sql = <<<'eot'
+        [
+            [
+                {
+                    "content": "I love movie."
+                }
+            ],
+            [
+                {
+                    "_name": "tom"
+                }
+            ]
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $result
+        )
+    );
+}
+```
+    
+## 查询存储过程数据支持原生方法
+
+``` php
+public function testCallProcedure3(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 1; $n++) {
+        $connect
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $pdoStatement = $connect->pdo(true)->prepare('CALL test_procedure2(0,:name)');
+    $outName = null;
+    $pdoStatement->bindParam(':name', $outName, PDO::PARAM_STR | PDO::PARAM_INPUT_OUTPUT, 200);
+    $pdoStatement->execute();
+
+    $result = [];
+    do {
+        try {
+            $result[] = $pdoStatement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+        }
+    } while ($pdoStatement->nextRowset());
+
+    $sql = <<<'eot'
+        [
+            [
+                {
+                    "content": "I love movie."
+                }
+            ],
+            [
+                {
+                    "_name": "tom"
+                }
+            ]
+        ]
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $result
+        )
+    );
+}
+```
+    
+## pdo 返回 PDO 查询连接
+
+``` php
+public function testPdo(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertNull($connect->pdo(IDatabase::MASTER));
+    $this->assertInstanceof(PDO::class, $connect->pdo(true));
+    $this->assertInstanceof(PDO::class, $connect->pdo(IDatabase::MASTER));
+    $this->assertNull($connect->pdo(5));
+
+    $connect->close();
+}
+```
+    
+## setSavepoints 设置是否启用部分事务回滚保存点
+
+``` php
+public function testBeginTransactionWithCreateSavepoint(): void
+{
+    if (isset($_SERVER['TRAVIS_COMMIT'])) {
+        $this->markTestSkipped('Mysql of travis-ci not support savepoint.');
+
+        return;
+    }
+
+    $connect = $this->createDatabaseConnect();
+
+    $connect->setSavepoints(true);
+    $connect->beginTransaction();
+    $connect
+        ->table('guest_book')
+        ->insert(['name' => 'tom']); // `tom` will not rollBack
+
+    $connect->beginTransaction();
+    $this->assertSame('SAVEPOINT trans2', $connect->getLastSql());
+
+    $connect
+        ->table('guest_book')
+        ->insert(['name' => 'jerry']);
+
+    $connect->rollBack();
+    $this->assertSame('ROLLBACK TO SAVEPOINT trans2', $connect->getLastSql());
+    $connect->commit();
+
+    $book = $connect
+        ->table('guest_book')
+        ->where('id', 1)
+        ->findOne();
+
+    $this->assertSame(1, $connect->table('guest_book')->findCount());
+    $this->assertSame('tom', $book->name);
+}
+```
+    
+## setSavepoints 设置是否启用部分事务提交保存点
+
+``` php
+public function testCommitWithReleaseSavepoint(): void
+{
+    if (isset($_SERVER['TRAVIS_COMMIT'])) {
+        $this->markTestSkipped('Mysql of travis-ci not support savepoint.');
+
+        return;
+    }
+
+    $connect = $this->createDatabaseConnect();
+    $connect->setSavepoints(true);
+    $connect->beginTransaction();
+
+    $connect
+        ->table('guest_book')
+        ->insert(['name' => 'tom']);
+
+    $connect->beginTransaction();
+    $this->assertSame('SAVEPOINT trans2', $connect->getLastSql());
+
+    $connect
+        ->table('guest_book')
+        ->insert(['name' => 'jerry']);
+
+    $connect->commit();
+    $this->assertSame('RELEASE SAVEPOINT trans2', $connect->getLastSql());
+    $connect->commit();
+
+    $book = $connect
+        ->table('guest_book')
+        ->where('id', 1)
+        ->findOne();
+    $book2 = $connect
+        ->table('guest_book')
+        ->where('id', 2)
+        ->findOne();
+
+    $this->assertSame(2, $connect->table('guest_book')->findCount());
+    $this->assertSame('tom', $book->name);
+    $this->assertSame('jerry', $book2->name);
+}
+```
+    
+## numRows 返回影响记录
+
+``` php
+public function testNumRows(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(0, $connect->numRows());
+
+    $connect
+        ->table('guest_book')
+        ->insert(['name' => 'jerry', 'content' => '']);
+
+    $this->assertSame(1, $connect->numRows());
+
+    $connect
+        ->table('guest_book')
+        ->where('id', 1)
+        ->update(['name' => 'jerry']);
+
+    $this->assertSame(0, $connect->numRows());
+
+    $connect
+        ->table('guest_book')
+        ->where('id', 1)
+        ->update(['name' => 'tom']);
+
+    $this->assertSame(1, $connect->numRows());
+}
+```
+    
+## 数据库主从
+
+数据库配置项 `distributed` 表示主从，如果从数据库均连接失败，则还是会走主库。
+
+
+``` php
+public function testReadConnectDistributed(): void
+{
+    $connect = $this->createDatabaseConnectMock([
+        'driver'             => 'mysql',
+        'separate'           => false,
+        'distributed'        => true,
+        'master'             => [
+            'host'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['HOST'],
+            'port'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PORT'],
+            'name'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['NAME'],
+            'user'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['USER'],
+            'password' => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PASSWORD'],
+            'charset'  => 'utf8',
+            'options'  => [
+                PDO::ATTR_PERSISTENT        => false,
+                PDO::ATTR_CASE              => PDO::CASE_NATURAL,
+                PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
+                PDO::ATTR_STRINGIFY_FETCHES => false,
+                PDO::ATTR_EMULATE_PREPARES  => false,
+            ],
+        ],
+        'slave' => [
+            [
+                'host'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['HOST'],
+                'port'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PORT'],
+                'name'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['NAME'],
+                'user'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['USER'],
+                'password' => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PASSWORD'],
+                'charset'  => 'utf8',
+                'options'  => [
+                    PDO::ATTR_PERSISTENT        => false,
+                    PDO::ATTR_CASE              => PDO::CASE_NATURAL,
+                    PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
+                    PDO::ATTR_STRINGIFY_FETCHES => false,
+                    PDO::ATTR_EMULATE_PREPARES  => false,
+                ],
+            ],
+            [
+                'host'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['HOST'],
+                'port'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PORT'],
+                'name'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['NAME'],
+                'user'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['USER'],
+                'password' => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PASSWORD'],
+                'charset'  => 'utf8',
+                'options'  => [
+                    PDO::ATTR_PERSISTENT        => false,
+                    PDO::ATTR_CASE              => PDO::CASE_NATURAL,
+                    PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
+                    PDO::ATTR_STRINGIFY_FETCHES => false,
+                    PDO::ATTR_EMULATE_PREPARES  => false,
+                ],
+            ],
+        ],
+    ]);
+
+    $this->assertInstanceof(PDO::class, $connect->pdo());
+
+    $connect->close();
+}
+```
+    
+## 数据库读写分离
+
+数据库配置项 `separate` 表示读写分离，如果从数据库均连接失败，则读数据还是会走主库。
+
+
+``` php
+public function testReadConnectDistributedButAllInvalidAndAlsoIsSeparate(): void
+{
+    $connect = $this->createDatabaseConnectMock([
+        'driver'             => 'mysql',
+        'separate'           => true,
+        'distributed'        => true,
+        'master'             => [
+            'host'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['HOST'],
+            'port'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PORT'],
+            'name'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['NAME'],
+            'user'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['USER'],
+            'password' => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PASSWORD'],
+            'charset'  => 'utf8',
+            'options'  => [
+                PDO::ATTR_PERSISTENT        => false,
+                PDO::ATTR_CASE              => PDO::CASE_NATURAL,
+                PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
+                PDO::ATTR_STRINGIFY_FETCHES => false,
+                PDO::ATTR_EMULATE_PREPARES  => false,
+            ],
+        ],
+        'slave' => [
+            [
+                'host'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['HOST'],
+                'port'     => '5555', // not invalid
+                'name'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['NAME'],
+                'user'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['USER'],
+                'password' => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PASSWORD'],
+                'charset'  => 'utf8',
+                'options'  => [
+                    PDO::ATTR_PERSISTENT        => false,
+                    PDO::ATTR_CASE              => PDO::CASE_NATURAL,
+                    PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
+                    PDO::ATTR_STRINGIFY_FETCHES => false,
+                    PDO::ATTR_EMULATE_PREPARES  => false,
+                ],
+            ],
+            [
+                'host'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['HOST'],
+                'port'     => '6666', // not invalid
+                'name'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['NAME'],
+                'user'     => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['USER'],
+                'password' => $GLOBALS['LEEVEL_ENV']['DATABASE']['MYSQL']['PASSWORD'],
+                'charset'  => 'utf8',
+                'options'  => [
+                    PDO::ATTR_PERSISTENT        => false,
+                    PDO::ATTR_CASE              => PDO::CASE_NATURAL,
+                    PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
+                    PDO::ATTR_STRINGIFY_FETCHES => false,
+                    PDO::ATTR_EMULATE_PREPARES  => false,
+                ],
+            ],
+        ],
+    ]);
+
+    $this->assertInstanceof(PDO::class, $connect->pdo());
+    $this->assertInstanceof(PDO::class, $connect->pdo());
+
+    $connect->close();
+}
+```
+    
+## databaseSelect 返回查询对象
+
+``` php
+public function testDatabaseSelectIsNotInit(): void
+{
+    $connect = $this->createDatabaseConnect();
+    $this->assertInstanceof(Select::class, $connect->databaseSelect());
+}
+```
+    
+## tableNames 取得数据库表名列表
+
+``` php
+public function testGetTableNames(): void
+{
+    $connect = $this->createDatabaseConnect();
+    $result = $connect->tableNames('test');
+    $this->assertTrue(in_array('guest_book', $result, true));
+}
+```
+    
+## tableColumns 取得数据库表字段信息
+
+``` php
+public function testGetTableColumns(): void
+{
+    $connect = $this->createDatabaseConnect();
+    $result = $connect->tableColumns('guest_book');
+
+    $sql = <<<'eot'
+        {
+            "list": {
+                "id": {
+                    "field": "id",
+                    "type": "bigint(20)",
+                    "collation": null,
+                    "null": false,
+                    "key": "PRI",
+                    "default": null,
+                    "extra": "auto_increment",
+                    "comment": "ID",
+                    "primary_key": true,
+                    "type_name": "bigint",
+                    "type_length": "20",
+                    "auto_increment": true
+                },
+                "name": {
+                    "field": "name",
+                    "type": "varchar(64)",
+                    "collation": "utf8_general_ci",
+                    "null": false,
+                    "key": "",
+                    "default": "",
+                    "extra": "",
+                    "comment": "名字",
+                    "primary_key": false,
+                    "type_name": "varchar",
+                    "type_length": "64",
+                    "auto_increment": false
+                },
+                "content": {
+                    "field": "content",
+                    "type": "longtext",
+                    "collation": "utf8_general_ci",
+                    "null": false,
+                    "key": "",
+                    "default": null,
+                    "extra": "",
+                    "comment": "评论内容",
+                    "primary_key": false,
+                    "type_name": "longtext",
+                    "type_length": null,
+                    "auto_increment": false
+                },
+                "create_at": {
+                    "field": "create_at",
+                    "type": "datetime",
+                    "collation": null,
+                    "null": false,
+                    "key": "",
+                    "default": "CURRENT_TIMESTAMP",
+                    "extra": "",
+                    "comment": "创建时间",
+                    "primary_key": false,
+                    "type_name": "datetime",
+                    "type_length": null,
+                    "auto_increment": false
+                }
+            },
+            "primary_key": [
+                "id"
+            ],
+            "auto_increment": "id",
+            "table_collation": "utf8_general_ci",
+            "table_comment": "留言板"
+        }
+        eot;
+
+    $this->assertSame(
+        $sql,
+        $this->varJson(
+            $result
+        )
+    );
+}
+```
