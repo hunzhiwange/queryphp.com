@@ -23,8 +23,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Tests\Router\Middlewares\Demo1;
 use Tests\Router\Middlewares\Demo2;
 use Tests\Router\Middlewares\Demo3;
-use Tests\Router\Middlewares\DemoForBasePath;
 use Tests\Router\Middlewares\DemoForAll;
+use Tests\Router\Middlewares\DemoForBasePath;
 ```
 
 ## 注解路由扫描
