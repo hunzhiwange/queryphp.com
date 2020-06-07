@@ -225,8 +225,11 @@ function genSidebarConfigDoc (title) {
       collapsable: true,
       children: [
         'router/',
-        'component/router',
+        'router/router',
         'router/url',
+        'router/response',
+        'router/annotation',
+        'router/provider',
       ]
     },
     {
@@ -255,6 +258,8 @@ function genSidebarConfigDoc (title) {
       children: [
         'database/',
         'database/config',
+        'database/database',
+        'database/select',
         {
           title: title.title7 + ' Create',
           collapsable: true,
