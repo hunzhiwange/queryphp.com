@@ -96,7 +96,7 @@ public function testColumnsExpressionForSelectString(): void
         $this->varJson(
             [
                 $connect
-                    ->columns("{'foo'}")
+                    ->columns(Condition::raw("'foo'"))
                     ->findAll(true),
             ]
         )
