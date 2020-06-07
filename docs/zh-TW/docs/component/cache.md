@@ -580,9 +580,9 @@ public function testDecrease(): void
 
 剩余时间存在 3 种情况。
 
-不存在的 key:-2
-key 存在，但没有设置剩余生存时间:-1
-有剩余生存时间的 key:剩余时间
+ * 不存在的 key:-2
+ * key 存在，但没有设置剩余生存时间:-1
+ * 有剩余生存时间的 key:剩余时间
 
 
 ``` php

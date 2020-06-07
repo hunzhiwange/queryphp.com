@@ -150,8 +150,8 @@ Restful 已经是一种开发主流，前后端分离的场景我们通常会定
 ```
 
 ::: warning 数字类数据支持多个和跨目录
-/car/5/10
-/car/5/foo/bar/10/20
+ * /car/5/10
+ * /car/5/foo/bar/10/20
 :::
 
 
@@ -235,9 +235,9 @@ leevelBind="\XXX\XXX\class@method"
 ```
 
 ::: danger
-leevelBind 未设置自动绑定当前注释的控制器和方法
-文档注释未写到控制器上，这个时候没有上下文控制器，需要使用 leevelBind 绑定
-leevelBind 未设置 `@` 则绑定到类的 `handle` 方法，`@` 可以自定义绑定方法
+ * leevelBind 未设置自动绑定当前注释的控制器和方法
+ * 文档注释未写到控制器上，这个时候没有上下文控制器，需要使用 leevelBind 绑定
+ * leevelBind 未设置 `@` 则绑定到类的 `handle` 方法，`@` 可以自定义绑定方法
 :::
 
 路由地址 path 支持正则参数

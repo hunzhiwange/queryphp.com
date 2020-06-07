@@ -10,9 +10,9 @@ QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式
 
 事实上，QueryPHP 也是一个普通的 PHP 框架，目前最低版本要求 PHP 7.4.0，我们对环境并没有特别的要求。
 
-PHP ^7.4.0
-ext-mbstring [字符处理](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Support/Str.php)
-ext-openssl [加密组件](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Encryption/Encryption.php)
+ * PHP ^7.4.0
+ * ext-mbstring [字符处理](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Support/Str.php)
+ * ext-openssl [加密组件](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Encryption/Encryption.php)
 
 我们系统依赖的组件可以通过 [composer.json](https://github.com/hunzhiwange/queryphp/blob/master/composer.json) 找到，我们提供了大量开箱即用的功能。
 
@@ -27,7 +27,7 @@ QueryPHP 使用 [Composer](https://developer.aliyun.com/composer) 来管理整�
 
 国外镜像访问速度很慢，我们建议使用国内阿里云镜像。
 
-镜像 1 <https://developer.aliyun.com/composer>
+ * 镜像 1 <https://developer.aliyun.com/composer>
 
 ``` sh
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
@@ -80,9 +80,9 @@ Swagger Api（apis）、Debugbar 调试（debugbar）。
 
 QueryPHP 在初始化应用程序会自动帮您创建 `.env`、`.env.phpunit` 和 `phinx.yml` 文件。
 
-.env (系统配置文件)
-.env.phpunit (单元测试配置文件)
-phinx.yml (Phinx 数据库迁移命令配置，他会读取 .env 或者 .env.phpunit 中的数据库配置)
+ * .env (系统配置文件)
+ * .env.phpunit (单元测试配置文件)
+ * phinx.yml (Phinx 数据库迁移命令配置，他会读取 .env 或者 .env.phpunit 中的数据库配置)
 
 ### 入口目录
 
