@@ -335,6 +335,7 @@ function genSidebarConfigDoc (title) {
       children: [
         'orm/',
         'orm/define',
+        'orm/toarray',
         'orm/create',
         'orm/update',
         'orm/replace',
