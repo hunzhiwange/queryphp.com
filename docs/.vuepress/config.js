@@ -335,6 +335,10 @@ function genSidebarConfigDoc (title) {
       children: [
         'orm/',
         'orm/create',
+        'orm/update',
+        'orm/replace',
+        'orm/delete', 
+        'orm/event',
         'orm/unitofwork',
       ]
     },

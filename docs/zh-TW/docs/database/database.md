@@ -786,24 +786,24 @@ public function testDatabaseSelectIsNotInit(): void
 }
 ```
     
-## tableNames 取得数据库表名列表
+## getTableNames 取得数据库表名列表
 
 ``` php
 public function testGetTableNames(): void
 {
     $connect = $this->createDatabaseConnect();
-    $result = $connect->tableNames('test');
+    $result = $connect->getTableNames('test');
     $this->assertTrue(in_array('guest_book', $result, true));
 }
 ```
     
-## tableColumns 取得数据库表字段信息
+## getTableColumns 取得数据库表字段信息
 
 ``` php
 public function testGetTableColumns(): void
 {
     $connect = $this->createDatabaseConnect();
-    $result = $connect->tableColumns('guest_book');
+    $result = $connect->getTableColumns('guest_book');
 
     $sql = <<<'eot'
         {
