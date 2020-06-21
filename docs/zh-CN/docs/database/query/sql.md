@@ -43,7 +43,8 @@ public function testBaseUse(): void
             "delete from test where id = ?",
             [
                 22
-            ]
+            ],
+            false
         ]
         eot;
 

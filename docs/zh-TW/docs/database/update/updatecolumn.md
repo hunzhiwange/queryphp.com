@@ -32,7 +32,8 @@ public function testBaseUse(): void
                 "test_query_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -63,7 +64,8 @@ public function testExpression(): void
                 "test_query_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 

@@ -29,7 +29,8 @@ public function testBaseUse(): void
                 "test_query_id": [
                     1
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -60,7 +61,8 @@ public function testWithoutCondition(): void
     $sql = <<<'eot'
         [
             "DELETE FROM `test_query`",
-            []
+            [],
+            false
         ]
         eot;
 
@@ -90,7 +92,8 @@ public function testJoin(): void
                 "t_id": [
                     1
                 ]
-            }
+            },
+            false
         ]
         eot;
 

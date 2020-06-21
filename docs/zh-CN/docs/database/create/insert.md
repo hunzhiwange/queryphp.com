@@ -32,7 +32,8 @@ public function testBaseUse(): void
                 "pdonamedparameter_value": [
                     "吃饭饭"
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -67,7 +68,8 @@ public function testBind(): void
                 "pdopositional2namedparameter_0": [
                     "吃肉"
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -91,7 +93,8 @@ public function testBind(): void
                     "小鸭子"
                 ],
                 "value": "呱呱呱"
-            }
+            },
+            false
         ]
         eot;
 
@@ -131,7 +134,8 @@ public function testWithBindFunction(): void
                 "pdopositional2namedparameter_0": [
                     "吃鱼"
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -165,7 +169,8 @@ public function testReplace(): void
                     "小鸭子"
                 ],
                 "value": "呱呱呱"
-            }
+            },
+            false
         ]
         eot;
 
@@ -198,7 +203,8 @@ public function testInsertSupportTable(): void
                     "小鸭子"
                 ],
                 "value": "呱呱呱"
-            }
+            },
+            false
         ]
         eot;
 
@@ -226,7 +232,8 @@ public function testInsertWithEmptyData(): void
     $sql = <<<'eot'
         [
             "INSERT INTO `test_query` () VALUES ()",
-            []
+            [],
+            false
         ]
         eot;
 
@@ -254,7 +261,8 @@ public function testReplaceWithEmptyData(): void
     $sql = <<<'eot'
         [
             "REPLACE INTO `test_query` () VALUES ()",
-            []
+            [],
+            false
         ]
         eot;
 

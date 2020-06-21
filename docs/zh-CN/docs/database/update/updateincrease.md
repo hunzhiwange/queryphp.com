@@ -29,7 +29,8 @@ public function testBaseUse(): void
                 "test_query_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -58,7 +59,8 @@ public function testBind(): void
             "UPDATE `test_query` SET `test_query`.`num` = `test_query`.`num`+3 WHERE `test_query`.`id` = ?",
             [
                 503
-            ]
+            ],
+            false
         ]
         eot;
 

@@ -23,7 +23,8 @@ public function testBaseUse(): void
             "select *from test where id = ?",
             [
                 1
-            ]
+            ],
+            false
         ]
         eot;
 

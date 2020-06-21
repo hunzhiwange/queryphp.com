@@ -24,7 +24,8 @@ public function testBaseUse(): void
     $sql = <<<'eot'
         [
             "TRUNCATE TABLE `test`",
-            []
+            [],
+            false
         ]
         eot;
 

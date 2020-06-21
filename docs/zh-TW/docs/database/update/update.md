@@ -32,7 +32,8 @@ public function testBaseUse(): void
                 "test_query_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -66,7 +67,8 @@ public function testWithLimit(): void
                 "test_query_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -101,7 +103,8 @@ public function testWithOrderBy(): void
                 "test_query_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -136,7 +139,8 @@ public function testWithOrderAndLimit(): void
                 "test_query_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -172,7 +176,8 @@ public function testWithJoin(): void
                 "t_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 
@@ -208,7 +213,8 @@ public function testBind(): void
                     503
                 ],
                 "hello": "hello world!"
-            }
+            },
+            false
         ]
         eot;
 
@@ -248,7 +254,8 @@ public function testExpression(): void
                 "test_query_id": [
                     503
                 ]
-            }
+            },
+            false
         ]
         eot;
 

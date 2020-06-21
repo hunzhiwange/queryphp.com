@@ -804,7 +804,7 @@ public function testWithRelation(): void
     
 ## toArray 实体对象转数组支持转换关联实体数据（黑白名单）
 
-`toArray` 第三个参数为关联实体的黑白名单。 
+`toArray` 第三个参数为关联实体的黑白名单。
 
 
 ``` php

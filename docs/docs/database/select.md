@@ -13,7 +13,9 @@ use I18nMock;
 use Leevel\Collection\Collection;
 use Leevel\Database\Condition;
 use Leevel\Database\Page;
+use Leevel\Database\Select;
 use Leevel\Di\Container;
+use Leevel\Filesystem\Helper;
 use Leevel\Page\Page as BasePage;
 use stdClass;
 use Tests\Database\DatabaseTestCase as TestCase;
@@ -986,5 +988,116 @@ public function testMakeSqlWithLogicGroup(): void
             ]
         )
     );
+}
+```
+    
+## cache 设置查询缓存
+
+**cache 原型**
+
+``` php
+# Leevel\Database\Select::cache
+/**
+ * 设置查询缓存.
+ *
+ * @return \Leevel\Database\Select
+ */
+public function cache(string $name, ?int $expire = null, ?string $connect = null): self;
+```
+
+
+``` php
+public function testCache(): void
+{
+    $manager = $this->createDatabaseManager();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 5; $n++) {
+        $manager
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $cacheDir = dirname(__DIR__).'/databaseCacheManager';
+    $cacheFile = $cacheDir.'/testcachekey.php';
+
+    $result = $manager
+        ->table('guest_book')
+        ->where('id', 2)
+        ->findOne();
+    $this->assertFileNotExists($cacheFile);
+    $this->assertSame(2, $result->id);
+    $this->assertSame('tom', $result->name);
+    $this->assertSame('I love movie.', $result->content);
+
+    $resultWithoutCache = $manager
+        ->cache('testcachekey')
+        ->table('guest_book')
+        ->where('id', 2)
+        ->findOne();
+    // cached data
+    $resultWithCache = $manager
+        ->cache('testcachekey')
+        ->table('guest_book')
+        ->where('id', 2)
+        ->findOne();
+
+    $this->assertFileExists($cacheFile);
+    $this->assertSame(2, $resultWithCache->id);
+    $this->assertSame('tom', $resultWithCache->name);
+    $this->assertSame('I love movie.', $resultWithCache->content);
+    $this->assertEquals($result, $resultWithCache);
+    $this->assertEquals($resultWithCache, $resultWithoutCache);
+    $this->assertFalse($result === $resultWithCache);
+    $this->assertFalse($resultWithCache === $resultWithoutCache);
+}
+```
+    
+## cache 设置查询缓存支持分页查询
+
+分页查询会生成两个缓存 KEY，一种是缓存数据本身，一个是缓存分页统计数量。
+
+分页统计数量缓存 KEY 需要加一个后缀与分页数据区分，KEY 后缀为 `\Leevel\Database\Select::PAGE_COUNT_CACHE_SUFFIX`。
+
+
+``` php
+public function testCachePage(): void
+{
+    $manager = $this->createDatabaseManager();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 25; $n++) {
+        $manager
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $cacheDir = dirname(__DIR__).'/databaseCacheManager';
+    $cacheFile = $cacheDir.'/testcachekey.php';
+    $cacheFilePageCount = $cacheDir.'/testcachekey/pagecount.php';
+
+    $result = $manager
+        ->table('guest_book')
+        ->page(1);
+    $this->assertFileNotExists($cacheFile);
+    $this->assertFileNotExists($cacheFilePageCount);
+
+    $resultWithoutCache = $manager
+        ->cache('testcachekey')
+        ->table('guest_book')
+        ->page(1);
+    // cached data
+    $resultWithCache = $manager
+        ->cache('testcachekey')
+        ->table('guest_book')
+        ->page(1);
+
+    $this->assertFileExists($cacheFile);
+    $this->assertFileExists($cacheFilePageCount);
+    $this->assertEquals($result, $resultWithCache);
+    $this->assertFalse($result === $resultWithCache);
+    $this->assertEquals($resultWithCache, $resultWithoutCache);
 }
 ```

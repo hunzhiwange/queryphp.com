@@ -387,7 +387,7 @@ public function testCallProcedure(): void
 
     $result = $connect->procedure('CALL test_procedure(0)');
 
-    $sql = <<<'eot'
+    $data = <<<'eot'
         [
             [
                 {
@@ -406,7 +406,7 @@ public function testCallProcedure(): void
         eot;
 
     $this->assertSame(
-        $sql,
+        $data,
         $this->varJson(
             $result
         )
@@ -433,7 +433,7 @@ public function testCallProcedure2(): void
         'name' => [null, PDO::PARAM_STR | PDO::PARAM_INPUT_OUTPUT, 200],
     ]);
 
-    $sql = <<<'eot'
+    $data = <<<'eot'
         [
             [
                 {
@@ -449,7 +449,7 @@ public function testCallProcedure2(): void
         eot;
 
     $this->assertSame(
-        $sql,
+        $data,
         $this->varJson(
             $result
         )
@@ -485,7 +485,7 @@ public function testCallProcedure3(): void
         }
     } while ($pdoStatement->nextRowset());
 
-    $sql = <<<'eot'
+    $data = <<<'eot'
         [
             [
                 {
@@ -501,7 +501,7 @@ public function testCallProcedure3(): void
         eot;
 
     $this->assertSame(
-        $sql,
+        $data,
         $this->varJson(
             $result
         )
