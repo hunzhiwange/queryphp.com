@@ -183,9 +183,11 @@ class Test extends Command
           <info>php %command.full_name%</info>
         EOF;
 
-    public function handle()
+    public function handle(): int
     {
         $this->info('Hello my test command.');
+
+        return 0;
     }
 
     protected function getArguments(): array
@@ -219,9 +221,11 @@ class Foo extends Command
           <info>php %command.full_name%</info>
         EOF;
 
-    public function handle()
+    public function handle(): int
     {
         $this->info('Hello my foo command.');
+
+        return 0;
     }
 
     protected function getArguments(): array
@@ -255,9 +259,11 @@ class Bar extends Command
           <info>php %command.full_name%</info>
         EOF;
 
-    public function handle()
+    public function handle(): int
     {
         $this->info('Hello my foo command.');
+
+        return 0;
     }
 
     protected function getArguments(): array

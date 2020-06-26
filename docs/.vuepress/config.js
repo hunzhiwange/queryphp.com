@@ -334,8 +334,10 @@ function genSidebarConfigDoc (title) {
       collapsable: true,
       children: [
         'orm/',
+        'orm/entity',
         'orm/define',
         'orm/toarray',
+        'orm/conversion',
         'orm/create',
         'orm/update',
         'orm/replace',

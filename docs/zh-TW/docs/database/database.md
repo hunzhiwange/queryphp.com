@@ -13,6 +13,7 @@ use Exception;
 use Leevel\Database\IDatabase;
 use Leevel\Database\Mysql;
 use Leevel\Database\Select;
+use Leevel\Filesystem\Helper;
 use PDO;
 use PDOException;
 use Tests\Database\DatabaseTestCase as TestCase;
@@ -70,6 +71,67 @@ public function testQuery(): void
     $this->assertSame('tom', $insertData['name']);
     $this->assertSame('I love movie.', $insertData['content']);
     $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+}
+```
+    
+## query 查询数据记录支持缓存
+
+`query` 是一个底层查询方法支持直接设置缓存，实际上其它的查询都会走这个 `query` 查询方法。
+
+**query 原型**
+
+``` php
+# Leevel\Database\Database::query
+/**
+ * 查询数据记录.
+ *
+ * @param bool|int $master
+ *
+ * @return mixed
+ */
+public function query(string $sql, array $bindParams = [], $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null);
+```
+
+
+``` php
+public function testQueryCache(): void
+{
+    $manager = $this->createDatabaseManager();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 5; $n++) {
+        $manager
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $cacheDir = dirname(__DIR__).'/databaseCacheManager';
+    $cacheFile = $cacheDir.'/testcachekey.php';
+
+    $result = $manager
+        ->table('guest_book')
+        ->query('SELECT * FROM guest_book');
+    $this->assertFileNotExists($cacheFile);
+    $this->assertCount(6, $result);
+    $this->assertSame(1, $result[0]->id);
+    $this->assertSame('tom', $result[0]->name);
+    $this->assertSame('I love movie.', $result[0]->content);
+
+    $resultWithoutCache = $manager
+        ->query('SELECT * FROM guest_book', [], false, 'testcachekey');
+    // cached data
+    $resultWithCache = $manager
+        ->query('SELECT * FROM guest_book', [], false, 'testcachekey');
+
+    $this->assertFileExists($cacheFile);
+    $this->assertCount(6, $resultWithCache);
+    $this->assertSame(1, $resultWithCache[0]->id);
+    $this->assertSame('tom', $resultWithCache[0]->name);
+    $this->assertSame('I love movie.', $resultWithCache[0]->content);
+    $this->assertEquals($result, $resultWithCache);
+    $this->assertFalse($result === $resultWithCache);
+    $this->assertEquals($resultWithCache, $resultWithoutCache);
 }
 ```
     
@@ -506,6 +568,85 @@ public function testCallProcedure3(): void
             $result
         )
     );
+}
+```
+    
+## 查询存储过程数据支持缓存
+
+`procedure` 是一个底层查询方法支持直接设置缓存。
+
+**procedure 原型**
+
+``` php
+# Leevel\Database\Database::procedure
+/**
+ * 查询存储过程数据记录.
+ *
+ * @param bool|int $master
+ */
+public function procedure(string $sql, array $bindParams = [], $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): array;
+```
+
+
+``` php
+public function testCacheProcedure(): void
+{
+    $manager = $this->createDatabaseManager();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 1; $n++) {
+        $manager
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $cacheDir = dirname(__DIR__).'/databaseCacheManager';
+    $cacheFile = $cacheDir.'/testcachekey.php';
+
+    $result = $manager
+        ->procedure('CALL test_procedure(0)');
+    $this->assertFileNotExists($cacheFile);
+    $data = <<<'eot'
+        [
+            [
+                {
+                    "name": "tom"
+                },
+                {
+                    "name": "tom"
+                }
+            ],
+            [
+                {
+                    "content": "I love movie."
+                }
+            ]
+        ]
+        eot;
+    $this->assertSame(
+        $data,
+        $this->varJson(
+            $result
+        )
+    );
+
+    $resultWithoutCache = $manager
+        ->procedure('CALL test_procedure(0)', [], false, 'testcachekey');
+    $this->assertFileExists($cacheFile);
+    // cached data
+    $resultWithCache = $manager
+        ->procedure('CALL test_procedure(0)', [], false, 'testcachekey');
+    $this->assertFileExists($cacheFile);
+    $this->assertSame(
+        $data,
+        $this->varJson(
+            $resultWithCache
+        )
+    );
+    $this->assertEquals($result, $resultWithCache);
+    $this->assertFalse($result === $resultWithCache);
+    $this->assertEquals($resultWithCache, $resultWithoutCache);
 }
 ```
     

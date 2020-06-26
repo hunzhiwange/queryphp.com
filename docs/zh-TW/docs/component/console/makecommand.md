@@ -37,7 +37,7 @@ class MakeFile extends Make
 
     protected string $description = 'Create a test file.';
 
-    public function handle()
+    public function handle(): int
     {
         $this->setTemplatePath(__DIR__.'/'.($this->argument('template') ?: 'template'));
 
@@ -51,6 +51,8 @@ class MakeFile extends Make
         $this->setMakeType('test');
 
         $this->create();
+
+        return 0;
     }
 
     protected function getArguments(): array
