@@ -780,22 +780,7 @@ public function testSetConnectNotFoundWillThrowException(): void
 如果没有存在的连接，则会报错。
 :::
     
-## 无实体执行 flush 什么都不做
-
-``` php
-public function testFlushButNotFoundAny(): void
-{
-    $work = UnitOfWork::make(new Post());
-
-    $this->assertNull($work->flush());
-}
-```
-    
-::: tip
-实际上什么也不会发生。
-:::
-    
-## 实体实体支持缓存
+## 保持实体支持缓存
 
 ``` php
 public function testPersistStageManagedEntityDoNothing(): void
@@ -942,5 +927,1363 @@ public function testCreateManyTimes(): void
 
     $work->create($post);
     $work->create($post);
+}
+```
+    
+## 已经删除的实体不能够被更新
+
+``` php
+public function testUpdateButAlreadyInDeletes(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Deleted entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for update.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'new']);
+
+    $work->delete($post);
+
+    $work->update($post);
+}
+```
+    
+## 已经创建的实体不能够被更新
+
+``` php
+public function testUpdateButAlreadyInCreates(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Created entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for update.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'new']);
+
+    $work->create($post);
+
+    $work->update($post);
+}
+```
+    
+## 已经替换的实体不能够被更新
+
+``` php
+public function testUpdateButAlreadyInReplaces(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Replaced entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for update.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'new']);
+
+    $work->replace($post);
+
+    $work->update($post);
+}
+```
+    
+## update 不能多次更新同一个实体
+
+``` php
+public function testUpdateManyTimes(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be updated for twice.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post(['id' => 1, 'title' => 'foo']);
+
+    $work->update($post);
+    $work->update($post);
+}
+```
+    
+## delete.create 已创建的实体可以被删除
+
+``` php
+public function testDeleteCreated(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post(['title' => 'foo', 'id' => 5]);
+
+    $work->create($post);
+    $work->delete($post);
+
+    $work->flush();
+
+    $this->assertSame(0, $connect->table('post')->findCount());
+}
+```
+    
+## delete.update 删除已更新的实体
+
+``` php
+public function testDeleteUpdated(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('post')
+            ->insert([
+                'title'     => 'hello world',
+                'user_id'   => 1,
+                'summary'   => 'post summary',
+                'delete_at' => 0,
+            ]));
+
+    $post = Post::select()->findEntity(1);
+
+    $work->update($post);
+    $work->delete($post);
+
+    $post->title = 'new';
+
+    $work->flush();
+
+    $postNew = Post::select()->findEntity(1);
+
+    $this->assertSame(1, $connect->table('post')->findCount());
+    $this->assertSame(0, $connect->table('post')->where('delete_at', 0)->findCount());
+    $this->assertNull($postNew->id);
+    $this->assertNull($postNew->title);
+}
+```
+    
+## delete.replace 删除已替换的实体
+
+``` php
+public function testDeleteReplaced(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('post')
+            ->insert([
+                'title'     => 'hello world',
+                'user_id'   => 1,
+                'summary'   => 'post summary',
+                'delete_at' => 0,
+            ]));
+
+    $post = Post::select()->findEntity(1);
+
+    $work->replace($post);
+    $work->delete($post);
+
+    $post->title = 'new';
+
+    $work->flush();
+
+    $postNew = Post::select()->findEntity(1);
+
+    $this->assertSame(1, $connect->table('post')->findCount());
+    $this->assertSame(0, $connect->table('post')->where('delete_at', 0)->findCount());
+    $this->assertNull($postNew->id);
+    $this->assertNull($postNew->title);
+}
+```
+    
+## repository 取得实体仓储
+
+``` php
+public function testRepository(): void
+{
+    $work = UnitOfWork::make();
+
+    $repository = $work->repository(Guestbook::class);
+
+    $this->assertInstanceof(GuestbookRepository::class, $repository);
+}
+```
+    
+## repository 取得实体仓储支持实体实例
+
+``` php
+public function testRepository2(): void
+{
+    $work = UnitOfWork::make();
+
+    $repository = $work->repository(new Guestbook());
+
+    $this->assertInstanceof(GuestbookRepository::class, $repository);
+}
+```
+    
+## remove 移除未被管理的实体不做任何处理直接返回
+
+``` php
+public function testRemoveStageNewDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->remove($post = new Post());
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除未被管理的实体到前置区域不做任何处理直接返回
+
+``` php
+public function testRemoveBeforeStageNewDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->removeBefore($post = new Post());
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除未被管理的实体到后置区域不做任何处理直接返回
+
+``` php
+public function testRemoveAfterBeforeStageNewDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->removeAfter($post = new Post());
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除未被管理的实体不做任何处理直接返回
+
+``` php
+public function testForceRemoveStageNewDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->forceRemove($post = new Post());
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除未被管理的实体到前置区域不做任何处理直接返回
+
+``` php
+public function testForceRemoveBeforeStageNewDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->forceRemoveBefore($post = new Post());
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除未被管理的实体到后置区域不做任何处理直接返回
+
+``` php
+public function testForceRemoveAfterStageNewDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->forceRemoveAfter($post = new Post());
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除已删除的实体不做任何处理直接返回
+
+``` php
+public function testRemoveStageRemovedDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->delete($post = new Post(['id' => 5]));
+    $work->remove($post);
+
+    $this->assertSame(UnitOfWork::STATE_REMOVED, $work->getEntityState($post));
+}
+```
+    
+## remove 移除已删除的实体到前置区域不做任何处理直接返回
+
+``` php
+public function testRemoveBeforeStageRemovedDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->delete($post = new Post(['id' => 5]));
+    $work->removeBefore($post);
+
+    $this->assertSame(UnitOfWork::STATE_REMOVED, $work->getEntityState($post));
+}
+```
+    
+## remove 移除已删除的实体到后置区域不做任何处理直接返回
+
+``` php
+public function testRemoveAfterStageRemovedDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->delete($post = new Post(['id' => 5]));
+    $work->removeAfter($post);
+
+    $this->assertSame(UnitOfWork::STATE_REMOVED, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除已删除的实体不做任何处理直接返回
+
+``` php
+public function testForceRemoveStageRemovedDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->delete($post = new Post(['id' => 5]));
+    $work->forceRemove($post);
+
+    $this->assertSame(UnitOfWork::STATE_REMOVED, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除已删除的实体到前置区域不做任何处理直接返回
+
+``` php
+public function testForceRemoveBeforeStageRemovedDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->delete($post = new Post(['id' => 5]));
+    $work->forceRemoveBefore($post);
+
+    $this->assertSame(UnitOfWork::STATE_REMOVED, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除已删除的实体到后置区域不做任何处理直接返回
+
+``` php
+public function testForceRemoveAfterStageRemovedDoNothing(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->delete($post = new Post(['id' => 5]));
+    $work->forceRemoveAfter($post);
+
+    $this->assertSame(UnitOfWork::STATE_REMOVED, $work->getEntityState($post));
+}
+```
+    
+## remove 移除已经被管理的新增实体将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testRemoveStageManagedWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post);
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->remove($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除已经被管理的新增实体到前置区域将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testRemoveBeforeStageManagedWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post);
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->removeBefore($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除已经被管理的新增实体到后置区域将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testRemoveAfterStageManagedWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post);
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->removeAfter($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除已经被管理的新增实体将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testForceRemoveStageManagedWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post);
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->forceRemove($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->flush();
+
+    $sql = null;
+    $this->assertSame(
+        $sql,
+        $post->select()->getLastSql(),
+    );
+}
+```
+    
+## forceRemove 强制移除已经被管理的新增实体到前置区域将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testForceRemoveBeforeStageManagedWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post);
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->forceRemoveBefore($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->flush();
+
+    $sql = null;
+    $this->assertSame(
+        $sql,
+        $post->select()->getLastSql(),
+    );
+}
+```
+    
+## forceRemove 强制移除已经被管理的新增实体到后置区域将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testForceRemoveAfterStageManagedWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post);
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->forceRemoveAfter($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->flush();
+
+    $sql = null;
+    $this->assertSame(
+        $sql,
+        $post->select()->getLastSql(),
+    );
+}
+```
+    
+## remove 移除已经被管理的替换实体将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testRemoveStageManagedReplaceWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post, 'replace');
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->remove($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除已经被管理的替换实体到前置区域将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testRemoveBeforeStageManagedReplaceWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post, 'replace');
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->removeBefore($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除已经被管理的替换实体到后置区域将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testRemoveAfterStageManagedReplaceWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post, 'replace');
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->removeAfter($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除已经被管理的替换实体将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testForceRemoveStageManagedReplaceWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post, 'replace');
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->forceRemove($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除已经被管理的替换实体到前置区域将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testForceRemoveBeforeStageManagedReplaceWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post, 'replace');
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->forceRemoveBefore($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## forceRemove 强制移除已经被管理的替换实体到后置区域将会清理已管理状态，但是不做删除然后直接返回
+
+``` php
+public function testForceRemoveAfterStageManagedReplaceWillDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $post = new Post();
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+
+    $work->persist($post, 'replace');
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+
+    $work->forceRemoveAfter($post);
+
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## persist 保持实体自动识别为更新状态
+
+``` php
+public function testPersistAsSaveUpdate(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post([
+        'id'      => 1,
+        'title'   => 'old',
+        'summary' => 'old',
+    ]);
+
+    $work->persist($post);
+
+    $work->flush();
+
+    $this->assertSame(0, $connect->table('post')->findCount());
+}
+```
+    
+## persist 保持实体为更新状态
+
+``` php
+public function testPersistAsUpdate(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post([
+        'id'      => 1,
+        'title'   => 'old',
+        'summary' => 'old',
+    ]);
+
+    $work->persist($post, 'update');
+
+    $work->flush();
+
+    $this->assertSame(0, $connect->table('post')->findCount());
+}
+```
+    
+## persist 保持实体为替换状态
+
+``` php
+public function testPersistAsReplace(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('post')
+            ->insert([
+                'title'     => 'hello world',
+                'user_id'   => 1,
+                'summary'   => 'post summary',
+                'delete_at' => 0,
+            ]));
+
+    $post = new Post([
+        'id'      => 1,
+        'title'   => 'old',
+        'summary' => 'old',
+        'user_id' => 1,
+    ]);
+
+    $work->persist($post, 'replace');
+
+    $work->flush();
+
+    $updatedPost = Post::select()->findEntity(1);
+
+    $this->assertSame(1, $updatedPost->id);
+    $this->assertSame('old', $updatedPost->title);
+    $this->assertSame(1, $updatedPost->userId);
+    $this->assertSame('old', $updatedPost->summary);
+}
+```
+    
+## persist 已经持久化并且脱离管理的实体状态不能被再次保持
+
+``` php
+public function testPersistStageDetachedEntity(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Detached entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be persist.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'new']);
+
+    $work->persist($post);
+
+    $work->flush($post);
+
+    $work->persist($post);
+}
+```
+    
+## remove 已经持久化并且脱离管理的实体状态不能被再次移除
+
+``` php
+public function testRemoveStageDetachedEntity(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Detached entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be remove.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'new']);
+
+    $work->persist($post);
+
+    $work->flush($post);
+
+    $work->remove($post);
+}
+```
+    
+## on 保持的实体回调
+
+``` php
+public function testOnCallbacks(): void
+{
+    $work = UnitOfWork::make();
+
+    $post = new Post([
+        'title'   => 'new',
+        'user_id' => 0,
+    ]);
+    $guestBook = new Guestbook(['name' => '']);
+
+    $work->persist($post);
+    $work->persist($guestBook);
+
+    $work->on($post, function ($p) use ($guestBook) {
+        $guestBook->content = 'guest_book content was post id is '.$p->id;
+    });
+
+    $work->flush($post);
+
+    $newGuestbook = Guestbook::select()->findEntity(1);
+
+    $this->assertSame('guest_book content was post id is 1', $newGuestbook->content);
+
+    $work->clear();
+}
+```
+    
+## on 替换的实体回调
+
+``` php
+public function testOnCallbacksForReplace(): void
+{
+    $work = UnitOfWork::make();
+
+    $post = new Post([
+        'title'   => 'new',
+        'user_id' => 0,
+    ]);
+    $guestBook = new Guestbook(['name' => '']);
+
+    $work->replace($post);
+    $work->replace($guestBook);
+
+    $work->on($post, function ($p) use ($guestBook) {
+        $guestBook->content = 'guest_book content was post id is '.$p->id;
+    });
+
+    $work->flush($post);
+
+    $newGuestbook = Guestbook::select()->findEntity(1);
+
+    $this->assertSame('guest_book content was post id is 1', $newGuestbook->content);
+
+    $work->clear();
+}
+```
+    
+## on 更新的实体回调
+
+``` php
+public function testOnCallbacksForUpdate(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('post')
+            ->insert([
+                'title'     => 'hello world',
+                'user_id'   => 1,
+                'summary'   => 'post summary',
+                'delete_at' => 0,
+            ]));
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('guest_book')
+            ->insert([
+                'name'      => '',
+                'content'   => 'hello world',
+            ]));
+
+    $post = new Post(['id' => 1, 'title' => 'new'], true);
+    $guestBook = new Guestbook(['id' => 1], true);
+
+    $work->update($post);
+    $work->update($guestBook);
+
+    $work->on($post, function ($p) use ($guestBook) {
+        $guestBook->content = 'guest_book content was post id is '.$p->id;
+    });
+
+    $post->title = 'new new';
+
+    $work->flush($post);
+
+    $newGuestbook = Guestbook::select()->findEntity(1);
+
+    $this->assertSame('guest_book content was post id is 1', $newGuestbook->content);
+
+    $work->clear();
+}
+```
+    
+## on 删除的实体回调
+
+``` php
+public function testOnCallbacksForDelete(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('post')
+            ->insert([
+                'title'     => 'hello world',
+                'user_id'   => 1,
+                'summary'   => 'post summary',
+                'delete_at' => 0,
+            ]));
+
+    $post = Post::select()->findEntity(1);
+    $work->persist($post)->remove($post);
+
+    $work->on($post, function ($p) {
+        // post has already removed,do nothing
+    });
+
+    $work->flush($post);
+
+    $newPost = Post::select()->findEntity(1);
+    $this->assertSame(1, $newPost->id);
+    $work->clear();
+}
+```
+    
+## replace 注册替换实体
+
+``` php
+public function testReplace(): void
+{
+    $work = UnitOfWork::make();
+
+    $post = new Post([
+        'id'      => 1,
+        'title'   => 'new',
+        'user_id' => 0,
+    ]);
+    $post2 = new Post([
+        'id'      => 2,
+        'title'   => 'new2',
+        'user_id' => 2,
+    ]);
+
+    $this->assertFalse($work->replaced($post));
+    $this->assertFalse($work->replaced($post2));
+    $work->replace($post);
+    $work->replace($post2);
+    $this->assertTrue($work->replaced($post));
+    $this->assertTrue($work->replaced($post2));
+    $work->on($post2, function () {
+        $GLOBALS['unitofwork'][] = 1;
+    });
+    $work->on($post, function () {
+        $GLOBALS['unitofwork'][] = 2;
+    });
+
+    $work->flush();
+
+    $data = <<<'eot'
+        [
+            2,
+            1
+        ]
+        eot;
+
+    $this->assertSame(
+        $data,
+        $this->varJson(
+            $GLOBALS['unitofwork']
+        )
+    );
+
+    $this->assertFalse($work->replaced($post));
+    $this->assertFalse($work->replaced($post2));
+
+    $createPost = Post::select()->findEntity(1);
+    $this->assertInstanceof(Post::class, $createPost);
+    $this->assertSame(1, $createPost->id);
+    $this->assertSame('new', $createPost->title);
+
+    $createPost = Post::select()->findEntity(2);
+    $this->assertInstanceof(Post::class, $createPost);
+    $this->assertSame(2, $createPost->id);
+    $this->assertSame('new2', $createPost->title);
+}
+```
+    
+## replace 注册替换实体到前置区域
+
+``` php
+public function testReplaceBefore(): void
+{
+    $work = UnitOfWork::make();
+
+    $post = new Post([
+        'id'      => 1,
+        'title'   => 'new',
+        'user_id' => 0,
+    ]);
+    $post2 = new Post([
+        'id'      => 2,
+        'title'   => 'new2',
+        'user_id' => 2,
+    ]);
+
+    $this->assertFalse($work->replaced($post));
+    $this->assertFalse($work->replaced($post2));
+    $work->replace($post);
+    $work->replaceBefore($post2);
+    $this->assertTrue($work->replaced($post));
+    $this->assertTrue($work->replaced($post2));
+    $work->on($post2, function () {
+        $GLOBALS['unitofwork'][] = 1;
+    });
+    $work->on($post, function () {
+        $GLOBALS['unitofwork'][] = 2;
+    });
+
+    $work->flush();
+
+    $data = <<<'eot'
+        [
+            1,
+            2
+        ]
+        eot;
+
+    $this->assertSame(
+        $data,
+        $this->varJson(
+            $GLOBALS['unitofwork']
+        )
+    );
+
+    $this->assertFalse($work->replaced($post));
+    $this->assertFalse($work->replaced($post2));
+
+    $createPost = Post::select()->findEntity(1);
+    $this->assertInstanceof(Post::class, $createPost);
+    $this->assertSame(1, $createPost->id);
+    $this->assertSame('new', $createPost->title);
+
+    $createPost = Post::select()->findEntity(2);
+    $this->assertInstanceof(Post::class, $createPost);
+    $this->assertSame(2, $createPost->id);
+    $this->assertSame('new2', $createPost->title);
+}
+```
+    
+## replace 注册替换实体到后置区域
+
+``` php
+public function testReplaceAfter(): void
+{
+    $work = UnitOfWork::make();
+
+    $post = new Post([
+        'id'      => 1,
+        'title'   => 'new',
+        'user_id' => 0,
+    ]);
+    $post2 = new Post([
+        'id'      => 2,
+        'title'   => 'new2',
+        'user_id' => 2,
+    ]);
+
+    $this->assertFalse($work->replaced($post));
+    $this->assertFalse($work->replaced($post2));
+    $work->replaceAfter($post);
+    $work->replace($post2);
+    $this->assertTrue($work->replaced($post));
+    $this->assertTrue($work->replaced($post2));
+    $work->on($post2, function () {
+        $GLOBALS['unitofwork'][] = 1;
+    });
+    $work->on($post, function () {
+        $GLOBALS['unitofwork'][] = 2;
+    });
+
+    $work->flush();
+
+    $data = <<<'eot'
+        [
+            1,
+            2
+        ]
+        eot;
+
+    $this->assertSame(
+        $data,
+        $this->varJson(
+            $GLOBALS['unitofwork']
+        )
+    );
+
+    $this->assertFalse($work->replaced($post));
+    $this->assertFalse($work->replaced($post2));
+
+    $createPost = Post::select()->findEntity(1);
+    $this->assertInstanceof(Post::class, $createPost);
+    $this->assertSame(1, $createPost->id);
+    $this->assertSame('new', $createPost->title);
+
+    $createPost = Post::select()->findEntity(2);
+    $this->assertInstanceof(Post::class, $createPost);
+    $this->assertSame(2, $createPost->id);
+    $this->assertSame('new2', $createPost->title);
+}
+```
+    
+## replace 注册替换实体更新例子
+
+``` php
+public function testReplaceAsUpdate(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('post')
+            ->insert([
+                'title'     => 'hello world',
+                'user_id'   => 1,
+                'summary'   => 'post summary',
+                'delete_at' => 0,
+            ]));
+
+    $post = new Post([
+        'id'      => 1,
+        'title'   => 'new',
+        'summary' => 'new',
+        'user_id' => 1,
+    ]);
+
+    $work->replace($post);
+
+    $work->flush();
+
+    $updatedPost = Post::select()->findEntity(1);
+
+    $this->assertSame(1, $updatedPost->id);
+    $this->assertSame('new', $updatedPost->title);
+    $this->assertSame(1, $updatedPost->userId);
+    $this->assertSame('new', $updatedPost->summary);
+}
+```
+    
+## 已创建的实体不能够被替换
+
+``` php
+public function testReplaceButAlreadyInCreates(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Created entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for replace.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'new']);
+
+    $work->create($post);
+
+    $work->replace($post);
+}
+```
+    
+## 已更新的实体不能够被替换
+
+``` php
+public function testReplaceButAlreadyInUpdates(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Updated entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for replace.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'new']);
+
+    $work->update($post);
+
+    $work->replace($post);
+}
+```
+    
+## 同一个实体不能被替换多次
+
+``` php
+public function testReplaceManyTimes(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be replaced for twice.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post(['title' => 'foo']);
+
+    $work->replace($post);
+    $work->replace($post);
+}
+```
+    
+## 已删除的实体不能够被替换
+
+``` php
+public function testReplaceButAlreadyInDeletes(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Deleted entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be added for replace.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $post = new Post(['id' => 5, 'title' => 'new']);
+
+    $work->delete($post);
+
+    $work->replace($post);
+}
+```
+    
+## 同一个实体不能够被删除多次
+
+``` php
+public function testDeleteManyTimes(): void
+{
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage(
+        'Entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` cannot be deleted for twice.'
+    );
+
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post(['id' => 1, 'title' => 'foo']);
+
+    $work->delete($post);
+    $work->delete($post);
+}
+```
+    
+## registerManaged 注册实体为管理状态
+
+``` php
+public function testRegisterManaged(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $post = new Post(['id' => 1, 'title' => 'foo']);
+
+    $this->assertSame(UnitOfWork::STATE_DETACHED, $work->getEntityState($post));
+
+    $work->registerManaged($post);
+
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+}
+```
+    
+## 不能多次创建同一个实体
+
+``` php
+public function testPersistAsCompositeIdReplace2(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $compositeId = new CompositeId([
+        'id1'      => 1,
+        'id2'      => 2,
+        'name'     => 'old',
+    ]);
+
+    $work->persist($compositeId);
+
+    $work->flush();
+
+    $this->assertSame(1, $connect->table('composite_id')->findCount());
+}
+```
+    
+## persist 保持实体为替换支持复合主键
+
+``` php
+public function testPersistAsCompositeIdReplace(): void
+{
+    $work = UnitOfWork::make();
+
+    $connect = $this->createDatabaseConnect();
+
+    $compositeId = new CompositeId([
+        'id1'      => 1,
+        'id2'      => 2,
+        'name'     => 'old',
+    ]);
+
+    $work->persist($compositeId, 'replace');
+
+    $work->flush();
+
+    $this->assertSame(1, $connect->table('composite_id')->findCount());
 }
 ```
