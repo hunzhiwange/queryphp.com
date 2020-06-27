@@ -343,6 +343,12 @@ function genSidebarConfigDoc (title) {
         'orm/replace',
         'orm/delete', 
         'orm/event',
+        'orm/relation',
+        'orm/belongsto',
+        'orm/hasmany',
+        'orm/hasone',
+        'orm/manymany',
+        'orm/nested',
         'orm/unitofwork',
       ]
     },

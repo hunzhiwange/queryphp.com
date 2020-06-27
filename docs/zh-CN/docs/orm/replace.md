@@ -1,10 +1,10 @@
-# 尝试更新（没有则新增）实体
+# 替换实体
 
 ::: tip Testing Is Documentation
 [tests/Database/Ddd/Replace/ReplaceTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Database/Ddd/Replace/ReplaceTest.php)
 :::
     
-将实体变更持久化到数据库。
+尝试更新（没有则新增）实体，将实体变更持久化到数据库。
 
 **Uses**
 
