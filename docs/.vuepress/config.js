@@ -73,6 +73,8 @@ module.exports = {
             title21:'Filesystem',
             title22:'Console',
             title23:'Kernel',
+            title24:'Guide',
+            title25:'Test',
           }),
         }
       },
@@ -108,6 +110,8 @@ module.exports = {
             title21:'文件系统',
             title22:'命令行',
             title23:'内核',
+            title24:'指南',
+            title25:'测试',
           }),
         }
       },
@@ -143,6 +147,8 @@ module.exports = {
             title21:'文件系統',
             title22:'命令行',
             title23:'內核',
+            title24:'指南',
+            title25:'測試',
           }),
         }
       }
@@ -192,6 +198,13 @@ function genSidebarConfigDoc (title) {
         'started/specification',
         'started/directory',
         'started/namespace',
+      ]
+    },
+    {
+      title: title.title24,
+      collapsable: true,
+      children: [
+        'guide/',
       ]
     },
     {
@@ -529,6 +542,13 @@ function genSidebarConfigDoc (title) {
           ],
         },
         'component/view',
+      ]
+    },
+    {
+      title: title.title25,
+      collapsable: true,
+      children: [
+        'test/',
       ]
     },
     {
