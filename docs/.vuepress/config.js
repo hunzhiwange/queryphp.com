@@ -349,7 +349,9 @@ function genSidebarConfigDoc (title) {
         'orm/hasone',
         'orm/manymany',
         'orm/nested',
+        'orm/select',
         'orm/unitofwork',
+        'orm/repository',
       ]
     },
     {
