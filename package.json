@@ -2,7 +2,7 @@
   "private": true,
   "version": "1.0.0-alpha.13",
   "name": "docs",
-  "description": "docs of VuePress",
+  "description": "docs of QueryPHP",
   "scripts": {
     "dev": "vuepress dev docs --temp .temp",
     "build": "vuepress build docs --temp .temp"

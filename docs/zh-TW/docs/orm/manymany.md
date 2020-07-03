@@ -46,10 +46,13 @@ use Tests\Database\Ddd\Entity\Relation\UserRoleSoftDeleted;
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 use Leevel\Database\Ddd\Relation\ManyMany;
 
 class User extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'user';
 
     const ID = 'id';
@@ -158,32 +161,6 @@ class User extends Entity
         ],
     ];
 
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
-
     protected function relationScopeWithSoftDeleted(ManyMany $relation): void
     {
         $relation->middleWithSoftDeleted();
@@ -211,9 +188,12 @@ class User extends Entity
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class UserRole extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'user_role';
 
     const ID = 'id';
@@ -226,32 +206,6 @@ class UserRole extends Entity
         'role_id'   => [],
         'create_at' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -261,9 +215,12 @@ class UserRole extends Entity
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class Role extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'role';
 
     const ID = 'id';
@@ -275,32 +232,6 @@ class Role extends Entity
         'name'      => [],
         'create_at' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -751,10 +682,13 @@ public function testRelationDataWasNotFound(): void
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 use Leevel\Database\Ddd\Relation\ManyMany;
 
 class User extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'user';
 
     const ID = 'id';
@@ -863,32 +797,6 @@ class User extends Entity
         ],
     ];
 
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
-
     protected function relationScopeWithSoftDeleted(ManyMany $relation): void
     {
         $relation->middleWithSoftDeleted();
@@ -916,9 +824,12 @@ class User extends Entity
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class UserRoleSoftDeleted extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'user_role_soft_deleted';
 
     const ID = 'id';
@@ -936,32 +847,6 @@ class UserRoleSoftDeleted extends Entity
     ];
 
     const DELETE_AT = 'delete_at';
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -971,9 +856,12 @@ class UserRoleSoftDeleted extends Entity
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class RoleSoftDeleted extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'role_soft_deleted';
 
     const ID = 'id';
@@ -990,32 +878,6 @@ class RoleSoftDeleted extends Entity
     ];
 
     const DELETE_AT = 'delete_at';
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 

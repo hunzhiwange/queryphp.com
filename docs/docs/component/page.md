@@ -4,7 +4,7 @@
 [tests/Page/PageTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Page/PageTest.php)
 :::
     
-QueryPHP 提供的分页组件，可以轻松地对数据进行分页处理，这里仅仅是分页组件本身，数据库查询分页见 @todo。
+QueryPHP 提供的分页组件，可以轻松地对数据进行分页处理。
 
 
 **Uses**

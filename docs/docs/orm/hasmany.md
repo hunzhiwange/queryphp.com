@@ -39,10 +39,13 @@ use Tests\Database\Ddd\Entity\Relation\Post;
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 use Leevel\Database\Ddd\Relation\Relation;
 
 class Post extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'post';
 
     const ID = 'id';
@@ -106,32 +109,6 @@ class Post extends Entity
 
     const DELETE_AT = 'delete_at';
 
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
-
     protected function relationScopeComment(Relation $relation): void
     {
         $relation->where('id', '>', 4);
@@ -145,9 +122,12 @@ class Post extends Entity
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class Comment extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'comment';
 
     const ID = 'id';
@@ -161,32 +141,6 @@ class Comment extends Entity
         'content'   => [],
         'create_at' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 

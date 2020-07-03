@@ -13,6 +13,7 @@
 <?php
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 use Tests\Database\DatabaseTestCase as TestCase;
 use Tests\Database\Ddd\Entity\DemoEntity;
 ```
@@ -34,9 +35,12 @@ use Tests\Database\Ddd\Entity\DemoEntity;
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -49,32 +53,6 @@ class DemoEntity extends Entity
         ],
         'name' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ``
 
@@ -102,31 +80,9 @@ namespace Tests\Database\Ddd;
 
 class Test1Entity extends Entity
 {
-    private static $leevelConnect;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->{$this->realProp($prop)} = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->{$this->realProp($prop)};
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$leevelConnect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$leevelConnect;
-    }
+    use GetterSetter;
 }
-``
+```
 
 
 ``` php

@@ -42,9 +42,12 @@ $entity->save()->flush();
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -57,32 +60,6 @@ class DemoEntity extends Entity
         ],
         'name' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -166,9 +143,12 @@ public function testCreateBaseUse(): void
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoConstructPropWhiteEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -182,32 +162,6 @@ class DemoConstructPropWhiteEntity extends Entity
         ],
         'name' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -235,9 +189,12 @@ public function testConsturctPropWhite(): void
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoConstructPropBlackEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -251,32 +208,6 @@ class DemoConstructPropBlackEntity extends Entity
         ],
         'name' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -304,9 +235,12 @@ public function testConsturctPropBlack(): void
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoCreatePropWhiteEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -322,32 +256,6 @@ class DemoCreatePropWhiteEntity extends Entity
         ],
         'description' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -388,9 +296,12 @@ public function testSavePropBlackAndWhite(): void
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoCreateAutoFillEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -417,32 +328,6 @@ class DemoCreateAutoFillEntity extends Entity
             self::CREATE_FILL      => null,
         ],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 
     protected function fillDescription($old): string
     {
@@ -560,9 +445,12 @@ public function testAutoFillWithCustomField(): void
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoDatabaseEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -576,32 +464,6 @@ class DemoDatabaseEntity extends Entity
         'name'      => [],
         'create_at' => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 

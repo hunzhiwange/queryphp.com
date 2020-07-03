@@ -4,7 +4,7 @@
 [tests/Docs/TestDoc.php](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/TestDoc.php)
 :::
     
-QueryPHP 自身经过大量的单元测试用例验证过，取得了非常好的效果，对于业务层测试来说，我们也提供了基础的测试功能。 
+QueryPHP 自身经过大量的单元测试用例验证过，取得了非常好的效果，对于业务层测试来说，我们也提供了基础的测试功能。
 
 
 ## 基本使用方法

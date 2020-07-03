@@ -50,9 +50,12 @@ protected function makeEntity(): DemoToArrayEntity
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoToArrayEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -67,32 +70,6 @@ class DemoToArrayEntity extends Entity
         'foo_bar'     => [],
         'hello'       => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -304,9 +281,12 @@ protected function makeWhiteEntity(): DemoToArrayWhiteEntity
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoToArrayWhiteEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -325,32 +305,6 @@ class DemoToArrayWhiteEntity extends Entity
         ],
         'hello'       => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -408,9 +362,12 @@ protected function makeBlackEntity(): DemoToArrayBlackEntity
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoToArrayBlackEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -429,32 +386,6 @@ class DemoToArrayBlackEntity extends Entity
         ],
         'hello'       => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -509,10 +440,13 @@ protected function makeRelationEntity(): Post
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 use Leevel\Database\Ddd\Relation\ManyMany;
 
 class User extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'user';
 
     const ID = 'id';
@@ -621,32 +555,6 @@ class User extends Entity
         ],
     ];
 
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
-
     protected function relationScopeWithSoftDeleted(ManyMany $relation): void
     {
         $relation->middleWithSoftDeleted();
@@ -674,10 +582,13 @@ class User extends Entity
 namespace Tests\Database\Ddd\Entity\Relation;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 use Leevel\Database\Ddd\Relation\Relation;
 
 class Post extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'post';
 
     const ID = 'id';
@@ -740,32 +651,6 @@ class Post extends Entity
     ];
 
     const DELETE_AT = 'delete_at';
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 
     protected function relationScopeComment(Relation $relation): void
     {
@@ -856,9 +741,12 @@ protected function makeShowPropNullEntity(): DemoToArrayShowPropNullEntity
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoToArrayShowPropNullEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -879,32 +767,6 @@ class DemoToArrayShowPropNullEntity extends Entity
             self::SHOW_PROP_NULL => 'default_value',
         ],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -960,9 +822,12 @@ protected function makeRelationShowPropNullEntity(): DemoToArrayShowPropNullRela
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoToArrayShowPropNullRelationTargetEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -973,32 +838,6 @@ class DemoToArrayShowPropNullRelationTargetEntity extends Entity
         'id'          => [],
         'name'        => [],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
@@ -1008,9 +847,12 @@ class DemoToArrayShowPropNullRelationTargetEntity extends Entity
 namespace Tests\Database\Ddd\Entity;
 
 use Leevel\Database\Ddd\Entity;
+use Leevel\Database\Ddd\GetterSetter;
 
 class DemoToArrayShowPropNullRelationEntity extends Entity
 {
+    use GetterSetter;
+
     const TABLE = 'test';
 
     const ID = 'id';
@@ -1036,32 +878,6 @@ class DemoToArrayShowPropNullRelationEntity extends Entity
             self::TARGET_KEY  => 'id',
         ],
     ];
-
-    private array $data = [];
-
-    private static ?string $connect = null;
-
-    public function setter(string $prop, $value): self
-    {
-        $this->data[$this->realProp($prop)] = $value;
-
-        return $this;
-    }
-
-    public function getter(string $prop)
-    {
-        return $this->data[$this->realProp($prop)] ?? null;
-    }
-
-    public static function withConnect(?string $connect = null): void
-    {
-        static::$connect = $connect;
-    }
-
-    public static function connect(): ?string
-    {
-        return static::$connect;
-    }
 }
 ```
 
