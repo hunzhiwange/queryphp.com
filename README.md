@@ -23,6 +23,6 @@ sh ./deploy.sh
 ## Node set
 
 ``` sh
-npm install -g increase-memory-limit
-increase-memory-limit
+npm install -g increase-memory-limit cross-env
+npm run fix-memory-limit #cross-env LIMIT=8192 increase-memory-limit
 ```

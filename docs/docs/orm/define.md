@@ -66,7 +66,7 @@ public function testBaseUse(): void
 
     $this->assertSame(DemoEntity::STRUCT, $entity->fields());
     $this->assertSame(DemoEntity::TABLE, $entity->table());
-    $this->assertSame((array) DemoEntity::ID, $entity->primaryKeys());
+    $this->assertSame(DemoEntity::ID, $entity->primaryKey());
     $this->assertSame(DemoEntity::AUTO, $entity->autoIncrement());
 }
 ```

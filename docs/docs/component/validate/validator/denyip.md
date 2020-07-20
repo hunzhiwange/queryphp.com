@@ -81,7 +81,7 @@ public function testBad($value, string $param): void
         [
             'name'     => 'deny_ip:'.$param,
         ]
-        );
+    );
 
     $this->assertFalse($validate->success());
 }

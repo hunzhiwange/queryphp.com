@@ -164,7 +164,8 @@ public function testBaseUse(): void
                 'user_id'   => 1,
                 'summary'   => 'Say hello to the world.',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -173,7 +174,8 @@ public function testBaseUse(): void
             ->insert([
                 'post_id' => 1,
                 'content' => 'I am content with big data.',
-            ]));
+            ])
+    );
 
     $post = Post::select()->where('id', 1)->findOne();
 
@@ -227,7 +229,8 @@ public function testEager(): void
                     'user_id'   => 1,
                     'summary'   => 'Say hello to the world.',
                     'delete_at' => 0,
-                ]));
+                ])
+        );
 
         $this->assertSame(
             1,
@@ -236,7 +239,8 @@ public function testEager(): void
                 ->insert([
                     'post_id' => $i + 1,
                     'content' => 'I am content with big data.',
-                ]));
+                ])
+        );
     }
 
     $posts = Post::eager(['post_content'])->findAll();
@@ -276,7 +280,8 @@ public function testEagerWithCondition(): void
                     'user_id'   => 1,
                     'summary'   => 'Say hello to the world.',
                     'delete_at' => 0,
-                ]));
+                ])
+        );
 
         $this->assertSame(
             1,
@@ -285,7 +290,8 @@ public function testEagerWithCondition(): void
                 ->insert([
                     'post_id' => $i + 1,
                     'content' => 'I am content with big data.',
-                ]));
+                ])
+        );
     }
 
     $posts = Post::eager(['post_content' => function (Relation $select) {
@@ -322,7 +328,8 @@ public function testRelationAsMethod(): void
                 'user_id'   => 1,
                 'summary'   => 'Say hello to the world.',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -331,7 +338,8 @@ public function testRelationAsMethod(): void
             ->insert([
                 'post_id' => 1,
                 'content' => 'I am content with big data.',
-            ]));
+            ])
+    );
 
     $postContentRelation = Post::make()->relation('postContent');
 
@@ -365,7 +373,8 @@ public function testRelationDataWasNotFound(): void
                 'user_id'   => 1,
                 'summary'   => 'Say hello to the world.',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -374,7 +383,8 @@ public function testRelationDataWasNotFound(): void
             ->insert([
                 'post_id' => 5,
                 'content' => 'I am content with big data.',
-            ]));
+            ])
+    );
 
     $post = Post::select()->where('id', 1)->findOne();
 

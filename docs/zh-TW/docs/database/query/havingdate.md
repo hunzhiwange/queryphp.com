@@ -199,11 +199,13 @@ public function testTime(): void
                     ->having('create_date', '+5 month')
                     ->endTime()
                     ->findOne(true)
-            ), [
+            ),
+            [
                 sprintf($sql, $value),
                 sprintf($sql, $value2),
                 sprintf($sql, $value3),
-            ], true
+            ],
+            true
         )
     );
 }
@@ -242,11 +244,14 @@ public function testTimeDateIsDefault(): void
                     ->having('create_date', '+5 month')
                     ->endTime()
                     ->findOne(true)
-            ), [
+            ),
+            [
                 sprintf($sql, $value),
                 sprintf($sql, $value2),
                 sprintf($sql, $value3),
-            ], true)
+            ],
+            true
+        )
     );
 }
 ```

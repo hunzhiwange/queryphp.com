@@ -162,6 +162,7 @@ use Leevel\Di\Container;
 use Leevel\Http\Request;
 use Leevel\Router\IRouter;
 use Leevel\Router\Router;
+use Leevel\Router\RouterNotFoundException;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Router\Middlewares\Demo1;
@@ -425,6 +426,42 @@ public function testShouldJson(): void
 
     $this->assertInstanceof(Response::class, $result);
     $this->assertSame('{"foo":"bar"}', $result->getContent());
+}
+```
+    
+## 不可以转换为 JSON 的控制器响应强制转化为字符串
+
+**fixture 定义**
+
+**Tests\Router\Controllers\Response\IntResponse**
+
+``` php
+namespace Tests\Router\Controllers\Response;
+
+class IntResponse
+{
+    public function handle(): int
+    {
+        return 123456;
+    }
+}
+```
+
+
+``` php
+public function testResponseIsInt(): void
+{
+    $pathInfo = '/:tests/Response/IntResponse';
+    $attributes = [];
+    $method = 'GET';
+    $controllerDir = 'Router\\Controllers';
+    $request = $this->createRequest($pathInfo, $attributes, $method);
+    $router = $this->createRouter();
+    $router->setControllerDir($controllerDir);
+    $result = $router->dispatch($request);
+
+    $this->assertInstanceof(Response::class, $result);
+    $this->assertSame('123456', $result->getContent());
 }
 ```
     

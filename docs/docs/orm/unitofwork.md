@@ -225,7 +225,8 @@ public function testUpdate(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -236,7 +237,8 @@ public function testUpdate(): void
                 'user_id'   => 2,
                 'summary'   => 'foo bar',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = Post::select()->findEntity(1);
 
@@ -348,7 +350,8 @@ public function testDelete(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -359,7 +362,8 @@ public function testDelete(): void
                 'user_id'   => 2,
                 'summary'   => 'foo bar',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = Post::select()->findEntity(1);
 
@@ -484,7 +488,8 @@ public function testRefresh(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = new Post([
         'id'      => 1,
@@ -544,7 +549,8 @@ public function testBeginTransaction(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $work->beginTransaction();
 
@@ -575,7 +581,7 @@ public function testBeginTransaction(): void
 ``` php
 public function testFlushButRollBack(): void
 {
-    $this->expectException(\Leevel\Database\ReplaceException::class);
+    $this->expectException(\Leevel\Database\DuplicateKeyException::class);
     $this->expectExceptionMessage(
         'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry \'1\' for key \'PRIMARY\''
     );
@@ -627,7 +633,8 @@ public function testTransaction(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $work->transaction(function ($w) {
         $post = Post::select()->findEntity(1);
@@ -652,7 +659,7 @@ public function testTransaction(): void
 ``` php
 public function testTransactionAndRollBack(): void
 {
-    $this->expectException(\Leevel\Database\ReplaceException::class);
+    $this->expectException(\Leevel\Database\DuplicateKeyException::class);
     $this->expectExceptionMessage(
         'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry \'1\' for key \'PRIMARY\''
     );
@@ -690,7 +697,7 @@ public function testTransactionAndRollBack(): void
 可以将事务包裹在一个闭包中，执行失败自动回滚测试，不会更新数据库。
 :::
     
-## 设置根实体 setRootEntity
+## 设置实体 setEntity
 
 ``` php
 public function testSetRootEntity(): void
@@ -710,10 +717,11 @@ public function testSetRootEntity(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = Post::select()->findEntity(1);
-    $work->setRootEntity($post, 'password_right');
+    $work->setEntity($post, 'password_right');
 
     $work->update($post);
 
@@ -729,12 +737,12 @@ public function testSetRootEntity(): void
     $this->assertSame(1, $newPost->getId());
     $this->assertSame('new title', $newPost->getTitle());
 
-    $work->setRootEntity($post, null);
+    $work->setEntity($post, null);
 }
 ```
     
 ::: tip
-系统默认读取基础的数据库配置来处理数据相关信息，设置跟实体可以更改事务处理的数据库连接。
+系统默认读取基础的数据库配置来处理数据相关信息，设置跟实体还可以更改事务处理的数据库连接。
 :::
     
 ## 更改数据库连接 setConnect
@@ -759,7 +767,8 @@ public function testSetConnectNotFoundWillThrowException(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = Post::select()->findEntity(1);
     $work->setConnect('hello');
@@ -827,20 +836,20 @@ public function testPersistStageRemovedEntity(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = Post::select()->findEntity(1);
-
     $this->assertSame(1, $post->getId());
     $this->assertSame('hello world', $post->getTitle());
     $this->assertSame('post summary', $post->getSummary());
-
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
     $work->delete($post);
-
+    $this->assertSame(UnitOfWork::STATE_REMOVED, $work->getEntityState($post));
     $work->persist($post);
-
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
     $work->flush();
-
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
     $this->assertSame(1, $connect->table('post')->findCount());
 }
 ```
@@ -1049,7 +1058,8 @@ public function testDeleteUpdated(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = Post::select()->findEntity(1);
 
@@ -1087,7 +1097,8 @@ public function testDeleteReplaced(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = Post::select()->findEntity(1);
 
@@ -1144,6 +1155,38 @@ public function testRemoveStageNewDoNothing(): void
 
     $work->remove($post = new Post());
 
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除管理的新增实体直接删除
+
+``` php
+public function testRemoveStageCreateManaged(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->create($post = new Post(['id' => 5]));
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+    $work->remove($post);
+    $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
+}
+```
+    
+## remove 移除管理的更新实体直接删除
+
+``` php
+public function testRemoveStageUpdateManaged(): void
+{
+    $work = UnitOfWork::make();
+
+    $this->assertInstanceof(UnitOfWork::class, $work);
+
+    $work->update($post = new Post(['id' => 5], true));
+    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
+    $work->remove($post);
     $this->assertSame(UnitOfWork::STATE_NEW, $work->getEntityState($post));
 }
 ```
@@ -1632,7 +1675,7 @@ public function testPersistAsSaveUpdate(): void
         'id'      => 1,
         'title'   => 'old',
         'summary' => 'old',
-    ]);
+    ], true);
 
     $work->persist($post);
 
@@ -1683,7 +1726,8 @@ public function testPersistAsReplace(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = new Post([
         'id'      => 1,
@@ -1827,7 +1871,8 @@ public function testOnCallbacksForUpdate(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -1836,7 +1881,8 @@ public function testOnCallbacksForUpdate(): void
             ->insert([
                 'name'      => '',
                 'content'   => 'hello world',
-            ]));
+            ])
+    );
 
     $post = new Post(['id' => 1, 'title' => 'new'], true);
     $guestBook = new Guestbook(['id' => 1], true);
@@ -1878,7 +1924,8 @@ public function testOnCallbacksForDelete(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = Post::select()->findEntity(1);
     $work->persist($post)->remove($post);
@@ -2099,7 +2146,8 @@ public function testReplaceAsUpdate(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $post = new Post([
         'id'      => 1,
@@ -2220,25 +2268,6 @@ public function testDeleteManyTimes(): void
 
     $work->delete($post);
     $work->delete($post);
-}
-```
-    
-## registerManaged 注册实体为管理状态
-
-``` php
-public function testRegisterManaged(): void
-{
-    $work = UnitOfWork::make();
-
-    $connect = $this->createDatabaseConnect();
-
-    $post = new Post(['id' => 1, 'title' => 'foo']);
-
-    $this->assertSame(UnitOfWork::STATE_DETACHED, $work->getEntityState($post));
-
-    $work->registerManaged($post);
-
-    $this->assertSame(UnitOfWork::STATE_MANAGED, $work->getEntityState($post));
 }
 ```
     

@@ -174,11 +174,10 @@ public function testAutoCode(string $type): void
 public function testMinWidthAndMinHeight(): void
 {
     $seccode = new Seccode([
-        'font_path'       => __DIR__.'/font',
+        'font_path' => __DIR__.'/font',
+        'width'     => 2,
+        'height'    => 2,
     ]);
-
-    $seccode->setOption('width', 2);
-    $seccode->setOption('height', 2);
 
     $file = __DIR__.'/minWidthAndMinHeight.png';
 
@@ -216,11 +215,10 @@ public function testMinWidthAndMinHeight(): void
 public function testMaxWidthAndMaxHeight(): void
 {
     $seccode = new Seccode([
-        'font_path'       => __DIR__.'/font',
+        'font_path' => __DIR__.'/font',
+        'width'     => 1200,
+        'height'    => 1200,
     ]);
-
-    $seccode->setOption('width', 1200);
-    $seccode->setOption('height', 1200);
 
     $file = __DIR__.'/maxWidthAndMaxHeight.png';
 

@@ -10,6 +10,8 @@
 <?php
 
 use Exception;
+use Generator;
+use Leevel\Database\Database;
 use Leevel\Database\IDatabase;
 use Leevel\Database\Mysql;
 use Leevel\Database\Select;
@@ -150,6 +152,48 @@ public function testExecute(): void
     $this->assertSame('小鸭子', $insertData['name']);
     $this->assertSame('喜欢游泳', $insertData['content']);
     $this->assertStringContainsString(date('Y-m'), $insertData['create_at']);
+}
+```
+    
+## cursor 游标查询
+
+`cursor` 游标查询可以节省内存。
+
+**cursor 原型**
+
+``` php
+# Leevel\Database\Database::cursor
+/**
+ * 游标查询.
+ *
+ * @param bool|int $master
+ */
+public function cursor(string $sql, array $bindParams = [], $master = false): Generator;
+```
+
+
+``` php
+public function testCursor(): void
+{
+    $manager = $this->createDatabaseManager();
+
+    $data = ['name' => 'tom', 'content' => 'I love movie.'];
+
+    for ($n = 0; $n <= 5; $n++) {
+        $manager
+            ->table('guest_book')
+            ->insert($data);
+    }
+
+    $result = $manager->cursor('SELECT * FROM guest_book');
+    $this->assertInstanceof(Generator::class, $result);
+    $n = 1;
+    foreach ($result as $v) {
+        $this->assertSame($n, $v->id);
+        $this->assertSame('tom', $v->name);
+        $this->assertSame('I love movie.', $v->content);
+        $n++;
+    }
 }
 ```
     
@@ -807,6 +851,7 @@ public function testReadConnectDistributed(): void
                 PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
                 PDO::ATTR_STRINGIFY_FETCHES => false,
                 PDO::ATTR_EMULATE_PREPARES  => false,
+                PDO::ATTR_TIMEOUT           => 30,
             ],
         ],
         'slave' => [
@@ -823,6 +868,7 @@ public function testReadConnectDistributed(): void
                     PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
                     PDO::ATTR_STRINGIFY_FETCHES => false,
                     PDO::ATTR_EMULATE_PREPARES  => false,
+                    PDO::ATTR_TIMEOUT           => 30,
                 ],
             ],
             [
@@ -838,6 +884,7 @@ public function testReadConnectDistributed(): void
                     PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
                     PDO::ATTR_STRINGIFY_FETCHES => false,
                     PDO::ATTR_EMULATE_PREPARES  => false,
+                    PDO::ATTR_TIMEOUT           => 30,
                 ],
             ],
         ],
@@ -874,6 +921,7 @@ public function testReadConnectDistributedButAllInvalidAndAlsoIsSeparate(): void
                 PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
                 PDO::ATTR_STRINGIFY_FETCHES => false,
                 PDO::ATTR_EMULATE_PREPARES  => false,
+                PDO::ATTR_TIMEOUT           => 30,
             ],
         ],
         'slave' => [
@@ -890,6 +938,7 @@ public function testReadConnectDistributedButAllInvalidAndAlsoIsSeparate(): void
                     PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
                     PDO::ATTR_STRINGIFY_FETCHES => false,
                     PDO::ATTR_EMULATE_PREPARES  => false,
+                    PDO::ATTR_TIMEOUT           => 30,
                 ],
             ],
             [
@@ -905,6 +954,7 @@ public function testReadConnectDistributedButAllInvalidAndAlsoIsSeparate(): void
                     PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
                     PDO::ATTR_STRINGIFY_FETCHES => false,
                     PDO::ATTR_EMULATE_PREPARES  => false,
+                    PDO::ATTR_TIMEOUT           => 30,
                 ],
             ],
         ],
@@ -1021,5 +1071,36 @@ public function testGetTableColumns(): void
             $result
         )
     );
+}
+```
+    
+## getRawSql 游标查询
+
+`getRawSql` 返回原生查询真实 SQL，以便于更加直观。
+
+**getRawSql 原型**
+
+``` php
+# Leevel\Database\Database::getRawSql
+/**
+ * 从 PDO 预处理语句中获取原始 SQL 查询字符串.
+ *
+ * - This method borrows heavily from the pdo-debug package and is part of the pdo-debug package.
+ *
+ * @see https://github.com/panique/pdo-debug/blob/master/pdo-debug.php
+ * @see https://stackoverflow.com/questions/210564/getting-raw-sql-query-string-from-pdo-prepared-statements
+ * @see http://php.net/manual/en/pdo.constants.php
+ */
+public static function getRawSql(string $sql, array $bindParams): string;
+```
+
+
+``` php
+public function testGetRawSql(): void
+{
+    $sql = Database::getRawSql('SELECT * FROM guest_book WHERE id = :id', [
+        ':id' => [1],
+    ]);
+    $this->assertSame($sql, 'SELECT * FROM guest_book WHERE id = 1');
 }
 ```

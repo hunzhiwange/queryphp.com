@@ -31,10 +31,10 @@ declare(strict_types=1);
 
 namespace Leevel\Kernel;
 
-use Exception;
 use Leevel\Http\Request;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 /**
  * 异常运行时接口.
@@ -46,17 +46,22 @@ interface IExceptionRuntime
      *
      * @return mixed
      */
-    public function report(Exception $e);
+    public function report(Throwable $e);
+
+    /**
+     * 异常是否需要上报.
+     */
+    public function reportable(Throwable $e): bool;
 
     /**
      * 异常渲染.
      */
-    public function render(Request $request, Exception $e): Response;
+    public function render(Request $request, Throwable $e): Response;
 
     /**
      * 命令行渲染.
      */
-    public function renderForConsole(OutputInterface $output, Exception $e): void;
+    public function renderForConsole(OutputInterface $output, Throwable $e): void;
 }
 
 ```
@@ -102,12 +107,12 @@ declare(strict_types=1);
 
 namespace Common\App;
 
-use Exception;
 use Leevel;
 use Leevel\Http\Request;
 use Leevel\Kernel\Exception\HttpException;
 use Leevel\Kernel\ExceptionRuntime as BaseExceptionRuntime;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 /**
  * 异常运行时.
@@ -117,7 +122,7 @@ class ExceptionRuntime extends BaseExceptionRuntime
     /**
      * {@inheritdoc}
      */
-    public function report(Exception $e)
+    public function report(Throwable $e)
     {
         parent::report($e);
     }
@@ -125,7 +130,7 @@ class ExceptionRuntime extends BaseExceptionRuntime
     /**
      * {@inheritdoc}
      */
-    public function render(Request $request, Exception $e): Response
+    public function render(Request $request, Throwable $e): Response
     {
         return parent::render($request, $e);
     }
@@ -228,7 +233,7 @@ public function testBaseUse(): void
 
     $option = new Option([
         'app' => [
-            '_composer' => [
+            ':composer' => [
                 'i18ns' => [
                     'extend',
                 ],
@@ -296,6 +301,81 @@ public function testExceptionItSelfWithReport(): void
     $this->assertSame(1, $_SERVER['testExceptionItSelfWithReport']);
 
     unset($_SERVER['testExceptionItSelfWithReport']);
+}
+```
+    
+## reportable 异常是否需要上报
+
+默认可上报，reportable 返回 true 可以会上报。
+
+**fixture 定义**
+
+**Tests\Kernel\ExceptionCanReportable**
+
+``` php
+namespace Tests\Kernel;
+
+class ExceptionCanReportable extends Exception
+{
+    public function reportable(): bool
+    {
+        return true;
+    }
+
+    public function report(): void
+    {
+        $_SERVER['testExceptionReportable'] = 1;
+    }
+}
+```
+
+
+``` php
+public function testExceptionReportable(): void
+{
+    $app = new AppRuntime(new Container(), __DIR__.'/app');
+    $runtime = new Runtime11($app);
+    $e = new ExceptionCanReportable('hello world');
+    $this->assertArrayNotHasKey('testExceptionReportable', $_SERVER);
+    $this->assertNull($runtime->report($e));
+    $this->assertSame(1, $_SERVER['testExceptionReportable']);
+    unset($_SERVER['testExceptionReportable']);
+}
+```
+    
+## reportable 异常是否需要上报不可上报例子
+
+**fixture 定义**
+
+**Tests\Kernel\ExceptionCannotReportable**
+
+``` php
+namespace Tests\Kernel;
+
+class ExceptionCannotReportable extends Exception
+{
+    public function reportable(): bool
+    {
+        return false;
+    }
+
+    public function report(): void
+    {
+        $_SERVER['testExceptionReportableIsFalse'] = 1;
+    }
+}
+```
+
+
+``` php
+public function testExceptionReportableIsFalse(): void
+{
+    $app = new AppRuntime(new Container(), __DIR__.'/app');
+    $runtime = new Runtime11($app);
+    $e = new ExceptionCannotReportable('hello world');
+    $this->assertArrayNotHasKey('testExceptionReportableIsFalse', $_SERVER);
+    $this->assertNull($runtime->report($e));
+    $this->assertArrayNotHasKey('testExceptionReportableIsFalse', $_SERVER);
 }
 ```
     

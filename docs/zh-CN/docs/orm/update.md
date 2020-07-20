@@ -368,7 +368,7 @@ class DemoDatabaseEntity extends Entity
 ``` php
 public function testSaveWithProp(): void
 {
-    $entity = new DemoDatabaseEntity(['id' => 1]);
+    $entity = new DemoDatabaseEntity(['id' => 1], true);
     $entity->save(['name' => 'hello']);
 
     $data = <<<'eot'
@@ -422,13 +422,11 @@ public function testUpdateWithProp(): void
 ## update 更新快捷方式存在更新数据才能够保存
 
 ``` php
-public function testUpdateWithNoData(): void
+public function testUpdateWithNoDataAndDoNothing(): void
 {
-    $this->expectException(\RuntimeException::class);
-    $this->expectExceptionMessage('Entity `Tests\\Database\\Ddd\\Entity\\DemoDatabaseEntity` has no data need to be update.');
-
     $entity = new DemoDatabaseEntity(['id' => 1]);
-    $entity->update();
+    $this->assertInstanceof(DemoDatabaseEntity::class, $entity->update());
+    $this->assertNull($entity->flushData());
 }
 ```
     
@@ -486,7 +484,8 @@ public function testSaveWithCompositeId(): void
             ->insert([
                 'id1'     => 2,
                 'id2'     => 3,
-            ]));
+            ])
+    );
 
     $entity = new CompositeId();
     $entity->save(['id1' => 2, 'id2' => 3, 'name' => 'hello']);
@@ -509,5 +508,8 @@ public function testSaveWithCompositeId(): void
     );
 
     $entity->flush();
+
+    $sql = 'SQL: [173] UPDATE `composite_id` SET `composite_id`.`name` = :pdonamedparameter_name WHERE `composite_id`.`id1` = :composite_id_id1 AND `composite_id`.`id2` = :composite_id_id2 LIMIT 1 | Params:  3 | Key: Name: [23] :pdonamedparameter_name | paramno=0 | name=[23] ":pdonamedparameter_name" | is_param=1 | param_type=2 | Key: Name: [17] :composite_id_id1 | paramno=1 | name=[17] ":composite_id_id1" | is_param=1 | param_type=1 | Key: Name: [17] :composite_id_id2 | paramno=2 | name=[17] ":composite_id_id2" | is_param=1 | param_type=1 (UPDATE `composite_id` SET `composite_id`.`name` = \'hello\' WHERE `composite_id`.`id1` = 2 AND `composite_id`.`id2` = 3 LIMIT 1)';
+    $this->assertSame($sql, $entity->select()->getLastSql());
 }
 ```

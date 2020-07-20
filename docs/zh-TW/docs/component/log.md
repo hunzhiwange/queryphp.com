@@ -151,11 +151,17 @@ return [
             // 日志文件名时间格式化
             'name' => 'Y-m-d H',
 
-            // 日志文件大小限制,单位为字节 byte
-            'size' => 2097152,
-
             // 默认的日志路径
             'path' => Leevel::runtimePath('log'),
+
+            // 日志行时间格式化，支持微秒
+            'format' => 'Y-m-d H:i:s u',
+
+            // 日志文件权限
+            'file_permission' => null,
+
+            // 是否使用锁
+            'use_locking' => false,
         ],
 
         'syslog' => [
@@ -170,6 +176,9 @@ return [
 
             // 等级
             'level' => 'debug',
+
+            // 日志行事件格式化，支持微秒
+            'format' => 'Y-m-d H:i:s u',
         ],
     ],
 ];
@@ -198,6 +207,7 @@ QueryPHP 的日志如果启用了缓冲，会在日志数量达到缓冲数量�
 use Leevel\Filesystem\Helper;
 use Leevel\Log\File;
 use Leevel\Log\ILog;
+use Monolog\Logger;
 ```
 
 ## log 基本使用
@@ -255,8 +265,6 @@ public function all(?string $level = null): array;
 public function clear(?string $level = null): void;
 ```
 
-除了这些外，还有一些辅助方法如 `isMonolog`，因为 `Monolog` 非常流行，底层进行了一些封装。
-
 
 ``` php
 public function testBaseUse(string $level): void
@@ -279,10 +287,9 @@ public function testBaseUse(string $level): void
     $this->assertSame([], $log->all());
     $this->assertSame([], $log->all($level));
 
-    $this->assertFalse($log->isMonolog());
-    $this->assertNull($log->getMonolog());
+    $this->assertInstanceOf(Logger::class, $log->getMonolog());
 
-    Helper::deleteDirectory(__DIR__.'/cacheLog', true);
+    Helper::deleteDirectory(__DIR__.'/cacheLog');
 }
 ```
     
@@ -291,8 +298,7 @@ public function testBaseUse(string $level): void
 ``` php
 public function testLogFilterLevel(): void
 {
-    $log = $this->createFileConnect();
-    $log->setOption('levels', [ILog::INFO]);
+    $log = $this->createFileConnect(['levels' => [ILog::INFO]]);
     $log->log(ILog::INFO, 'foo', ['hello', 'world']);
     $log->log(ILog::DEBUG, 'foo', ['hello', 'world']);
     $this->assertSame([ILog::INFO => [[ILog::INFO, 'foo', ['hello', 'world']]]], $log->all());
@@ -304,8 +310,7 @@ public function testLogFilterLevel(): void
 ``` php
 public function testLogLevelNotFoundWithDefaultLevel(): void
 {
-    $log = $this->createFileConnect();
-    $log->setOption('levels', [ILog::DEBUG]);
+    $log = $this->createFileConnect(['levels' => [ILog::DEBUG]]);
     $log->log('notfound', 'foo', ['hello', 'world']);
     $this->assertSame([ILog::DEBUG => [[ILog::DEBUG, 'foo', ['hello', 'world']]]], $log->all());
     $log->flush();

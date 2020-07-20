@@ -104,7 +104,8 @@ public function testDecryptButExpired(): void
 public function testWithPublicAndPrimaryKey(): void
 {
     $encryption = new Encryption(
-        'encode-key', 'AES-256-CBC',
+        'encode-key',
+        'AES-256-CBC',
         file_get_contents(__DIR__.'/assert/rsa_private_key.pem'),
         file_get_contents(__DIR__.'/assert/rsa_public_key.pem')
     );

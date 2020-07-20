@@ -21,13 +21,14 @@ public function testCreateDirectory(): void
 
     $this->assertDirectoryNotExists($dir);
 
-    $this->assertTrue(Helper::createDirectory($dir));
+    Helper::createDirectory($dir);
 
     $this->assertDirectoryExists($dir);
 
-    $this->assertTrue(Helper::createDirectory($dir));
+    Helper::createDirectory($dir);
+    Helper::createDirectory($dir);
 
-    rmdir($dir);
+    Helper::deleteDirectory($dir);
 }
 ```
     
@@ -42,7 +43,7 @@ public function testDeleteDirectory(): void
 
     Helper::deleteDirectory($dir);
 
-    $this->assertTrue(Helper::createDirectory($dir));
+    Helper::createDirectory($dir);
 
     $this->assertDirectoryExists($dir);
 
@@ -58,48 +59,17 @@ public function testDeleteDirectory(): void
 }
 ```
     
-## copy_directory 复制目录
+## traverse_directory 遍历目录
 
 ``` php
-public function testCopyDirectory(): void
+public function testTraverseDirectory(): void
 {
-    $sourcePath = __DIR__.'/copyDirectory';
-    $sourceSubPath = __DIR__.'/copyDirectory/dir';
-    $targetPath = __DIR__.'/targetCopyDirectory';
-
-    $this->assertDirectoryNotExists($sourceSubPath);
-    $this->assertDirectoryNotExists($targetPath);
-
-    $this->assertTrue(Helper::createDirectory($sourceSubPath));
-
-    file_put_contents($testFile = $sourceSubPath.'/hello.txt', 'foo');
-
-    $this->assertTrue(is_file($testFile));
-
-    $this->assertSame('foo', file_get_contents($testFile));
-
-    Helper::copyDirectory($sourcePath, $targetPath);
-
-    $this->assertDirectoryExists($targetPath);
-    $this->assertDirectoryExists($targetPath.'/dir');
-    $this->assertTrue(is_file($targetPath.'/dir/hello.txt'));
-
-    Helper::deleteDirectory($sourcePath, true);
-    Helper::deleteDirectory($targetPath, true);
-}
-```
-    
-## list_directory 浏览目录
-
-``` php
-public function testListDirectory(): void
-{
-    $sourcePath = __DIR__.'/listDirectory';
-    $sourceSubPath = __DIR__.'/listDirectory/dir';
+    $sourcePath = __DIR__.'/traverseDirectory';
+    $sourceSubPath = __DIR__.'/traverseDirectory/dir';
 
     $this->assertDirectoryNotExists($sourceSubPath);
 
-    $this->assertTrue(Helper::createDirectory($sourceSubPath));
+    Helper::createDirectory($sourceSubPath);
 
     file_put_contents($testFile = $sourceSubPath.'/hello.txt', 'foo');
 
@@ -110,18 +80,18 @@ public function testListDirectory(): void
     $filesAndDirs = [];
     $filesAndDirs2 = [];
 
-    Helper::listDirectory($sourcePath, true, function ($item) use (&$filesAndDirs) {
+    Helper::traverseDirectory($sourcePath, true, function ($item) use (&$filesAndDirs) {
         $filesAndDirs[] = $item->getFileName();
     });
 
-    Helper::listDirectory($sourcePath, true, function ($item) use (&$filesAndDirs2) {
+    Helper::traverseDirectory($sourcePath, true, function ($item) use (&$filesAndDirs2) {
         $filesAndDirs2[] = $item->getFileName();
     }, ['hello.txt']);
 
     $this->assertSame(['dir', 'hello.txt'], $filesAndDirs);
     $this->assertSame(['dir'], $filesAndDirs2);
 
-    Helper::deleteDirectory($sourcePath, true);
+    Helper::deleteDirectory($sourcePath);
 }
 ```
     
@@ -137,16 +107,14 @@ public function testTidyPath(): void
 }
 ```
     
-## is_absolute 判断是否为绝对路径
+## is_absolute_path 判断是否为绝对路径
 
 ``` php
-public function testIsAbsolute(): void
+public function testIsAbsolutePath(): void
 {
-    $this->assertTrue(Helper::isAbsolute('c://'));
-
-    $this->assertTrue(Helper::isAbsolute('/path/hello'));
-
-    $this->assertFalse(Helper::isAbsolute('hello'));
+    $this->assertTrue(Helper::isAbsolutePath('c://'));
+    $this->assertTrue(Helper::isAbsolutePath('/path/hello'));
+    $this->assertFalse(Helper::isAbsolutePath('hello'));
 }
 ```
     
@@ -171,7 +139,7 @@ public function testCreateFile(): void
 
     $this->assertDirectoryNotExists($sourcePath);
 
-    $this->assertTrue(Helper::createDirectory($sourcePath));
+    Helper::createDirectory($sourcePath);
 
     $this->assertFalse(is_file($file));
 
@@ -179,7 +147,7 @@ public function testCreateFile(): void
 
     $this->assertTrue(is_file($file));
 
-    Helper::deleteDirectory($sourcePath, true);
+    Helper::deleteDirectory($sourcePath);
 }
 ```
     
@@ -193,16 +161,5 @@ public function testGetExtension(): void
     $this->assertSame('pHp', Helper::getExtension($file));
     $this->assertSame('PHP', Helper::getExtension($file, 1));
     $this->assertSame('php', Helper::getExtension($file, 2));
-}
-```
-    
-## get_name 获取文件名字
-
-``` php
-public function testGetName(): void
-{
-    $file = __DIR__.'/HelperTest.pHp';
-
-    $this->assertSame('HelperTest', Helper::getName($file));
 }
 ```

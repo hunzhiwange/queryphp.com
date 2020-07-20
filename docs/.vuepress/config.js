@@ -1,8 +1,15 @@
-const path = require('path')
+const { description } = require('../../package')
 
 module.exports = {
-  dest: 'vuepress',
-  port: 8088,
+  /**
+   * Ref：https://v1.vuepress.vuejs.org/config/#title
+   */
+  title: 'Vuepress Docs Boilerplate',
+  /**
+   * Ref：https://v1.vuepress.vuejs.org/config/#description
+   */
+  description: description,
+
   locales: {
     '/': {
       lang: 'en-Us',
@@ -20,152 +27,129 @@ module.exports = {
       description: '高性能 PHP 漸進式協程框架引擎.'
     }
   },
+
+  /**
+   * Extra tags to be injected to the page HTML `<head>`
+   *
+   * ref：https://v1.vuepress.vuejs.org/config/#head
+   */
   head: [
-    ['link', { rel: 'icon', href: `/logo.png` }],
-    ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
-    ['link', { rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` }],
-    ['link', { rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg', color: '#3eaf7c' }],
-    ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
-    ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
   ],
+
+  /**
+   * Theme configuration, here is the default theme configuration for VuePress.
+   *
+   * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
+   */
   themeConfig: {
     repo: 'hunzhiwange/queryphp.com',
-    editLinks: true,
-    docsDir: 'docs',
-    // #697 Provided by the official algolia team.
-    // algolia: {
-    //   apiKey: '',
-    //   indexName: ''
-    // },
+    editLinks: false,
+    docsDir: '',
+    editLinkText: '',
+    lastUpdated: false,
+    nav: [
+      {
+        text: 'Guide',
+        link: '/guide/',
+      },
+      {
+        text: 'Config',
+        link: '/config/'
+      },
+      {
+        text: 'VuePress',
+        link: 'https://v1.vuepress.vuejs.org'
+      }
+    ],
+    //sidebar: {
+      // '/guide/': [
+      //   {
+      //     title: 'Guide',
+      //     collapsable: false,
+      //     children: [
+      //       '',
+      //       'using-vue',
+      //     ]
+      //   }
+      // ],
+    //},
+
     locales: {
       '/': {
-        label: 'English',
         selectText: 'Languages',
+        label: 'English',
+        ariaLabel: 'Languages',
         editLinkText: 'View this page on GitHub',
-        lastUpdated: 'Last Updated',
+        serviceWorker: {
+          updatePopup: {
+            message: "New content is available.",
+            buttonText: "Refresh"
+          }
+        },
+        algolia: {},
         nav: require('./nav/en-US'),
         sidebar: {
-          '/guide/': genSidebarConfig({title1:'Guide'}),
-          '/docs/': genSidebarConfigDoc({
-            title1: 'Preface',
-            title2: 'Started',
-            title3:'Architecture', 
-            title4:'Routing',
-            title5:'Template',
-            title6:'Database',
-            title7:'Add',
-            title8:'Delete',
-            title9:'Update',
-            title10:'Query',
-            title11:'Query lang',
-            title12:'ORM',
-            title13:'Component',
-            title14:'Developer',
-            title15:'Validate',
-            title16:'Option',
-            title17:'Cache',
-            title18:'Swoole',
-            title19:'Auth',
-            title20:'Encryption',
-            title21:'Filesystem',
-            title22:'Console',
-            title23:'Kernel',
-            title24:'Guide',
-            title25:'Test',
-          }),
+          '/': [/* ... */],
+          '/nested/': [/* ... */]
         }
       },
       '/zh-CN/': {
-        label: '简体中文',
+        // 多语言下拉菜单的标题
         selectText: '选择语言',
+        // 该语言在下拉菜单中的标签
+        label: '简体中文',
+        // 编辑链接文字
         editLinkText: '在 GitHub 上查看此页',
-        lastUpdated: '上次更新',
+        // Service Worker 的配置
+        serviceWorker: {
+          updatePopup: {
+            message: "发现新内容可用.",
+            buttonText: "刷新"
+          }
+        },
+        // 当前 locale 的 algolia docsearch 选项
+        algolia: {},
         nav: require('./nav/zh-CN'),
         sidebar: {
-          '/zh-CN/guide/': genSidebarConfig({title1:'指南'}),
-          '/zh-CN/docs/': genSidebarConfigDoc({
-            title1: '序言',
-            title2: '入门',
-            title3:'架构', 
-            title4:'路由',
-            title5:'模板',
-            title6:'数据库',
-            title7:'新增',
-            title8:'删除',
-            title9:'更新',
-            title10:'查询',
-            title11:'查询语言',
-            title12:'ORM',
-            title13:'组件',
-            title14:'开发者',
-            title15:'验证器',
-            title16:'配置',
-            title17:'缓存',
-            title18:'Swoole',
-            title19:'认证',
-            title20:'加密',
-            title21:'文件系统',
-            title22:'命令行',
-            title23:'内核',
-            title24:'指南',
-            title25:'测试',
-          }),
+          '/zh/': [/* ... */],
+          '/zh/nested/': [/* ... */]
         }
       },
       '/zh-TW/': {
-        label: '繁体中文',
-        selectText: '选择语言',
-        editLinkText: '在 GitHub 上查看此页',
-        lastUpdated: '上次更新',
+        // 多语言下拉菜单的标题
+        selectText: '選擇語言',
+        // 该语言在下拉菜单中的标签
+        label: '繁體中文',
+        // 编辑链接文字
+        editLinkText: '在 GitHub 上查看此頁',
+        // Service Worker 的配置
+        serviceWorker: {
+          updatePopup: {
+            message: "發現新內容可用.",
+            buttonText: "重繪"
+          }
+        },
+        // 当前 locale 的 algolia docsearch 选项
+        algolia: {},
         nav: require('./nav/zh-TW'),
         sidebar: {
-          '/zh-TW/guide/': genSidebarConfig({title1:'指南'}),
-          '/zh-TW/docs/': genSidebarConfigDoc({
-            title1: '序言',
-            title2: '入門',
-            title3:'架構', 
-            title4:'路由',
-            title5:'模板',
-            title6:'資料庫',
-            title7:'新增',
-            title8:'删除',
-            title9:'更新',
-            title10:'査詢',
-            title11:'査詢語言',
-            title12:'ORM',
-            title13:'組件',
-            title14:'開發者',
-            title15:'驗證器',
-            title16:'配寘',
-            title17:'緩存',
-            title18:'Swoole',
-            title19:'認證',
-            title20:'加密',
-            title21:'文件系統',
-            title22:'命令行',
-            title23:'內核',
-            title24:'指南',
-            title25:'測試',
-          }),
+          '/zh/': [/* ... */],
+          '/zh/nested/': [/* ... */]
         }
-      }
-    }
-  },
-  plugins: {
-    '@vuepress/i18n-ui': false,
-    '@vuepress/back-to-top': true,
-    '@vuepress/pwa': {
-      serviceWorker: true,
-      updatePopup: true
+      },
     },
-    '@vuepress/plugin-medium-zoom': true,
-    //'@vuepress/notification': true,
-    'flowchart': true
   },
-  clientRootMixin: path.resolve(__dirname, 'mixin.js')
+
+  /**
+   * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
+   */
+  plugins: [
+    '@vuepress/plugin-back-to-top',
+    '@vuepress/plugin-medium-zoom',
+  ]
 }
 
 function genSidebarConfig (title) {

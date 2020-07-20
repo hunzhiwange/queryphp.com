@@ -163,7 +163,8 @@ public function testBaseUse(): void
                 'user_id'   => 1,
                 'summary'   => 'Say hello to the world.',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -172,7 +173,8 @@ public function testBaseUse(): void
             ->insert([
                 'post_id' => 1,
                 'content' => 'I am content with big data.',
-            ]));
+            ])
+    );
 
     $post = Post::select()->where('id', 1)->findOne();
 

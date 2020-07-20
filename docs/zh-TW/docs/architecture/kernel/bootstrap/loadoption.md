@@ -201,19 +201,19 @@ return [
     'app' => [
         'environment' => 'development',
         'debug'       => false,
-        '_env'        => [
+        ':env'        => [
             'environment'  => 'development',
             'debug'        => true,
             'app_auth_key' => '7becb888f518b20224a988906df51e05',
             'foo'          => null,
         ],
-        '_deferred_providers' => [
+        ':deferred_providers' => [
             0 => [
             ],
             1 => [
             ],
         ],
-        '_composer' => [
+        ':composer' => [
             'providers' => [
             ],
             'ignores' => [
@@ -264,7 +264,7 @@ public function testLoadCached(): void
 
     $this->assertSame('development', $option->get('environment'));
     $this->assertSame('bar', $option->get('demo\\foo'));
-    $this->assertNull($option->get('_env.foo'));
-    $this->assertTrue($option->get('_env.debug'));
+    $this->assertNull($option->get(':env.foo'));
+    $this->assertTrue($option->get(':env.debug'));
 }
 ```

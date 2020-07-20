@@ -9,6 +9,15 @@
 `func` 是一个全局函数随着 `kernel` 包自动加载，可以在业务中随时使用，组件开发中请使用原生 `class_exists` 导入函数。
 
 
+**Uses**
+
+``` php
+<?php
+
+use Error;
+use Exception;
+```
+
 ## 分组函数
 
 ``` php

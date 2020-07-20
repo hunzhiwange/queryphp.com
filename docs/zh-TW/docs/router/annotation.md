@@ -96,6 +96,7 @@ class RouterProviderAnnotation extends RouterProvider
         '/api/v4' => [
             'middlewares' => 'notFound',
         ],
+        'newPrefix/v1'    => [],
     ];
 
     public function bootstrap(): void
@@ -173,7 +174,8 @@ class RouterProviderAnnotation extends RouterProvider
         "\/api\/v1",
         "\/api\/v2",
         "\/api\/v3",
-        "\/api\/v4"
+        "\/api\/v4",
+        "\/newPrefix\/v1"
     ],
     "routers": {
         "get": {
@@ -319,6 +321,24 @@ class RouterProviderAnnotation extends RouterProvider
                     "map": [
                         {
                             "2": "\/api\/notInGroup\/petLeevel\/{petId:[A-Za-z]+}\/"
+                        }
+                    ]
+                }
+            },
+            "n": {
+                "\/newPrefix\/v1": {
+                    "\/newPrefix\/v1\/petLeevel\/{petId:[A-Za-z]+}\/": {
+                        "bind": "\\Tests\\Router\\Controllers\\Annotation\\NewPrefix",
+                        "var": [
+                            "petId"
+                        ]
+                    },
+                    "regex": [
+                        "~^(?|\/newPrefix\/v1\/petLeevel\/([A-Za-z]+)\/)$~x"
+                    ],
+                    "map": [
+                        {
+                            "2": "\/newPrefix\/v1\/petLeevel\/{petId:[A-Za-z]+}\/"
                         }
                     ]
                 }

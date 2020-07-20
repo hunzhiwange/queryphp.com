@@ -64,16 +64,16 @@ public function testBaseUse(): void
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->toArray()
-            )
+        $this->varJson(
+            $page->toArray()
+        )
     );
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->jsonSerialize()
-            )
+        $this->varJson(
+            $page->jsonSerialize()
+        )
     );
 
     $data = <<<'eot'

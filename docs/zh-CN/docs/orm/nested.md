@@ -181,7 +181,8 @@ public function testBase(): void
                     'user_id'   => 1,
                     'summary'   => 'Say hello to the world.',
                     'delete_at' => 0,
-                ]));
+                ])
+        );
     }
 
     $this->assertSame(
@@ -190,7 +191,8 @@ public function testBase(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -198,7 +200,8 @@ public function testBase(): void
             ->table('role')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -206,7 +209,8 @@ public function testBase(): void
             ->table('role')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -214,7 +218,8 @@ public function testBase(): void
             ->table('role')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -223,7 +228,8 @@ public function testBase(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 1,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -232,7 +238,8 @@ public function testBase(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 3,
-            ]));
+            ])
+    );
 
     $posts = Post::eager(['user.role'])
         ->limit(5)

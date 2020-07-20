@@ -159,6 +159,15 @@ class User extends Entity
             self::MIDDLE_TARGET_KEY => 'role_id',
             self::RELATION_SCOPE    => 'middleField',
         ],
+        'role_middle_only_soft_deleted_and_middle_field_and_other_table_condition' => [
+            self::MANY_MANY         => RoleSoftDeleted::class,
+            self::MIDDLE_ENTITY     => UserRoleSoftDeleted::class,
+            self::SOURCE_KEY        => 'id',
+            self::TARGET_KEY        => 'id',
+            self::MIDDLE_SOURCE_KEY => 'user_id',
+            self::MIDDLE_TARGET_KEY => 'role_id',
+            self::RELATION_SCOPE    => 'middleOnlySoftDeletedAndMiddleFieldAndOtherTableCondition',
+        ],
     ];
 
     protected function relationScopeWithSoftDeleted(ManyMany $relation): void
@@ -174,6 +183,15 @@ class User extends Entity
     protected function relationScopeMiddleField(ManyMany $relation): void
     {
         $relation->middleField(['create_at', 'middle_id' => 'id']);
+    }
+
+    protected function relationScopeMiddleOnlySoftDeletedAndMiddleFieldAndOtherTableCondition(ManyMany $relation): void
+    {
+        $relation
+            ->middleOnlySoftDeleted()
+            ->middleField(['create_at', 'middle_id' => 'id'])
+            ->setColumns('id,name')
+            ->where('id', '>', 3);
     }
 
     private function relationScopeFoundButPrivate(ManyMany $relation): void
@@ -252,7 +270,8 @@ public function testBaseUse(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -260,7 +279,8 @@ public function testBaseUse(): void
             ->table('role')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -268,7 +288,8 @@ public function testBaseUse(): void
             ->table('role')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -276,7 +297,8 @@ public function testBaseUse(): void
             ->table('role')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -285,7 +307,8 @@ public function testBaseUse(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 1,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -294,7 +317,8 @@ public function testBaseUse(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 3,
-            ]));
+            ])
+    );
 
     $user = User::select()->where('id', 1)->findOne();
 
@@ -364,7 +388,8 @@ public function testEager(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -372,7 +397,8 @@ public function testEager(): void
             ->table('role')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -380,7 +406,8 @@ public function testEager(): void
             ->table('role')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -388,7 +415,8 @@ public function testEager(): void
             ->table('role')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -397,7 +425,8 @@ public function testEager(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 1,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -406,7 +435,8 @@ public function testEager(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 3,
-            ]));
+            ])
+    );
 
     $user = User::eager(['role'])
         ->where('id', 1)
@@ -477,7 +507,8 @@ public function testEagerWithCondition(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -485,7 +516,8 @@ public function testEagerWithCondition(): void
             ->table('role')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -493,7 +525,8 @@ public function testEagerWithCondition(): void
             ->table('role')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -501,7 +534,8 @@ public function testEagerWithCondition(): void
             ->table('role')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -510,7 +544,8 @@ public function testEagerWithCondition(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 1,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -519,7 +554,8 @@ public function testEagerWithCondition(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 3,
-            ]));
+            ])
+    );
 
     $user = User::eager(['role' => function (Relation $select) {
         $select->where('id', '>', 99999);
@@ -554,7 +590,8 @@ public function testRelationAsMethod(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -562,7 +599,8 @@ public function testRelationAsMethod(): void
             ->table('role')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -570,7 +608,8 @@ public function testRelationAsMethod(): void
             ->table('role')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -578,7 +617,8 @@ public function testRelationAsMethod(): void
             ->table('role')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -587,7 +627,8 @@ public function testRelationAsMethod(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 1,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -596,7 +637,8 @@ public function testRelationAsMethod(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 3,
-            ]));
+            ])
+    );
 
     $roleRelation = User::make()->relation('role');
 
@@ -630,7 +672,8 @@ public function testRelationDataWasNotFound(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -638,7 +681,8 @@ public function testRelationDataWasNotFound(): void
             ->table('role')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -646,7 +690,8 @@ public function testRelationDataWasNotFound(): void
             ->table('role')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -654,7 +699,8 @@ public function testRelationDataWasNotFound(): void
             ->table('role')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $user = User::select()->where('id', 1)->findOne();
 
@@ -795,6 +841,15 @@ class User extends Entity
             self::MIDDLE_TARGET_KEY => 'role_id',
             self::RELATION_SCOPE    => 'middleField',
         ],
+        'role_middle_only_soft_deleted_and_middle_field_and_other_table_condition' => [
+            self::MANY_MANY         => RoleSoftDeleted::class,
+            self::MIDDLE_ENTITY     => UserRoleSoftDeleted::class,
+            self::SOURCE_KEY        => 'id',
+            self::TARGET_KEY        => 'id',
+            self::MIDDLE_SOURCE_KEY => 'user_id',
+            self::MIDDLE_TARGET_KEY => 'role_id',
+            self::RELATION_SCOPE    => 'middleOnlySoftDeletedAndMiddleFieldAndOtherTableCondition',
+        ],
     ];
 
     protected function relationScopeWithSoftDeleted(ManyMany $relation): void
@@ -810,6 +865,15 @@ class User extends Entity
     protected function relationScopeMiddleField(ManyMany $relation): void
     {
         $relation->middleField(['create_at', 'middle_id' => 'id']);
+    }
+
+    protected function relationScopeMiddleOnlySoftDeletedAndMiddleFieldAndOtherTableCondition(ManyMany $relation): void
+    {
+        $relation
+            ->middleOnlySoftDeleted()
+            ->middleField(['create_at', 'middle_id' => 'id'])
+            ->setColumns('id,name')
+            ->where('id', '>', 3);
     }
 
     private function relationScopeFoundButPrivate(ManyMany $relation): void
@@ -898,7 +962,8 @@ public function testSoftDeleted(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -906,7 +971,8 @@ public function testSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -914,7 +980,8 @@ public function testSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -922,7 +989,8 @@ public function testSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -931,7 +999,8 @@ public function testSoftDeleted(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 1,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -940,7 +1009,8 @@ public function testSoftDeleted(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 3,
-            ]));
+            ])
+    );
 
     $user = User::select()->where('id', 1)->findOne();
 
@@ -1040,7 +1110,8 @@ public function testWithMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -1048,7 +1119,8 @@ public function testWithMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -1056,7 +1128,8 @@ public function testWithMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -1064,7 +1137,8 @@ public function testWithMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -1073,7 +1147,8 @@ public function testWithMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 1,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -1083,7 +1158,8 @@ public function testWithMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
                 'user_id'   => 1,
                 'role_id'   => 3,
                 'delete_at' => time(),
-            ]));
+            ])
+    );
 
     $user = User::select()->where('id', 1)->findOne();
 
@@ -1183,7 +1259,8 @@ public function testOnlyMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -1191,7 +1268,8 @@ public function testOnlyMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -1199,7 +1277,8 @@ public function testOnlyMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         3,
@@ -1207,7 +1286,8 @@ public function testOnlyMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->table('role_soft_deleted')
             ->insert([
                 'name' => '会员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -1216,7 +1296,8 @@ public function testOnlyMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 1,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -1226,7 +1307,8 @@ public function testOnlyMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
                 'user_id'   => 1,
                 'role_id'   => 3,
                 'delete_at' => time(),
-            ]));
+            ])
+    );
 
     $user = User::select()->where('id', 1)->findOne();
 
@@ -1284,6 +1366,124 @@ public function testOnlyMiddleSoftDeletedAndMiddleEntityHasSoftDeleted(): void
 }
 ```
     
+## middleOnlySoftDeleted.middleField.where 组合条件查询例子
+
+通过关联作用域来设置组合查询条件。
+
+**fixture 定义**
+
+``` php
+# Tests\Database\Ddd\Entity\Relation\User::relationScopeMiddleOnlySoftDeletedAndMiddleFieldAndOtherTableCondition
+protected function relationScopeMiddleOnlySoftDeletedAndMiddleFieldAndOtherTableCondition(ManyMany $relation): void
+{
+    $relation
+        ->middleOnlySoftDeleted()
+        ->middleField(['create_at', 'middle_id' => 'id'])
+        ->setColumns('id,name')
+        ->where('id', '>', 3);
+}
+```
+
+
+``` php
+public function testMiddleOnlySoftDeletedAndMiddleFieldAndOtherTableCondition(): void
+{
+    $user = User::select()->where('id', 1)->findOne();
+
+    $this->assertInstanceof(User::class, $user);
+    $this->assertNull($user->id);
+
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('user')
+            ->insert([
+                'name' => 'niu',
+            ])
+    );
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('role_soft_deleted')
+            ->insert([
+                'name' => '管理员',
+            ])
+    );
+
+    $this->assertSame(
+        2,
+        $connect
+            ->table('role_soft_deleted')
+            ->insert([
+                'name' => '版主',
+            ])
+    );
+
+    $this->assertSame(
+        3,
+        $connect
+            ->table('role_soft_deleted')
+            ->insert([
+                'name' => '会员',
+            ])
+    );
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('user_role_soft_deleted')
+            ->insert([
+                'user_id' => 1,
+                'role_id' => 1,
+            ])
+    );
+
+    $this->assertSame(
+        2,
+        $connect
+            ->table('user_role_soft_deleted')
+            ->insert([
+                'user_id'   => 1,
+                'role_id'   => 3,
+                'delete_at' => time(),
+            ])
+    );
+
+    $user = User::select()->where('id', 1)->findOne();
+
+    $sql = <<<'eot'
+        SQL: [64] SELECT `user`.* FROM `user` WHERE `user`.`id` = :user_id LIMIT 1 | Params:  1 | Key: Name: [8] :user_id | paramno=0 | name=[8] ":user_id" | is_param=1 | param_type=1 (SELECT `user`.* FROM `user` WHERE `user`.`id` = 1 LIMIT 1)
+        eot;
+    $this->assertSame(
+        $sql,
+        User::select()->getLastSql(),
+    );
+
+    $this->assertSame(1, $user->id);
+    $this->assertSame(1, $user['id']);
+    $this->assertSame(1, $user->getId());
+    $this->assertSame('niu', $user->name);
+    $this->assertSame('niu', $user['name']);
+    $this->assertSame('niu', $user->getName());
+
+    $role = $user->roleMiddleOnlySoftDeletedAndMiddleFieldAndOtherTableCondition;
+
+    $sql = <<<'eot'
+        SQL: [655] SELECT `role_soft_deleted`.`id`,`role_soft_deleted`.`name`,`user_role_soft_deleted`.`create_at`,`user_role_soft_deleted`.`id` AS `middle_id`,`user_role_soft_deleted`.`role_id` AS `middle_role_id`,`user_role_soft_deleted`.`user_id` AS `middle_user_id` FROM `role_soft_deleted` INNER JOIN `user_role_soft_deleted` ON `user_role_soft_deleted`.`role_id` = `role_soft_deleted`.`id` AND `user_role_soft_deleted`.`delete_at` > :user_role_soft_deleted_delete_at WHERE `role_soft_deleted`.`delete_at` = :role_soft_deleted_delete_at AND `role_soft_deleted`.`id` > :role_soft_deleted_id AND `user_role_soft_deleted`.`user_id` IN (:user_role_soft_deleted_user_id_in0) | Params:  4 | Key: Name: [33] :user_role_soft_deleted_delete_at | paramno=0 | name=[33] ":user_role_soft_deleted_delete_at" | is_param=1 | param_type=1 | Key: Name: [28] :role_soft_deleted_delete_at | paramno=1 | name=[28] ":role_soft_deleted_delete_at" | is_param=1 | param_type=1 | Key: Name: [21] :role_soft_deleted_id | paramno=2 | name=[21] ":role_soft_deleted_id" | is_param=1 | param_type=1 | Key: Name: [35] :user_role_soft_deleted_user_id_in0 | paramno=3 | name=[35] ":user_role_soft_deleted_user_id_in0" | is_param=1 | param_type=1 (SELECT `role_soft_deleted`.`id`,`role_soft_deleted`.`name`,`user_role_soft_deleted`.`create_at`,`user_role_soft_deleted`.`id` AS `middle_id`,`user_role_soft_deleted`.`role_id` AS `middle_role_id`,`user_role_soft_deleted`.`user_id` AS `middle_user_id` FROM `role_soft_deleted` INNER JOIN `user_role_soft_deleted` ON `user_role_soft_deleted`.`role_id` = `role_soft_deleted`.`id` AND `user_role_soft_deleted`.`delete_at` > 0 WHERE `role_soft_deleted`.`delete_at` = 0 AND `role_soft_deleted`.`id` > 3 AND `user_role_soft_deleted`.`user_id` IN (1))
+        eot;
+    $this->assertSame(
+        $sql,
+        User::select()->getLastSql(),
+    );
+
+    $this->assertInstanceof(Collection::class, $role);
+    $this->assertFalse(isset($role[0]));
+}
+```
+    
 ## middleField 中间实体查询字段
 
 通过关联作用域来设置中间实体查询字段。
@@ -1315,7 +1515,8 @@ public function testMiddleField(): void
             ->table('user')
             ->insert([
                 'name' => 'niu',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -1323,7 +1524,8 @@ public function testMiddleField(): void
             ->table('role')
             ->insert([
                 'name' => '管理员',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -1331,7 +1533,8 @@ public function testMiddleField(): void
             ->table('role')
             ->insert([
                 'name' => '版主',
-            ]));
+            ])
+    );
 
     $this->assertSame(
         1,
@@ -1340,7 +1543,8 @@ public function testMiddleField(): void
             ->insert([
                 'user_id' => 1,
                 'role_id' => 2,
-            ]));
+            ])
+    );
 
     $user = User::select()->where('id', 1)->findOne();
 

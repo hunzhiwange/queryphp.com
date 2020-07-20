@@ -49,6 +49,7 @@ protected function createDatabaseManager(): Manager
                         PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
                         PDO::ATTR_STRINGIFY_FETCHES => false,
                         PDO::ATTR_EMULATE_PREPARES  => false,
+                        PDO::ATTR_TIMEOUT           => 30,
                     ],
                     'separate'           => false,
                     'distributed'        => false,
@@ -113,7 +114,8 @@ public function testBaseUse(): void
 
     $data = ['name' => 'tom', 'content' => 'I love movie.'];
 
-    $this->assertSame(1,
+    $this->assertSame(
+        1,
         $manager
             ->table('guest_book')
             ->insert($data)
@@ -154,6 +156,7 @@ public function testParseDatabaseOptionDistributedIsTrue(): void
             PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
             PDO::ATTR_STRINGIFY_FETCHES => false,
             PDO::ATTR_EMULATE_PREPARES  => false,
+            PDO::ATTR_TIMEOUT           => 30,
         ],
         'separate'           => false,
         'distributed'        => true,
@@ -180,7 +183,8 @@ public function testParseDatabaseOptionDistributedIsTrue(): void
                     "8": 0,
                     "11": 0,
                     "17": false,
-                    "20": false
+                    "20": false,
+                    "2": 30
                 }
             },
             "slave": [
@@ -196,7 +200,8 @@ public function testParseDatabaseOptionDistributedIsTrue(): void
                         "8": 0,
                         "11": 0,
                         "17": false,
-                        "20": false
+                        "20": false,
+                        "2": 30
                     }
                 }
             ]
@@ -233,6 +238,7 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
             PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
             PDO::ATTR_STRINGIFY_FETCHES => false,
             PDO::ATTR_EMULATE_PREPARES  => false,
+            PDO::ATTR_TIMEOUT           => 30,
         ],
         'separate'           => false,
         'distributed'        => true,
@@ -262,7 +268,8 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
                     "8": 0,
                     "11": 0,
                     "17": false,
-                    "20": false
+                    "20": false,
+                    "2": 30
                 }
             },
             "slave": [
@@ -278,7 +285,8 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
                         "8": 0,
                         "11": 0,
                         "17": false,
-                        "20": false
+                        "20": false,
+                        "2": 30
                     }
                 },
                 {
@@ -293,7 +301,8 @@ public function testParseDatabaseOptionDistributedIsTrueWithTwoDimensionalArray(
                         "8": 0,
                         "11": 0,
                         "17": false,
-                        "20": false
+                        "20": false,
+                        "2": 30
                     }
                 }
             ]
@@ -335,6 +344,7 @@ public function testParseDatabaseOptionMasterAndSlaveMustBeAnArray(): void
             PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
             PDO::ATTR_STRINGIFY_FETCHES => false,
             PDO::ATTR_EMULATE_PREPARES  => false,
+            PDO::ATTR_TIMEOUT           => 30,
         ],
         'separate'           => false,
         'distributed'        => true,

@@ -10,6 +10,7 @@
 <?php
 
 use I18nMock;
+use Leevel\Cache\Manager;
 use Leevel\Collection\Collection;
 use Leevel\Database\Condition;
 use Leevel\Database\Page;
@@ -688,16 +689,16 @@ public function testPage(): void
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->toArray()['page']
-            )
+        $this->varJson(
+            $page->toArray()['page']
+        )
     );
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->jsonSerialize()['page']
-            )
+        $this->varJson(
+            $page->jsonSerialize()['page']
+        )
     );
 
     $data = <<<'eot'
@@ -793,16 +794,16 @@ public function testPageWithCondition(): void
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->toArray()['page']
-            )
+        $this->varJson(
+            $page->toArray()['page']
+        )
     );
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->jsonSerialize()['page']
-            )
+        $this->varJson(
+            $page->jsonSerialize()['page']
+        )
     );
 
     $data = <<<'eot'
@@ -892,16 +893,16 @@ public function testPageMacro(): void
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->toArray()['page']
-            )
+        $this->varJson(
+            $page->toArray()['page']
+        )
     );
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->jsonSerialize()['page']
-            )
+        $this->varJson(
+            $page->jsonSerialize()['page']
+        )
     );
 
     $data = <<<'eot'
@@ -991,16 +992,16 @@ public function testPagePrevNext(): void
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->toArray()['page']
-            )
+        $this->varJson(
+            $page->toArray()['page']
+        )
     );
 
     $this->assertSame(
         $data,
-            $this->varJson(
-                $page->jsonSerialize()['page']
-            )
+        $this->varJson(
+            $page->jsonSerialize()['page']
+        )
     );
 
     $data = <<<'eot'
@@ -1126,6 +1127,7 @@ public function testCache(): void
     $cacheDir = dirname(__DIR__).'/databaseCacheManager';
     $cacheFile = $cacheDir.'/testcachekey.php';
 
+    $this->assertInstanceof(Manager::class, $manager->getCache());
     $result = $manager
         ->table('guest_book')
         ->where('id', 2)

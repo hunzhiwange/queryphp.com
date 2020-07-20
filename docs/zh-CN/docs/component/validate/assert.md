@@ -12,6 +12,7 @@
 <?php
 
 use Leevel\Validate\Assert;
+use Leevel\Validate\AssertException;
 ```
 
 ## 基本断言测试

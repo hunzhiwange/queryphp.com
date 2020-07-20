@@ -40,7 +40,7 @@ public function testBaseUse(): void
 
     $option = new Option([
         'app' => [
-            '_composer' => [
+            ':composer' => [
                 'i18ns' => [
                     'extend',
                 ],
@@ -142,7 +142,7 @@ public function testLoadCached(): void
 
     $option = new Option([
         'app' => [
-            '_composer' => [
+            ':composer' => [
                 'i18ns' => [
                     'extend',
                 ],
@@ -176,6 +176,6 @@ public function testLoadCached(): void
     $this->assertSame('Total 5', $i18n->gettext('共 %d 条', 5));
     $this->assertSame('Go to', $i18n->gettext('前往'));
 
-    Helper::deleteDirectory($appPath.'/bootstrap', true);
+    Helper::deleteDirectory($appPath.'/bootstrap');
 }
 ```

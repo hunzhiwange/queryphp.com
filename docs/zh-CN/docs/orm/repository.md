@@ -41,7 +41,8 @@ public function testBase(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $repository = new Repository(new Post());
 
@@ -72,7 +73,8 @@ public function testFindEntity(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $repository = new Repository(new Post());
 
@@ -102,7 +104,8 @@ public function testFindOrFail(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $repository = new Repository(new Post());
 
@@ -483,7 +486,8 @@ public function testCall(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $repository = new Repository(new Post());
 
@@ -538,13 +542,8 @@ public function testCreateTwice(): void
 ## updateEntity 更新实体
 
 ``` php
-public function testUpdateTwice(): void
+public function testUpdateTwiceAndDoNothing(): void
 {
-    $this->expectException(\RuntimeException::class);
-    $this->expectExceptionMessage(
-        'Entity `Tests\\Database\\Ddd\\Entity\\Relation\\Post` has no data need to be update.'
-    );
-
     $connect = $this->createDatabaseConnect();
 
     $this->assertSame(
@@ -556,15 +555,15 @@ public function testUpdateTwice(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $repository = new Repository(new Post());
-    $repository->updateEntity($post = new Post(['id' => 1, 'title' => 'new title']));
+    $this->assertSame(1, $repository->updateEntity($post = new Post(['id' => 1, 'title' => 'new title'])));
 
-    $this->assertSame('SQL: [88] UPDATE `post` SET `post`.`title` = :pdonamedparameter_title WHERE `post`.`id` = :post_id | Params:  2 | Key: Name: [24] :pdonamedparameter_title | paramno=0 | name=[24] ":pdonamedparameter_title" | is_param=1 | param_type=2 | Key: Name: [8] :post_id | paramno=1 | name=[8] ":post_id" | is_param=1 | param_type=1 (UPDATE `post` SET `post`.`title` = \'new title\' WHERE `post`.`id` = 1)', $repository->getLastSql());
-
+    $this->assertSame('SQL: [96] UPDATE `post` SET `post`.`title` = :pdonamedparameter_title WHERE `post`.`id` = :post_id LIMIT 1 | Params:  2 | Key: Name: [24] :pdonamedparameter_title | paramno=0 | name=[24] ":pdonamedparameter_title" | is_param=1 | param_type=2 | Key: Name: [8] :post_id | paramno=1 | name=[8] ":post_id" | is_param=1 | param_type=1 (UPDATE `post` SET `post`.`title` = \'new title\' WHERE `post`.`id` = 1 LIMIT 1)', $repository->getLastSql());
     $this->assertSame([], $post->changed());
-    $repository->updateEntity($post);
+    $this->assertNull($repository->updateEntity($post));
 }
 ```
     
@@ -584,7 +583,8 @@ public function testReplaceTwiceAndFindExistData(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $repository = new Repository(new Post());
     $affectedRow = $repository->replaceEntity($post = new Post([
@@ -592,7 +592,7 @@ public function testReplaceTwiceAndFindExistData(): void
         'title'   => 'new title',
         'user_id' => 1,
     ]));
-    $this->assertSame('SQL: [134] UPDATE `post` SET `post`.`title` = :pdonamedparameter_title,`post`.`user_id` = :pdonamedparameter_user_id WHERE `post`.`id` = :post_id | Params:  3 | Key: Name: [24] :pdonamedparameter_title | paramno=0 | name=[24] ":pdonamedparameter_title" | is_param=1 | param_type=2 | Key: Name: [26] :pdonamedparameter_user_id | paramno=1 | name=[26] ":pdonamedparameter_user_id" | is_param=1 | param_type=1 | Key: Name: [8] :post_id | paramno=2 | name=[8] ":post_id" | is_param=1 | param_type=1 (UPDATE `post` SET `post`.`title` = \'new title\',`post`.`user_id` = 1 WHERE `post`.`id` = 1)', $repository->getLastSql());
+    $this->assertSame('SQL: [142] UPDATE `post` SET `post`.`title` = :pdonamedparameter_title,`post`.`user_id` = :pdonamedparameter_user_id WHERE `post`.`id` = :post_id LIMIT 1 | Params:  3 | Key: Name: [24] :pdonamedparameter_title | paramno=0 | name=[24] ":pdonamedparameter_title" | is_param=1 | param_type=2 | Key: Name: [26] :pdonamedparameter_user_id | paramno=1 | name=[26] ":pdonamedparameter_user_id" | is_param=1 | param_type=1 | Key: Name: [8] :post_id | paramno=2 | name=[8] ":post_id" | is_param=1 | param_type=1 (UPDATE `post` SET `post`.`title` = \'new title\',`post`.`user_id` = 1 WHERE `post`.`id` = 1 LIMIT 1)', $repository->getLastSql());
 
     $this->assertSame(1, $affectedRow);
     $this->assertSame([], $post->changed());
@@ -631,12 +631,13 @@ public function testSoftDeleteTwice(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $repository = new Repository(new Post());
 
     $repository->deleteEntity($post = new Post(['id' => 1, 'title' => 'new title']));
-    $sql = 'SQL: [96] UPDATE `post` SET `post`.`delete_at` = :pdonamedparameter_delete_at WHERE `post`.`id` = :post_id | Params:  2 | Key: Name: [28] :pdonamedparameter_delete_at | paramno=0 | name=[28] ":pdonamedparameter_delete_at" | is_param=1 | param_type=1 | Key: Name: [8] :post_id | paramno=1 | name=[8] ":post_id" | is_param=1 | param_type=1 (UPDATE `post` SET `post`.`delete_at` = %d WHERE `post`.`id` = 1)';
+    $sql = 'SQL: [104] UPDATE `post` SET `post`.`delete_at` = :pdonamedparameter_delete_at WHERE `post`.`id` = :post_id LIMIT 1 | Params:  2 | Key: Name: [28] :pdonamedparameter_delete_at | paramno=0 | name=[28] ":pdonamedparameter_delete_at" | is_param=1 | param_type=1 | Key: Name: [8] :post_id | paramno=1 | name=[8] ":post_id" | is_param=1 | param_type=1 (UPDATE `post` SET `post`.`delete_at` = %d WHERE `post`.`id` = 1 LIMIT 1)';
     $this->assertTrue(in_array($repository->getLastSql(), [
         sprintf($sql, time() - 1),
         sprintf($sql, time()),
@@ -644,7 +645,7 @@ public function testSoftDeleteTwice(): void
     ], true));
 
     $repository->deleteEntity($post); // 将会更新 `delete_at` 字段.
-    $sql = 'SQL: [96] UPDATE `post` SET `post`.`delete_at` = :pdonamedparameter_delete_at WHERE `post`.`id` = :post_id | Params:  2 | Key: Name: [28] :pdonamedparameter_delete_at | paramno=0 | name=[28] ":pdonamedparameter_delete_at" | is_param=1 | param_type=1 | Key: Name: [8] :post_id | paramno=1 | name=[8] ":post_id" | is_param=1 | param_type=1 (UPDATE `post` SET `post`.`delete_at` = %d WHERE `post`.`id` = 1)';
+    $sql = 'SQL: [104] UPDATE `post` SET `post`.`delete_at` = :pdonamedparameter_delete_at WHERE `post`.`id` = :post_id LIMIT 1 | Params:  2 | Key: Name: [28] :pdonamedparameter_delete_at | paramno=0 | name=[28] ":pdonamedparameter_delete_at" | is_param=1 | param_type=1 | Key: Name: [8] :post_id | paramno=1 | name=[8] ":post_id" | is_param=1 | param_type=1 (UPDATE `post` SET `post`.`delete_at` = %s WHERE `post`.`id` = 1 LIMIT 1)';
     $this->assertTrue(in_array($repository->getLastSql(), [
         sprintf($sql, time() - 1),
         sprintf($sql, time()),
@@ -677,14 +678,15 @@ public function testForceDeleteTwice(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $repository = new Repository(new Post());
 
     $repository->forceDeleteEntity($post = new Post(['id' => 1, 'title' => 'new title']));
-    $this->assertSame('SQL: [47] DELETE FROM `post` WHERE `post`.`id` = :post_id | Params:  1 | Key: Name: [8] :post_id | paramno=0 | name=[8] ":post_id" | is_param=1 | param_type=1 (DELETE FROM `post` WHERE `post`.`id` = 1)', $repository->getLastSql());
+    $this->assertSame('SQL: [55] DELETE FROM `post` WHERE `post`.`id` = :post_id LIMIT 1 | Params:  1 | Key: Name: [8] :post_id | paramno=0 | name=[8] ":post_id" | is_param=1 | param_type=1 (DELETE FROM `post` WHERE `post`.`id` = 1 LIMIT 1)', $repository->getLastSql());
     $repository->forceDeleteEntity($post); // 会执行 SQL，因为已经删除，没有任何影响.
-    $this->assertSame('SQL: [47] DELETE FROM `post` WHERE `post`.`id` = :post_id | Params:  1 | Key: Name: [8] :post_id | paramno=0 | name=[8] ":post_id" | is_param=1 | param_type=1 (DELETE FROM `post` WHERE `post`.`id` = 1)', $repository->getLastSql());
+    $this->assertSame('SQL: [55] DELETE FROM `post` WHERE `post`.`id` = :post_id LIMIT 1 | Params:  1 | Key: Name: [8] :post_id | paramno=0 | name=[8] ":post_id" | is_param=1 | param_type=1 (DELETE FROM `post` WHERE `post`.`id` = 1 LIMIT 1)', $repository->getLastSql());
     $newPost = $repository->findEntity(1);
 
     $this->assertInstanceof(Post::class, $newPost);

@@ -18,6 +18,7 @@ use Leevel\Database\Ddd\Entity;
 use Leevel\Database\Ddd\Select;
 use Leevel\Database\Page;
 use Tests\Database\DatabaseTestCase as TestCase;
+use Tests\Database\Ddd\Entity\CompositeId;
 use Tests\Database\Ddd\Entity\Relation\Post;
 ```
 
@@ -37,7 +38,8 @@ public function testBase(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select(new Post());
     $post = $select->findEntity(1);
@@ -68,7 +70,8 @@ public function testFindEntity(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select(new Post());
     $post = $select->findEntity(1);
@@ -78,6 +81,33 @@ public function testFindEntity(): void
     $this->assertSame(1, $post->userId);
     $this->assertSame('hello world', $post->title);
     $this->assertSame('post summary', $post->summary);
+}
+```
+    
+## 复合主键请使用 where 条件查询
+
+``` php
+public function testFindEntityForCompositeId(): void
+{
+    $connect = $this->createDatabaseConnect();
+
+    $this->assertSame(
+        1,
+        $connect
+            ->table('composite_id')
+            ->insert([
+                'id1'     => 1,
+                'id2'     => 2,
+                'name'    => 'hello liu',
+            ])
+    );
+
+    $select = new Select(new CompositeId());
+    $entity = $select->where(['id1' => 1, 'id2' => 2])->findOne();
+    $this->assertInstanceof(CompositeId::class, $entity);
+    $this->assertSame(1, $entity->id1);
+    $this->assertSame(2, $entity->id2);
+    $this->assertSame('hello liu', $entity->name);
 }
 ```
     
@@ -97,7 +127,8 @@ public function testFindOrFail(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select(new Post());
     $post = $select->findOrFail(1);
@@ -141,7 +172,8 @@ public function testFindMany(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -152,7 +184,8 @@ public function testFindMany(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select(new Post());
     $posts = $select->findMany([1, 2]);
@@ -203,7 +236,8 @@ public function testEntityDefaultWithoutSoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -214,7 +248,8 @@ public function testEntityDefaultWithoutSoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select($post = Post::select()->findEntity(1));
     $posts = $select->findAll();
@@ -275,7 +310,8 @@ public function testEntityWithSoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -286,7 +322,8 @@ public function testEntityWithSoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select($post = Post::select()->findEntity(1));
     $posts = $select->findAll();
@@ -347,7 +384,8 @@ public function testEntityOnlySoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -358,7 +396,8 @@ public function testEntityOnlySoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select($post = Post::select()->findEntity(1));
     $posts = $select->findAll();
@@ -419,7 +458,8 @@ public function testWithSoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -430,7 +470,8 @@ public function testWithSoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select($post = Post::select()->findEntity(1));
     $posts = $select->findAll();
@@ -491,7 +532,8 @@ public function testOnlySoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -502,7 +544,8 @@ public function testOnlySoftDeleted(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select($post = Post::select()->findEntity(1));
     $posts = $select->findAll();
@@ -563,7 +606,8 @@ public function testLastSql(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select(new Post());
     $post = $select->findEntity(1);
@@ -601,7 +645,8 @@ public function testWithoutPreLoadsResult(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select(new Post());
     $post = Select::withoutPreLoadsResult(function () use ($select) {
@@ -632,7 +677,8 @@ public function testPreLoadPage(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $this->assertSame(
         2,
@@ -643,7 +689,8 @@ public function testPreLoadPage(): void
                 'user_id'   => 1,
                 'summary'   => 'post summary',
                 'delete_at' => 0,
-            ]));
+            ])
+    );
 
     $select = new Select($post = Post::select()->findEntity(1));
     $select->eager(['user']);
