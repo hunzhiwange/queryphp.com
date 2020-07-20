@@ -1,15 +1,4 @@
-const { description } = require('../../package')
-
 module.exports = {
-  /**
-   * Ref：https://v1.vuepress.vuejs.org/config/#title
-   */
-  title: 'Vuepress Docs Boilerplate',
-  /**
-   * Ref：https://v1.vuepress.vuejs.org/config/#description
-   */
-  description: description,
-
   locales: {
     '/': {
       lang: 'en-Us',
@@ -64,18 +53,6 @@ module.exports = {
         link: 'https://v1.vuepress.vuejs.org'
       }
     ],
-    //sidebar: {
-      // '/guide/': [
-      //   {
-      //     title: 'Guide',
-      //     collapsable: false,
-      //     children: [
-      //       '',
-      //       'using-vue',
-      //     ]
-      //   }
-      // ],
-    //},
 
     locales: {
       '/': {
@@ -92,8 +69,19 @@ module.exports = {
         algolia: {},
         nav: require('./nav/en-US'),
         sidebar: {
-          '/': [/* ... */],
-          '/nested/': [/* ... */]
+          '/guide/': genSidebarConfig({title1:'Guide'}),
+          '/docs/started/': genSidebarConfigStartedDoc('Started'),
+          '/docs/guide/': genSidebarConfigGuideDoc('Guide'),
+          '/docs/architecture/': genSidebarConfigArchitectureDoc('Architecture', 'Kernel'),
+          '/docs/router/': genSidebarConfigRouterDoc('Routing'),
+          '/docs/template/': genSidebarConfigTemplateDoc('Template'),
+          '/docs/database/': genSidebarConfigDatabaseDoc('Database', 'Add', 'Delete', 'Update', 'Query', 'Query lang'),
+          '/docs/orm/': genSidebarConfigOrmDoc('ORM'),
+          '/docs/validate/': genSidebarConfigValidateDoc('Validate'),
+          '/docs/protocol/': genSidebarConfigProtocolDoc('Swoole'),
+          '/docs/component/': genSidebarConfigComponentDoc('Component', 'Encryption', 'Option', 'Cache', 'Auth', 'Filesystem', 'Console'),
+          '/docs/test/': genSidebarConfigTestDoc('Test'),
+          '/docs/developer/': genSidebarConfigDeveloperDoc('Developer'),
         }
       },
       '/zh-CN/': {
@@ -114,8 +102,34 @@ module.exports = {
         algolia: {},
         nav: require('./nav/zh-CN'),
         sidebar: {
-          '/zh/': [/* ... */],
-          '/zh/nested/': [/* ... */]
+          '/zh-CN/guide/': genSidebarConfig({title1:'指南'}),
+          // '/zh-CN/docs/': genSidebarConfigDoc({
+          //   title1: '序言',
+          //   title2: '入门',
+          //   title3:'架构', 
+          //   title4:'路由',
+          //   title5:'模板',
+          //   title6:'数据库',
+          //   title7:'新增',
+          //   title8:'删除',
+          //   title9:'更新',
+          //   title10:'查询',
+          //   title11:'查询语言',
+          //   title12:'ORM',
+          //   title13:'组件',
+          //   title14:'开发者',
+          //   title15:'验证器',
+          //   title16:'配置',
+          //   title17:'缓存',
+          //   title18:'Swoole',
+          //   title19:'认证',
+          //   title20:'加密',
+          //   title21:'文件系统',
+          //   title22:'命令行',
+          //   title23:'内核',
+          //   title24:'指南',
+          //   title25:'测试',
+          // }),
         }
       },
       '/zh-TW/': {
@@ -136,8 +150,34 @@ module.exports = {
         algolia: {},
         nav: require('./nav/zh-TW'),
         sidebar: {
-          '/zh/': [/* ... */],
-          '/zh/nested/': [/* ... */]
+          '/zh-TW/guide/': genSidebarConfig({title1:'指南'}),
+          // '/zh-TW/docs/': genSidebarConfigDoc({
+          //   title1: '序言',
+          //   title2: '入門',
+          //   title3:'架構', 
+          //   title4:'路由',
+          //   title5:'模板',
+          //   title6:'資料庫',
+          //   title7:'新增',
+          //   title8:'删除',
+          //   title9:'更新',
+          //   title10:'査詢',
+          //   title11:'査詢語言',
+          //   title12:'ORM',
+          //   title13:'組件',
+          //   title14:'開發者',
+          //   title15:'驗證器',
+          //   title16:'配寘',
+          //   title17:'緩存',
+          //   title18:'Swoole',
+          //   title19:'認證',
+          //   title20:'加密',
+          //   title21:'文件系統',
+          //   title22:'命令行',
+          //   title23:'內核',
+          //   title24:'指南',
+          //   title25:'測試',
+          // }),
         }
       },
     },
@@ -164,171 +204,194 @@ function genSidebarConfig (title) {
   ]
 }
 
-function genSidebarConfigDoc (title) {
+function genSidebarConfigStartedDoc (groupA) {
   return [
     {
-      title: title.title1,
+      title: groupA,
       collapsable: false,
       children: [
-        ''
+        '',
+        'install',
+        'specification',
+        'directory',
+        'namespace',
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigArchitectureDoc (groupA, groupB) {
+  return [
     {
-      title: title.title2,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
       children: [
-        'started/',
-        'started/install',
-        'started/specification',
-        'started/directory',
-        'started/namespace',
-      ]
-    },
-    {
-      title: title.title24,
-      collapsable: true,
-      children: [
-        'guide/',
-      ]
-    },
-    {
-      title: title.title3,
-      collapsable: true,
-      children: [
-        'architecture/',
-        'architecture/ioc',
-        'architecture/provider',
-        'architecture/fn',
-        'architecture/event',
-        'architecture/manager',
+        '',
+        'ioc',
+        'provider',
+        'fn',
+        'event',
+        'manager',
         {
-          title: title.title23,
+          title: groupB,
           collapsable: true,
           'children': [
-            'architecture/kernel',
-            'architecture/kernel/kernelconsole',
-            'architecture/kernel/app',
-            'architecture/kernel/functions',
-            'architecture/kernel/bootstrap/loadoption',
-            'architecture/kernel/bootstrap/loadi18n',
-            'architecture/kernel/bootstrap/registerexceptionruntime',
-            'architecture/kernel/bootstrap/traverseprovider',
+            'kernel',
+            'kernel/kernelconsole',
+            'kernel/app',
+            'kernel/functions',
+            'kernel/bootstrap/loadoption',
+            'kernel/bootstrap/loadi18n',
+            'kernel/bootstrap/registerexceptionruntime',
+            'kernel/bootstrap/traverseprovider',
           ],
         },
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigGuideDoc (groupA) {
+  return [
     {
-      title: title.title4,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
       children: [
-        'router/',
-        'router/router',
-        'router/url',
-        'router/response',
-        'router/annotation',
-        'router/provider',
+        '',
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigRouterDoc (groupA) {
+  return [
     {
-      title: title.title5,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
       children: [
-        'template/',
-        'template/var',
-        'template/assign',
-        'template/quick',
-        'template/if',
-        'template/for',
-        'template/list',
-        'template/lists',
-        'template/while',
-        'template/break',
-        'template/php',
-        'template/include',
-        'template/css',
-        'template/tagself',
+        '',
+        'router',
+        'url',
+        'response',
+        'annotation',
+        'provider',
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigTemplateDoc (groupA) {
+  return [
     {
-      title: title.title6,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
       children: [
-        'database/',
-        'database/config',
-        'database/database',
-        'database/select',
+        '',
+        'var',
+        'assign',
+        'quick',
+        'if',
+        'for',
+        'list',
+        'lists',
+        'while',
+        'break',
+        'php',
+        'include',
+        'css',
+        'tagself',
+      ]
+    }
+  ]
+}
+
+function genSidebarConfigDatabaseDoc (groupA, groupB, groupC, groupD, groupE, groupF) {
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      children: [
+        '',
+        'config',
+        'database',
+        'select',
         {
-          title: title.title7 + ' Create',
-          collapsable: true,
+          title: groupB + ' Create',
+          collapsable: false,
           'children': [
-            'database/create/insert',
-            'database/create/insertall',
+            'create/insert',
+            'create/insertall',
           ],
         },
         {
-          title: title.title8 + ' Delete',
-          collapsable: true,
+          title: groupC + ' Delete',
+          collapsable: false,
           'children': [
-            'database/delete/delete',
-            'database/delete/truncate',
+            'delete/delete',
+            'delete/truncate',
           ],
         },
         {
-          title: title.title9 + ' Update',
-          collapsable: true,
+          title: groupD + ' Update',
+          collapsable: false,
           'children': [
-            'database/update/update',
-            'database/update/updatecolumn',
-            'database/update/updateincrease',
-            'database/update/updatedecrease',
+            'update/update',
+            'update/updatecolumn',
+            'update/updateincrease',
+            'update/updatedecrease',
           ],
         },
         {
-          title: title.title10 + ' Read',
-          collapsable: true,
+          title: groupE + ' Read',
+          collapsable: false,
           'children': [
-            'database/read/aggregate',
-            'database/read/find',
-            'database/read/findall',
-            'database/read/findone',
-            'database/read/finddynamics',
-            'database/read/select',
-            'database/read/list',
-            'database/read/value',
+            'read/aggregate',
+            'read/find',
+            'read/findall',
+            'read/findone',
+            'read/finddynamics',
+            'read/select',
+            'read/list',
+            'read/value',
           ],
         },
         {
-          title: title.title11,
-          collapsable: true,
+          title: groupF,
+          collapsable: false,
           'children': [
-            'database/query/flow',
-            'database/query/sql',
-            'database/query/table',
-            'database/query/columns',
-            'database/query/where',
-            'database/query/wheredate',
-            'database/query/comment',
-            'database/query/prefix',
-            'database/query/forceindex',
-            'database/query/bind',
-            'database/query/join',
-            'database/query/union',
-            'database/query/orderby',
-            'database/query/groupby',
-            'database/query/having',
-            'database/query/havingdate',
-            'database/query/distinct',
-            'database/query/aggregate',
-            'database/query/limit',
-            'database/query/forupdate',
-            'database/query/reset',
+            'query/flow',
+            'query/sql',
+            'query/table',
+            'query/columns',
+            'query/where',
+            'query/wheredate',
+            'query/comment',
+            'query/prefix',
+            'query/forceindex',
+            'query/bind',
+            'query/join',
+            'query/union',
+            'query/orderby',
+            'query/groupby',
+            'query/having',
+            'query/havingdate',
+            'query/distinct',
+            'query/aggregate',
+            'query/limit',
+            'query/forupdate',
+            'query/reset',
           ],
         },
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigOrmDoc (groupA) {
+  return [
     {
-      title: title.title12,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
       children: [
         'orm/',
         'orm/entity',
@@ -350,197 +413,222 @@ function genSidebarConfigDoc (title) {
         'orm/unitofwork',
         'orm/repository',
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigValidateDoc (groupA) {
+  return [
     {
-      title: title.title18,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
+      'children': [
+        '',
+        'assert',
+        'helper',
+        'validator/accepted',
+        'validator/after',
+        'validator/allowedip',
+        'validator/alpha',
+        'validator/alphadash',
+        'validator/alphalower',
+        'validator/alphanum',
+        'validator/alphaupper',
+        'validator/isarray',
+        'validator/before',
+        'validator/between',
+        'validator/betweenequal',
+        'validator/boolean',
+        'validator/chinese',
+        'validator/chinesealphadash',
+        'validator/chinesealphanum',
+        'validator/date',
+        'validator/dateformat',
+        'validator/denyip',
+        'validator/different',
+        'validator/digit',
+        'validator/double',
+        'validator/email',
+        'validator/isempty',
+        'validator/equal',
+        'validator/equalgreaterthan',
+        'validator/equallessthan',
+        'validator/equalto',
+        'validator/isfloat',
+        'validator/greaterthan',
+        'validator/idcard',
+        'validator/in',
+        'validator/integer',
+        'validator/ip',
+        'validator/ipv4',
+        'validator/ipv6',
+        'validator/json',
+        'validator/lessthan',
+        'validator/lower',
+        'validator/luhn',
+        'validator/max',
+        'validator/maxlength',
+        'validator/min',
+        'validator/minlength',
+        'validator/mobile',
+        'validator/notbetween',
+        'validator/notbetweenequal',
+        'validator/notempty',
+        'validator/notequal',
+        'validator/notin',
+        'validator/notnull',
+        'validator/notsame',
+        'validator/isnull',
+        'validator/number',
+        'validator/phone',
+        'validator/qq',
+        'validator/regex',
+        'validator/required',
+        'validator/same',
+        'validator/strlen',
+        'validator/telephone',
+        'validator/timezone',
+        'validator/type',
+        'validator/unique',
+        'validator/upper',
+        'validator/url',
+        'validator/zipcode',
+      ]
+    }
+  ]
+}
+
+function genSidebarConfigProtocolDoc (groupA) {
+  return [
+    {
+      title: groupA,
+      collapsable: false,
       children: [
-        'protocol/coroutine',
-        'protocol/timer', 
-        'protocol/task',
-        'protocol/process/hotoverload',
+        'coroutine',
+        'timer', 
+        'task',
+        'process/hotoverload',
         {
           title: 'HTTP Server',
-          collapsable: true,
+          collapsable: false,
           'children': [
-            'protocol/leevel2swoole',
-            'protocol/swoole2Leevel',
+            'leevel2swoole',
+            'swoole2Leevel',
           ],
         },
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigComponentDoc (groupA, groupB, groupC, groupD, groupE, groupF, groupG) {
+  return [
     {
-      title: title.title13,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
       children: [
-        'component/support/str',
-        'component/support/arr',
-        'component/support/type',
-        'component/collection',
-        'component/tree',
-        'component/pipeline',
-        'component/flow',
-        'component/linkedlist',
-        'component/queue',
-        'component/stack',
+        'support/str',
+        'support/arr',
+        'support/type',
+        'collection',
+        'tree',
+        'pipeline',
+        'flow',
+        'linkedlist',
+        'queue',
+        'stack',
         {
-          title: title.title20,
-          collapsable: true,
+          title: groupB,
+          collapsable: false,
           'children': [
-            'component/encryption',
-            'component/encryption/helper',
+            'encryption',
+            'encryption/helper',
           ],
         },
         {
-          title: title.title15,
-          collapsable: true,
+          title: groupC,
+          collapsable: false,
           'children': [
-            'component/validate/',
-            'component/validate/assert',
-            'component/validate/helper',
-            'component/validate/validator/accepted',
-            'component/validate/validator/after',
-            'component/validate/validator/allowedip',
-            'component/validate/validator/alpha',
-            'component/validate/validator/alphadash',
-            'component/validate/validator/alphalower',
-            'component/validate/validator/alphanum',
-            'component/validate/validator/alphaupper',
-            'component/validate/validator/isarray',
-            'component/validate/validator/before',
-            'component/validate/validator/between',
-            'component/validate/validator/betweenequal',
-            'component/validate/validator/boolean',
-            'component/validate/validator/chinese',
-            'component/validate/validator/chinesealphadash',
-            'component/validate/validator/chinesealphanum',
-            'component/validate/validator/date',
-            'component/validate/validator/dateformat',
-            'component/validate/validator/denyip',
-            'component/validate/validator/different',
-            'component/validate/validator/digit',
-            'component/validate/validator/double',
-            'component/validate/validator/email',
-            'component/validate/validator/isempty',
-            'component/validate/validator/equal',
-            'component/validate/validator/equalgreaterthan',
-            'component/validate/validator/equallessthan',
-            'component/validate/validator/equalto',
-            'component/validate/validator/isfloat',
-            'component/validate/validator/greaterthan',
-            'component/validate/validator/idcard',
-            'component/validate/validator/in',
-            'component/validate/validator/integer',
-            'component/validate/validator/ip',
-            'component/validate/validator/ipv4',
-            'component/validate/validator/ipv6',
-            'component/validate/validator/json',
-            'component/validate/validator/lessthan',
-            'component/validate/validator/lower',
-            'component/validate/validator/luhn',
-            'component/validate/validator/max',
-            'component/validate/validator/maxlength',
-            'component/validate/validator/min',
-            'component/validate/validator/minlength',
-            'component/validate/validator/mobile',
-            'component/validate/validator/notbetween',
-            'component/validate/validator/notbetweenequal',
-            'component/validate/validator/notempty',
-            'component/validate/validator/notequal',
-            'component/validate/validator/notin',
-            'component/validate/validator/notnull',
-            'component/validate/validator/notsame',
-            'component/validate/validator/isnull',
-            'component/validate/validator/number',
-            'component/validate/validator/phone',
-            'component/validate/validator/qq',
-            'component/validate/validator/regex',
-            'component/validate/validator/required',
-            'component/validate/validator/same',
-            'component/validate/validator/strlen',
-            'component/validate/validator/telephone',
-            'component/validate/validator/timezone',
-            'component/validate/validator/type',
-            'component/validate/validator/unique',
-            'component/validate/validator/upper',
-            'component/validate/validator/url',
-            'component/validate/validator/zipcode',
-          ]
-        },
-        {
-          title: title.title16,
-          collapsable: true,
-          'children': [
-            'component/option',
-            'component/option/composer',
+            'option',
+            'option/composer',
           ],
         },
         {
-          title: title.title17,
-          collapsable: true,
+          title: groupD,
+          collapsable: false,
           'children': [
-            'component/cache',
-            'component/cache/load',
+            'cache',
+            'cache/load',
           ],
         },
-        'component/session',
-        'component/page',
-        'component/debug',
-        'component/log',
-        'component/seccode',
+        'session',
+        'page',
+        'debug',
+        'log',
+        'seccode',
         {
           title: 'HTTP',
-          collapsable: true,
+          collapsable: false,
           'children': [
-            'component/http/',
-            'component/http/request',
-            'component/http/response',
-            'component/http/jsonresponse',
-            'component/http/redirectresponse',
+            'http/',
+            'http/request',
+            'http/response',
+            'http/jsonresponse',
+            'http/redirectresponse',
           ],
         },
-        'component/mail',
+        'mail',
         {
-          title: title.title19,
-          collapsable: true,
+          title: groupE,
+          collapsable: false,
           'children': [
-            'component/auth',
-            'component/auth/hash',
-          ],
-        },
-        {
-          title: title.title21,
-          collapsable: true,
-          'children': [
-            'component/filesystem',
-            'component/filesystem/helper',
+            'auth',
+            'auth/hash',
           ],
         },
         {
-          title: title.title22,
-          collapsable: true,
+          title: groupF,
+          collapsable: false,
           'children': [
-            'component/console',
-            'component/console/makecommand',
-            'component/console/runcommand',
+            'filesystem',
+            'filesystem/helper',
           ],
         },
-        'component/view',
+        {
+          title: groupG,
+          collapsable: false,
+          'children': [
+            'console',
+            'console/makecommand',
+            'console/runcommand',
+          ],
+        },
+        'view',
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigTestDoc (groupA) {
+  return [
     {
-      title: title.title25,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
       children: [
-        'test/',
+        '',
       ]
-    },
+    }
+  ]
+}
+
+function genSidebarConfigDeveloperDoc (groupA) {
+  return [
     {
-      title: title.title14,
-      collapsable: true,
+      title: groupA,
+      collapsable: false,
       children: [
-        'developer/',
+        '',
       ]
-    },
+    }
   ]
 }
