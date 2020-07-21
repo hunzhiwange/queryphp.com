@@ -207,7 +207,7 @@ footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
 <div class="code-title">安装</div>
 
 ``` bash
-composer create-project hunzhiwange/queryphp myapp dev-master
+composer create-project hunzhiwange/queryphp myapp
 php leevel server <Visite http://127.0.0.1:9527/>
 ```
 </div>

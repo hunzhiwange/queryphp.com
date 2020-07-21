@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "./node_modules/.bin/vuepress dev docs --temp .temp",
     "build": "./node_modules/.bin/vuepress build docs --temp .temp",
-    "fix-memory-limit": "cross-env LIMIT=4096 increase-memory-limit"
+    "fix-memory-limit": "cross-env LIMIT=8192 increase-memory-limit"
   },
   "repository": {
     "type": "git",

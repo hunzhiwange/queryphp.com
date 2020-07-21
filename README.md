@@ -7,8 +7,8 @@ This site is built with [VuePress](https://vuepress.vuejs.org).
 Start a dev server at `localhost:8088`:
 
 ```
-$ yarn add -D vuepress # or npm install -D vuepress
-$ yarn run dev # or npx vuepress dev docs
+$ yarn install # or npm install
+$ yarn run dev # or npm run dev 
 & sh ./init.sh # need remove note
 ```
 
@@ -20,7 +20,7 @@ You can publish your modify by use the command:
 sh ./deploy.sh
 ```
 
-## Node set
+## Node Memory Limit
 
 ``` sh
 npm install -g increase-memory-limit cross-env

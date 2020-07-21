@@ -41,7 +41,7 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 ### 安装
 
 ``` sh
-composer create-project --prefer-dist hunzhiwange/queryphp myapp
+composer create-project hunzhiwange/queryphp myapp
 ```
 
 或者体验开发版本
