@@ -20,6 +20,7 @@ QueryPHP 文档系统概览。
 模板  | template  |
 数据库  |  database |
 ORM  | orm  |
+验证  | validate  |
 Swoole  | swoole  |
 组件  |  component |
 测试  | test  |
