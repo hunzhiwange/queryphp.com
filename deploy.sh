@@ -9,7 +9,7 @@ commit=$(date "+Update site %Y-%m-%d %H:%M:%S")
 yarn build
 
 # 进入生成的文件夹
-cp -rf ./vuepress/* ./.deploy/
+cp -rf ./docs/.vuepress/dist/* ./.deploy/
 
 cd .deploy
 
