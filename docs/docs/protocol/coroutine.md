@@ -16,20 +16,20 @@ use Leevel\Protocol\Coroutine;
 use Throwable;
 ```
 
-## 普通服务是否处于协程上下文
+## inContext 普通服务是否处于协程上下文
 
 ``` php
 public function testCoroutineContext(): void
 {
     $coroutine = new Coroutine();
     $this->assertInstanceOf(ICoroutine::class, $coroutine);
-    $this->assertFalse($coroutine->context('notFound'));
+    $this->assertFalse($coroutine->inContext('notFound'));
     $coroutine->addContext('notFound');
-    $this->assertTrue($coroutine->context('notFound'));
+    $this->assertTrue($coroutine->inContext('notFound'));
 }
 ```
     
-## 类是否处于协程上下文
+## inContext 类是否处于协程上下文
 
 类可以通过添加静态方法 `coroutineContext` 来自动完成协程上下文标识。
 
@@ -37,10 +37,41 @@ public function testCoroutineContext(): void
 public function testCoroutineContextForClass(): void
 {
     $coroutine = new Coroutine();
-    $this->assertFalse($coroutine->context(Demo1::class));
+    $this->assertFalse($coroutine->inContext(Demo1::class));
     $coroutine->addContext(Demo1::class);
-    $this->assertTrue($coroutine->context(Demo1::class));
-    $this->assertTrue($coroutine->context(Demo2::class));
+    $this->assertTrue($coroutine->inContext(Demo1::class));
+    $this->assertTrue($coroutine->inContext(Demo2::class));
+}
+```
+    
+## addContext 添加协程上下文键值
+
+``` php
+public function testAddContext(): void
+{
+    $coroutine = new Coroutine();
+    $this->assertFalse($coroutine->inContext('hello'));
+    $this->assertFalse($coroutine->inContext(Demo1::class));
+    $coroutine->addContext(Demo1::class, 'hello');
+    $this->assertTrue($coroutine->inContext('hello'));
+    $this->assertTrue($coroutine->inContext(Demo1::class));
+}
+```
+    
+## removeContext 删除协程上下文键值
+
+``` php
+public function testRemoveContext(): void
+{
+    $coroutine = new Coroutine();
+    $this->assertFalse($coroutine->inContext('hello'));
+    $this->assertFalse($coroutine->inContext(Demo1::class));
+    $coroutine->addContext(Demo1::class, 'hello');
+    $this->assertTrue($coroutine->inContext('hello'));
+    $this->assertTrue($coroutine->inContext(Demo1::class));
+    $coroutine->removeContext(Demo1::class, 'hello');
+    $this->assertFalse($coroutine->inContext('hello'));
+    $this->assertFalse($coroutine->inContext(Demo1::class));
 }
 ```
     

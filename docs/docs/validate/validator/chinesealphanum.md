@@ -1,4 +1,4 @@
-# Validator.chinese_alpha_num
+# 验证器.是否为中文、数字和字母
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/ChineseAlphaNumTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/ChineseAlphaNumTest.php)

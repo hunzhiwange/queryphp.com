@@ -1,4 +1,4 @@
-# Validator.chinese_alpha_dash
+# 验证器.是否为中文、数字、下划线、短横线和字母
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/ChineseAlphaDashTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/ChineseAlphaDashTest.php)

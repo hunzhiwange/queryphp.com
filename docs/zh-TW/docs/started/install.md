@@ -41,7 +41,7 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 ### 安装
 
 ``` sh
-composer create-project hunzhiwange/queryphp myapp
+composer create-project --prefer-dist hunzhiwange/queryphp myapp
 ```
 
 或者体验开发版本
@@ -78,11 +78,12 @@ Swagger Api（apis）、Debugbar 调试（debugbar）。
 
 ## 基础配置
 
-QueryPHP 在初始化应用程序会自动帮您创建 `.env`、`.env.phpunit` 和 `phinx.yml` 文件。
+QueryPHP 在初始化应用程序会自动帮您创建 `.env`、`.env.phpunit`、`frontend/.env.local` 和 `frontend/.env.production` 文件。
 
- * .env (系统配置文件)
- * .env.phpunit (单元测试配置文件)
- * phinx.yml (Phinx 数据库迁移命令配置，他会读取 .env 或者 .env.phpunit 中的数据库配置)
+ * .env (环境配置)
+ * .env.phpunit (单元测试环境配置)
+ * frontend/.env.local (前端环境配置)
+ * frontend/.env.production (前端生产环境配置)
 
 ### 入口目录
 
@@ -123,7 +124,7 @@ Windows 开发者如果不需要 Swoole 则可以按照其他普通的 PHP 项�
 
 ```
 server {
-    add_header HostName php7.2.1-app1;
+    add_header HostName php-7.4.0-app1;
     listen 8080;
     server_name queryphp.cn  *.queryphp.cn;
     error_log  /var/log/nginx/queryphp.error.log;

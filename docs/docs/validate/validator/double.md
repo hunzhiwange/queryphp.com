@@ -1,4 +1,4 @@
-# Validator.double
+# 验证器.是否双精度浮点数
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/DoubleTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/DoubleTest.php)

@@ -1,4 +1,4 @@
-# Validator.zip_code
+# 验证器.是否为中国邮政编码
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/ZipCodeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/ZipCodeTest.php)

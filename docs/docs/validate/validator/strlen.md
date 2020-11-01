@@ -1,4 +1,4 @@
-# Validator.strlen
+# 验证器.长度验证
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/StrlenTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/StrlenTest.php)

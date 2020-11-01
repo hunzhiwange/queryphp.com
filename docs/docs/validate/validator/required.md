@@ -1,4 +1,4 @@
-# Validator.required
+# 验证器.不能为空
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/RequiredTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/RequiredTest.php)
@@ -58,7 +58,7 @@ public function testBaseUse($value): void
 public function badProvider(): array
 {
     return [
-        //[null],
+        [null],
         [''],
         [' '],
         ['    '],

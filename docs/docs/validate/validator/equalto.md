@@ -1,4 +1,4 @@
-# Validator.equal_to
+# 验证器.两个字段是否相同
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/EqualToTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/EqualToTest.php)

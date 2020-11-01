@@ -1,4 +1,4 @@
-# Validator.not_empty
+# 验证器.值是否不为空
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/NotEmptyTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/NotEmptyTest.php)

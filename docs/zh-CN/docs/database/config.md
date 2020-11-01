@@ -23,9 +23,11 @@ use Tests\Database\DatabaseTestCase as TestCase;
 
 ``` php
 # Tests\Database::createDatabaseManager
-protected function createDatabaseManager(): Manager
+protected function createDatabaseManager(?Container $container = null): Manager
 {
-    $container = new Container();
+    if (null === $container) {
+        $container = new Container();
+    }
     $manager = new Manager($container);
 
     $this->assertInstanceof(IContainer::class, $manager->container());

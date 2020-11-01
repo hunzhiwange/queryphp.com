@@ -1,4 +1,4 @@
-# Validator.ipv6
+# 验证器.是否为 ipv6
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/Ipv6Test.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/Ipv6Test.php)

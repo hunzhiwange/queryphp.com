@@ -1,4 +1,4 @@
-# Validator.id_card
+# 验证器.是否为大陆身份证
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/IdCardTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IdCardTest.php)

@@ -38,7 +38,7 @@ class Test1 implements IBlock
 }
 ```
 
-缓冲块需要实现 `\Leevel\Cache\IBlock` 接口，即可统一进行管理。
+缓存块需要实现 `\Leevel\Cache\IBlock` 接口，即可统一进行管理。
 
 **接口 \Leevel\Cache\IBlock**
 
@@ -85,9 +85,11 @@ interface IBlock
 
 use Leevel\Cache\Load;
 use Leevel\Di\Container;
+use Leevel\Filesystem\Helper;
 use Tests\Cache\Pieces\Test1;
 use Tests\Cache\Pieces\Test2;
 use Tests\Cache\Pieces\Test4;
+use Tests\Cache\Pieces\Test5;
 ```
 
 ## data 载入缓存块数据
@@ -116,10 +118,20 @@ public function testBaseUse(): void
     $result = $load->data([Test1::class]);
     $this->assertSame(['foo' => 'bar'], $result);
 
+    $this->assertSame(
+        [Test1::class => ['foo' => 'bar']],
+        $this->getTestProperty($load, 'cacheLoaded'),
+    );
+
     $result = $load->data([Test1::class]);
     $this->assertSame(['foo' => 'bar'], $result);
 
     $load->refresh([Test1::class]);
+
+    $this->assertSame(
+        [],
+        $this->getTestProperty($load, 'cacheLoaded'),
+    );
 }
 ```
     
@@ -147,14 +159,29 @@ public function testRefresh(): void
     $result = $load->data([Test1::class]);
     $this->assertSame(['foo' => 'bar'], $result);
 
+    $this->assertSame(
+        [Test1::class => ['foo' => 'bar']],
+        $this->getTestProperty($load, 'cacheLoaded'),
+    );
+
     $result = $load->data([Test1::class]);
     $this->assertSame(['foo' => 'bar'], $result);
 
     $file = __DIR__.'/Pieces/cacheLoad/test1.php';
     $this->assertTrue(is_file($file));
 
+    $this->assertSame(
+        [Test1::class => ['foo' => 'bar']],
+        $this->getTestProperty($load, 'cacheLoaded'),
+    );
+
     $load->refresh([Test1::class]);
     $this->assertFalse(is_file($file));
+
+    $this->assertSame(
+        [],
+        $this->getTestProperty($load, 'cacheLoaded'),
+    );
 }
 ```
     
@@ -225,5 +252,86 @@ public function testWithParams(): void
 
     $result = $load->data([Test4::class.':hello,world,foo,bar']);
     $this->assertSame(['hello', 'world', 'foo', 'bar'], $result);
+}
+```
+    
+## clearCacheLoaded 清理已载入的缓存数据
+
+如果缓存原始数据可以动态变化，比如在一个常驻脚本中，后台修改了系统配置，然后使用 `refresh` 更新了缓存。
+此时你需要在每次循环调用业务代码前清理掉已载入的缓存数据，而不是通过 `refresh` 清理原始缓存数据，那么这个方法将会变得非常有用。
+
+**例子 \Tests\Cache\Pieces\Test5**
+
+``` php
+namespace Tests\Cache\Pieces;
+
+use Leevel\Cache\File;
+use Leevel\Cache\IBlock;
+use Leevel\Cache\ICache;
+
+class Test5 implements IBlock
+{
+    public function handle(array $params = []): array
+    {
+        return ['data' => $GLOBALS['cache_data'] ?? 'test5'];
+    }
+
+    public function cache(): ICache
+    {
+        return new File([
+            'path' => __DIR__.'/cacheLoad',
+        ]);
+    }
+
+    public static function key(array $params = []): string
+    {
+        return 'test5';
+    }
+}
+```
+
+例子中的缓存原始数据变化，我们通过 `$GLOBALS['cache_data]` 来模拟实现。
+
+
+``` php
+public function testClearCacheLoaded(): void
+{
+    $container = new Container();
+    $load = $this->createLoad($container);
+
+    if (isset($GLOBALS['cache_data'])) {
+        unset($GLOBALS['cache_data']);
+    }
+
+    $GLOBALS['cache_data'] = 'data1';
+    $result = $load->data([Test5::class]);
+    $this->assertSame(['data' => 'data1'], $result);
+
+    $GLOBALS['cache_data'] = 'data2';
+    $result = $load->data([Test5::class]);
+    $this->assertSame(['data' => 'data1'], $result);
+
+    // 清理原始缓存，模拟修改系统配置
+    $newLoad = $this->createLoad($container);
+    $newLoad->refresh([Test5::class]);
+
+    $result = $load->data([Test5::class]);
+    $this->assertSame(['data' => 'data1'], $result);
+
+    $load->clearCacheLoaded([Test5::class]);
+    $result = $load->data([Test5::class]);
+    $this->assertSame(['data' => 'data2'], $result);
+
+    // 清理原始缓存，模拟修改系统配置
+    $newLoad = $this->createLoad($container);
+    $newLoad->refresh([Test5::class]);
+    $GLOBALS['cache_data'] = 'data3';
+    $load->clearCacheLoaded();
+    $result = $load->data([Test5::class]);
+    $this->assertSame(['data' => 'data3'], $result);
+
+    if (isset($GLOBALS['cache_data'])) {
+        unset($GLOBALS['cache_data']);
+    }
 }
 ```

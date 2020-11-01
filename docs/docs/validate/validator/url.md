@@ -1,4 +1,4 @@
-# Validator.url
+# 验证器.验证是否为 URL 地址
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/UrlTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/UrlTest.php)

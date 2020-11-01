@@ -1,4 +1,4 @@
-# Validator.regex
+# 验证器.数据是否满足正则条件
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/RegexTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/RegexTest.php)

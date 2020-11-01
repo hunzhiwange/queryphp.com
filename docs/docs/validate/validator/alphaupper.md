@@ -1,4 +1,4 @@
-# Validator.alpha_upper
+# 验证器.是否为大写英文字母
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/AlphaUpperTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/AlphaUpperTest.php)

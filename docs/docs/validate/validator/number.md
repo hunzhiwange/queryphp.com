@@ -1,4 +1,4 @@
-# Validator.number
+# 验证器.是否为数字
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/NumberTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/NumberTest.php)

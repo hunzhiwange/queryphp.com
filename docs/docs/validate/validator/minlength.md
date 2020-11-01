@@ -1,4 +1,4 @@
-# Validator.min_length
+# 验证器.验证数据最小长度
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/MinLengthTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/MinLengthTest.php)

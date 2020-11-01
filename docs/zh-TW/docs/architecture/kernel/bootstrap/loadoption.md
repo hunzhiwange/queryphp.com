@@ -20,6 +20,7 @@ use Leevel\Filesystem\Helper;
 use Leevel\Kernel\App as Apps;
 use Leevel\Kernel\Bootstrap\LoadOption;
 use Leevel\Kernel\IApp;
+use Leevel\Option\Option;
 ```
 
 ## 基本使用方法
@@ -98,7 +99,7 @@ return [
 ``` php
 public function testBaseUse(): void
 {
-    $bootstrap = new LoadOption();
+    $bootstrap = new LoadOption1();
 
     $container = Container::singletons();
     $app = new App3($container, $appPath = __DIR__.'/app');
@@ -112,7 +113,7 @@ public function testBaseUse(): void
     $this->assertFalse($app->isCachedOption());
     $this->assertSame($appPath.'/option', $app->optionPath());
 
-    $this->assertNull($bootstrap->handle($app, true));
+    $this->assertNull($bootstrap->handle($app));
 
     $option = $container->make('option');
 
@@ -147,7 +148,7 @@ public function testWithRuntimeEnv(): void
 {
     putenv('RUNTIME_ENVIRONMENT=fooenv');
 
-    $bootstrap = new LoadOption();
+    $bootstrap = new LoadOption1();
 
     $container = Container::singletons();
     $app = new App3($container, $appPath = __DIR__.'/app');
@@ -161,7 +162,7 @@ public function testWithRuntimeEnv(): void
     $this->assertFalse($app->isCachedOption());
     $this->assertSame($appPath.'/option', $app->optionPath());
 
-    $this->assertNull($bootstrap->handle($app, true));
+    $this->assertNull($bootstrap->handle($app));
 
     $option = $container->make('option');
 
@@ -239,7 +240,7 @@ return [
 ``` php
 public function testLoadCached(): void
 {
-    $bootstrap = new LoadOption();
+    $bootstrap = new LoadOption1();
 
     $container = Container::singletons();
     $app = new App3($container, $appPath = __DIR__.'/app');
@@ -258,7 +259,7 @@ public function testLoadCached(): void
 
     $this->assertTrue($app->isCachedOption());
 
-    $this->assertNull($bootstrap->handle($app, true));
+    $this->assertNull($bootstrap->handle($app));
 
     $option = $container->make('option');
 

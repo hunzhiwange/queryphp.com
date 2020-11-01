@@ -149,9 +149,9 @@ namespace Tests\Kernel;
 
 class KernelConsole1 extends KernelConsole
 {
-    public function bootstrap(): void
-    {
-    }
+    protected array $bootstraps = [
+        DemoBootstrapForKernelConsole::class,
+    ];
 
     protected function getConsoleApplication(): Application
     {
@@ -189,16 +189,6 @@ class Test extends Command
 
         return 0;
     }
-
-    protected function getArguments(): array
-    {
-        return [];
-    }
-
-    protected function getOptions(): array
-    {
-        return [];
-    }
 }
 ```
 
@@ -226,16 +216,6 @@ class Foo extends Command
         $this->info('Hello my foo command.');
 
         return 0;
-    }
-
-    protected function getArguments(): array
-    {
-        return [];
-    }
-
-    protected function getOptions(): array
-    {
-        return [];
     }
 }
 ```
@@ -265,15 +245,19 @@ class Bar extends Command
 
         return 0;
     }
+}
+```
 
-    protected function getArguments(): array
-    {
-        return [];
-    }
+**Tests\Kernel\DemoBootstrapForKernelConsole**
 
-    protected function getOptions(): array
+``` php
+namespace Tests\Kernel;
+
+class DemoBootstrapForKernelConsole
+{
+    public function handle(IApp $app): void
     {
-        return [];
+        $GLOBALS['DemoBootstrapForKernelConsole'] = true;
     }
 }
 ```
@@ -290,7 +274,9 @@ public function testBaseUse(): void
     $kernel = new KernelConsole1($app);
     $this->assertInstanceof(IKernelConsole::class, $kernel);
     $this->assertInstanceof(IApp::class, $kernel->getApp());
-
     $this->assertSame(0, $kernel->handle());
+    $kernel->terminate(0);
+    $this->assertTrue($GLOBALS['DemoBootstrapForKernelConsole']);
+    unset($GLOBALS['DemoBootstrapForKernelConsole']);
 }
 ```

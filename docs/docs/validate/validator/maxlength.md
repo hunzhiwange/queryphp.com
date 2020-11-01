@@ -1,4 +1,4 @@
-# Validator.max_length
+# 验证器.验证数据最大长度
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/MaxLengthTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/MaxLengthTest.php)

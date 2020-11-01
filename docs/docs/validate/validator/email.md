@@ -1,4 +1,4 @@
-# Validator.email
+# 验证器.是否为电子邮件
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/EmailTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/EmailTest.php)

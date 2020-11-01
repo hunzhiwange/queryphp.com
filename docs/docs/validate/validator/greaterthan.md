@@ -1,4 +1,4 @@
-# Validator.greater_than
+# 验证器.大于
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/GreaterThanTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/GreaterThanTest.php)

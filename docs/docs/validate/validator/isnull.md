@@ -1,4 +1,4 @@
-# Validator.is_null
+# 验证器.是否为 null
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/IsNullTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsNullTest.php)

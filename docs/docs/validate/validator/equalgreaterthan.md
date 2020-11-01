@@ -1,4 +1,4 @@
-# Validator.equal_greater_than
+# 验证器.大于或者全等
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/EqualGreaterThanTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/EqualGreaterThanTest.php)

@@ -1,4 +1,4 @@
-# Validator.after
+# 验证器.验证在给定日期之后
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/AfterTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/AfterTest.php)

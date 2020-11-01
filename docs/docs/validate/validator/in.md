@@ -1,4 +1,4 @@
-# Validator.in
+# 验证器.是否处于某个范围
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/InTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/InTest.php)

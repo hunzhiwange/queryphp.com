@@ -1,4 +1,4 @@
-# Validator.equal_less_than
+# 验证器.小于或者全等
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/EqualLessThanTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/EqualLessThanTest.php)

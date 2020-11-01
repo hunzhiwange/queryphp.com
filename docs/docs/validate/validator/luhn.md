@@ -1,4 +1,4 @@
-# Validator.luhn
+# 验证器.值是否为银行卡等符合 luhn 算法
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/LuhnTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/LuhnTest.php)

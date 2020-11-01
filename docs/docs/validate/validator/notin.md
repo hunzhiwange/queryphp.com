@@ -1,4 +1,4 @@
-# Validator.not_in
+# 验证器.是否不处于某个范围
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/NotInTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/NotInTest.php)

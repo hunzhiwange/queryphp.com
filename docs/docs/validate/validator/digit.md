@@ -1,4 +1,4 @@
-# Validator.digit
+# 验证器.检测字符串中的字符是否都是数字，负数和小数会检测不通过
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/DigitTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/DigitTest.php)

@@ -120,8 +120,22 @@ namespace Tests\Kernel;
 
 class Kernel1 extends Kernel
 {
-    public function bootstrap(): void
+    protected array $bootstraps = [
+        DemoBootstrapForKernel::class,
+    ];
+}
+```
+
+**Tests\Kernel\DemoBootstrapForKernel**
+
+``` php
+namespace Tests\Kernel;
+
+class DemoBootstrapForKernel
+{
+    public function handle(IApp $app): void
     {
+        $GLOBALS['DemoBootstrapForKernel'] = true;
     }
 }
 ```
@@ -144,8 +158,10 @@ public function testBaseUse(bool $debug): void
     $kernel = new Kernel1($app, $router);
     $this->assertInstanceof(IKernel::class, $kernel);
     $this->assertInstanceof(IApp::class, $kernel->getApp());
-
     $this->assertInstanceof(Response::class, $resultResponse = $kernel->handle($request));
+    $kernel->terminate($request, $resultResponse);
+    $this->assertTrue($GLOBALS['DemoBootstrapForKernel']);
+    unset($GLOBALS['DemoBootstrapForKernel']);
 }
 ```
     

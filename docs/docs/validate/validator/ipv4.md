@@ -1,4 +1,4 @@
-# Validator.ipv4
+# 验证器.是否为 ipv4
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/Ipv4Test.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/Ipv4Test.php)

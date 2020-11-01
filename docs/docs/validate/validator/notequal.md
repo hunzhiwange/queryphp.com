@@ -1,4 +1,4 @@
-# Validator.not_equal
+# 验证器.两个值是否不相同
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/NotEqualTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/NotEqualTest.php)

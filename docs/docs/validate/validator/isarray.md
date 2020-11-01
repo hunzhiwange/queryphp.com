@@ -1,4 +1,4 @@
-# Validator.is_array
+# 验证器.验证是否为数组
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/IsArrayTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsArrayTest.php)

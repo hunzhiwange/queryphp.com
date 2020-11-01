@@ -1,4 +1,4 @@
-# Validator.between_equal
+# 验证器.处于 betweenEqual 范围，包含全等
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/BetweenEqualTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/BetweenEqualTest.php)

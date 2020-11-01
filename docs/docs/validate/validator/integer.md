@@ -1,4 +1,4 @@
-# Validator.integer
+# 验证器.是否整型数字
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/IntegerTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IntegerTest.php)

@@ -1,4 +1,4 @@
-# Validator.qq
+# 验证器.是否为 QQ 号码
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/QqTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/QqTest.php)

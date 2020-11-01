@@ -1,4 +1,4 @@
-# Validator.alpha_num
+# 验证器.字符串是否为数字和字母
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/AlphaNumTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/AlphaNumTest.php)

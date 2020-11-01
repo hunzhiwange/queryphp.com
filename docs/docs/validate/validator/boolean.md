@@ -1,4 +1,4 @@
-# Validator.boolean
+# 验证器.验证是否为布尔值
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/BooleanTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/BooleanTest.php)

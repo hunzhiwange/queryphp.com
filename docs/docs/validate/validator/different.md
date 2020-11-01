@@ -1,4 +1,4 @@
-# Validator.different
+# 验证器.两个字段是否不同
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/DifferentTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/DifferentTest.php)

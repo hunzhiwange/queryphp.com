@@ -1,4 +1,4 @@
-# Validator.phone
+# 验证器.值是否为电话号码或者手机号码
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/PhoneTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/PhoneTest.php)

@@ -58,7 +58,7 @@ public function testBaseUse($value): void
 public function badProvider(): array
 {
     return [
-        //[null],
+        [null],
         [''],
         [' '],
         ['    '],

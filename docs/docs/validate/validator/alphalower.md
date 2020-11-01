@@ -1,4 +1,4 @@
-# Validator.alpha_lower
+# 验证器.验证是否都是小写
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/AlphaLowerTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/AlphaLowerTest.php)

@@ -1,4 +1,4 @@
-# Validator.min
+# 验证器.验证值下限
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/MinTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/MinTest.php)

@@ -1,4 +1,4 @@
-# Validator.date_format
+# 验证器.是否为时间
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/DateFormatTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/DateFormatTest.php)

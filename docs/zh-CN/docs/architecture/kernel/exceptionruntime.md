@@ -173,6 +173,7 @@ use Leevel\Kernel\Exception\NotFoundHttpException;
 use Leevel\Kernel\ExceptionRuntime;
 use Leevel\Log\ILog;
 use Leevel\Option\Option;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Response;
 ```
 
@@ -413,6 +414,49 @@ public function testRender(): void
     $this->assertInstanceof(Response::class, $resultResponse = $runtime->render($request, $e));
     $this->assertStringContainsString('Tests\\Kernel\\Exception1: hello world in file', $resultResponse->getContent());
     $this->assertSame(500, $resultResponse->getStatusCode());
+}
+```
+    
+## renderForConsole 命令行渲染
+
+``` php
+public function testRenderForConsole(): void
+{
+    $app = new AppRuntimeForConsole($container = new Container(), $appPath = __DIR__.'/app');
+
+    $this->assertInstanceof(IContainer::class, $container);
+    $this->assertInstanceof(Container::class, $container);
+
+    $option = new Option([
+        'app' => [
+            ':composer' => [
+                'i18ns' => [
+                    'extend',
+                ],
+            ],
+        ],
+        'i18n' => [
+            'default' => 'en-US',
+        ],
+    ]);
+
+    $container->singleton('option', function () use ($option) {
+        return $option;
+    });
+
+    $log = $this->createMock(ILog::class);
+
+    $this->assertNull($log->error('hello world', []));
+
+    $container->singleton(ILog::class, function () use ($log) {
+        return $log;
+    });
+
+    $runtime = new Runtime11($app);
+
+    $e = new Exception1('hello world');
+
+    $runtime->renderForConsole(new ConsoleOutput(), $e);
 }
 ```
     

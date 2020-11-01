@@ -1,4 +1,4 @@
-# Validator.same
+# 验证器.两个值是否完全相同
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/SameTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/SameTest.php)

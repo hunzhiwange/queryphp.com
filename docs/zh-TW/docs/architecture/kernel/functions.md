@@ -17,6 +17,7 @@ QueryPHP 在内核助手函数中为代理应用 `\Leevel\Kernel\Proxy\App` 提�
 use App as Apps;
 use Leevel;
 use Leevel\Di\Container;
+use Leevel\I18n\II18n;
 use Leevel\Kernel\App;
 ```
 
@@ -57,5 +58,35 @@ public function testAppWithContainerMethod(): void
 {
     $this->createContainer();
     $this->assertSame('foo', Apps::make('foo'));
+}
+```
+    
+## 全局语言函数 __()
+
+``` php
+public function testFunctionLang(): void
+{
+    $container = $this->createContainer();
+    $this->assertSame('foo', Apps::make('foo'));
+
+    $i18n = $this->createMock(II18n::class);
+    $map = [
+        ['hello', 'hello'],
+        ['hello %s', 'foo', 'hello foo'],
+        ['hello %d', 5, 'hello 5'],
+    ];
+    $i18n->method('gettext')->willReturnMap($map);
+    $this->assertSame('hello', $i18n->gettext('hello'));
+    $this->assertSame('hello foo', $i18n->gettext('hello %s', 'foo'));
+    $this->assertSame('hello 5', $i18n->gettext('hello %d', 5));
+
+    $container = $this->createContainer();
+    $container->singleton('i18n', function () use ($i18n) {
+        return $i18n;
+    });
+
+    $this->assertSame('hello', __('hello'));
+    $this->assertSame('hello foo', __('hello %s', 'foo'));
+    $this->assertSame('hello 5', __('hello %d', 5));
 }
 ```

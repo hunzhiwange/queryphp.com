@@ -1,4 +1,4 @@
-# Validator.type
+# 验证器.数据类型验证
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/TypeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/TypeTest.php)

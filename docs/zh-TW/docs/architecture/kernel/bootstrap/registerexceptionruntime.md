@@ -25,7 +25,9 @@ use Leevel\Kernel\App as Apps;
 use Leevel\Kernel\Bootstrap\RegisterExceptionRuntime;
 use Leevel\Kernel\IApp;
 use Leevel\Kernel\IExceptionRuntime;
+use Leevel\Option\IOption;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Throwable;
 ```
 
 ## set_error_handler 设置错误处理函数
@@ -57,7 +59,8 @@ public function testSetErrorHandle(): void
 ``` php
 public function testSetExceptionHandler(): void
 {
-    $bootstrap = new RegisterExceptionRuntime();
+    $this->backupSystemEnvironment();
+    $bootstrap = new RegisterExceptionRuntime1();
 
     $container = Container::singletons();
     $app = new App4($container, $appPath = __DIR__.'/app');
@@ -79,7 +82,13 @@ public function testSetExceptionHandler(): void
         return $runtime;
     });
 
-    $bootstrap->handle($app, true);
+    $option = $this->createMock(IOption::class);
+    $option->method('get')->willReturn('production');
+    $container->singleton('option', function () use ($option) {
+        return $option;
+    }); 
+
+    $bootstrap->handle($app);
 
     $this->assertInstanceof(IContainer::class, $container);
     $this->assertInstanceof(Container::class, $container);
@@ -93,5 +102,27 @@ public function testSetExceptionHandler(): void
     $error = new Error('hello world.');
 
     $this->assertNull($this->invokeTestMethod($bootstrap, 'setExceptionHandler', [$error]));
+    $this->restoreSystemEnvironment();
+}
+```
+    
+## register_shutdown_function 设置请求关闭处理函数
+
+``` php
+public function testRegisterShutdownFunction(): void
+{
+    $bootstrap = new RegisterExceptionRuntime2();
+
+    $container = Container::singletons();
+    $app = new App4($container, $appPath = __DIR__.'/app');
+
+    set_error_handler('var_dump', 0);
+    trigger_error('hello error');
+    restore_error_handler();
+
+    $this->setTestProperty($bootstrap, 'app', $app);
+    $this->assertNull($this->invokeTestMethod($bootstrap, 'registerShutdownFunction'));
+    $this->assertSame($GLOBALS['testRegisterShutdownFunction'], 'hello error');
+    unset($GLOBALS['testRegisterShutdownFunction']);
 }
 ```

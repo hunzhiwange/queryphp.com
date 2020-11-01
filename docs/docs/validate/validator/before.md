@@ -1,4 +1,4 @@
-# Validator.before
+# 验证器.验证在给定日期之前
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/BeforeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/BeforeTest.php)

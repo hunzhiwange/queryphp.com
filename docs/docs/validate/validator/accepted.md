@@ -1,4 +1,4 @@
-# Validator.accepted
+# 验证器.是否可接受的
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/AcceptedTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/AcceptedTest.php)

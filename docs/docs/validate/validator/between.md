@@ -1,4 +1,4 @@
-# Validator.between
+# 验证器.处于 between 范围，不包含等于
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/BetweenTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/BetweenTest.php)

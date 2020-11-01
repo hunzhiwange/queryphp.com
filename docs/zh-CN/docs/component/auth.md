@@ -1,4 +1,4 @@
-# Auth
+# 身份验证
 
 ::: tip Testing Is Documentation
 [tests/Auth/ManagerTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Auth/ManagerTest.php)

@@ -17,6 +17,7 @@ use Leevel\Di\Provider;
 use Leevel\Filesystem\Helper;
 use Leevel\Http\Request;
 use Leevel\Kernel\App as Apps;
+use Leevel\Kernel\Console\Autoload;
 use Leevel\Kernel\IApp;
 use Leevel\Option\IOption;
 ```
@@ -490,6 +491,21 @@ public function testIsCachedRouter(): void
     $this->assertTrue($app->isCachedRouter());
 
     Helper::deleteDirectory($appPath);
+}
+```
+    
+## namespacePath 获取命名空间目录真实路径
+
+``` php
+public function testNamespacePath(): void
+{
+    $appPath = dirname(__DIR__, 2);
+    $app = $this->createApp($appPath );
+    $container = $app->container();
+    $this->assertSame(
+        dirname(__DIR__, 2).'/src/Leevel/Kernel/Console',
+        realpath($app->namespacePath(Autoload::class))
+    );
 }
 ```
     

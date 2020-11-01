@@ -1,4 +1,4 @@
-# Validator.max
+# 验证器.验证值上限
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/MaxTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/MaxTest.php)

@@ -159,6 +159,25 @@ public function testAssertChain(): void
 }
 ```
     
+## 断言链式表达式支持可选和多个校验
+
+链式表达式数据值只支持单个，但是可以调用多个校验方法，系统做了统一兼容。一般来说多个校验这种用法在链式调用中没有必要，如果调用了也是没有什么问题。
+
+
+``` php
+public function testAssertChainSupportOptionalMulti(): void
+{
+    Assert::make(5, 'Assert success.')
+        ->notEmpty()
+        ->lessThan([7])
+        ->multiNotEmpty()
+        ->optionalNotEmpty()
+        ->optionalMultiNotEmpty();
+
+    $this->assertSame(1, 1);
+}
+```
+    
 ## 断言支持延迟释放
 
 可以将所有错误几种抛出。

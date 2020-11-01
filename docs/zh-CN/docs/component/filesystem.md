@@ -166,6 +166,7 @@ filesystem 参数根据不同的连接会有所区别。
 use League\Flysystem\Filesystem as LeagueFilesystem;
 use Leevel\Di\Container;
 use Leevel\Di\IContainer;
+use Leevel\Filesystem\Helper;
 use Leevel\Filesystem\Manager;
 use Leevel\Option\Option;
 ```
@@ -184,8 +185,6 @@ public function testBaseUse(): void
 
     $this->assertTrue(is_file($file));
     $this->assertSame('manager', file_get_contents($file));
-
-    unlink($file);
-    rmdir($path);
+    $this->clearTempDir();
 }
 ```

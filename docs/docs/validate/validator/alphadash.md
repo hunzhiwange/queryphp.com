@@ -1,4 +1,4 @@
-# Validator.alpha_dash
+# 验证器.符串是否为数字、下划线、短横线和字母
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/AlphaDashTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/AlphaDashTest.php)

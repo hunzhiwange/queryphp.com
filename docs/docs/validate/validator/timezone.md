@@ -1,4 +1,4 @@
-# Validator.timezone
+# 验证器.是否为正确的时区
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/TimezoneTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/TimezoneTest.php)

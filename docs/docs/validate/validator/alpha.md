@@ -1,4 +1,4 @@
-# Validator.alpha
+# 验证器.是否为英文字母
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/AlphaTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/AlphaTest.php)

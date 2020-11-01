@@ -1,4 +1,4 @@
-# Auth hash
+# 身份验证哈希
 
 ::: tip Testing Is Documentation
 [tests/Auth/HashTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Auth/HashTest.php)

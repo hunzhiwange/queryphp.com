@@ -1,4 +1,4 @@
-# Validator.less_than
+# 验证器.小于
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/LessThanTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/LessThanTest.php)

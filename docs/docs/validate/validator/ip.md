@@ -1,4 +1,4 @@
-# Validator.ip
+# 验证器.是否为合法的 IP 地址
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/IpTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IpTest.php)

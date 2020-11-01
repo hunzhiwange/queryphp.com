@@ -1,4 +1,4 @@
-# Validator.is_float
+# 验证器.验证是否为浮点数
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/IsFloatTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/IsFloatTest.php)

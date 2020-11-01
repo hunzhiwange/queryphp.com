@@ -1,4 +1,4 @@
-# Validator.not_between_equal
+# 验证器.未处于 betweenEqual 范围，包含等于
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/NotBetweenEqualTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/NotBetweenEqualTest.php)

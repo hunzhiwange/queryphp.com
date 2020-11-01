@@ -1,4 +1,4 @@
-# Validator.chinese
+# 验证器.是否为中文
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/ChineseTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/ChineseTest.php)

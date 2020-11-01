@@ -1,4 +1,4 @@
-# Validator.deny_ip
+# 验证器.验证 IP 许可
 
 ::: tip Testing Is Documentation
 [tests/Validate/Validator/DenyIpTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/DenyIpTest.php)
