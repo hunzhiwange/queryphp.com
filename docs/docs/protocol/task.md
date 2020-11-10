@@ -31,7 +31,7 @@ public function testTask(): void
                 'worker_num'      => 1,
                 'task_worker_num' => 1,
             ]);
-            $swooleServer->on('Start', function (Server $server) use ($worker) {
+            $swooleServer->on('Start', function (Server $server) {
             });
             $swooleServer->on('Receive', function ($req, $rep) {
             });
@@ -66,7 +66,7 @@ public function testTaskCo(): void
                 'worker_num'      => 1,
                 'task_worker_num' => 1,
             ]);
-            $swooleServer->on('Start', function (Server $server) use ($worker) {
+            $swooleServer->on('Start', function (Server $server) {
             });
             $swooleServer->on('Receive', function ($req, $rep) {
             });

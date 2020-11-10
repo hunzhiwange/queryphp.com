@@ -719,7 +719,7 @@ public function testConditionIsClosure(): void
 
     $repository = new Repository(new Post());
 
-    $condition = function (Select $select, Entity $entity) use ($request) {
+    $condition = function (Select $select, Entity $entity) {
         $select->where('id', '<', 8);
     };
 
@@ -784,7 +784,7 @@ public function testFindPageWithCondition(): void
 
     $repository = new Repository(new Post());
 
-    $condition = function (Select $select, Entity $entity) use ($request) {
+    $condition = function (Select $select, Entity $entity) {
         $select->where('id', '<', 8);
     };
 
@@ -850,7 +850,7 @@ public function testFindPageMacroWithCondition(): void
 
     $repository = new Repository(new Post());
 
-    $condition = function (Select $select, Entity $entity) use ($request) {
+    $condition = function (Select $select, Entity $entity) {
         $select->where('id', '<', 8);
     };
 
@@ -916,7 +916,7 @@ public function testFindPagePrevNextWithCondition(): void
 
     $repository = new Repository(new Post());
 
-    $condition = function (Select $select, Entity $entity) use ($request) {
+    $condition = function (Select $select, Entity $entity) {
         $select->where('id', '<', 8);
     };
 

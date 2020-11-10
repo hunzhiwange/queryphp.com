@@ -86,7 +86,7 @@ public function testSetExceptionHandler(): void
     $option->method('get')->willReturn('production');
     $container->singleton('option', function () use ($option) {
         return $option;
-    }); 
+    });
 
     $bootstrap->handle($app);
 

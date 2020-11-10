@@ -19,7 +19,7 @@ public function testCreateDirectory(): void
 {
     $dir = __DIR__.'/createDirectory';
 
-    $this->assertDirectoryNotExists($dir);
+    $this->assertDirectoryDoesNotExist($dir);
 
     Helper::createDirectory($dir);
 
@@ -39,7 +39,7 @@ public function testDeleteDirectory(): void
 {
     $dir = __DIR__.'/deleteDirectory/dir';
 
-    $this->assertDirectoryNotExists($dir);
+    $this->assertDirectoryDoesNotExist($dir);
 
     Helper::deleteDirectory($dir);
 
@@ -55,7 +55,7 @@ public function testDeleteDirectory(): void
 
     Helper::deleteDirectory($topDir);
 
-    $this->assertDirectoryNotExists($topDir);
+    $this->assertDirectoryDoesNotExist($topDir);
 }
 ```
     
@@ -67,7 +67,7 @@ public function testTraverseDirectory(): void
     $sourcePath = __DIR__.'/traverseDirectory';
     $sourceSubPath = __DIR__.'/traverseDirectory/dir';
 
-    $this->assertDirectoryNotExists($sourceSubPath);
+    $this->assertDirectoryDoesNotExist($sourceSubPath);
 
     Helper::createDirectory($sourceSubPath);
 
@@ -137,7 +137,7 @@ public function testCreateFile(): void
     $sourcePath = __DIR__.'/createFile';
     $file = $sourcePath.'/hello.txt';
 
-    $this->assertDirectoryNotExists($sourcePath);
+    $this->assertDirectoryDoesNotExist($sourcePath);
 
     Helper::createDirectory($sourcePath);
 

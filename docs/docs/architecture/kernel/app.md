@@ -500,7 +500,7 @@ public function testIsCachedRouter(): void
 public function testNamespacePath(): void
 {
     $appPath = dirname(__DIR__, 2);
-    $app = $this->createApp($appPath );
+    $app = $this->createApp($appPath);
     $container = $app->container();
     $this->assertSame(
         dirname(__DIR__, 2).'/src/Leevel/Kernel/Console',
