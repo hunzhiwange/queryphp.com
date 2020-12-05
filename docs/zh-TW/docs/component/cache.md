@@ -266,10 +266,8 @@ use Leevel\Filesystem\Helper;
 # Leevel\Cache\ICache::set
 /**
  * 设置缓存.
- *
- * @param mixed $data
  */
-public function set(string $name, $data, ?int $expire = null): void;
+public function set(string $name, mixed $data, ?int $expire = null): void;
 ```
 
 缓存配置 `$option` 根据不同缓存驱动支持不同的一些配置。
@@ -295,12 +293,8 @@ public function set(string $name, $data, ?int $expire = null): void;
 # Leevel\Cache\ICache::get
 /**
  * 获取缓存.
- *
- * @param mixed $defaults
- *
- * @return mixed
  */
-public function get(string $name, $defaults = false);
+public function get(string $name, mixed $defaults = false);
 ```
 
 缓存不存在或者过期返回 `false`，可以根据这个判断缓存是否可用。
@@ -344,11 +338,8 @@ public function testBaseUse(): void
 # Leevel\Cache\ICache::put
 /**
  * 批量设置缓存.
- *
- * @param array|string $keys
- * @param mixed        $value
  */
-public function put($keys, $value = null, ?int $expire = null): void;
+public function put(array|string $keys, mixed $value = null, ?int $expire = null): void;
 ```
 
 ::: tip
@@ -441,10 +432,8 @@ public function testPutWithExpire(): void
 # Leevel\Cache\ICache::remember
 /**
  * 缓存存在读取否则重新设置.
- *
- * @return mixed
  */
-public function remember(string $name, Closure $dataGenerator, ?int $expire = null);
+public function remember(string $name, Closure $dataGenerator, ?int $expire = null): mixed;
 ```
 
 ::: tip

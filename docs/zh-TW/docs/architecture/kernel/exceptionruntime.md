@@ -43,10 +43,8 @@ interface IExceptionRuntime
 {
     /**
      * 异常上报.
-     *
-     * @return mixed
      */
-    public function report(Throwable $e);
+    public function report(Throwable $e): void;
 
     /**
      * 异常是否需要上报.
@@ -59,7 +57,7 @@ interface IExceptionRuntime
     public function render(Request $request, Throwable $e): Response;
 
     /**
-     * 命令行渲染.
+     * 命令行异常渲染.
      */
     public function renderForConsole(OutputInterface $output, Throwable $e): void;
 }
@@ -120,15 +118,15 @@ use Throwable;
 class ExceptionRuntime extends BaseExceptionRuntime
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function report(Throwable $e)
+    public function report(Throwable $e): void
     {
         parent::report($e);
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function render(Request $request, Throwable $e): Response
     {

@@ -79,7 +79,7 @@ $kernel->terminate($request, $response);
 ``` php
 # Leevel\Kernel\Kernel::handle
 /**
- * 响应 HTTP 请求.
+ * {@inheritDoc}
  */
 public function handle(Request $request): Response;
 ```

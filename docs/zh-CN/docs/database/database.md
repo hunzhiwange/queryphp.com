@@ -85,13 +85,9 @@ public function testQuery(): void
 ``` php
 # Leevel\Database\Database::query
 /**
- * 查询数据记录.
- *
- * @param bool|int $master
- *
- * @return mixed
+ * {@inheritDoc}
  */
-public function query(string $sql, array $bindParams = [], $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null);
+public function query(string $sql, array $bindParams = [], bool|int $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): mixed;
 ```
 
 
@@ -164,11 +160,9 @@ public function testExecute(): void
 ``` php
 # Leevel\Database\Database::cursor
 /**
- * 游标查询.
- *
- * @param bool|int $master
+ * {@inheritDoc}
  */
-public function cursor(string $sql, array $bindParams = [], $master = false): Generator;
+public function cursor(string $sql, array $bindParams = [], bool|int $master = false): Generator;
 ```
 
 
@@ -587,7 +581,7 @@ public function testCallProcedure3(): void
     do {
         try {
             $result[] = $pdoStatement->fetchAll(PDO::FETCH_OBJ);
-        } catch (PDOException $e) {
+        } catch (PDOException) {
         }
     } while ($pdoStatement->nextRowset());
 
@@ -624,11 +618,9 @@ public function testCallProcedure3(): void
 ``` php
 # Leevel\Database\Database::procedure
 /**
- * 查询存储过程数据记录.
- *
- * @param bool|int $master
+ * {@inheritDoc}
  */
-public function procedure(string $sql, array $bindParams = [], $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): array;
+public function procedure(string $sql, array $bindParams = [], bool|int $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): array;
 ```
 
 
@@ -715,12 +707,6 @@ public function testPdo(): void
 ``` php
 public function testBeginTransactionWithCreateSavepoint(): void
 {
-    if (isset($_SERVER['TRAVIS_COMMIT'])) {
-        $this->markTestSkipped('Mysql of travis-ci not support savepoint.');
-
-        return;
-    }
-
     $connect = $this->createDatabaseConnect();
 
     $connect->setSavepoints(true);
@@ -755,12 +741,6 @@ public function testBeginTransactionWithCreateSavepoint(): void
 ``` php
 public function testCommitWithReleaseSavepoint(): void
 {
-    if (isset($_SERVER['TRAVIS_COMMIT'])) {
-        $this->markTestSkipped('Mysql of travis-ci not support savepoint.');
-
-        return;
-    }
-
     $connect = $this->createDatabaseConnect();
     $connect->setSavepoints(true);
     $connect->beginTransaction();
@@ -1083,13 +1063,7 @@ public function testGetTableColumns(): void
 ``` php
 # Leevel\Database\Database::getRawSql
 /**
- * 从 PDO 预处理语句中获取原始 SQL 查询字符串.
- *
- * - This method borrows heavily from the pdo-debug package and is part of the pdo-debug package.
- *
- * @see https://github.com/panique/pdo-debug/blob/master/pdo-debug.php
- * @see https://stackoverflow.com/questions/210564/getting-raw-sql-query-string-from-pdo-prepared-statements
- * @see http://php.net/manual/en/pdo.constants.php
+ * {@inheritDoc}
  */
 public static function getRawSql(string $sql, array $bindParams): string;
 ```

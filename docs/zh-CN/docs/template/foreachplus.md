@@ -1,14 +1,14 @@
-# Lists 循环
+# Foreach 增强循环
 
 ::: tip Testing Is Documentation
-[tests/View/Compiler/CompilerListsTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerListsTest.php)
+[tests/View/Compiler/CompilerForeachPlusTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/View/Compiler/CompilerForeachPlusTest.php)
 :::
     
-lists 标签主要用于在模板中循环输出数据集或者多维数组。
+foreach+ 标签主要用于在模板中循环输出数据集或者多维数组。
 
 ## 普通输出
 
-lists 标签的 `name` 属性表示模板赋值的变量名称，因此不可随意在模板文件中改变。
+foreach+ 标签的 `name` 属性表示模板赋值的变量名称，因此不可随意在模板文件中改变。
 `id` 表示当前的循环变量，可以随意指定，但确保不要和 name 属性冲突。
 
 
@@ -18,9 +18,9 @@ public function testBaseUse(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <lists name="list" id="vo">
-            {$vo.title}  {$vo.people}
-        </lists>
+        {% foreach+ name="list" id="vo" %}
+            {{ $vo->title }}  {{ $vo->people }}
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'
@@ -55,9 +55,9 @@ public function testOffsetLength(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <lists name="list" id="vo" offset="2" length='4'>
-            {$vo.title} {$vo.people}
-        </lists>
+        {% foreach+ name="list" id="vo" offset="2" length='4' %}
+            {{ $vo->title }} {{ $vo->people }}
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'
@@ -92,9 +92,9 @@ public function testOffset(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <lists name="list" id="vo" offset="3">
-            {$vo.title}  {$vo.people}
-        </lists>
+        {% foreach+ name="list" id="vo" offset="3" %}
+            {{ $vo->title }}  {{ $vo->people }}
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'
@@ -121,7 +121,7 @@ public function testOffset(): void
     
 ## 输出偶数记录
 
-lists 还支持偶数记录的输出，基于 `mod` 属性来控制。
+foreach+ 还支持偶数记录的输出，基于 `mod` 属性来控制。
 
 ``` php
 public function testMod(): void
@@ -129,11 +129,11 @@ public function testMod(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <lists name="list" id="vo" mod="2">
+        {% foreach+ name="list" id="vo" mod="2" %}
             <?php if ($mod == 1): ?>
-                {$vo.title} {$vo.people}
+                {{ $vo->title }} {{ $vo->people }}
             <?php endif; ?>
-        </lists>
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'
@@ -166,7 +166,7 @@ public function testMod(): void
     
 ## 输出奇数记录
 
-lists 还支持奇数记录的输出，基于 `mod` 属性来控制。
+foreach+ 还支持奇数记录的输出，基于 `mod` 属性来控制。
 
 ``` php
 public function testMod2(): void
@@ -174,11 +174,11 @@ public function testMod2(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <lists name="list" id="vo" mod="2">
+        {% foreach+ name="list" id="vo" mod="2" %}
             <?php if (0 === $mod): ?>
-                {$vo.title} {$vo.people}
+                {{ $vo->title }} {{ $vo->people }}
             <?php endif; ?>
-        </lists>
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'
@@ -219,12 +219,12 @@ public function testMod3(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <lists name="list" id="vo" mod="2">
-            {$vo.title} {$vo.people}
+        {% foreach+ name="list" id="vo" mod="2" %}
+            {{ $vo->title }} {{ $vo->people }}
             <?php if (0 === $mod): ?>
                 <br>
             <?php endif; ?>
-        </lists>
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'
@@ -262,11 +262,11 @@ public function testModCanBeVar(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        {~$mod = 4}
+        {{~ $mod = 4 }}
         
-        <lists name="list" id="vo" mod="mod">
-            {$vo.title}  {$vo.people}
-        </lists>
+        {% foreach+ name="list" id="vo" mod="mod" %}
+            {{ $vo->title }}  {{ $vo->people }}
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'
@@ -301,9 +301,9 @@ public function testIndex(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <lists name="list" id="vo" index="k">
-            {$k} {$vo.people}
-        </lists>
+        {% foreach+ name="list" id="vo" index="k" %}
+            {{ $k }} {{ $vo->people }}
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'
@@ -338,9 +338,9 @@ public function testKey(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <lists name="list" id="vo">
-            key: {$key}
-        </lists>
+        {% foreach+ name="list" id="vo" %}
+            key: {{ $key }}
+        {% :foreach+ %}
         eot;
 
     $compiled = <<<'eot'

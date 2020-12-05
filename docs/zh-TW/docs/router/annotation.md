@@ -196,19 +196,19 @@ class RouterProviderAnnotation extends RouterProvider
                     "bind": null
                 },
                 "\/bindNotSet\/test2\/": {
-                    "bind": null
+                    "bind": ""
                 },
                 "\/domain\/test\/": {
-                    "domain": "queryphp.com",
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Domain@fooNotMatchedDomain"
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Domain@fooNotMatchedDomain",
+                    "domain": "queryphp.com"
                 },
                 "\/domain\/test2\/": {
-                    "domain": "queryphp.com",
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Domain@barMatchedDomain"
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Domain@barMatchedDomain",
+                    "domain": "queryphp.com"
                 },
                 "\/domain\/test3\/": {
-                    "domain": "{subdomain:[A-Za-z]+}-vip.{domain}.queryphp.com",
                     "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Domain@barMatchedDomainWithVar",
+                    "domain": "{subdomain:[A-Za-z]+}-vip.{domain}.queryphp.com",
                     "domain_regex": "\/^([A-Za-z]+)\\-vip\\.(\\S+)\\.queryphp\\.com$\/",
                     "domain_var": [
                         "subdomain",
@@ -216,8 +216,8 @@ class RouterProviderAnnotation extends RouterProvider
                     ]
                 },
                 "\/domain\/test4\/": {
-                    "domain": "api.queryphp.com",
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Domain@barMatchedDomainWithoutExtend"
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Domain@barMatchedDomainWithoutExtend",
+                    "domain": "api.queryphp.com"
                 },
                 "\/extendVar\/test\/": {
                     "attributes": {
@@ -227,6 +227,7 @@ class RouterProviderAnnotation extends RouterProvider
                     "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\ExtendVar@withExtendVar"
                 },
                 "\/middleware\/test\/": {
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Middleware@foo",
                     "middlewares": {
                         "handle": [
                             "Tests\\Router\\Middlewares\\Demo2@handle"
@@ -235,10 +236,10 @@ class RouterProviderAnnotation extends RouterProvider
                             "Tests\\Router\\Middlewares\\Demo1@terminate",
                             "Tests\\Router\\Middlewares\\Demo2@terminate"
                         ]
-                    },
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Middleware@foo"
+                    }
                 },
                 "\/middleware\/test2\/": {
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Middleware@bar",
                     "middlewares": {
                         "handle": [
                             "Tests\\Router\\Middlewares\\Demo2@handle",
@@ -248,10 +249,10 @@ class RouterProviderAnnotation extends RouterProvider
                             "Tests\\Router\\Middlewares\\Demo1@terminate",
                             "Tests\\Router\\Middlewares\\Demo2@terminate"
                         ]
-                    },
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Middleware@bar"
+                    }
                 },
                 "\/middleware\/test3\/": {
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Middleware@hello",
                     "middlewares": {
                         "handle": [
                             "Tests\\Router\\Middlewares\\Demo2@handle",
@@ -262,33 +263,32 @@ class RouterProviderAnnotation extends RouterProvider
                             "Tests\\Router\\Middlewares\\Demo1@terminate",
                             "Tests\\Router\\Middlewares\\Demo2@terminate"
                         ]
-                    },
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Middleware@hello"
+                    }
                 },
                 "\/middleware\/test4\/": {
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Middleware@world",
                     "middlewares": {
                         "handle": [],
                         "terminate": [
                             "Tests\\Router\\Middlewares\\Demo1@terminate"
                         ]
-                    },
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Middleware@world"
+                    }
                 },
                 "\/port\/test\/": {
-                    "port": 9527,
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Port@fooNotMatchedPort"
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Port@fooNotMatchedPort",
+                    "port": 9527
                 },
                 "\/port\/test2\/": {
-                    "port": 9527,
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Port@barMatchedPort"
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Port@barMatchedPort",
+                    "port": 9527
                 },
                 "\/scheme\/test\/": {
-                    "scheme": "https",
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Scheme@fooNotMatchedScheme"
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Scheme@fooNotMatchedScheme",
+                    "scheme": "https"
                 },
                 "\/scheme\/test2\/": {
-                    "scheme": "http",
-                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Scheme@barMatchedScheme"
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Scheme@barMatchedScheme",
+                    "scheme": "http"
                 }
             },
             "a": {
@@ -384,34 +384,7 @@ public function testBaseRouterData(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Pet::petLeevel
-/**
- * @OA\Get(
- *     path="/api/v1/petLeevel/{petId:[A-Za-z]+}/",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelBind="\Tests\Router\Controllers\Annotation\PetLeevel"
- * )
- */
-public function petLeevel();
+private function petLeevel(): void;
 ```
 
 **控制器**
@@ -515,34 +488,7 @@ public function testMatchedPetLeevel(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\BasePath::foo
-/**
- * @OA\Get(
- *     path="/basePath/normalize/",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelBind="Tests\Router\Controllers\Annotation\BasePath@normalize"
- * )
- */
-public function foo();
+private function foo(): void;
 ```
 
 **控制器**
@@ -636,41 +582,14 @@ public function testMatchedBasePathNormalize(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Scheme::barMatchedScheme
-/**
- * @OA\Get(
- *     path="/scheme/test2",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelScheme="http"
- * )
- */
-public function barMatchedScheme();
+public function barMatchedScheme(): string;
 ```
 
 **控制器**
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Scheme::barMatchedScheme
-public function barMatchedScheme()
+public function barMatchedScheme(): string
 {
     return 'barMatchedScheme';
 }
@@ -713,41 +632,14 @@ public function testMatchedAndSchemeMatched(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Domain::barMatchedDomain
-/**
- * @OA\Get(
- *     path="/domain/test2",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelDomain="queryphp.com"
- * )
- */
-public function barMatchedDomain();
+public function barMatchedDomain(): string;
 ```
 
 **控制器**
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Domain::barMatchedDomain
-public function barMatchedDomain()
+public function barMatchedDomain(): string
 {
     return 'barMatchedDomain';
 }
@@ -793,41 +685,14 @@ public function testMatchedAndDomainMatched(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Domain::barMatchedDomainWithVar
-/**
- * @OA\Get(
- *     path="/domain/test3",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelDomain="{subdomain:[A-Za-z]+}-vip.{domain}.queryphp.com"
- * )
- */
-public function barMatchedDomainWithVar(Request $request);
+public function barMatchedDomainWithVar(Request $request): string;
 ```
 
 **控制器**
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Domain::barMatchedDomainWithVar
-public function barMatchedDomainWithVar(Request $request)
+public function barMatchedDomainWithVar(Request $request): string
 {
     return 'barMatchedDomainWithVar and attributes are '.
         json_encode($request->attributes->all());
@@ -876,41 +741,14 @@ public function testMatchedAndDomainWithVarMatched(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Port::barMatchedPort
-/**
- * @OA\Get(
- *     path="/port/test2",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelPort=9527
- * )
- */
-public function barMatchedPort();
+public function barMatchedPort(): string;
 ```
 
 **控制器**
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Port::barMatchedPort
-public function barMatchedPort()
+public function barMatchedPort(): string
 {
     return 'barMatchedPort';
 }
@@ -956,41 +794,14 @@ public function testMatchedAndPortMatched(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\ExtendVar::withExtendVar
-/**
- * @OA\Get(
- *     path="/extendVar/test",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelAttributes={"args1": "hello", "args2": "world"}
- * )
- */
-public function withExtendVar(Request $request);
+public function withExtendVar(Request $request): string;
 ```
 
 **控制器**
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\ExtendVar::withExtendVar
-public function withExtendVar(Request $request)
+public function withExtendVar(Request $request): string
 {
     return 'withExtendVar and attributes are '.
         json_encode($request->attributes->all());
@@ -1037,41 +848,14 @@ public function testMatchedWithExtendVar(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Middleware::foo
-/**
- * @OA\Get(
- *     path="/middleware/test",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelMiddlewares="group1"
- * )
- */
-public function foo();
+public function foo(): string;
 ```
 
 **控制器**
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Middleware::foo
-public function foo()
+public function foo(): string
 {
     return 'Middleware matched';
 }
@@ -1159,41 +943,14 @@ public function testMiddleware(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Middleware::bar
-/**
- * @OA\Get(
- *     path="/middleware/test2",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelMiddlewares={"group1", "group2"}
- * )
- */
-public function bar();
+public function bar(): string;
 ```
 
 **控制器**
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Middleware::bar
-public function bar()
+public function bar(): string
 {
     return 'Middleware matched 2';
 }
@@ -1283,41 +1040,14 @@ public function testMiddleware2(): void
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Middleware::world
-/**
- * @OA\Get(
- *     path="/middleware/test4",
- *     tags={"pet"},
- *     summary="Just test the router",
- *     operationId="petLeevel",
- *     @OA\Parameter(
- *         name="petId",
- *         in="path",
- *         description="ID of pet to return",
- *         required=true,
- *         @OA\Schema(
- *             type="integer",
- *             format="int64"
- *         )
- *     ),
- *     @OA\Response(
- *         response=405,
- *         description="Invalid input"
- *     ),
- *     security={
- *         {"petstore_auth": {"write:pets", "read:pets"}}
- *     },
- *     requestBody={"$ref": "#/components/requestBodies/Pet"},
- *     leevelMiddlewares={"Tests\Router\Middlewares\Demo1"}
- * )
- */
-public function world();
+public function world(): string;
 ```
 
 **控制器**
 
 ``` php
 # Tests\Router\Apps\AppForAnnotation\Controllers\Middleware::world
-public function world()
+public function world(): string
 {
     return 'Middleware matched 4';
 }

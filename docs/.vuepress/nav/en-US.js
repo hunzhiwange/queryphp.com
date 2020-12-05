@@ -58,10 +58,6 @@ module.exports = [
     ],
   },
   {
-    text: 'API',
-    link: 'https://api.queryphp.com/',
-  },
-  {
     text: 'Community',
     link: '/ecosystem/',
   },

@@ -16,12 +16,12 @@ public function testBaseUse(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        {# 我是一个注释 #}
+        {{# 我是一个注释 #}}
         
-        {#
+        {{#
             我是两行注释
           Thank U!
-        #}
+        #}}
         eot;
 
     $compiled = <<<'eot'
@@ -42,8 +42,8 @@ public function testOriginalPhp(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        {~$value = 'Make QueryPHP greater !'}
-        {$value}
+        {{~ $value = 'Make QueryPHP greater !' }}
+        {{ $value }}
         eot;
 
     $compiled = <<<'eot'
@@ -63,7 +63,7 @@ public function testEcho(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        {:'Hello QueryPHP!'}
+        {{: 'Hello QueryPHP!' }}
         eot;
 
     $compiled = <<<'eot'

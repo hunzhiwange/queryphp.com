@@ -11,7 +11,7 @@
 ``` php
 # Leevel\Auth\Hash::password
 /**
- * 生成密码.
+ * {@inheritDoc}
  */
 public function password(string $password, array $option = []): string;
 ```
@@ -21,7 +21,7 @@ public function password(string $password, array $option = []): string;
 ``` php
 # Leevel\Auth\Hash::verify
 /**
- * 校验密码.
+ * {@inheritDoc}
  */
 public function verify(string $password, string $hash): bool;
 ```

@@ -152,10 +152,13 @@ mail 参数根据不同的连接会有所区别，通用的 mail 参数如下：
 ``` php
 <?php
 
+use Leevel\Di\Container;
+use Leevel\Di\IContainer;
+use Leevel\Kernel\App;
 use Leevel\Mail\Mail;
 use Leevel\Mail\Smtp;
-use Leevel\Router\View;
-use Leevel\View\Phpui;
+use Leevel\Option\Option;
+use Leevel\View\Manager;
 use Swift_Attachment;
 use Swift_Message;
 use Swift_Mime_SimpleMessage;
@@ -380,7 +383,7 @@ HTML 邮件内容与纯文本邮件内容同时存在，系统优先采用前者
 ``` php
 # Leevel\Mail\Mail::flush
 /**
- * 发送邮件.
+ * {@inheritDoc}
  */
 public function flush(?Closure $callbacks = null, bool $htmlPriority = true): int;
 ```

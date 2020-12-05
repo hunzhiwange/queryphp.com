@@ -638,7 +638,7 @@ public function testParseReflectionException(): void
 {
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage(
-        'Class Tests\\Di\\Fixtures\\TestNotFound does not exist'
+        'Class or interface Tests\\Di\\Fixtures\\TestNotFound is register in container is not object.'
     );
 
     $container = new Container();

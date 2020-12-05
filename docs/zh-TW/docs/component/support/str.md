@@ -279,33 +279,3 @@ public function testUnCamelize(): void
     $this->assertSame('hello-world', Str::unCamelize('helloWorld', '-'));
 }
 ```
-    
-## 判断字符串中是否包含给定的字符开始
-
-``` php
-public function testStartsWith(): void
-{
-    $this->assertFalse(Str::startsWith('foo', 'hello'));
-    $this->assertTrue(Str::startsWith('foo bar', 'foo'));
-}
-```
-    
-## 判断字符串中是否包含给定的字符结尾
-
-``` php
-public function testEndsWith(): void
-{
-    $this->assertFalse(Str::endsWith('foo', 'hello'));
-    $this->assertTrue(Str::endsWith('foo bar', 'bar'));
-}
-```
-    
-## 判断字符串中是否包含给定的字符串集合
-
-``` php
-public function testContains(): void
-{
-    $this->assertFalse(Str::contains('foo', ''));
-    $this->assertTrue(Str::contains('foo bar', 'foo'));
-}
-```

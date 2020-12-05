@@ -1104,8 +1104,6 @@ public function testMakeSqlWithLogicGroup(): void
 # Leevel\Database\Select::cache
 /**
  * 设置查询缓存.
- *
- * @return \Leevel\Database\Select
  */
 public function cache(string $name, ?int $expire = null, ?string $connect = null): self;
 ```
@@ -1507,13 +1505,9 @@ public function testCachePage(): void
 ``` php
 # Leevel\Database\Database::query
 /**
- * 查询数据记录.
- *
- * @param bool|int $master
- *
- * @return mixed
+ * {@inheritDoc}
  */
-public function query(string $sql, array $bindParams = [], $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null);
+public function query(string $sql, array $bindParams = [], bool|int $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): mixed;
 ```
 
 
@@ -1568,11 +1562,9 @@ public function testCacheQuery(): void
 ``` php
 # Leevel\Database\Database::procedure
 /**
- * 查询存储过程数据记录.
- *
- * @param bool|int $master
+ * {@inheritDoc}
  */
-public function procedure(string $sql, array $bindParams = [], $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): array;
+public function procedure(string $sql, array $bindParams = [], bool|int $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): array;
 ```
 
 

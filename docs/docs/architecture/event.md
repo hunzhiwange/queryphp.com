@@ -28,12 +28,9 @@ use Leevel\Event\Observer;
 ``` php
 # Leevel\Event\Dispatch::register
 /**
- * 注册监听器.
- *
- * @param array|object|string $event
- * @param mixed               $listener
+ * {@inheritDoc}
  */
-public function register($event, $listener, int $priority = 500): void;
+public function register(array|object|string $event, mixed $listener, int $priority = 500): void;
 ```
 
 **handle 函数原型**
@@ -41,12 +38,9 @@ public function register($event, $listener, int $priority = 500): void;
 ``` php
 # Leevel\Event\Dispatch::handle
 /**
- * 执行一个事件.
- *
- * @param object|string $event
- * @param array         ...$params
+ * {@inheritDoc}
  */
-public function handle($event, ...$params): void;
+public function handle(object|string $event, ...$params): void;
 ```
 
 **fixture 定义**

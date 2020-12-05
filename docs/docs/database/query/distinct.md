@@ -10,8 +10,6 @@
 # Leevel\Database\Condition::distinct
 /**
  * 创建一个 SELECT DISTINCT 查询.
- *
- * @return \Leevel\Database\Condition
  */
 public function distinct(bool $flag = true): self;
 ```

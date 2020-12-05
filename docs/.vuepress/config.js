@@ -260,17 +260,14 @@ function genSidebarConfigTemplateDoc (groupA) {
       children: [
         '',
         'var',
-        'assign',
         'quick',
         'if',
         'for',
-        'list',
-        'lists',
+        'foreach',
+        'foreachplus',
         'while',
         'break',
-        'php',
         'include',
-        'css',
         'tagself',
       ]
     }

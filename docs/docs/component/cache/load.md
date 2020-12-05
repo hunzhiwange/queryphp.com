@@ -19,7 +19,7 @@ use Leevel\Cache\ICache;
 
 class Test1 implements IBlock
 {
-    public function handle(array $params = []): array
+    public function handle(array $params = []): mixed
     {
         return ['foo' => 'bar'];
     }
@@ -50,12 +50,10 @@ interface IBlock
     /**
      * 响应.
      */
-    public function handle(array $params = []): array;
+    public function handle(array $params = []): mixed;
 
     /**
      * 缓存驱动.
-     *
-     * @return \Leevel\Cache\ICache
      */
     public function cache(): ICache;
 
@@ -90,6 +88,7 @@ use Tests\Cache\Pieces\Test1;
 use Tests\Cache\Pieces\Test2;
 use Tests\Cache\Pieces\Test4;
 use Tests\Cache\Pieces\Test5;
+use Tests\Cache\Pieces\Test6;
 ```
 
 ## data 载入缓存块数据
@@ -103,7 +102,7 @@ use Tests\Cache\Pieces\Test5;
  *
  * - 系统自动存储缓存到内存，可重复执行不会重复载入数据.
  */
-public function data(array $names, ?int $expire = null, bool $force = false): array;
+public function data(array $names, ?int $expire = null, bool $force = false): mixed;
 ```
 
 配置 `$expire` 和缓存功能中的 `set` 的用法一致。
@@ -222,7 +221,7 @@ use Leevel\Cache\ICache;
 
 class Test4 implements IBlock
 {
-    public function handle(array $params = []): array
+    public function handle(array $params = []): mixed
     {
         return $params;
     }
@@ -271,7 +270,7 @@ use Leevel\Cache\ICache;
 
 class Test5 implements IBlock
 {
-    public function handle(array $params = []): array
+    public function handle(array $params = []): mixed
     {
         return ['data' => $GLOBALS['cache_data'] ?? 'test5'];
     }

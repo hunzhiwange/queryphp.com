@@ -18,14 +18,17 @@ QueryPHP 路由响应封装了常用的响应，比如模板、JSON、文件下�
 ``` php
 <?php
 
+use Leevel\Di\Container;
+use Leevel\Di\IContainer;
 use Leevel\Http\JsonResponse;
 use Leevel\Http\RedirectResponse;
 use Leevel\Http\Request;
+use Leevel\Kernel\App;
+use Leevel\Option\Option;
 use Leevel\Router\Redirect;
 use Leevel\Router\Response as RouterResponse;
 use Leevel\Router\Url;
-use Leevel\Router\View;
-use Leevel\View\Phpui;
+use Leevel\View\Manager;
 use SplFileInfo;
 use SplFileObject;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;

@@ -559,10 +559,9 @@ public function testBeginTransaction(): void
 
     try {
         $post->title = 'new title';
-
         $work->flush();
         $work->commit();
-    } catch (Throwable $e) {
+    } catch (Throwable) {
         $work->close();
         $work->rollBack();
     }

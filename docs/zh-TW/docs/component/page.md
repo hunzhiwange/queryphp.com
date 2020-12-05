@@ -108,7 +108,6 @@ public function testCurrentPageIsZero(): void
 public function testFragment(): void
 {
     $page = new Page(1, 10, 52);
-
     $page->fragment('hello');
 
     $this->assertSame('hello', $page->getFragment());
@@ -148,11 +147,8 @@ public function testFragment(): void
 public function testPerPage(): void
 {
     $page = new Page(1, 10, 52);
-
     $this->assertSame(10, $page->getPerPage());
-
     $page->perPage(20);
-
     $this->assertSame(20, $page->getPerPage());
 
     $data = <<<'eot'
@@ -228,11 +224,8 @@ public function testSetSmallTemplate(): void
 public function testAppend(): void
 {
     $page = new Page(1, 5, 3);
-
     $page->append('foo', 'bar');
-
     $page->addParam('foo1', 'bar1');
-
     $page->appends(['hello' => 'world']);
 
     $data = <<<'eot'
@@ -341,7 +334,6 @@ public function testRenderOption(): void
 public function testUrl(): void
 {
     $page = new Page(1, 3, 5);
-
     $page->url('/hello');
 
     $data = <<<'eot'
@@ -361,7 +353,6 @@ public function testUrl(): void
 public function testSetRender(): void
 {
     $page = new Page(1, 3, 5);
-
     $page->setRender('bootstrap');
 
     $data = <<<'eot'
@@ -423,9 +414,7 @@ public function testPageName(): void
 public function testRange(): void
 {
     $page = new Page(1, 3, 40);
-
     $page->currentPage(7);
-
     $page->range(4);
 
     $data = <<<'eot'
@@ -463,7 +452,6 @@ public function testRange(): void
 public function testMacro(): void
 {
     $page = new Page(1, 3, Page::MACRO);
-
     $page->currentPage(44);
 
     $data = <<<'eot'
@@ -501,7 +489,6 @@ public function testMacro(): void
 public function testPageBootstrapSize(): void
 {
     $page = new Page(1, 3, 40);
-
     $page->currentPage(8);
 
     $data = <<<'eot'

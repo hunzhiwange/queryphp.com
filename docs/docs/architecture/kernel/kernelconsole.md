@@ -83,7 +83,7 @@ exit($status);
 ``` php
 # Leevel\Kernel\KernelConsole::handle
 /**
- * 响应命令行请求.
+ * {@inheritDoc}
  */
 public function handle(?InputInterface $input = null, ?OutputInterface $output = null): int;
 ```

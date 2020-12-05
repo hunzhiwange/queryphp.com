@@ -75,23 +75,20 @@ public function testRemoveContext(): void
 }
 ```
     
-## 当前协程 ID 和父 ID
+## 当前协程 ID
 
 ``` php
-public function testCoroutineCidAndPcid(): void
+public function testCoroutineCid(): void
 {
     $coroutine = new Coroutine();
     $this->assertSame(-1, $coroutine->cid());
-    $this->assertFalse($coroutine->pcid());
 
     try {
         go(function () use ($coroutine) {
             $this->assertSame(1, $coroutine->cid());
-            $this->assertSame(-1, $coroutine->pcid());
 
             go(function () use ($coroutine) {
                 $this->assertSame(2, $coroutine->cid());
-                $this->assertSame(1, $coroutine->pcid());
             });
         });
     } catch (Throwable $th) {

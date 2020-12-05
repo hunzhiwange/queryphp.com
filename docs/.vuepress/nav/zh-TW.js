@@ -58,10 +58,6 @@ module.exports = [
     ],
   },
   {
-    text: 'API 檔案',
-    link: 'https://api.queryphp.com/',
-  },
-  {
     text: '社區',
     link: '/zh-TW/ecosystem/',
   },

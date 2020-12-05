@@ -14,27 +14,27 @@ public function testBaseUse(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        <tagself>
-           <if condition="$name eq 1 "> value1
-              <elseif condition="$name eq 2" />value2
-              <else /> value3
-           </if>
-        </tagself>
+        {% tagself %}
+            {% if cond="1 == $name" %} value1
+            {% elseif cond="2 == $name" %} value2
+            {% else %} value3
+            {% :if %}
+        {% :tagself %}
         
-        {tagself}
-             {{i + 1}}
-             {$value}
-        {/tagself}
+        {% tagself %}
+             {{ $i + 1 }}
+             {{ $value }}
+        {% :tagself %}
         eot;
 
     $compiled = <<<'eot'
-        <if condition="$name eq 1 "> value1
-              <elseif condition="$name eq 2" />value2
-              <else /> value3
-           </if>
+        {% if cond="1 == $name" %} value1
+            {% elseif cond="2 == $name" %} value2
+            {% else %} value3
+            {% :if %}
         
-        {{i + 1}}
-             {$value}
+        {{ $i + 1 }}
+             {{ $value }}
         eot;
 
     $this->assertSame($compiled, $parser->doCompile($source, null, true));
