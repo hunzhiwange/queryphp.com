@@ -249,28 +249,22 @@ php leevel websocket:status
   <p>simply and happily</p>
  </div>
  <div class="feature">
-  <h2>Framework Ideas</h2>
-  <p>A sense of mission worth entrusting,to provide a stable and reliable high-quality enterprise level framework as its historical mission.</p>
+  <h2>Production-ready</h2>
  </div>
  <div class="feature">
-  <h2>Component System</h2>
-  <p>The core of the framework is composed of independent high cohesion and low coupling components, which can easily access existing systems without intrusion.</p>
+  <h2>[Simple high performance routing](https://www.queryphp.com/docs/router/)</h2>
  </div>
  <div class="feature">
-  <h2>Router System</h2>
-  <p>The framework provides MVC automatic routing and can intelligently parse Restful requests and annotated routing based on PHP 8 attributes.</p>
+  <h2>[Expressive template engine](https://www.queryphp.com/docs/template/)</h2>
  </div>
  <div class="feature">
-  <h2>Overall Solution</h2>
-  <p>The framework provides a large number of built-in functions from caching, Session, IOC container, template engine, Ddd ORM, and provides a Symfony Console command line toolkit.</p>
+  <h2>[Powerful ORM based on domain driven design](https://www.queryphp.com/docs/database/)</h2>
  </div>
  <div class="feature">
-  <h2>High Quality</h2>
-  <p>High test coverage to face bugs.</p>
+  <h2>High quality code and high coverage [unit testing](https://github.com/hunzhiwange/framework/tree/master/tests)</h2>
  </div>
  <div class="feature">
-  <h2>Business Coroutine</h2>
-  <p>New coroutine programming mode based on Swoole 4 makes business performance better,our vision is a small amount of code modification or no modification,let your business to support more user services.</p>
+  <h2>&nbsp;</h2>
  </div>
 </div>
 

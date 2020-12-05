@@ -259,28 +259,22 @@ php leevel websocket:status
   <p>左手程式碼右手年華</p>
  </div>
  <div class="feature">
-  <h2>框架理念</h2>
-  <p>值得託付的使命感，以提供穩定可靠的高品質企業級框架為歷史使命。</p>
+  <h2>生產就緒</h2>
  </div>
  <div class="feature">
-  <h2>組件系統</h2>
-  <p>框架底層由獨立的高內聚低耦合組件構成，可以輕鬆無侵入接入現有系統。</p>
+  <h2>[簡單高性能路由](https://www.queryphp.com/docs/router/)</h2>
  </div>
  <div class="feature">
-  <h2>路由系統</h2>
-  <p>框架提供 MVC 自動路由並能够智慧解析 Restful 請求和基於 PHP 8 内容的注解路由。</p>
+  <h2>[富於表現力的範本引擎](https://www.queryphp.com/docs/template/)</h2>
  </div>
  <div class="feature">
-  <h2>整體解決方案</h2>
-  <p>框架提供了從緩存、Session、IOC 容器、範本引擎、Ddd ORM 等大量開箱即用的功能，提供了基於 Symfony Console 命令列工具集。</p>
+  <h2>[基於領域驅動設計的强大 ORM](https://www.queryphp.com/docs/database/)</h2>
  </div>
  <div class="feature">
-  <h2>高品質</h2>
-  <p>高測試覆蓋率直面 Bug。</p>
+  <h2>高品質程式碼及高覆蓋率[單元測試](https://github.com/hunzhiwange/framework/tree/master/tests)</h2>
  </div>
  <div class="feature">
-  <h2>業務協程化</h2>
-  <p>基於 Swoole 4 提供的全新協程程式設計模式讓業務效能更好，我們的願景是少量程式碼修改或者無修改，讓你的業務撐起更多的用戶服務。</p>
+  <h2>&nbsp;</h2>
  </div>
 </div>
 
