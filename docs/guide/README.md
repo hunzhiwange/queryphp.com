@@ -6,11 +6,13 @@
 
 QueryPHP 是一款现代化的高性能 PHP 渐进式框架, 以提供稳定可靠的高品质企业级框架为历史使命。**<span style="color:#e82e7d;">USE LEEVEL DO BETTER</span>**
 
-::: tip 四年重构，只为更好的自己
-QueryPHP 基于一款成立于 2010 年的 PHP 框架 [DoYouHaoBaby](https://github.com/hunzhiwange/dyhb.blog-x/tree/master/Upload/DoYouHaoBaby) 开发，最新版本 DoYouHaoBaby 更名为 [QeePHP](https://github.com/hunzhiwange/windsforce/tree/master/upload/System/include/QeePHP)，继承了上一代产品的优秀之处，彻底革新并进行了长达 4 年重构。
+## 特性
 
-在这个基础上，我们引入了 Laravel、Symfony 等框架现代化先进特性，站在巨人的肩膀上保持创新。
-:::
+- 生产就绪 (Production-ready)
+- [简单高性能路由](https://www.queryphp.com/docs/router/)
+- [富于表现力的模板引擎](https://www.queryphp.com/docs/template/)
+- [基于领域驱动设计的强大 ORM](https://www.queryphp.com/docs/database/)
+- 高质量代码及高覆盖率[单元测试](https://github.com/hunzhiwange/framework/tree/master/tests)
 
 ## 它是如何工作的？
 
@@ -31,16 +33,16 @@ QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式
 # => Now visite http://127.0.0.1:9527/
 ```
 
- * Home http://127.0.0.1:9527/
- * MVC router http://127.0.0.1:9527/api/test
- * MVC restful router http://127.0.0.1:9527/restful/123
- * MVC restful router with method http://127.0.0.1:9527/restful/123/show
- * Annotation api router http://127.0.0.1:9527/api/v1/demo/liu
- * Annotation web router http://127.0.0.1:9527/web/v2/demo
- * php leevel link:public http://127.0.0.1:9527/public/css/page.css
- * php leevel link:storage http://127.0.0.1:9527/storage/logo.png
- * php leevel link:apis http://127.0.0.1:9527/apis/
- * php leevel link:debugbar http://127.0.0.1:9527/debugbar/debugbar.css
+- Home http://127.0.0.1:9527/
+- MVC router http://127.0.0.1:9527/api/test
+- MVC restful router http://127.0.0.1:9527/restful/123
+- MVC restful router with method http://127.0.0.1:9527/restful/123/show
+- Annotation api router http://127.0.0.1:9527/api/v1/demo/liu
+- Annotation web router http://127.0.0.1:9527/web/v2/demo
+- php leevel link:public http://127.0.0.1:9527/public/css/page.css
+- php leevel link:storage http://127.0.0.1:9527/storage/logo.png
+- php leevel link:apis http://127.0.0.1:9527/apis/
+- php leevel link:debugbar http://127.0.0.1:9527/debugbar/debugbar.cs
 
 上面就是运行在 PHP 内置 WebServer 中，也可以用 Nginx 搭建站点。
 
@@ -117,22 +119,6 @@ DEBU[0000] [rpc]: started
 DEBU[0000] [http]: started
 INFO[0060] 127.0.0.1 {23.1ms} 200 GET http://127.0.0.1:9527/api/test
 ```
-
-## 特性
-
-- 生产就绪 (Production-ready)
-- 框架理念 (值得托付的使命感，以提供稳定可靠的高品质企业级框架为历史使命。)
-- 组件系统 (框架底层由独立的高内聚低耦合组件构成，可以轻松无侵入接入现有系统。)
-- 路由系统 (框架提供 MVC 自动路由并能够智能解析 Restful 请求和基于 PHP 8 属性的注解路由。)
-- 整体解决方案 (框架提供了从缓存、Session、IOC 容器、模板引擎、Ddd ORM 等大量开箱即用的功能，提供了基于 Symfony Console 命令行工具集。)
-- 高品质 (高测试覆盖率直面 Bug，超过 3500 例测试用例保证系统可靠性和可持续维护。)
-- 业务协程化 (基于 Swoole 4 开发，我们的愿景是少量代码或者无修改，让你的业务撑起更多的用户服务。)
-- PHP 严格模式 （每一个 PHP 脚本都是 strict_types=1，严格模式可以避免很多弱类型带来潜在 BUG。）
-- PHP 8 类型提示 (为每一个方法提供确定的参数类型和返回值类型，以及类属性的类型支持。）
-- 依赖注入（完整实现，关键 MVC、命令行脚本、事件监听器全部接入 IOC 容器。）
-- 领域驱动设计（支持 UnitOfWork 事务工作单元、Repository 仓储、Specification 查询规约，Entity Getter Setter 领域实体等。）
-- 避免闭门造车 (QueryPHP 一直从 Laravel、Symfony 等框架吸收一些优秀的设计，同时我们自身也进行了大量的创新设计。)
-- 更多的特性期待你的发现...
 
 ## Todo
 
