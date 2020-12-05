@@ -3,17 +3,17 @@ module.exports = {
     '/': {
       lang: 'en-Us',
       title: 'QueryPHP',
-      description: 'High Performance PHP Progressive Coroutine Framework Engine.'
+      description: 'High Performance PHP Progressive Framework.'
     },
     '/zh-CN/': {
       lang: 'zh-CN',
       title: 'QueryPHP',
-      description: '高性能 PHP 渐进式协程框架引擎.'
+      description: '高性能 PHP 渐进式框架.'
     },
     '/zh-TW/': {
       lang: 'zh-TW',
       title: 'QueryPHP',
-      description: '高性能 PHP 漸進式協程框架引擎.'
+      description: '高性能 PHP 漸進式框架.'
     }
   },
 
