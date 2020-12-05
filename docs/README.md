@@ -6,7 +6,7 @@ actionLink: /guide/
 ---
 
 <div style="color:#212121!important;font-weight:700;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
-  <div style="margin-bottom:10px;">QueryPHP is a modern, high performance PHP progressive framework, to provide a stable and reliable high-quality enterprise level framework as its historical mission. **<span>USE <span style="color:#f80378">LEEVEL</span> DO <span style="color:#02d629">BETTER</span></span>**</div>
+  <div style="margin-bottom:10px;">QueryPHP is a modern, high performance PHP progressive framework, to provide a stable and reliable high-quality enterprise level framework as its historical mission. **<span style="color:#e82e7d;">USE LEEVEL DO BETTER</span>**</div>
 </div>
 
 <div style="margin-top: -50px;margin-bottom: -80px;">

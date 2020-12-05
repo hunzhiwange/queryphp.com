@@ -6,8 +6,7 @@ actionLink: /guide/
 ---
 
 <div style="color:#212121!important;font-weight:700;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
-  <div style="margin-bottom:10px;">QueryPHP 是一款現代化的高性能 PHP 漸進式協程框架，我們還是主要面向傳統 PHP-FPM 場景，以工程師用戶體驗為歷史使命，讓每一個 PHP 應用都有一個好框架。</div>
-  <div>百分之百單元測試覆蓋直面 Bug，致力於創造高品質產品 Level Level Leevel，依託 Swoole 開啟未來更多可能，此刻未來逐步漸進。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，讓您的業務撐起更多的用戶服務。</div>
+  <div style="margin-bottom:10px;">QueryPHP 是一款現代化的高性能 PHP 漸進式協程框架，我們還是主要面向傳統 PHP-FPM 場景，以工程師用戶體驗為歷史使命，讓每一個 PHP 應用都有一個好框架。**<span style="color:#e82e7d;">USE LEEVEL DO BETTER</span>**</div>
 </div>
 
 <div style="margin-top: -50px;margin-bottom: -80px;">

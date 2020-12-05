@@ -6,7 +6,7 @@ actionLink: /guide/
 ---
 
 <div style="color:#212121!important;font-weight:700;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
-  <div style="margin-bottom:10px;">QueryPHP 是一款现代化的高性能 PHP 渐进式框架, 以提供稳定可靠的高品质企业级框架为历史使命。**<span>USE <span style="color:#f80378">LEEVEL</span> DO <span style="color:#02d629">BETTER</span></span>**</div>
+  <div style="margin-bottom:10px;">QueryPHP 是一款現代化的高性能 PHP 漸進式框架，以提供穩定可靠的高品質企業級框架為歷史使命。**<span style="color:#e82e7d;">USE LEEVEL DO BETTER</span>**</div>
 </div>
 
 <div style="margin-top: -50px;margin-bottom: -80px;">
