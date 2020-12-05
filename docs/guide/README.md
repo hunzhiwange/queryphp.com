@@ -31,6 +31,17 @@ QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式
 # => Now visite http://127.0.0.1:9527/
 ```
 
+ * Home http://127.0.0.1:9527/
+ * MVC router http://127.0.0.1:9527/api/test
+ * MVC restful router http://127.0.0.1:9527/restful/123
+ * MVC restful router with method http://127.0.0.1:9527/restful/123/show
+ * Annotation api router http://127.0.0.1:9527/api/v1/demo/liu
+ * Annotation web router http://127.0.0.1:9527/web/v2/demo
+ * php leevel link:public http://127.0.0.1:9527/public/css/page.css
+ * php leevel link:storage http://127.0.0.1:9527/storage/logo.png
+ * php leevel link:apis http://127.0.0.1:9527/apis/
+ * php leevel link:debugbar http://127.0.0.1:9527/debugbar/debugbar.css
+
 上面就是运行在 PHP 内置 WebServer 中，也可以用 Nginx 搭建站点。
 
 ### 运行在 Swoole 环境中
@@ -74,17 +85,6 @@ _____________                           _______________
 +-----------------------+---------------------------------+
 ```
 
- * Home http://127.0.0.1:9527/
- * MVC router http://127.0.0.1:9527/api/test
- * MVC restful router http://127.0.0.1:9527/restful/123
- * MVC restful router with method http://127.0.0.1:9527/restful/123/show
- * Annotation api router http://127.0.0.1:9527/api/v1/demo/liu
- * Annotation web router http://127.0.0.1:9527/web/v2/demo
- * php leevel link:public http://127.0.0.1:9527/public/css/page.css
- * php leevel link:storage http://127.0.0.1:9527/storage/logo.png
- * php leevel link:apis http://127.0.0.1:9527/apis/
- * php leevel link:debugbar http://127.0.0.1:9527/debugbar/debugbar.css
-
 ### Go RoadRunner 支持
 
 RoadRunner 是一个开源的高性能 PHP 应用服务器、负载均衡器和流程管理器。它支持作为一个服务运行，能够在每个项目的基础上扩展其功能。
@@ -118,31 +118,19 @@ DEBU[0000] [http]: started
 INFO[0060] 127.0.0.1 {23.1ms} 200 GET http://127.0.0.1:9527/api/test
 ```
 
- * Home http://127.0.0.1:9527/
- * MVC router http://127.0.0.1:9527/api/test
- * MVC restful router http://127.0.0.1:9527/restful/123
- * MVC restful router with method http://127.0.0.1:9527/restful/123/show
- * Annotation router http://127.0.0.1:9527/api/v1/petLeevelForApi/helloworld
- * Annotation router with bind http://127.0.0.1:9527/api/v2/withBind/foobar
- * php leevel link:public http://127.0.0.1:9527/public/css/page.css
- * php leevel link:storage http://127.0.0.1:9527/storage/logo.png
- * php leevel link:apis http://127.0.0.1:9527/apis/
- * php leevel link:debugbar http://127.0.0.1:9527/debugbar/debugbar.css
-
 ## 特性
 
 - 生产就绪 (Production-ready)
-- 框架理念 (值得托付的使命感，让每一个 PHP 应用都有一个好框架。)
+- 框架理念 (值得托付的使命感，以提供稳定可靠的高品质企业级框架为历史使命。)
 - 组件系统 (框架底层由独立的高内聚低耦合组件构成，可以轻松无侵入接入现有系统。)
-- 路由系统 (框架提供 MVC 自动路由并能够智能解析 Restful 请求和基于 OpenApi 3.0 规范的 swagger-php 注解路由，文档路由一步搞定。)
+- 路由系统 (框架提供 MVC 自动路由并能够智能解析 Restful 请求和基于 PHP 8 属性的注解路由。)
 - 整体解决方案 (框架提供了从缓存、Session、IOC 容器、模板引擎、Ddd ORM 等大量开箱即用的功能，提供了基于 Symfony Console 命令行工具集。)
-- 高品质 (百分之百单元测试覆盖直面 Bug，致力于创造高品质产品 Level Level Leevel。)
+- 高品质 (高测试覆盖率直面 Bug，超过 3500 例测试用例保证系统可靠性和可持续维护。)
 - 业务协程化 (基于 Swoole 4 开发，我们的愿景是少量代码或者无修改，让你的业务撑起更多的用户服务。)
-- 百分之百单元测试覆盖（超过 3500 例测试用例保证系统可靠性和可持续维护。）
-- PHP 7 严格模式 （每一个 PHP 脚本都是 strict_types=1，严格模式可以避免很多弱类型带来潜在 BUG。）
-- PHP 7 类型提示 (尽可能为每一个方法提供确定的参数类型和返回值类型，以及类属性的类型支持。）
+- PHP 严格模式 （每一个 PHP 脚本都是 strict_types=1，严格模式可以避免很多弱类型带来潜在 BUG。）
+- PHP 8 类型提示 (为每一个方法提供确定的参数类型和返回值类型，以及类属性的类型支持。）
 - 依赖注入（完整实现，关键 MVC、命令行脚本、事件监听器全部接入 IOC 容器。）
-- 领域驱动设计（支持 UnitOfWork 事务工作单元、Repository 仓储、Specification 查询规约，Entity Getter Setter领域实体等。）
+- 领域驱动设计（支持 UnitOfWork 事务工作单元、Repository 仓储、Specification 查询规约，Entity Getter Setter 领域实体等。）
 - 避免闭门造车 (QueryPHP 一直从 Laravel、Symfony 等框架吸收一些优秀的设计，同时我们自身也进行了大量的创新设计。)
 - 更多的特性期待你的发现...
 
