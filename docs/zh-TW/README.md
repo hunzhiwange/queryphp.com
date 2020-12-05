@@ -3,6 +3,7 @@ home: true
 heroImage: /hero.png
 actionText: 設計理念指南 →
 actionLink: /guide/
+footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
 ---
 
 <div style="color:#212121!important;font-weight:700;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
