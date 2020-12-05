@@ -262,16 +262,16 @@ php leevel websocket:status
   <h2>生產就緒</h2>
  </div>
  <div class="feature">
-  <h2>[簡單高性能路由](https://www.queryphp.com/docs/router/)</h2>
+  <h2><a href="https://www.queryphp.com/docs/router/">簡單高性能路由</a></h2>
  </div>
  <div class="feature">
-  <h2>[富於表現力的範本引擎](https://www.queryphp.com/docs/template/)</h2>
+  <h2><a href="https://www.queryphp.com/docs/template/">富於表現力的範本引擎</a></h2>
  </div>
  <div class="feature">
-  <h2>[基於領域驅動設計的强大 ORM](https://www.queryphp.com/docs/database/)</h2>
+  <h2><a href="https://www.queryphp.com/docs/orm/">基於領域驅動設計的强大 ORM</a></h2>
  </div>
  <div class="feature">
-  <h2>高品質程式碼及高覆蓋率[單元測試](https://github.com/hunzhiwange/framework/tree/master/tests)</h2>
+  <h2>高品質程式碼及高覆蓋率<a href="https://github.com/hunzhiwange/framework/tree/master/tests">單元測試</a></h2>
  </div>
  <div class="feature">
   <h2>&nbsp;</h2>
