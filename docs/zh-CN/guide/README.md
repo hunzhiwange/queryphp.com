@@ -4,12 +4,10 @@
 始于二零一零，十年磨一剑
 :::
 
-QueryPHP 是一款现代化的高性能 PHP 渐进式协程框架, 我们还是主要面向传统 PHP-FPM 场景，以工程师用户体验为历史使命，让每一个 PHP 应用都有一个好框架。
-
-百分之百单元测试覆盖直面 Bug，致力于创造高品质产品 Level Level Leevel，依托 Swoole 开启未来更多可能，此刻未来逐步渐进。我们的愿景是 USE <span style="color:#f80378">LEEVEL</span> WITH <span style="color:#008ee6">SWOOLE</span> DO <span style="color:#02d629">BETTER</span>，让您的业务撑起更多的用户服务。
+QueryPHP 是一款现代化的高性能 PHP 渐进式框架, 以提供稳定可靠的高品质企业级框架为历史使命。**<span style="color:#e82e7d;">USE <span style="color:#f80378">LEEVEL</span> DO <span style="color:#02d629">BETTER</span></span>**
 
 ::: tip 四年重构，只为更好的自己
-QueryPHP 基于一款成立于 2010 年的 PHP 框架 [DoYouHaoBaby](https://github.com/hunzhiwange/dyhb.blog-x/tree/master/Upload/DoYouHaoBaby) 开发，最新版本 DoYouHaoBaby 更名为 [QeePHP](https://github.com/hunzhiwange/windsforce/tree/master/upload/System/include/QeePHP)，继承了上一代产品的优秀之处，彻底革新并进行了长达 3 年重构。
+QueryPHP 基于一款成立于 2010 年的 PHP 框架 [DoYouHaoBaby](https://github.com/hunzhiwange/dyhb.blog-x/tree/master/Upload/DoYouHaoBaby) 开发，最新版本 DoYouHaoBaby 更名为 [QeePHP](https://github.com/hunzhiwange/windsforce/tree/master/upload/System/include/QeePHP)，继承了上一代产品的优秀之处，彻底革新并进行了长达 4 年重构。
 
 在这个基础上，我们引入了 Laravel、Symfony 等框架现代化先进特性，站在巨人的肩膀上保持创新。
 :::
@@ -20,9 +18,9 @@ QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式
 
 ### 运行在 PHP-FPM 场景或者 PHP 内置 webserver
 
-事实上，QueryPHP 也是一个普通的 PHP 框架，目前最低版本要求 PHP 7.4.0，我们对环境并没有特别的要求。
+事实上，QueryPHP 也是一个普通的 PHP 框架，目前最低版本要求 PHP 8.0.0，我们对环境并没有特别的要求。
 
- * PHP ^7.4.0
+ * PHP ^8.0.0
  * ext-mbstring [字符处理](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Support/Str.php)
  * ext-openssl [加密组件](https://github.com/hunzhiwange/framework/blob/master/src/Leevel/Encryption/Encryption.php)
 
@@ -80,8 +78,8 @@ _____________                           _______________
  * MVC router http://127.0.0.1:9527/api/test
  * MVC restful router http://127.0.0.1:9527/restful/123
  * MVC restful router with method http://127.0.0.1:9527/restful/123/show
- * Annotation router http://127.0.0.1:9527/api/v1/petLeevelForApi/helloworld
- * Annotation router with bind http://127.0.0.1:9527/api/v2/withBind/foobar
+ * Annotation api router http://127.0.0.1:9527/api/v1/demo/liu
+ * Annotation web router http://127.0.0.1:9527/web/v2/demo
  * php leevel link:public http://127.0.0.1:9527/public/css/page.css
  * php leevel link:storage http://127.0.0.1:9527/storage/logo.png
  * php leevel link:apis http://127.0.0.1:9527/apis/
