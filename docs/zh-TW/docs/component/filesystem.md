@@ -17,7 +17,7 @@
 使用容器 flysystems 服务
 
 ``` php
-\App::make('filesystems')->put(string $path, string $contents, array $config = []): bool;
+\App::make('filesystems')->write(string $path, string $contents, array $config = []): bool;
 ```
 
 依赖注入
@@ -37,7 +37,7 @@ class Demo
 使用静态代理
 
 ``` php
-\Leevel\Filesystem\Proxy\Filesystem::put(string $path, string $contents, array $config = []): bool;
+\Leevel\Filesystem\Proxy\Filesystem::write(string $path, string $contents, array $config = []): bool;
 ```
 
 ## filesystem 配置
@@ -50,16 +50,6 @@ class Demo
 <?php
 
 declare(strict_types=1);
-
-/*
- * This file is part of the your app package.
- *
- * The PHP Application For Code Poem For You.
- * (c) 2018-2099 http://yourdomian.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 return [
     /*
@@ -180,7 +170,7 @@ public function testBaseUse(): void
     $path = __DIR__.'/forManager';
     $this->assertInstanceof(LeagueFilesystem::class, $manager->getFilesystem());
 
-    $manager->put('hellomanager.txt', 'manager');
+    $manager->write('hellomanager.txt', 'manager');
     $file = $path.'/hellomanager.txt';
 
     $this->assertTrue(is_file($file));

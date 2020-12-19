@@ -24,7 +24,7 @@ class Router extends RouterProvider
     /**
      * 控制器相对目录.
      */
-    protected string $controllerDir = 'App\\Controller';
+    protected ?string $controllerDir = 'App\\Controller';
 
     /**
      * 中间件分组.
@@ -148,6 +148,7 @@ use Leevel\Di\Container;
 use Leevel\Kernel\App;
 use Leevel\Router\Router;
 use Leevel\Router\RouterProvider;
+use Leevel\Router\ScanRouter;
 use Leevel\Router\Url;
 use Tests\Router\Middlewares\Demo1;
 use Tests\Router\Middlewares\Demo2;
@@ -167,7 +168,7 @@ namespace Tests\Router;
 
 class RouterProvider1 extends RouterProvider
 {
-    protected string $controllerDir = 'Tests\\Router\\Apps';
+    protected ?string $controllerDir = 'Tests\\Router\\Apps';
 
     protected array $middlewareGroups = [
         'group1' => [
@@ -222,6 +223,14 @@ class RouterProvider1 extends RouterProvider
     public function getRouters(): array
     {
         return parent::getRouters();
+    }
+
+    protected function makeScanRouter(): ScanRouter
+    {
+        $scanRouter = parent::makeScanRouter();
+        $scanRouter->setControllerDir('');
+
+        return $scanRouter;
     }
 }
 ```

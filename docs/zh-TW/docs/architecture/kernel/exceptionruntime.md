@@ -13,22 +13,6 @@ QueryPHP 系统发生的异常统一由异常运行时进行管理，处理异�
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ************************ package.
- * _____________                           _______________
- *  ______/     \__  _____  ____  ______  / /_  _________
- *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
- *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
- *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
- *         \_\                /_/_/         /_/
- *
- * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
- * (c) 2010-2020 http://queryphp.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Leevel\Kernel;
 
 use Leevel\Http\Request;
@@ -92,16 +76,6 @@ abstract public function getDefaultHttpExceptionView(): string;
 <?php
 
 declare(strict_types=1);
-
-/*
- * This file is part of the your app package.
- *
- * The PHP Application For Code Poem For You.
- * (c) 2018-2099 http://yourdomian.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace Common\App;
 
@@ -723,22 +697,6 @@ class Exception6 extends InternalServerErrorHttpException
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ************************ package.
- * _____________                           _______________
- *  ______/     \__  _____  ____  ______  / /_  _________
- *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
- *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
- *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
- *         \_\                /_/_/         /_/
- *
- * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
- * (c) 2010-2020 http://queryphp.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
  * 500 模板
  */
@@ -803,22 +761,6 @@ class Exception7 extends NotFoundHttpException
 <?php
 
 declare(strict_types=1);
-
-/*
- * This file is part of the ************************ package.
- * _____________                           _______________
- *  ______/     \__  _____  ____  ______  / /_  _________
- *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
- *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
- *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
- *         \_\                /_/_/         /_/
- *
- * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
- * (c) 2010-2020 http://queryphp.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 /**
  * 404 模板
@@ -903,22 +845,6 @@ class Exception8 extends MethodNotAllowedHttpException
 <?php
 
 declare(strict_types=1);
-
-/*
- * This file is part of the ************************ package.
- * _____________                           _______________
- *  ______/     \__  _____  ____  ______  / /_  _________
- *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
- *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
- *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
- *         \_\                /_/_/         /_/
- *
- * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
- * (c) 2010-2020 http://queryphp.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 /**
  * 默认模板

@@ -18,6 +18,7 @@ use Leevel\Http\Request;
 use Leevel\Kernel\App;
 use Leevel\Router\Router;
 use Leevel\Router\RouterProvider;
+use Leevel\Router\ScanRouter;
 use Leevel\Router\Url;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Router\Middlewares\Demo1;
@@ -40,7 +41,7 @@ namespace Tests\Router;
 
 class RouterProviderAnnotation extends RouterProvider
 {
-    protected string $controllerDir = 'Router\\Controllers';
+    protected ?string $controllerDir = 'Router\\Controllers';
 
     protected array $middlewareGroups = [
         'group1' => [
@@ -107,6 +108,14 @@ class RouterProviderAnnotation extends RouterProvider
     public function getRouters(): array
     {
         return parent::getRouters();
+    }
+
+    protected function makeScanRouter(): ScanRouter
+    {
+        $scanRouter = parent::makeScanRouter();
+        $scanRouter->setControllerDir('');
+
+        return $scanRouter;
     }
 }
 ```
@@ -193,10 +202,10 @@ class RouterProviderAnnotation extends RouterProvider
                     "bind": "\\Tests\\Router\\Controllers\\Annotation\\BindMethodNotFound"
                 },
                 "\/bindNotSet\/test\/": {
-                    "bind": null
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\BindNotSet@routePlaceholderFoo"
                 },
                 "\/bindNotSet\/test2\/": {
-                    "bind": ""
+                    "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\BindNotSet@routePlaceholderBar"
                 },
                 "\/domain\/test\/": {
                     "bind": "\\Tests\\Router\\Apps\\AppForAnnotation\\Controllers\\Domain@fooNotMatchedDomain",
@@ -574,7 +583,7 @@ public function testMatchedBasePathNormalize(): void
 }
 ```
     
-## leevelScheme 协议匹配
+## Scheme 协议匹配
 
 **fixture 定义**
 
@@ -624,7 +633,7 @@ public function testMatchedAndSchemeMatched(): void
 }
 ```
     
-## leevelDomain 域名匹配
+## Domain 域名匹配
 
 **fixture 定义**
 
@@ -677,7 +686,7 @@ public function testMatchedAndDomainMatched(): void
 }
 ```
     
-## leevelDomain 域名匹配支持变量
+## Domain 域名匹配支持变量
 
 **fixture 定义**
 
@@ -733,7 +742,7 @@ public function testMatchedAndDomainWithVarMatched(): void
 }
 ```
     
-## leevelPort 端口匹配
+## Port 端口匹配
 
 **fixture 定义**
 
@@ -786,7 +795,7 @@ public function testMatchedAndPortMatched(): void
 }
 ```
     
-## leevelAttributes 扩展变量匹配
+## Attributes 扩展变量匹配
 
 **fixture 定义**
 
@@ -840,7 +849,7 @@ public function testMatchedWithExtendVar(): void
 }
 ```
     
-## leevelMiddlewares 中间件匹配
+## Middlewares 中间件匹配
 
 **fixture 定义**
 
@@ -935,7 +944,7 @@ public function testMiddleware(): void
 }
 ```
     
-## leevelMiddlewares 中间件匹配支持数组
+## Middlewares 中间件匹配支持数组
 
 **fixture 定义**
 
@@ -1032,7 +1041,7 @@ public function testMiddleware2(): void
 }
 ```
     
-## leevelMiddlewares 中间件匹配支持类名
+## Middlewares 中间件匹配支持类名
 
 **fixture 定义**
 

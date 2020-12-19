@@ -28,6 +28,7 @@ use Leevel\Option\Option;
 use Leevel\Router\Redirect;
 use Leevel\Router\Response as RouterResponse;
 use Leevel\Router\Url;
+use Leevel\View\IView;
 use Leevel\View\Manager;
 use SplFileInfo;
 use SplFileObject;

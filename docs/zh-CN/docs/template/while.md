@@ -14,7 +14,7 @@ public function testNode(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        {{ ~$i = 10 }}
+        {{~ $i = 10 }}
         {% while cond="$i > 0" %}
             {{ $i }}Hello QueryPHP !<br>
             {{~ $i-- }}
@@ -43,7 +43,7 @@ public function testNodeSimple(): void
     $parser = $this->createParser();
 
     $source = <<<'eot'
-        {{ ~$i = 10 }}
+        {{~ $i = 10 }}
         {% while "$i > 0" %}
             {{ $i }}Hello QueryPHP !<br>
             {{~ $i-- }}

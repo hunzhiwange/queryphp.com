@@ -83,16 +83,6 @@ QueryPHP 会优先进行`MVC 自动路由`匹配，也包含 `Restful` 路由匹
 
 declare(strict_types=1);
 
-/*
-* This file is part of the forcodepoem package.
-*
-* The PHP Application Created By Code Poem. <Query Yet Simple>
-* (c) 2018-2099 http://forcodepoem.com All rights reserved.
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
-
 namespace App\App\Controller\Api;
 
 /**
@@ -192,8 +182,8 @@ scheme: "https",
 ```
 
 ::: tip
- * bind 未设置自动绑定当前注释的控制器和方法
- * bind 未设置 `@` 则绑定到类的 `handle` 方法，`@` 可以自定义绑定方法
+ * 参数 bind 未设置，系统会自动绑定当前注释的控制器方法
+ * 参数 bind 默认会绑定到类的 `handle` 方法，`@` 可以则可以自定义绑定方法
 :::
 
 路由地址 path 和域名支持正则参数

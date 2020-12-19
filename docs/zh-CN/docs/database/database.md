@@ -87,7 +87,7 @@ public function testQuery(): void
 /**
  * {@inheritDoc}
  */
-public function query(string $sql, array $bindParams = [], bool|int $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): mixed;
+public function query(string $sql, array $bindParams = [], bool|int $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?ICache $cache = null): mixed;
 ```
 
 
@@ -475,6 +475,8 @@ public function testTransactionRollbackByCustom(): void
 ``` php
 public function testCallProcedure(): void
 {
+    $this->markTestSkipped('Skip procedure.');
+
     $connect = $this->createDatabaseConnect();
 
     $data = ['name' => 'tom', 'content' => 'I love movie.'];
@@ -519,6 +521,8 @@ public function testCallProcedure(): void
 ``` php
 public function testCallProcedure2(): void
 {
+    $this->markTestSkipped('Skip procedure.');
+
     $connect = $this->createDatabaseConnect();
 
     $data = ['name' => 'tom', 'content' => 'I love movie.'];
@@ -562,6 +566,8 @@ public function testCallProcedure2(): void
 ``` php
 public function testCallProcedure3(): void
 {
+    $this->markTestSkipped('Skip procedure.');
+
     $connect = $this->createDatabaseConnect();
 
     $data = ['name' => 'tom', 'content' => 'I love movie.'];
@@ -578,12 +584,10 @@ public function testCallProcedure3(): void
     $pdoStatement->execute();
 
     $result = [];
-    do {
-        try {
-            $result[] = $pdoStatement->fetchAll(PDO::FETCH_OBJ);
-        } catch (PDOException) {
-        }
-    } while ($pdoStatement->nextRowset());
+    while ($pdoStatement->columnCount()) {
+        $result[] = $pdoStatement->fetchAll(PDO::FETCH_OBJ);
+        $pdoStatement->nextRowset();
+    }
 
     $data = <<<'eot'
         [
@@ -620,13 +624,15 @@ public function testCallProcedure3(): void
 /**
  * {@inheritDoc}
  */
-public function procedure(string $sql, array $bindParams = [], bool|int $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?string $cacheConnect = null): array;
+public function procedure(string $sql, array $bindParams = [], bool|int $master = false, ?string $cacheName = null, ?int $cacheExpire = null, ?ICache $cache = null): array;
 ```
 
 
 ``` php
 public function testCacheProcedure(): void
 {
+    $this->markTestSkipped('Skip procedure.');
+    
     $manager = $this->createDatabaseManager();
 
     $data = ['name' => 'tom', 'content' => 'I love movie.'];

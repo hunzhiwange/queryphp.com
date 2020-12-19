@@ -96,8 +96,9 @@ protected function createDatabaseManager(?Container $container = null): Manager
     $eventDispatch = $this->createMock(IDispatch::class);
     $this->assertNull($eventDispatch->handle('event'));
     $container->singleton(IDispatch::class, $eventDispatch);
-    $cache = $this->createCacheManager($container, $option, 'file');
-    $container->singleton('caches', $cache);
+    $cacheManager = $this->createCacheManager($container, $option, 'file');
+    $container->singleton('caches', $cacheManager);
+    $container->singleton('cache', $cacheManager->connect());
 
     $this->databaseConnects[] = $manager->connect();
 
