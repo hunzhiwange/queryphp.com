@@ -9,3 +9,11 @@ sidebar: auto
 ### QQ 群
 
 `288751294`
+
+### 讨论区
+
+[GitHub Discussions](https://github.com/hunzhiwange/framework/discussions)
+
+### 问题
+
+[GitHub Issues](https://github.com/hunzhiwange/framework/issues)
