@@ -104,6 +104,12 @@ cd /data/codes/queryphp
 
 ### RoadRunner 服务
 
+安装依赖包
+
+- composer require spiral/roadrunner ^1.9.0              
+- composer require spiral/dumper ^2.6.3.                 
+- composer require symfony/psr-http-message-bridge ^2.0  
+
 ```
 /data/server/roadrunner-1.3.5-darwin-amd64/rr serve -d -v # -d = debug
 /data/server/roadrunner-1.3.5-darwin-amd64/rr http:reset
