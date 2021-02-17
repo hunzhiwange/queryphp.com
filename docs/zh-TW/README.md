@@ -7,7 +7,7 @@ footer: MIT Licensed | Copyright © 2010-present Xiangmin Liu
 ---
 
 <div style="color:#212121!important;font-weight:700;line-height: 1.5;text-align:left;opacity: 0.7 !important;padding: 10px;border-radius:15px;">
-  <div style="margin-bottom:10px;">QueryPHP 是一款現代化的高性能 PHP 漸進式協程框架，我們還是主要面向傳統 PHP-FPM 場景，以工程師用戶體驗為歷史使命，讓每一個 PHP 應用都有一個好框架。<span style="color:#e82e7d;">USE LEEVEL DO BETTER</span></div>
+  <div style="margin-bottom:10px;">QueryPHP 是一款現代化的高性能 PHP 漸進式框架，以提供穩定可靠的高品質企業級框架為歷史使命。<span style="color:#e82e7d;">USE LEEVEL DO BETTER</span></div>
 </div>
 
 <div style="margin-top: -50px;margin-bottom: -80px;">
