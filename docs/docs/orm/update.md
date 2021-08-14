@@ -47,13 +47,13 @@ class DemoEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY => true,
         ],
@@ -153,13 +153,13 @@ class DemoUpdatePropWhiteEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::UPDATE_PROP_WHITE => true,
             self::READONLY          => true,
@@ -217,13 +217,13 @@ class DemoUpdateAutoFillEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY => true,
         ],
@@ -348,13 +348,13 @@ class DemoDatabaseEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY => true,
         ],
@@ -436,7 +436,7 @@ public function testUpdateWithNoDataAndDoNothing(): void
 public function testUpdateWithPrimaryKeyData(): void
 {
     $this->expectException(\InvalidArgumentException::class);
-    $this->expectExceptionMessage('Entity Tests\\Database\\Ddd\\Entity\\DemoDatabaseEntity has no primary key data.');
+    $this->expectExceptionMessage('Entity Tests\\Database\\Ddd\\Entity\\DemoDatabaseEntity has no unique key data.');
 
     $entity = new DemoDatabaseEntity();
     $entity->update();
@@ -457,13 +457,13 @@ class CompositeId extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'composite_id';
+    public const TABLE = 'composite_id';
 
-    const ID = ['id1', 'id2'];
+    public const ID = ['id1', 'id2'];
 
-    const AUTO = null;
+    public const AUTO = null;
 
-    const STRUCT = [
+    public const STRUCT = [
         'id1'      => [],
         'id2'      => [],
         'name'     => [],
@@ -510,6 +510,6 @@ public function testSaveWithCompositeId(): void
     $entity->flush();
 
     $sql = 'SQL: [173] UPDATE `composite_id` SET `composite_id`.`name` = :pdonamedparameter_name WHERE `composite_id`.`id1` = :composite_id_id1 AND `composite_id`.`id2` = :composite_id_id2 LIMIT 1 | Params:  3 | Key: Name: [23] :pdonamedparameter_name | paramno=0 | name=[23] ":pdonamedparameter_name" | is_param=1 | param_type=2 | Key: Name: [17] :composite_id_id1 | paramno=1 | name=[17] ":composite_id_id1" | is_param=1 | param_type=1 | Key: Name: [17] :composite_id_id2 | paramno=2 | name=[17] ":composite_id_id2" | is_param=1 | param_type=1 (UPDATE `composite_id` SET `composite_id`.`name` = \'hello\' WHERE `composite_id`.`id1` = 2 AND `composite_id`.`id2` = 3 LIMIT 1)';
-    $this->assertSame($sql, $entity->select()->getLastSql());
+    $this->assertSame(\sql_pdo_param_compatible($sql), $entity->select()->getLastSql());
 }
 ```
