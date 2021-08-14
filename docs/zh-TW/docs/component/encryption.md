@@ -37,7 +37,7 @@ public function testBaseUse(): void
 
     $this->assertSame(
         $encryption->decrypt($encodeMessage.'foo'),
-        ''
+        false
     );
 
     $this->assertSame(
@@ -69,7 +69,7 @@ public function testUse128(): void
 
     $this->assertSame(
         $encryption->decrypt($encodeMessage.'foo'),
-        ''
+        false
     );
 
     $this->assertSame(
@@ -94,7 +94,7 @@ public function testDecryptButExpired(): void
 
     sleep(2);
 
-    $this->assertSame('', $encryption->decrypt($data));
+    $this->assertSame(false, $encryption->decrypt($data));
 }
 ```
     

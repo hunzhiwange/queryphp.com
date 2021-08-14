@@ -463,9 +463,7 @@ public function testMatchedPetLeevel(): void
         )
     );
 
-    $router->throughMiddleware($request, [
-        $response,
-    ]);
+    $router->throughTerminateMiddleware($request, $response);
 
     $data = <<<'eot'
         [
@@ -559,9 +557,7 @@ public function testMatchedBasePathNormalize(): void
         )
     );
 
-    $router->throughMiddleware($request, [
-        $response,
-    ]);
+    $router->throughTerminateMiddleware($request, $response);
 
     $data = <<<'eot'
         [
@@ -916,9 +912,7 @@ public function testMiddleware(): void
         )
     );
 
-    $router->throughMiddleware($request, [
-        $result,
-    ]);
+    $router->throughTerminateMiddleware($request, $result);
 
     $data = <<<'eot'
         [
@@ -1012,9 +1006,7 @@ public function testMiddleware2(): void
         )
     );
 
-    $router->throughMiddleware($request, [
-        $result,
-    ]);
+    $router->throughTerminateMiddleware($request, $result);
 
     $data = <<<'eot'
         [
@@ -1107,9 +1099,7 @@ public function testMiddleware4(): void
         )
     );
 
-    $router->throughMiddleware($request, [
-        $result,
-    ]);
+    $router->throughTerminateMiddleware($request, $result);
 
     $data = <<<'eot'
         [

@@ -37,13 +37,13 @@ class Post extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'post';
+    public const TABLE = 'post';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY           => true,
         ],
@@ -98,7 +98,7 @@ class Post extends Entity
         ],
     ];
 
-    const DELETE_AT = 'delete_at';
+    public const DELETE_AT = 'delete_at';
 
     protected function relationScopeComment(Relation $relation): void
     {
@@ -119,13 +119,13 @@ class UserRole extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'user_role';
+    public const TABLE = 'user_role';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'        => [],
         'user_id'   => [],
         'role_id'   => [],
@@ -146,13 +146,13 @@ class Role extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'role';
+    public const TABLE = 'role';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'        => [],
         'name'      => [],
         'create_at' => [],

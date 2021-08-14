@@ -55,8 +55,242 @@ public function testBaseUse(): void
     $rule = <<<'eot'
         {
             "name": [
-                "required",
-                "max_length:10"
+                [
+                    "required",
+                    []
+                ],
+                [
+                    "max_length",
+                    [
+                        10
+                    ]
+                ]
+            ]
+        }
+        eot;
+
+    $this->assertTrue($validate->success());
+    $this->assertFalse($validate->fail());
+    $this->assertSame([], $validate->error());
+    $this->assertSame([], $validate->getMessage());
+    $this->assertSame(['name' => '小牛哥'], $validate->getData());
+
+    $this->assertSame(
+        $rule,
+        $this->varJson(
+            $validate->getRule()
+        )
+    );
+}
+```
+    
+## 验证器规则支持数组写法
+
+可以通过 `success` 判断是否通过验证，`error` 返回错误消息。
+
+
+``` php
+public function testRuleIsArray(): void
+{
+    $validate = new Validator(
+        [
+            'name' => '小牛哥',
+        ],
+        [
+            'name'     => ['required', 'max_length:10'],
+        ],
+        [
+            'name'     => '用户名',
+        ]
+    );
+
+    $this->assertInstanceof(IValidator::class, $validate);
+
+    $rule = <<<'eot'
+        {
+            "name": [
+                [
+                    "required",
+                    []
+                ],
+                [
+                    "max_length",
+                    [
+                        10
+                    ]
+                ]
+            ]
+        }
+        eot;
+
+    $this->assertTrue($validate->success());
+    $this->assertFalse($validate->fail());
+    $this->assertSame([], $validate->error());
+    $this->assertSame([], $validate->getMessage());
+    $this->assertSame(['name' => '小牛哥'], $validate->getData());
+
+    $this->assertSame(
+        $rule,
+        $this->varJson(
+            $validate->getRule()
+        )
+    );
+}
+```
+    
+## 验证器规则支持数组写法:每一项都是一个数组(第一个是规则，第一个是参数非数组兼容为数组)
+
+可以通过 `success` 判断是否通过验证，`error` 返回错误消息。
+
+
+``` php
+public function testRuleIsArray2(): void
+{
+    $validate = new Validator(
+        [
+            'name' => '小牛哥',
+        ],
+        [
+            'name'     => ['required', ['max_length', 10]],
+        ],
+        [
+            'name'     => '用户名',
+        ]
+    );
+
+    $this->assertInstanceof(IValidator::class, $validate);
+
+    $rule = <<<'eot'
+        {
+            "name": [
+                [
+                    "required",
+                    []
+                ],
+                [
+                    "max_length",
+                    [
+                        10
+                    ]
+                ]
+            ]
+        }
+        eot;
+
+    $this->assertTrue($validate->success());
+    $this->assertFalse($validate->fail());
+    $this->assertSame([], $validate->error());
+    $this->assertSame([], $validate->getMessage());
+    $this->assertSame(['name' => '小牛哥'], $validate->getData());
+
+    $this->assertSame(
+        $rule,
+        $this->varJson(
+            $validate->getRule()
+        )
+    );
+}
+```
+    
+## 验证器规则支持数组写法:每一项都是一个数组(第一个是规则，第一个是参数数组用法)
+
+可以通过 `success` 判断是否通过验证，`error` 返回错误消息。
+
+
+``` php
+public function testRuleIsArray3(): void
+{
+    $validate = new Validator(
+        [
+            'name' => '小牛哥',
+        ],
+        [
+            'name'     => ['required', ['max_length', [10]]],
+        ],
+        [
+            'name'     => '用户名',
+        ]
+    );
+
+    $this->assertInstanceof(IValidator::class, $validate);
+
+    $rule = <<<'eot'
+        {
+            "name": [
+                [
+                    "required",
+                    []
+                ],
+                [
+                    "max_length",
+                    [
+                        10
+                    ]
+                ]
+            ]
+        }
+        eot;
+
+    $this->assertTrue($validate->success());
+    $this->assertFalse($validate->fail());
+    $this->assertSame([], $validate->error());
+    $this->assertSame([], $validate->getMessage());
+    $this->assertSame(['name' => '小牛哥'], $validate->getData());
+
+    $this->assertSame(
+        $rule,
+        $this->varJson(
+            $validate->getRule()
+        )
+    );
+}
+```
+    
+## 验证器规则支持数组每一项字符串支持分隔:可以用于实际业务中合并验证规则的需求
+
+可以通过 `success` 判断是否通过验证，`error` 返回错误消息。
+
+
+``` php
+public function testRuleIsArrayStringMixed(): void
+{
+    $validate = new Validator(
+        [
+            'name' => '小牛哥',
+        ],
+        [
+            'name'     => ['required|chinese|min_length:1', ['max_length', [10]]],
+        ],
+        [
+            'name'     => '用户名',
+        ]
+    );
+
+    $this->assertInstanceof(IValidator::class, $validate);
+
+    $rule = <<<'eot'
+        {
+            "name": [
+                [
+                    "required",
+                    []
+                ],
+                [
+                    "chinese",
+                    []
+                ],
+                [
+                    "min_length",
+                    [
+                        1
+                    ]
+                ],
+                [
+                    "max_length",
+                    [
+                        10
+                    ]
+                ]
             ]
         }
         eot;
@@ -96,8 +330,16 @@ public function testMake(): void
     $rule = <<<'eot'
         {
             "name": [
-                "required",
-                "max_length:10"
+                [
+                    "required",
+                    []
+                ],
+                [
+                    "max_length",
+                    [
+                        10
+                    ]
+                ]
             ]
         }
         eot;
@@ -350,8 +592,16 @@ public function testAddRule(): void
     $rule = <<<'eot'
         {
             "name": [
-                "required",
-                "min_length:20"
+                [
+                    "required",
+                    []
+                ],
+                [
+                    "min_length",
+                    [
+                        20
+                    ]
+                ]
             ]
         }
         eot;
@@ -1501,13 +1751,22 @@ public function testWildcardRule(): void
     $rule = <<<'eot'
         {
             "name": [
-                "required"
+                [
+                    "required",
+                    []
+                ]
             ],
             "nafoo": [
-                "required"
+                [
+                    "required",
+                    []
+                ]
             ],
             "nabar": [
-                "required"
+                [
+                    "required",
+                    []
+                ]
             ]
         }
         eot;

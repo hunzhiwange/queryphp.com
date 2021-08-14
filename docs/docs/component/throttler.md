@@ -6,21 +6,16 @@
     
 节流器主要通过路由服务提供者来调用节流器中间件 `throttler:60,1` 实现限速。
 
-路由服务提供者 **Common\Infra\Provider\Router**
+路由服务提供者 **App\Infra\Provider\Router**
 
 ``` php
 <?php
 
 declare(strict_types=1);
 
-namespace Common\Infra\Provider;
+namespace App\Infra\Provider;
 
-use Admin\App\Middleware\Auth as AdminAuth;
-use Admin\App\Middleware\Cors;
-use Leevel\Auth\Middleware\Auth;
-use Leevel\Debug\Middleware\Debug;
-use Leevel\Di\IContainer;
-use Leevel\Log\Middleware\Log;
+use App\Middleware\Auth;
 use Leevel\Router\RouterProvider;
 use Leevel\Session\Middleware\Session;
 use Leevel\Throttler\Middleware\Throttler;
@@ -33,7 +28,7 @@ class Router extends RouterProvider
     /**
      * 控制器相对目录.
      */
-    protected ?string $controllerDir = 'App\\Controller';
+    protected ?string $controllerDir = 'Controller';
 
     /**
      * 中间件分组.
@@ -51,11 +46,6 @@ class Router extends RouterProvider
             // API 限流，可以通过网关来做限流更高效，如果需要去掉注释即可
             // 'throttler:60,60',
         ],
-
-        // 公共请求中间件
-        'common' => [
-            'log',
-        ],
     ];
 
     /**
@@ -65,34 +55,19 @@ class Router extends RouterProvider
      * - 例外在应用执行结束后响应环节也会调用 HTTP 中间件.
      */
     protected array $middlewareAlias = [
-        'auth'              => Auth::class,
-        'cors'              => Cors::class,
-        'admin_auth'        => AdminAuth::class,
-        'debug'             => Debug::class,
-        'log'               => Log::class,
-        'session'           => Session::class,
-        'throttler'         => Throttler::class,
+        'auth' => Auth::class,
+        'session'    => Session::class,
+        'throttler'  => Throttler::class,
     ];
 
     /**
      * 基础路径.
      */
     protected array $basePaths = [
-        '*' => [
-            'middlewares' => 'common',
-        ],
-        'foo/*world' => [
-        ],
         'api/test' => [
             'middlewares' => 'api',
         ],
-        ':admin/*' => [
-            'middlewares' => 'admin_auth,cors',
-        ],
-        'options/index' => [
-            'middlewares' => 'cors',
-        ],
-        'admin/show' => [
+        'api/v*' => [
             'middlewares' => 'auth',
         ],
     ];
@@ -117,17 +92,6 @@ class Router extends RouterProvider
             'middlewares' => 'web',
         ],
     ];
-
-    /**
-     * 创建一个服务容器提供者实例.
-     */
-    public function __construct(IContainer $container)
-    {
-        parent::__construct($container);
-        if ($container->make('app')->isDebug()) {
-            $this->middlewareGroups['common'][] = 'debug';
-        }
-    }
 
     /**
      * {@inheritDoc}

@@ -90,20 +90,12 @@ public function testAppPath(): void
         return $request;
     });
 
-    $container->instance('app_name', 'Blog');
-    $this->assertEquals('Blog', $container->make('app_name'));
-
-    $this->assertSame($appPath.'/application', $app->appPath());
-    $this->assertSame($appPath.'/application', $app->appPath(false));
-    $this->assertSame($appPath.'/application', $app->appPath(''));
-    $this->assertSame($appPath.'/application/blog', $app->appPath(true));
-    $this->assertSame($appPath.'/application/foo', $app->appPath('foo'));
-    $this->assertSame($appPath.'/application/bar', $app->appPath('bar'));
-    $this->assertSame($appPath.'/application/foo/bar', $app->appPath(false, 'foo/bar'));
-    $this->assertSame($appPath.'/application/foo/bar', $app->appPath('', 'foo/bar'));
-    $this->assertSame($appPath.'/application/blog/foo/bar', $app->appPath(true, 'foo/bar'));
-    $this->assertSame($appPath.'/application/foo/foo/bar', $app->appPath('foo', 'foo/bar'));
-    $this->assertSame($appPath.'/application/bar/foo/bar', $app->appPath('bar', 'foo/bar'));
+    $this->assertSame($appPath.'/apps', $app->appPath());
+    $this->assertSame($appPath.'/apps', $app->appPath(''));
+    $this->assertSame($appPath.'/apps/foo', $app->appPath('foo'));
+    $this->assertSame($appPath.'/apps/bar', $app->appPath('bar'));
+    $this->assertSame($appPath.'/apps/foo/foo/bar', $app->appPath('foo/foo/bar'));
+    $this->assertSame($appPath.'/apps/bar/foo/bar', $app->appPath('bar/foo/bar'));
 }
 ```
     
@@ -121,91 +113,13 @@ public function testSetAppPath(): void
         return $request;
     });
 
-    $container->instance('app_name', 'Blog');
-    $this->assertEquals('Blog', $container->make('app_name'));
-    $this->assertSame($appPath.'/application/blog', $app->appPath(true));
-
+    $this->assertSame($appPath.'/apps', $app->appPath());
     $app->setAppPath(__DIR__.'/app/foo');
-    $this->assertSame($appPath.'/foo/blog', $app->appPath(true));
+    $this->assertSame($appPath.'/foo', $app->appPath());
 }
 ```
     
-## themePath 获取应用主题目录
-
-``` php
-public function testPathTheme(): void
-{
-    $app = $this->createApp();
-    $appPath = __DIR__.'/app';
-
-    $this->assertSame($appPath.'/application/ui/theme', $app->themePath());
-    $this->assertSame($appPath.'/application/blog/ui/theme', $app->themePath('blog'));
-}
-```
-    
-## commonPath 获取公共路径
-
-``` php
-public function testCommonPath(): void
-{
-    $app = $this->createApp();
-    $appPath = __DIR__.'/app';
-
-    $this->assertSame($appPath.'/common', $app->commonPath());
-    $this->assertSame($appPath.'/common/foobar', $app->commonPath('foobar'));
-}
-```
-    
-## setCommonPath 设置公共路径
-
-``` php
-public function testSetCommonPath(): void
-{
-    $app = $this->createApp();
-    $appPath = __DIR__.'/app';
-
-    $this->assertSame($appPath.'/common', $app->commonPath());
-    $this->assertSame($appPath.'/common/foobar', $app->commonPath('foobar'));
-
-    $app->setCommonPath(__DIR__.'/app/commonFoo');
-
-    $this->assertSame($appPath.'/commonFoo', $app->commonPath());
-    $this->assertSame($appPath.'/commonFoo/foobar', $app->commonPath('foobar'));
-}
-```
-    
-## runtimePath 获取运行路径
-
-``` php
-public function testRuntimePath(): void
-{
-    $app = $this->createApp();
-    $appPath = __DIR__.'/app';
-
-    $this->assertSame($appPath.'/runtime', $app->runtimePath());
-    $this->assertSame($appPath.'/runtime/foobar', $app->runtimePath('foobar'));
-}
-```
-    
-## setRuntimePath 设置运行时路径
-
-``` php
-public function testSetRuntimePath(): void
-{
-    $app = $this->createApp();
-    $appPath = __DIR__.'/app';
-
-    $this->assertSame($appPath.'/runtime', $app->runtimePath());
-    $this->assertSame($appPath.'/runtime/foobar', $app->runtimePath('foobar'));
-
-    $app->setRuntimePath(__DIR__.'/app/runtimeFoo');
-
-    $this->assertSame($appPath.'/runtimeFoo', $app->runtimePath());
-    $this->assertSame($appPath.'/runtimeFoo/foobar', $app->runtimePath('foobar'));
-}
-```
-    
-## version 获取附件存储路径
+## storagePath 获取运行路径
 
 ``` php
 public function testStoragePath(): void
@@ -218,7 +132,7 @@ public function testStoragePath(): void
 }
 ```
     
-## setStoragePath 设置附件存储路径
+## setStoragePath 设置运行时路径
 
 ``` php
 public function testSetStoragePath(): void
@@ -275,8 +189,8 @@ public function testI18nPath(): void
     $app = $this->createApp();
     $appPath = __DIR__.'/app';
 
-    $this->assertSame($appPath.'/i18n', $app->i18nPath());
-    $this->assertSame($appPath.'/i18n/foobar', $app->i18nPath('foobar'));
+    $this->assertSame($appPath.'/assets/i18n', $app->i18nPath());
+    $this->assertSame($appPath.'/assets/i18n/foobar', $app->i18nPath('foobar'));
 }
 ```
     
@@ -288,8 +202,8 @@ public function testSetI18nPath(): void
     $app = $this->createApp();
     $appPath = __DIR__.'/app';
 
-    $this->assertSame($appPath.'/i18n', $app->i18nPath());
-    $this->assertSame($appPath.'/i18n/foobar', $app->i18nPath('foobar'));
+    $this->assertSame($appPath.'/assets/i18n', $app->i18nPath());
+    $this->assertSame($appPath.'/assets/i18n/foobar', $app->i18nPath('foobar'));
 
     $app->setI18nPath(__DIR__.'/app/i18nFoo');
 
@@ -378,7 +292,7 @@ public function testFullEnvPath(): void
 public function testSetI18nCachePath(): void
 {
     $app = $this->createApp();
-    $this->assertSame(__DIR__.'/app/bootstrap/i18n/zh-CN.php', $app->i18nCachedPath('zh-CN'));
+    $this->assertSame(__DIR__.'/app/storage/bootstrap/i18n/zh-CN.php', $app->i18nCachedPath('zh-CN'));
     $app->setI18nCachedPath(__DIR__.'/hello');
     $this->assertSame(__DIR__.'/hello/zh-CN.php', $app->i18nCachedPath('zh-CN'));
 }
@@ -392,9 +306,9 @@ public function testI18nCachedPath(): void
     $app = $this->createApp();
     $appPath = __DIR__.'/app';
 
-    $this->assertSame($appPath.'/bootstrap/i18n/zh-CN.php', $app->i18nCachedPath('zh-CN'));
-    $this->assertSame($appPath.'/bootstrap/i18n/zh-TW.php', $app->i18nCachedPath('zh-TW'));
-    $this->assertSame($appPath.'/bootstrap/i18n/en-US.php', $app->i18nCachedPath('en-US'));
+    $this->assertSame($appPath.'/storage/bootstrap/i18n/zh-CN.php', $app->i18nCachedPath('zh-CN'));
+    $this->assertSame($appPath.'/storage/bootstrap/i18n/zh-TW.php', $app->i18nCachedPath('zh-TW'));
+    $this->assertSame($appPath.'/storage/bootstrap/i18n/en-US.php', $app->i18nCachedPath('en-US'));
 }
 ```
     
@@ -408,10 +322,8 @@ public function testIsCachedI18n(): void
 
     $this->assertFalse($app->isCachedI18n('zh-CN'));
 
-    mkdir($appPath.'/bootstrap/i18n', 0777, true);
-
-    file_put_contents($appPath.'/bootstrap/i18n/zh-CN.php', 'foo');
-
+    mkdir($appPath.'/storage/bootstrap/i18n', 0777, true);
+    file_put_contents($appPath.'/storage/bootstrap/i18n/zh-CN.php', 'foo');
     $this->assertTrue($app->isCachedI18n('zh-CN'));
 
     Helper::deleteDirectory($appPath);
@@ -424,7 +336,7 @@ public function testIsCachedI18n(): void
 public function testSetOptionCachePath(): void
 {
     $app = $this->createApp();
-    $this->assertSame(__DIR__.'/app/bootstrap/option.php', $app->optionCachedPath());
+    $this->assertSame(__DIR__.'/app/storage/bootstrap/option.php', $app->optionCachedPath());
     $app->setOptionCachedPath(__DIR__.'/hello');
     $this->assertSame(__DIR__.'/hello/option.php', $app->optionCachedPath());
 }
@@ -437,8 +349,7 @@ public function testOptionCachedPath(): void
 {
     $app = $this->createApp();
     $appPath = __DIR__.'/app';
-
-    $this->assertSame($appPath.'/bootstrap/option.php', $app->optionCachedPath());
+    $this->assertSame($appPath.'/storage/bootstrap/option.php', $app->optionCachedPath());
 }
 ```
     
@@ -451,11 +362,8 @@ public function testIsCachedOption(): void
     $app = $this->createApp();
 
     $this->assertFalse($app->isCachedOption());
-
-    mkdir($appPath.'/bootstrap', 0777, true);
-
-    file_put_contents($optionPath = $appPath.'/bootstrap/option.php', 'foo');
-
+    mkdir($appPath.'/storage/bootstrap', 0777, true);
+    file_put_contents($appPath.'/storage/bootstrap/option.php', 'foo');
     $this->assertTrue($app->isCachedOption());
 
     Helper::deleteDirectory($appPath);
@@ -470,7 +378,7 @@ public function testRouterCachedPath(): void
     $appPath = __DIR__.'/app';
     $app = $this->createApp();
 
-    $this->assertSame($appPath.'/bootstrap/router.php', $app->routerCachedPath());
+    $this->assertSame($appPath.'/storage/bootstrap/router.php', $app->routerCachedPath());
 }
 ```
     
@@ -484,9 +392,9 @@ public function testIsCachedRouter(): void
 
     $this->assertFalse($app->isCachedRouter());
 
-    mkdir($appPath.'/bootstrap', 0777, true);
+    mkdir($appPath.'/storage/bootstrap', 0777, true);
 
-    file_put_contents($routerPath = $appPath.'/bootstrap/router.php', 'foo');
+    file_put_contents($routerPath = $appPath.'/storage/bootstrap/router.php', 'foo');
 
     $this->assertTrue($app->isCachedRouter());
 
@@ -504,7 +412,7 @@ public function testNamespacePath(): void
     $container = $app->container();
     $this->assertSame(
         dirname(__DIR__, 2).'/src/Leevel/Kernel/Console',
-        realpath($app->namespacePath(Autoload::class))
+        realpath($app->namespacePath('Leevel\\Kernel\\Console'))
     );
 }
 ```
@@ -787,25 +695,13 @@ public function testRegisterProviders(): void
 }
 ```
     
-## setPublicPath 设置资源路径
-
-``` php
-public function testSetPublicPath(): void
-{
-    $app = $this->createApp();
-    $this->assertSame(__DIR__.'/app/public', $app->publicPath());
-    $app->setPublicPath(__DIR__.'/hello');
-    $this->assertSame(__DIR__.'/hello', $app->publicPath());
-}
-```
-    
 ## setThemesPath 设置主题路径
 
 ``` php
 public function testSetThemesPath(): void
 {
     $app = $this->createApp();
-    $this->assertSame(__DIR__.'/app/themes', $app->themesPath());
+    $this->assertSame(__DIR__.'/app/assets/themes', $app->themesPath());
     $app->setThemesPath(__DIR__.'/hello');
     $this->assertSame(__DIR__.'/hello', $app->themesPath());
 }

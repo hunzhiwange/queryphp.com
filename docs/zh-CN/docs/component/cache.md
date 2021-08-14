@@ -72,17 +72,6 @@ return [
 
     /*
      * ---------------------------------------------------------------
-     * 缓存时间预置
-     * ---------------------------------------------------------------
-     *
-     * 为了满足不同的需求，有部分缓存键值需要的缓存时间不一致，有些缓存可能需要频繁更新
-     * 于是这里我们可以通过配置缓存预设时间来控制缓存的键值的特殊时间，其中 * 表示通配符
-     * 键值 = 缓存值，键值不带前缀,例如 ['option' => 60]
-     */
-    'time_preset' => [],
-
-    /*
-     * ---------------------------------------------------------------
      * 缓存连接参数
      * ---------------------------------------------------------------
      *
@@ -95,7 +84,7 @@ return [
             'driver' => 'file',
 
             // 文件缓存路径
-            'path' => Leevel::runtimePath('file'),
+            'path' => Leevel::storagePath('app/cache'),
 
             // 默认过期时间
             'expire' => null,
@@ -158,7 +147,7 @@ return [
             'driver' => 'file',
 
             // 文件缓存路径
-            'path' => Leevel::runtimePath('throttler'),
+            'path' => Leevel::storagePath('throttler'),
 
             // 默认过期时间
             'expire' => null,
@@ -195,7 +184,7 @@ return [
             'driver' => 'file',
 
             // 文件缓存路径
-            'path' => Leevel::runtimePath('session'),
+            'path' => Leevel::storagePath('app/sessions'),
 
             // 默认过期时间
             'expire' => null,
@@ -236,7 +225,6 @@ return [
 |配置项|配置描述|
 |:-|:-|
 |expire|设置好缓存时间（小与等于 0 表示永不过期，单位时间为秒）|
-|time_preset|缓存时间预置|
 
 
 **Uses**
@@ -267,7 +255,6 @@ public function set(string $name, mixed $data, ?int $expire = null): void;
 |配置项|配置描述|
 |:-|:-|
 |expire|设置好缓存时间（小与等于 0 表示永不过期，单位时间为秒）|
-|time_preset|缓存时间预置|
 |path|缓存路径|
 
 **redis 驱动**
@@ -275,7 +262,6 @@ public function set(string $name, mixed $data, ?int $expire = null): void;
 |配置项|配置描述|
 |:-|:-|
 |expire|设置好缓存时间（小与等于 0 表示永不过期，单位时间为秒）|
-|time_preset|缓存时间预置|
 
 ### 获取缓存
 
@@ -562,56 +548,6 @@ public function testTtl(): void
     $this->assertSame(-1, $cache->ttl('ttl'));
 }
 ```
-    
-## 缓存时间预置
-
-不同场景下面的缓存可能支持不同的时间，我们可以在配置中预设时间而不是在使用时通过第三个参数传递 `expire` 过期时间，这种做法非常灵活。
-
-缓存时间预设支持 `*` 通配符，可以灵活控制一类缓存时间。
-
-
-``` php
-public function testCacheTime(): void
-{
-    $file = new File([
-        'time_preset' => [
-            'foo'         => 500,
-            'bar'         => -10,
-            'hello*world' => 10,
-            'foo*bar'     => -10,
-        ],
-        'path' => __DIR__.'/cache',
-    ]);
-
-    $file->set('foo', 'bar');
-    $file->set('bar', 'hello');
-    $file->set('hello123456world', 'helloworld1');
-    $file->set('hello789world', 'helloworld2');
-    $file->set('foo123456bar', 'foobar1');
-    $file->set('foo789bar', 'foobar2');
-    $file->set('haha', 'what about others?');
-
-    $this->assertSame('bar', $file->get('foo'));
-    $this->assertSame('hello', $file->get('bar'));
-    $this->assertSame('helloworld1', $file->get('hello123456world'));
-    $this->assertSame('helloworld2', $file->get('hello789world'));
-    $this->assertSame('foobar1', $file->get('foo123456bar'));
-    $this->assertSame('foobar2', $file->get('foo789bar'));
-    $this->assertSame('what about others?', $file->get('haha'));
-
-    $file->delete('foo');
-    $file->delete('bar');
-    $file->delete('hello123456world');
-    $file->delete('hello789world');
-    $file->delete('foo123456bar');
-    $file->delete('foo789bar');
-    $file->delete('haha');
-}
-```
-    
-::: tip
-缓存时间预设小与等于 0 表示永不过期，单位时间为秒。
-:::
     
 ## 键值命名规范
 

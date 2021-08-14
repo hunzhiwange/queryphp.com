@@ -14,14 +14,14 @@ QueryPHP 命令行流程为入口接受输入，经过内核 kernel 传入输入
 
 declare(strict_types=1);
 
-use Common\App\ExceptionRuntime;
-use Common\App\Kernel;
-use Common\App\KernelConsole;
+use App\Exceptions\Runtime;
+use App\Kernel;
+use App\KernelConsole;
 use Leevel\Di\Container;
 use Leevel\Di\IContainer;
 use Leevel\Kernel\App;
 use Leevel\Kernel\IApp;
-use Leevel\Kernel\IExceptionRuntime;
+use Leevel\Kernel\Exceptions\IRuntime;
 use Leevel\Kernel\IKernel;
 use Leevel\Kernel\IKernelConsole;
 
@@ -36,7 +36,7 @@ $container->singleton('app', new App($container, realpath(__DIR__)));
 $container->alias('app', [IApp::class, App::class]);
 $container->singleton(IKernel::class, Kernel::class);
 $container->singleton(IKernelConsole::class, KernelConsole::class);
-$container->singleton(IExceptionRuntime::class, ExceptionRuntime::class);
+$container->singleton(IRuntime::class, Runtime::class);
 
 // 执行应用
 // 根据内核调度请求返回响应

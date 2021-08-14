@@ -45,21 +45,7 @@ AUTH_KEY = 7becb888f518b20224a988906df51e05
 ``` php
 <?php
 
-/*
- * This file is part of the ************************ package.
- * _____________                           _______________
- *  ______/     \__  _____  ____  ______  / /_  _________
- *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
- *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
- *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
- *         \_\                /_/_/         /_/
- *
- * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
- * (c) 2010-2020 http://queryphp.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+declare(strict_types=1);
 
 return [
     'environment' => getenv('ENVIRONMENT'),
@@ -73,21 +59,7 @@ return [
 ``` php
 <?php
 
-/*
- * This file is part of the ************************ package.
- * _____________                           _______________
- *  ______/     \__  _____  ____  ______  / /_  _________
- *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
- *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
- *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
- *         \_\                /_/_/         /_/
- *
- * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
- * (c) 2010-2020 http://queryphp.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+declare(strict_types=1);
 
 return [
     'foo' => 'bar',
@@ -109,7 +81,7 @@ public function testBaseUse(): void
     $this->assertInstanceof(IApp::class, $app);
     $this->assertInstanceof(Apps::class, $app);
 
-    $this->assertSame($appPath.'/bootstrap/option.php', $app->optionCachedPath());
+    $this->assertSame($appPath.'/storage/bootstrap/option.php', $app->optionCachedPath());
     $this->assertFalse($app->isCachedOption());
     $this->assertSame($appPath.'/option', $app->optionPath());
 
@@ -158,7 +130,7 @@ public function testWithRuntimeEnv(): void
     $this->assertInstanceof(IApp::class, $app);
     $this->assertInstanceof(Apps::class, $app);
 
-    $this->assertSame($appPath.'/bootstrap/fooenv.php', $app->optionCachedPath());
+    $this->assertSame($appPath.'/storage/bootstrap/fooenv.php', $app->optionCachedPath());
     $this->assertFalse($app->isCachedOption());
     $this->assertSame($appPath.'/option', $app->optionPath());
 
@@ -182,21 +154,7 @@ public function testWithRuntimeEnv(): void
 ``` php
 <?php
 
-/*
- * This file is part of the ************************ package.
- * _____________                           _______________
- *  ______/     \__  _____  ____  ______  / /_  _________
- *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
- *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
- *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
- *         \_\                /_/_/         /_/
- *
- * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
- * (c) 2010-2020 http://queryphp.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+declare(strict_types=1);
 
 return [
     'app' => [
@@ -250,12 +208,12 @@ public function testLoadCached(): void
     $this->assertInstanceof(IApp::class, $app);
     $this->assertInstanceof(Apps::class, $app);
 
-    $this->assertSame($appPath.'/bootstrap/option.php', $app->optionCachedPath());
+    $this->assertSame($appPath.'/storage/bootstrap/option.php', $app->optionCachedPath());
     $this->assertFalse($app->isCachedOption());
     $this->assertSame($appPath.'/option', $app->optionPath());
 
-    mkdir($appPath.'/bootstrap', 0777, true);
-    file_put_contents($appPath.'/bootstrap/option.php', file_get_contents($appPath.'/assert/option.php'));
+    mkdir($appPath.'/storage/bootstrap', 0777, true);
+    file_put_contents($appPath.'/storage/bootstrap/option.php', file_get_contents($appPath.'/assert/option.php'));
 
     $this->assertTrue($app->isCachedOption());
 

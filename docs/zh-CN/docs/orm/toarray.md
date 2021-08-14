@@ -56,13 +56,13 @@ class DemoToArrayEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'          => [],
         'name'        => [],
         'description' => [],
@@ -134,7 +134,9 @@ public function testWithWhite(): void
     $this->assertSame(
         $data,
         $this->varJson(
-            $entity->toArray(['name']),
+            $entity
+                ->only(['name'])
+                ->toArray(),
             1
         )
     );
@@ -149,7 +151,9 @@ public function testWithWhite(): void
     $this->assertSame(
         $data,
         $this->varJson(
-            $entity->toArray(['name', 'description']),
+            $entity
+                ->only(['name', 'description'])
+                ->toArray(),
             2
         )
     );
@@ -165,7 +169,9 @@ public function testWithWhite(): void
     $this->assertSame(
         $data,
         $this->varJson(
-            $entity->toArray(['name', 'description', 'hello']),
+            $entity
+                ->only(['name', 'description', 'hello'])
+                ->toArray(),
             3
         )
     );
@@ -211,7 +217,9 @@ public function testWithBlack(): void
     $this->assertSame(
         $data,
         $this->varJson(
-            $entity->toArray([], ['name']),
+            $entity
+                ->except(['name'])
+                ->toArray(),
             1
         )
     );
@@ -227,7 +235,9 @@ public function testWithBlack(): void
     $this->assertSame(
         $data,
         $this->varJson(
-            $entity->toArray([], ['name', 'description']),
+            $entity
+                ->except(['name', 'description'])
+                ->toArray(),
             2
         )
     );
@@ -242,7 +252,9 @@ public function testWithBlack(): void
     $this->assertSame(
         $data,
         $this->varJson(
-            $entity->toArray([], ['foo_bar', 'name', 'address']),
+            $entity
+                ->except(['foo_bar', 'name', 'address'])
+                ->toArray(),
             3
         )
     );
@@ -287,13 +299,13 @@ class DemoToArrayWhiteEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'          => [],
         'name'        => [],
         'description' => [
@@ -368,13 +380,13 @@ class DemoToArrayBlackEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'          => [],
         'name'        => [],
         'description' => [
@@ -447,13 +459,13 @@ class User extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'user';
+    public const TABLE = 'user';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'        => [],
         'name'      => [],
         'create_at' => [],
@@ -607,13 +619,13 @@ class Post extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'post';
+    public const TABLE = 'post';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY           => true,
         ],
@@ -668,7 +680,7 @@ class Post extends Entity
         ],
     ];
 
-    const DELETE_AT = 'delete_at';
+    public const DELETE_AT = 'delete_at';
 
     protected function relationScopeComment(Relation $relation): void
     {
@@ -730,7 +742,15 @@ public function testWithRelationWhiteAndBlack(): void
     $this->assertSame(
         $data,
         $this->varJson(
-            $entity->toArray([], [], ['user' => [['name']]])
+            $entity
+                ->each(function($value, $k) {
+                    if ('user' === $k) {
+                        $value = $value->only(['name']);
+                    }
+
+                    return $value;
+                })
+                ->toArray()
         )
     );
 }
@@ -765,13 +785,13 @@ class DemoToArrayShowPropNullEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'          => [],
         'name'        => [],
         'description' => [],
@@ -846,13 +866,13 @@ class DemoToArrayShowPropNullRelationTargetEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'          => [],
         'name'        => [],
     ];
@@ -871,13 +891,13 @@ class DemoToArrayShowPropNullRelationEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id'          => [],
         'name'        => [],
         'description' => [],

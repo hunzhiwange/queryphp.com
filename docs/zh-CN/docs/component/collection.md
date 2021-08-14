@@ -323,13 +323,13 @@ public function testGetArrayElementsWithStdClass(): void
 }
 ```
     
-## 集合数据支持类型验证
+## getValueTypes 集合数据支持值类型验证
 
 比如下面的数据类型为 `string`，只有字符串类型才能加入集合。
 
 
 ``` php
-public function testTypeValidate(): void
+public function testGetValueTypesValidate(): void
 {
     $data = [
         'hello',
@@ -338,7 +338,23 @@ public function testTypeValidate(): void
 
     $collection = new Collection($data, ['string']);
     $this->assertSame($collection->toArray(), $data);
-    $this->assertSame(['string'], $collection->getType());
+    $this->assertSame(['string'], $collection->getValueTypes());
+}
+```
+    
+## getKeyTypes 集合数据支持键类型验证
+
+``` php
+public function testGetKeyTypesValidate(): void
+{
+    $data = [
+        'hello' => 'world',
+        'world' => 'hello',
+    ];
+
+    $collection = new Collection($data, ['string'], ['string']);
+    $this->assertSame($collection->toArray(), $data);
+    $this->assertSame(['string'], $collection->getKeyTypes());
 }
 ```
     
@@ -349,9 +365,9 @@ public function testTypeValidate(): void
 ``` php
 public function testTypeValidateException(): void
 {
-    $this->expectException(\InvalidArgumentException::class);
+    $this->expectException(\UnexpectedValueException::class);
     $this->expectExceptionMessage(
-        'Collection type int validation failed.'
+        'The value of a collection value type requires the following types `int`.'
     );
 
     $data = [
@@ -544,5 +560,30 @@ public function testGetSetString(): void
     $this->assertSame($collection->hello, 'new world');
     $this->assertSame($collection->foo, 'new bar');
     $this->assertSame((string) $collection, '{"hello":"new world","foo":"new bar"}');
+}
+```
+    
+## __get,__set,__isset,__unset 魔术方法支持
+
+``` php
+public function testMagicMethod(): void
+{
+    $data = [
+        'hello' => 'world',
+        'foo'   => 'bar',
+    ];
+
+    $collection = new Collection($data);
+
+    $this->assertSame($collection->hello, 'world');
+    $this->assertSame($collection->foo, 'bar');
+    $collection->hello = 'new world';
+    $collection->foo = 'new bar';
+    $this->assertSame($collection->hello, 'new world');
+    $this->assertSame($collection->foo, 'new bar');
+    $this->assertTrue(isset($collection->hello)); 
+    $this->assertFalse(isset($collection->hello2));
+    unset($collection->hello);
+    $this->assertFalse(isset($collection->hello));
 }
 ```

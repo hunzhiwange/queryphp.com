@@ -56,9 +56,9 @@ public function testBaseUse(): void
     });
 
     $this->assertSame('en-US', $container['option']['i18n\\default']);
-    $this->assertSame($appPath.'/bootstrap/i18n/en-US.php', $app->i18nCachedPath('en-US'));
+    $this->assertSame($appPath.'/storage/bootstrap/i18n/en-US.php', $app->i18nCachedPath('en-US'));
     $this->assertFalse($app->isCachedI18n('en-US'));
-    $this->assertSame($appPath.'/i18n', $app->i18nPath());
+    $this->assertSame($appPath.'/assets/i18n', $app->i18nPath());
 
     $this->assertNull($bootstrap->handle($app));
 
@@ -82,21 +82,7 @@ public function testBaseUse(): void
 ``` php
 <?php
 
-/*
- * This file is part of the ************************ package.
- * _____________                           _______________
- *  ______/     \__  _____  ____  ______  / /_  _________
- *   ____/ __   / / / / _ \/ __`\/ / __ \/ __ \/ __ \___
- *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
- *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
- *         \_\                /_/_/         /_/
- *
- * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
- * (c) 2010-2020 http://queryphp.com All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+declare(strict_types=1);
 
 return [
     '上一页'                     => 'Previous',
@@ -158,12 +144,12 @@ public function testLoadCached(): void
     });
 
     $this->assertSame('en-US', $container['option']['i18n\\default']);
-    $this->assertSame($appPath.'/bootstrap/i18n/en-US.php', $app->i18nCachedPath('en-US'));
+    $this->assertSame($appPath.'/storage/bootstrap/i18n/en-US.php', $app->i18nCachedPath('en-US'));
     $this->assertFalse($app->isCachedI18n('en-US'));
-    $this->assertSame($appPath.'/i18n', $app->i18nPath());
+    $this->assertSame($appPath.'/assets/i18n', $app->i18nPath());
 
-    mkdir($appPath.'/bootstrap/i18n', 0777, true);
-    file_put_contents($appPath.'/bootstrap/i18n/en-US.php', file_get_contents($appPath.'/assert/en-US.php'));
+    mkdir($appPath.'/storage/bootstrap/i18n', 0777, true);
+    file_put_contents($appPath.'/storage/bootstrap/i18n/en-US.php', file_get_contents($appPath.'/assert/en-US.php'));
 
     $this->assertTrue($app->isCachedI18n('en-US'));
 
@@ -176,6 +162,6 @@ public function testLoadCached(): void
     $this->assertSame('Total 5', $i18n->gettext('共 %d 条', 5));
     $this->assertSame('Go to', $i18n->gettext('前往'));
 
-    Helper::deleteDirectory($appPath.'/bootstrap');
+    Helper::deleteDirectory($appPath.'/storage');
 }
 ```

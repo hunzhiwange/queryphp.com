@@ -48,13 +48,13 @@ class DemoEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY => true,
         ],
@@ -149,13 +149,13 @@ class DemoConstructPropWhiteEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY             => true,
             self::CONSTRUCT_PROP_WHITE => true,
@@ -195,13 +195,13 @@ class DemoConstructPropBlackEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY             => true,
             self::CONSTRUCT_PROP_BLACK => true,
@@ -241,13 +241,13 @@ class DemoCreatePropWhiteEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY => true,
         ],
@@ -302,13 +302,13 @@ class DemoCreateAutoFillEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY => true,
         ],
@@ -451,13 +451,13 @@ class DemoDatabaseEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY => true,
         ],

@@ -13,7 +13,7 @@ QueryPHP 系统发生的异常统一由异常运行时进行管理，处理异�
 
 declare(strict_types=1);
 
-namespace Leevel\Kernel;
+namespace Leevel\Kernel\Exceptions;
 
 use Leevel\Http\Request;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,7 +23,7 @@ use Throwable;
 /**
  * 异常运行时接口.
  */
-interface IExceptionRuntime
+interface IRuntime
 {
     /**
      * 异常上报.
@@ -53,7 +53,7 @@ interface IExceptionRuntime
 **getHttpExceptionView 原型**
 
 ``` php
-# Leevel\Kernel\ExceptionRuntime::getHttpExceptionView
+# Leevel\Kernel\Exceptions\Runtime::getHttpExceptionView
 /**
  * 获取 HTTP 状态的异常模板.
  */
@@ -63,33 +63,33 @@ abstract public function getHttpExceptionView(HttpException $e): string;
 **getDefaultHttpExceptionView 原型**
 
 ``` php
-# Leevel\Kernel\ExceptionRuntime::getDefaultHttpExceptionView
+# Leevel\Kernel\Exceptions\Runtime::getDefaultHttpExceptionView
 /**
  * 获取 HTTP 状态的默认异常模板.
  */
 abstract public function getDefaultHttpExceptionView(): string;
 ```
 
-只需要实现，即可轻松接入，例如应用中的 `\Common\App\ExceptionRuntime` 实现。
+只需要实现，即可轻松接入，例如应用中的 `\App\Exceptions\Runtime` 实现。
 
 ``` php
 <?php
 
 declare(strict_types=1);
 
-namespace Common\App;
+namespace App\Exceptions;
 
 use Leevel;
 use Leevel\Http\Request;
-use Leevel\Kernel\Exception\HttpException;
-use Leevel\Kernel\ExceptionRuntime as BaseExceptionRuntime;
+use Leevel\Kernel\Exceptions\HttpException;
+use Leevel\Kernel\Exceptions\Runtime as ExceptionRuntime;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 /**
  * 异常运行时.
  */
-class ExceptionRuntime extends BaseExceptionRuntime
+class Runtime extends ExceptionRuntime
 {
     /**
      * {@inheritDoc}
@@ -112,7 +112,7 @@ class ExceptionRuntime extends BaseExceptionRuntime
      */
     public function getHttpExceptionView(HttpException $e): string
     {
-        return Leevel::commonPath('ui/exception/'.$e->getStatusCode().'.php');
+        return Leevel::path(sprintf('assets/exceptions/%d.php', $e->getStatusCode()));
     }
 
     /**
@@ -120,7 +120,7 @@ class ExceptionRuntime extends BaseExceptionRuntime
      */
     public function getDefaultHttpExceptionView(): string
     {
-        return Leevel::commonPath('ui/exception/default.php');
+        return Leevel::path('assets/exceptions/default.php');
     }
 }
 
@@ -138,11 +138,11 @@ use Leevel\Di\Container;
 use Leevel\Di\IContainer;
 use Leevel\Http\Request;
 use Leevel\Kernel\App as Apps;
-use Leevel\Kernel\Exception\HttpException;
-use Leevel\Kernel\Exception\InternalServerErrorHttpException;
-use Leevel\Kernel\Exception\MethodNotAllowedHttpException;
-use Leevel\Kernel\Exception\NotFoundHttpException;
-use Leevel\Kernel\ExceptionRuntime;
+use Leevel\Kernel\Exceptions\HttpException;
+use Leevel\Kernel\Exceptions\InternalServerErrorHttpException;
+use Leevel\Kernel\Exceptions\MethodNotAllowedHttpException;
+use Leevel\Kernel\Exceptions\NotFoundHttpException;
+use Leevel\Kernel\Exceptions\Runtime;
 use Leevel\Log\ILog;
 use Leevel\Option\Option;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -171,7 +171,7 @@ class AppRuntime extends Apps
 ``` php
 namespace Tests\Kernel;
 
-class Runtime11 extends ExceptionRuntime
+class Runtime11 extends Runtime
 {
     public function getHttpExceptionView(HttpException $e): string
     {
@@ -655,7 +655,7 @@ public function testRenderWithCustomRenderMethodToJson(): void
 ``` php
 namespace Tests\Kernel;
 
-class Runtime22 extends ExceptionRuntime
+class Runtime22 extends Runtime
 {
     public function getHttpExceptionView(HttpException $e): string
     {
@@ -815,7 +815,7 @@ public function testRendorWithHttpExceptionViewFor404(): void
 ``` php
 namespace Tests\Kernel;
 
-class Runtime3 extends ExceptionRuntime
+class Runtime3 extends Runtime
 {
     public function getHttpExceptionView(HttpException $e): string
     {

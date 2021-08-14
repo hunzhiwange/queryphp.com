@@ -13,14 +13,14 @@ QueryPHP 流程为入口接受 HTTP 请求，经过内核 kernel 传入请求，
 
 declare(strict_types=1);
 
-use Common\App\ExceptionRuntime;
-use Common\App\Kernel;
+use App\Exceptions\Runtime;
+use App\Kernel;
 use Leevel\Di\Container;
 use Leevel\Di\IContainer;
 use Leevel\Http\Request;
 use Leevel\Kernel\App;
 use Leevel\Kernel\IApp;
-use Leevel\Kernel\IExceptionRuntime;
+use Leevel\Kernel\Exceptions\IRuntime;
 use Leevel\Kernel\IKernel;
 
 // 加载 Composer
@@ -33,7 +33,7 @@ $container->singleton(IContainer::class, $container);
 $container->singleton('app', new App($container, realpath(__DIR__.'/..')));
 $container->alias('app', [IApp::class, App::class]);
 $container->singleton(IKernel::class, Kernel::class);
-$container->singleton(IExceptionRuntime::class, ExceptionRuntime::class);
+$container->singleton(IRuntime::class, Runtime::class);
 
 // 执行应用
 // 根据内核调度请求返回响应
@@ -69,10 +69,10 @@ use Leevel\Di\IContainer;
 use Leevel\Http\JsonResponse;
 use Leevel\Http\Request;
 use Leevel\Kernel\App as Apps;
-use Leevel\Kernel\Exception\HttpException;
-use Leevel\Kernel\ExceptionRuntime;
+use Leevel\Kernel\Exceptions\HttpException;
+use Leevel\Kernel\Exceptions\Runtime;
 use Leevel\Kernel\IApp;
-use Leevel\Kernel\IExceptionRuntime;
+use Leevel\Kernel\Exceptions\IRuntime;
 use Leevel\Kernel\IKernel;
 use Leevel\Kernel\Kernel;
 use Leevel\Log\ILog;

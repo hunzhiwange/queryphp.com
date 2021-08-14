@@ -59,7 +59,7 @@ public function testBindWithType(): void
             {
                 "id": [
                     1,
-                    1
+                    "PDO::PARAM_INT"
                 ]
             },
             false
@@ -93,7 +93,7 @@ public function testWithTypeAndValueCanBeArray(): void
             {
                 "id": [
                     1,
-                    1
+                    "PDO::PARAM_INT"
                 ]
             },
             false
@@ -127,7 +127,7 @@ public function testNameBind(): void
             {
                 "id": [
                     1,
-                    1
+                    "PDO::PARAM_INT"
                 ],
                 "name": [
                     "小鸭子"
@@ -165,7 +165,7 @@ public function testQuestionMarkBind(): void
             [
                 [
                     5,
-                    1
+                    "PDO::PARAM_INT"
                 ],
                 [
                     "小鸭子"

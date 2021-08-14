@@ -30,7 +30,7 @@ use Leevel\Event\Observer;
 /**
  * {@inheritDoc}
  */
-public function register(array|object|string $event, mixed $listener, int $priority = 500): void;
+public function register(array|object|string $event, Closure|SplObserver|string $listener, int $priority = 500): void;
 ```
 
 **handle 函数原型**

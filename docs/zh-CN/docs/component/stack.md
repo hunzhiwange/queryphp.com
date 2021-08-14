@@ -57,8 +57,8 @@ public function testBaseUse(): void
 ``` php
 public function testValidateType(): void
 {
-    $this->expectException(\InvalidArgumentException::class);
-    $this->expectExceptionMessage('The stack element type verification failed, and the allowed type is string.');
+    $this->expectException(\UnexpectedValueException::class);
+    $this->expectExceptionMessage('The element type must be one of the following `string`.');
 
     $stack = new Stack(['string']);
     $stack->push(5);

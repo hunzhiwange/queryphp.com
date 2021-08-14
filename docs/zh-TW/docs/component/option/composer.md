@@ -77,6 +77,7 @@ public function testBaseUse(): void
             "i18ns": [
                 "i18n\/extend"
             ],
+            "i18n-paths": [],
             "metas": {
                 "foo": "bar"
             }

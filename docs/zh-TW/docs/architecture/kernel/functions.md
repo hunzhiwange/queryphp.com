@@ -27,7 +27,7 @@ use Leevel\Kernel\App;
 public function testLeevel(): void
 {
     $this->createContainer();
-    $this->assertSame('/runtime', Leevel::runtimePath());
+    $this->assertSame('/storage', Leevel::storagePath());
 }
 ```
     
@@ -37,7 +37,7 @@ public function testLeevel(): void
 public function testApp(): void
 {
     $this->createContainer();
-    $this->assertSame('/runtime', Apps::runtimePath());
+    $this->assertSame('/storage', Apps::storagePath());
 }
 ```
     

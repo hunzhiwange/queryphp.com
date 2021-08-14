@@ -171,8 +171,7 @@ public function testOnly(): void
     $json = <<<'eot'
         {
             "input": "test",
-            "hello": "world",
-            "notfound": null
+            "hello": "world"
         }
         eot;
 

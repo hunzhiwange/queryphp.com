@@ -41,13 +41,13 @@ class DemoEntity extends Entity
 {
     use GetterSetter;
 
-    const TABLE = 'test';
+    public const TABLE = 'test';
 
-    const ID = 'id';
+    public const ID = 'id';
 
-    const AUTO = 'id';
+    public const AUTO = 'id';
 
-    const STRUCT = [
+    public const STRUCT = [
         'id' => [
             self::READONLY => true,
         ],
@@ -66,7 +66,7 @@ public function testBaseUse(): void
 
     $this->assertSame(DemoEntity::STRUCT, $entity->fields());
     $this->assertSame(DemoEntity::TABLE, $entity->table());
-    $this->assertSame(DemoEntity::ID, $entity->primaryKey());
+    $this->assertSame([DemoEntity::ID], $entity->primaryKey());
     $this->assertSame(DemoEntity::AUTO, $entity->autoIncrement());
 }
 ```

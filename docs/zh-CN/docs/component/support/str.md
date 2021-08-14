@@ -265,6 +265,8 @@ public function testCamelize(): void
     $this->assertSame('helloWorld', Str::camelize('helloWorld', '-'));
     $this->assertSame('helloWorld', Str::camelize('hello_world'));
     $this->assertSame('helloWorld', Str::camelize('hello-world', '-'));
+    $this->assertSame('he3lloWorld', Str::camelize('he3llo_world'));
+    $this->assertSame('hello3World', Str::camelize('hello3_world'));
 }
 ```
     
@@ -277,5 +279,7 @@ public function testUnCamelize(): void
     $this->assertSame('hello-world', Str::unCamelize('hello-world', '-'));
     $this->assertSame('hello_world', Str::unCamelize('helloWorld'));
     $this->assertSame('hello-world', Str::unCamelize('helloWorld', '-'));
+    $this->assertSame('hello2_world', Str::unCamelize('hello2World'));
+    $this->assertSame('hel2lo_world', Str::unCamelize('hel2loWorld'));
 }
 ```

@@ -75,7 +75,7 @@ return [
             'driver' => 'local',
 
             // path
-            'path' => Leevel::storagePath(),
+            'path' => Leevel::storagePath('attachments'),
         ],
 
         'zip' => [
@@ -83,7 +83,7 @@ return [
             'driver' => 'zip',
 
             // path
-            'path' => Leevel::storagePath('filesystem.zip'),
+            'path' => Leevel::storagePath('attachments/filesystem.zip'),
         ],
 
         'ftp' => [
