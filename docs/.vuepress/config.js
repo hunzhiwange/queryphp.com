@@ -520,7 +520,6 @@ function genSidebarConfigComponentDoc (groupA, groupB, groupC, groupD, groupE, g
             'http/redirectresponse',
           ],
         },
-        'mail',
         {
           title: groupE,
           collapsable: false,
