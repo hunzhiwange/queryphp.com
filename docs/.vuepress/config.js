@@ -10,11 +10,6 @@ module.exports = {
       title: 'QueryPHP',
       description: '高性能 PHP 渐进式框架.'
     },
-    '/zh-TW/': {
-      lang: 'zh-TW',
-      title: 'QueryPHP',
-      description: '高性能 PHP 漸進式框架.'
-    }
   },
 
   /**
@@ -115,38 +110,6 @@ module.exports = {
           '/zh-CN/docs/component/': genSidebarConfigComponentDoc('组件', '加密', '配置', '缓存', '认证', '文件系统', '命令行'),
           '/zh-CN/docs/test/': genSidebarConfigTestDoc('测试'),
           '/zh-CN/docs/developer/': genSidebarConfigDeveloperDoc('开发者'),
-        }
-      },
-      '/zh-TW/': {
-        // 多语言下拉菜单的标题
-        selectText: '選擇語言',
-        // 该语言在下拉菜单中的标签
-        label: '繁體中文',
-        // 编辑链接文字
-        editLinkText: '在 GitHub 上查看此頁',
-        // Service Worker 的配置
-        serviceWorker: {
-          updatePopup: {
-            message: "發現新內容可用.",
-            buttonText: "重繪"
-          }
-        },
-        // 当前 locale 的 algolia docsearch 选项
-        algolia: {},
-        nav: require('./nav/zh-TW'),
-        sidebar: {
-          '/zh-TW/guide/': genSidebarConfig('指南'),
-          '/zh-TW/docs/started/': genSidebarConfigStartedDoc('入門'),
-          '/zh-TW/docs/guide/': genSidebarConfigGuideDoc('指南'),
-          '/zh-TW/docs/architecture/': genSidebarConfigArchitectureDoc('架構', '內核'),
-          '/zh-TW/docs/router/': genSidebarConfigRouterDoc('路由'),
-          '/zh-TW/docs/template/': genSidebarConfigTemplateDoc('模板'),
-          '/zh-TW/docs/database/': genSidebarConfigDatabaseDoc('資料庫', '新增', '删除', '更新', '査詢', '査詢語言'),
-          '/zh-TW/docs/orm/': genSidebarConfigOrmDoc('ORM'),
-          '/zh-TW/docs/validate/': genSidebarConfigValidateDoc('驗證器'),
-          '/zh-TW/docs/component/': genSidebarConfigComponentDoc('組件', '加密', '配寘', '緩存', '認證', '文件系統', '命令行'),
-          '/zh-TW/docs/test/': genSidebarConfigTestDoc('測試'),
-          '/zh-TW/docs/developer/': genSidebarConfigDeveloperDoc('開發者'),
         }
       },
     },
