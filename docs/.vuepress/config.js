@@ -161,7 +161,6 @@ function genSidebarConfigArchitectureDoc (groupA, groupB) {
         '',
         'ioc',
         'provider',
-        'fn',
         'event',
         'manager',
         {
