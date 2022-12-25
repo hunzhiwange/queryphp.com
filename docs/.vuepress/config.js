@@ -80,7 +80,6 @@ module.exports = {
           '/docs/database/': genSidebarConfigDatabaseDoc('Database', 'Add', 'Delete', 'Update', 'Query', 'Query lang'),
           '/docs/orm/': genSidebarConfigOrmDoc('ORM'),
           '/docs/validate/': genSidebarConfigValidateDoc('Validate'),
-          '/docs/protocol/': genSidebarConfigProtocolDoc('Swoole'),
           '/docs/component/': genSidebarConfigComponentDoc('Component', 'Encryption', 'Option', 'Cache', 'Auth', 'Filesystem', 'Console'),
           '/docs/test/': genSidebarConfigTestDoc('Test'),
           '/docs/developer/': genSidebarConfigDeveloperDoc('Developer'),
@@ -113,7 +112,6 @@ module.exports = {
           '/zh-CN/docs/database/': genSidebarConfigDatabaseDoc('数据库', '新增', '删除', '更新', '查询', '查询语言'),
           '/zh-CN/docs/orm/': genSidebarConfigOrmDoc('ORM'),
           '/zh-CN/docs/validate/': genSidebarConfigValidateDoc('验证器'),
-          '/zh-CN/docs/protocol/': genSidebarConfigProtocolDoc('Swoole'),
           '/zh-CN/docs/component/': genSidebarConfigComponentDoc('组件', '加密', '配置', '缓存', '认证', '文件系统', '命令行'),
           '/zh-CN/docs/test/': genSidebarConfigTestDoc('测试'),
           '/zh-CN/docs/developer/': genSidebarConfigDeveloperDoc('开发者'),
@@ -146,7 +144,6 @@ module.exports = {
           '/zh-TW/docs/database/': genSidebarConfigDatabaseDoc('資料庫', '新增', '删除', '更新', '査詢', '査詢語言'),
           '/zh-TW/docs/orm/': genSidebarConfigOrmDoc('ORM'),
           '/zh-TW/docs/validate/': genSidebarConfigValidateDoc('驗證器'),
-          '/zh-TW/docs/protocol/': genSidebarConfigProtocolDoc('Swoole'),
           '/zh-TW/docs/component/': genSidebarConfigComponentDoc('組件', '加密', '配寘', '緩存', '認證', '文件系統', '命令行'),
           '/zh-TW/docs/test/': genSidebarConfigTestDoc('測試'),
           '/zh-TW/docs/developer/': genSidebarConfigDeveloperDoc('開發者'),
@@ -462,29 +459,6 @@ function genSidebarConfigValidateDoc (groupA) {
         'validator/upper',
         'validator/url',
         'validator/zipcode',
-      ]
-    }
-  ]
-}
-
-function genSidebarConfigProtocolDoc (groupA) {
-  return [
-    {
-      title: groupA,
-      collapsable: false,
-      children: [
-        'coroutine',
-        'timer', 
-        'task',
-        'process/hotoverload',
-        {
-          title: 'HTTP Server',
-          collapsable: false,
-          'children': [
-            'leevel2swoole',
-            'swoole2Leevel',
-          ],
-        },
       ]
     }
   ]
