@@ -199,34 +199,11 @@ php leevel server <Visite http://127.0.0.1:9527/>
 </div>
 
 <div class="quickstart">
-<div class="code-title">HTTP Server</div>
-
-``` bash
-php leevel http:server # php leevel http:server -d
-php leevel http:reload
-php leevel http:stop
-php leevel http:status
-```
-</div>
-
-<div class="quickstart">
-<div class="code-title">WebSocket Server</div>
-
-``` bash
-php leevel websocket:server # php leevel websocket:server -d
-php leevel websocket:reload
-php leevel websocket:stop
-php leevel websocket:status
-```
-</div>
-
-<div class="quickstart">
 <div class="code-title">Go RoadRunner Server</div>
 
 ``` bash
-/data/server/roadrunner-1.3.5-darwin-amd64/rr serve -d -v # -d = debug
-/data/server/roadrunner-1.3.5-darwin-amd64/rr http:reset
-/data/server/roadrunner-1.3.5-darwin-amd64/rr http:workers -i
+/data/server/roadrunner-2.12.1-darwin-amd64/rr serve
+/data/server/roadrunner-2.12.1-darwin-amd64/rr http:reset
 ```
 </div>
 
@@ -269,7 +246,7 @@ php leevel websocket:status
 </div>
 
 ::: warning Warning
-QueryPHP requires PHP >= 8.0.0.
+QueryPHP requires PHP >= 8.1.0.
 :::
 
 <!-- <div id="sponsors">
