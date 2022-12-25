@@ -508,7 +508,6 @@ function genSidebarConfigComponentDoc (groupA, groupB, groupC, groupD, groupE, g
         'page',
         'debug',
         'log',
-        'seccode',
         {
           title: 'HTTP',
           collapsable: false,
