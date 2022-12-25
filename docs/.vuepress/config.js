@@ -473,7 +473,18 @@ function genSidebarConfigComponentDoc (groupA, groupB, groupC, groupD, groupE, g
         'support/str',
         'support/arr',
         'support/type',
-        'collection',
+        'support/dto',
+        'support/enum',
+        {
+          title: 'Collection',
+          collapsable: false,
+          'children': [
+            'collection',
+            'collection/typedassociative',
+            'collection/typedint',
+            'collection/typedstring',
+          ],
+        },
         'tree',
         'pipeline',
         'flow',
@@ -501,7 +512,6 @@ function genSidebarConfigComponentDoc (groupA, groupB, groupC, groupD, groupE, g
           collapsable: false,
           'children': [
             'cache',
-            'cache/load',
           ],
         },
         'session',
@@ -519,14 +529,7 @@ function genSidebarConfigComponentDoc (groupA, groupB, groupC, groupD, groupE, g
             'http/redirectresponse',
           ],
         },
-        {
-          title: groupE,
-          collapsable: false,
-          'children': [
-            'auth',
-            'auth/hash',
-          ],
-        },
+        'cache',
         {
           title: groupF,
           collapsable: false,
