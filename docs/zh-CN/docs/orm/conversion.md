@@ -14,8 +14,8 @@
 ``` php
 <?php
 
-use Leevel\Collection\Collection;
 use Leevel\Database\Ddd\Entity;
+use Leevel\Support\Collection;
 use Tests\Database\DatabaseTestCase as TestCase;
 use Tests\Database\Ddd\Entity\DemoConversionEntity;
 ```
@@ -40,9 +40,9 @@ protected function makeEntity(): DemoConversionEntity
 ``` php
 namespace Tests\Database\Ddd\Entity;
 
-use Leevel\Collection\Collection;
 use Leevel\Database\Ddd\Entity;
 use Leevel\Database\Ddd\GetterSetter;
+use Leevel\Support\Collection;
 use stdClass;
 
 class DemoConversionEntity extends Entity
@@ -251,6 +251,7 @@ class DemoConversionEntity extends Entity
     public function setObj2(string $value): Entity
     {
         $value = json_decode($value, true);
+
         return $this->setter('obj2', json_encode($value, JSON_FORCE_OBJECT));
     }
 

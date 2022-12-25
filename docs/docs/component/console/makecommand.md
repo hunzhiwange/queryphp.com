@@ -28,8 +28,8 @@ use Tests\Console\Command\MakeFileWithGlobalReplace;
 ``` php
 namespace Tests\Console\Command;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Leevel\Console\Make;
+use Symfony\Component\Console\Input\InputArgument;
 
 class MakeFile extends Make
 {

@@ -1,7 +1,7 @@
 # 整数集合 collection
 
 ::: tip Testing Is Documentation
-[tests/Collection/TypedIntArrayTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Collection/TypedIntArrayTest.php)
+[tests/Support/TypedIntArrayTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Support/TypedIntArrayTest.php)
 :::
     
 **Uses**
@@ -9,7 +9,7 @@
 ``` php
 <?php
 
-use Leevel\Collection\TypedIntArray;
+use Leevel\Support\TypedIntArray;
 ```
 
 ## 基本使用

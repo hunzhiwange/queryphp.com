@@ -80,7 +80,7 @@ public function testDescriptionSameValueDescriptionWillBeFristOne(): void
 ``` php
 public function testDescriptions(): void
 {
-    $value = Enum1::descriptions();
+    $value = Enum1::descriptions('');
     $json = <<<'eot'
         {
             "msg": {
@@ -251,62 +251,5 @@ public function testSearchKey(): void
 {
     $this->assertSame('ERROR_ONE', Enum1::searchKey(Enum1::ERROR_ONE));
     $this->assertSame(false, Enum1::searchKey(88));
-}
-```
-    
-## getValue 获取当前枚举对象值
-
-``` php
-public function testEnumObjectGetValue(): void
-{
-    $foo = new StatusEnum(StatusEnum::THREE);
-    $this->assertSame(3, $foo->getValue());
-}
-```
-    
-## __toString 获取当前枚举对象值字符串
-
-``` php
-public function testEnumObjectToString(): void
-{
-    $foo = new StatusEnum(StatusEnum::THREE);
-    $this->assertSame('3', (string) $foo);
-}
-```
-    
-## equals 比较两个枚举是否完全相同
-
-``` php
-public function testEnumObjectEquals(): void
-{
-    $foo = new StatusEnum(StatusEnum::THREE);
-    $bar = new StatusEnum(StatusEnum::DISABLE);
-    $this->assertTrue($foo->equals($foo));
-    $this->assertFalse($foo->equals($bar));
-    $this->assertFalse($foo->equals(new Enum1(Enum1::ERROR_ONE)));
-} 
-```
-    
-## 枚举对象值不符合预期将抛出异常
-
-``` php
-public function testEnumObjectGetValueButNotFound(): void
-{
-    $this->expectException(\UnexpectedValueException::class);
-    $this->expectExceptionMessage(
-        'Value `99999999` is not part of Tests\\Support\\Fixtures\\StatusEnum'
-    );
-
-    new StatusEnum(99999999);
-}
-```
-    
-## getKey 获取当前枚举值的键
-
-``` php
-public function testEnumObjectGetKey(): void
-{
-    $foo = new StatusEnum(StatusEnum::THREE);
-    $this->assertSame('THREE', $foo->getKey());
 }
 ```

@@ -27,7 +27,7 @@ use Leevel\Kernel\App;
 public function testLeevel(): void
 {
     $this->createContainer();
-    $this->assertSame('/storage', Leevel::storagePath());
+    $this->assertSame(App::VERSION, Leevel::version());
 }
 ```
     
@@ -37,7 +37,7 @@ public function testLeevel(): void
 public function testApp(): void
 {
     $this->createContainer();
-    $this->assertSame('/storage', Apps::storagePath());
+    $this->assertSame(App::VERSION, Apps::version());
 }
 ```
     

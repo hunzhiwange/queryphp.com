@@ -399,7 +399,7 @@ namespace Tests\Support;
 
 class ArrMyJsonSerializable implements JsonSerializable
 {
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return ['hello' => 'JsonSerializable'];
     }

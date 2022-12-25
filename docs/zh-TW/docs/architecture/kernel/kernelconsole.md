@@ -106,7 +106,7 @@ namespace Tests\Kernel;
 
 class Application1 extends Application
 {
-    public function run(?InputInterface $input = null, ?OutputInterface $output = null)
+    public function run(?InputInterface $input = null, ?OutputInterface $output = null): int
     {
         return 0;
     }

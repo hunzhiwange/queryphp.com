@@ -1,7 +1,7 @@
 # 树 tree
 
 ::: tip Testing Is Documentation
-[tests/Tree/TreeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Tree/TreeTest.php)
+[tests/Support/TreeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Support/TreeTest.php)
 :::
     
 树组件 `tree` 提供了一些实用方法，用于整理数据为一棵树，并提供一些方法来获取树相关节点的信息。
@@ -11,7 +11,7 @@
 ``` php
 <?php
 
-use Leevel\Tree\Tree;
+use Leevel\Support\Tree;
 ```
 
 ## Tree 基本使用
@@ -211,7 +211,7 @@ public function testSetNodeAsChildren(): void
 `测试树数据`
 
 ``` php
-# Tests\Tree\TreeTest::providerTree
+# Tests\Support\TreeTest::providerTree
 protected function providerTree(): Tree
 {
     return new Tree([

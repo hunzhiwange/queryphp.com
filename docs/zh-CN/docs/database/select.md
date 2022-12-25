@@ -12,12 +12,12 @@
 use I18nMock;
 use Leevel\Cache\File;
 use Leevel\Cache\ICache;
-use Leevel\Collection\Collection;
 use Leevel\Database\Condition;
 use Leevel\Database\Page;
 use Leevel\Di\Container;
 use Leevel\Filesystem\Helper;
 use Leevel\Page\Page as BasePage;
+use Leevel\Support\Collection;
 use stdClass;
 use Tests\Database\DatabaseTestCase as TestCase;
 ```
@@ -1579,7 +1579,7 @@ public function procedure(string $sql, array $bindParams = [], bool|int $master 
 public function testCacheProcedure(): void
 {
     $this->markTestSkipped('Skip procedure.');
-    
+
     $manager = $this->createDatabaseManager();
 
     $data = ['name' => 'tom', 'content' => 'I love movie.'];

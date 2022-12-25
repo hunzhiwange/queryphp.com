@@ -88,6 +88,9 @@ return [
             // driver
             'driver' => 'html',
 
+            // 驱动类
+            'driver_class' => \Leevel\View\Html::class,
+
             // 后缀
             'suffix' => '.html',
         ],
@@ -95,6 +98,9 @@ return [
         'phpui' => [
             // driver
             'driver' => 'phpui',
+
+            // 驱动类
+            'driver_class' => \Leevel\View\Phpui::class,
 
             // 后缀
             'suffix' => '.php',

@@ -4,7 +4,7 @@
 [tests/Validate/Validator/TypeTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Validate/Validator/TypeTest.php)
 :::
     
-数据类型验证底层核心为函数 `Leevel\Support\Type\type`，相对于 PHP 提供的 `gettype` 更加强大。
+数据类型验证底层核心为函数 `Leevel\Support\Type\Type`，相对于 PHP 提供的 `gettype` 更加强大。
 
 
 **Uses**

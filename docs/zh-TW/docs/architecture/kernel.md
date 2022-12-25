@@ -19,8 +19,8 @@ use Leevel\Di\Container;
 use Leevel\Di\IContainer;
 use Leevel\Http\Request;
 use Leevel\Kernel\App;
-use Leevel\Kernel\IApp;
 use Leevel\Kernel\Exceptions\IRuntime;
+use Leevel\Kernel\IApp;
 use Leevel\Kernel\IKernel;
 
 // 加载 Composer
@@ -70,15 +70,16 @@ use Leevel\Http\JsonResponse;
 use Leevel\Http\Request;
 use Leevel\Kernel\App as Apps;
 use Leevel\Kernel\Exceptions\HttpException;
+use Leevel\Kernel\Exceptions\IRuntime;
 use Leevel\Kernel\Exceptions\Runtime;
 use Leevel\Kernel\IApp;
-use Leevel\Kernel\Exceptions\IRuntime;
 use Leevel\Kernel\IKernel;
 use Leevel\Kernel\Kernel;
 use Leevel\Log\ILog;
 use Leevel\Option\IOption;
 use Leevel\Router\IRouter;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 ```
 
 ## 基本使用

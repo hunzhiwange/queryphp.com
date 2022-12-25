@@ -25,7 +25,6 @@
 \App::make('logs')->notice(string $message, array $context = []): void;
 \App::make('logs')->info(string $message, array $context = []): void;
 \App::make('logs')->debug(string $message, array $context = []): void;
-\App::make('logs')->log(string $level, string $message, array $context = []): void;
 ```
 
 依赖注入
@@ -53,7 +52,6 @@ class Demo
 \Leevel\Log\Proxy\Log::notice(string $message, array $context = []): void;
 \Leevel\Log\Proxy\Log::info(string $message, array $context = []): void;
 \Leevel\Log\Proxy\Log::debug(string $message, array $context = []): void;
-\Leevel\Log\Proxy\Log::log(string $level, string $message, array $context = []): void;
 ```
 
 ## log 配置
@@ -82,17 +80,10 @@ return [
      * 允许记录的日志级别
      * ---------------------------------------------------------------
      *
-     * 默认为 debug、info、notice、warning、error、critical、alert 和 emergency
+     * 默认为 info
      */
-    'levels' => [
-        'debug',
-        'info',
-        'notice',
-        'warning',
-        'error',
-        'critical',
-        'alert',
-        'emergency',
+    'level' => [
+        \Leevel\Log\ILog::DEFAULT_MESSAGE_CATEGORY => Leevel::env('LOG_DEFAULT_LEVEL', \Leevel\Log\ILog::LEVEL_INFO),
     ],
 
     /*
@@ -135,11 +126,15 @@ return [
             // driver
             'driver' => 'file',
 
+            // 驱动类
+            'driver_class' => \Leevel\Log\File::class,
+
             // 频道
             'channel' => null,
 
             // 日志文件名时间格式化
-            'name' => 'Y-m-d H',
+            // 使用 date 函数格式化处理
+            'name' => 'Y-m-d',
 
             // 默认的日志路径
             'path' => Leevel::storagePath('logs'),
@@ -158,14 +153,14 @@ return [
             // driver
             'driver' => 'syslog',
 
+            // 驱动类
+            'driver_class' => \Leevel\Log\Syslog::class,
+
             // 频道
             'channel' => null,
 
-            // 存储 @see \Monolog\Handler\AbstractSyslogHandler
+            // 存储 \Monolog\Handler\AbstractSyslogHandler
             'facility' => LOG_USER,
-
-            // 等级
-            'level' => 'debug',
 
             // 日志行事件格式化，支持微秒
             'format' => 'Y-m-d H:i:s u',
@@ -179,7 +174,7 @@ log 参数根据不同的连接会有所区别，通用的 log 参数如下：
 
 |配置项|配置描述|
 |:-|:-|
-|levels|允许记录的日志级别|
+|level|允许记录的日志级别|
 |channel|频道|
 |buffer|是否启用缓冲|
 |buffer_size|日志数量达到缓冲数量会执行一次 IO 操作|
@@ -223,38 +218,6 @@ public function baseUseProvider(): array
 }
 ```
 
-**获取日志记录数量**
-
-``` php
-# Leevel\Log\ILog::count
-/**
- * 获取日志记录数量.
- */
-public function count(?string $level = null): int;
-```
-
-**获取当前日志记录**
-
-``` php
-# Leevel\Log\ILog::all
-/**
- * 获取当前日志记录.
- *
- * - 每次 IO 写入后会执行一次清理
- */
-public function all(?string $level = null): array;
-```
-
-**清理日志记录**
-
-``` php
-# Leevel\Log\ILog::clear
-/**
- * 清理日志记录.
- */
-public function clear(?string $level = null): void;
-```
-
 
 ``` php
 public function testBaseUse(string $level): void
@@ -264,21 +227,14 @@ public function testBaseUse(string $level): void
     $this->assertInstanceof(ILog::class, $log);
 
     $this->assertNull($log->{$level}('foo', ['hello', 'world']));
-    $this->assertSame([$level => [[$level, 'foo', ['hello', 'world']]]], $log->all());
-    $this->assertSame([[$level, 'foo', ['hello', 'world']]], $log->all($level));
 
-    $this->assertSame(1, $log->count());
-    $this->assertSame(1, $log->count($level));
-
-    $this->assertNull($log->clear($level));
-    $this->assertSame([], $log->all($level));
-
-    $this->assertNull($log->clear());
-    $this->assertSame([], $log->all());
-    $this->assertSame([], $log->all($level));
-
+    $logData = $this->getTestProperty($log, 'logs');
+    $this->assertSame([$level =>
+        [
+            ILOG::DEFAULT_MESSAGE_CATEGORY => [[$level, 'foo', ['hello', 'world']]],
+        ],
+    ], $logData);
     $this->assertInstanceOf(Logger::class, $log->getMonolog());
-
     Helper::deleteDirectory(__DIR__.'/cacheLog');
 }
 ```
@@ -288,47 +244,32 @@ public function testBaseUse(string $level): void
 ``` php
 public function testLogFilterLevel(): void
 {
-    $log = $this->createFileConnect(['levels' => [ILog::INFO]]);
-    $log->log(ILog::INFO, 'foo', ['hello', 'world']);
-    $log->log(ILog::DEBUG, 'foo', ['hello', 'world']);
-    $this->assertSame([ILog::INFO => [[ILog::INFO, 'foo', ['hello', 'world']]]], $log->all());
-}
-```
-    
-## 日志支持默认等级 debug
-
-``` php
-public function testLogLevelNotFoundWithDefaultLevel(): void
-{
-    $log = $this->createFileConnect(['levels' => [ILog::DEBUG]]);
-    $log->log('notfound', 'foo', ['hello', 'world']);
-    $this->assertSame([ILog::DEBUG => [[ILog::DEBUG, 'foo', ['hello', 'world']]]], $log->all());
-    $log->flush();
+    $log = $this->createFileConnect([
+        'level' => [
+            ILOG::DEFAULT_MESSAGE_CATEGORY => ILog::LEVEL_INFO,
+        ]
+    ]);
+    $log->info('foo', ['hello', 'world']);
+    $log->debug('foo', ['hello', 'world']);
+    $logData = $this->getTestProperty($log, 'logs');
+    $this->assertSame([
+            ILog::LEVEL_INFO => [
+                ILOG::DEFAULT_MESSAGE_CATEGORY => [
+                    [ILog::LEVEL_INFO, 'foo', ['hello', 'world']]
+                ]
+            ],
+        ],
+        $logData
+    );
 }
 ```
     
 ## 日志支持消息分类
 
-系统提供的等级 `level` 无法满足大型项目的日志需求，于是对消息 `message` 定义了一套规则来满足更精细的分类。
-
-**日志消息分类规则**
-
-``` php
-# Leevel\Log\Log::parseMessageCategory
-public static function parseMessageCategory(string $message): string
-{
-    if (preg_match('/^\[([a-zA-Z_0-9\-:.\/]+)\]/', $message, $matches)) {
-        return str_replace(':', '/', $matches[1]);
-    }
-
-    return '';
-}
-```
+系统提供的等级 `level` 无法满足更精细化的日志需求，于是对消息 `message` 定义了一套规则来满足更精细的分类。
 
 ::: tip
-消息开头满足 `[大小写字母|数字|下划线|中横线|点号|斜杆|冒号]` 会被识别为消息分类，其中冒号会被转化为斜杆。
-
-目前消息分类会作为文件类日志目录，支持无限层级目录。
+消息开头满足 `[大小写字母|数字|下划线|中横线|点号|斜杆|冒号]` 会被识别为消息分类。
 :::
 
 
@@ -336,14 +277,15 @@ public static function parseMessageCategory(string $message): string
 public function testLogMessageCategory(): void
 {
     $log = $this->createFileConnect();
-    $log->log(ILog::INFO, '[SQL] foo', ['hello', 'world']);
-    $log->log(ILog::INFO, '[SQL:FAILED] foo', ['hello', 'world']);
+    $log->info('[SQL] foo', ['hello', 'world']);
+    $log->info('[SQL:FAILED] foo', ['hello', 'world']);
+    $logData = $this->getTestProperty($log, 'logs');
     $this->assertSame([
-        ILog::INFO => [
-            [ILog::INFO, '[SQL] foo', ['hello', 'world']],
-            [ILog::INFO, '[SQL:FAILED] foo', ['hello', 'world']],
+        ILog::LEVEL_INFO => [
+            'SQL' => [[ILog::LEVEL_INFO, '[SQL] foo', ['hello', 'world']]],
+            'SQL:FAILED' => [[ILog::LEVEL_INFO, '[SQL:FAILED] foo', ['hello', 'world']]],
         ],
-    ], $log->all());
+    ], $logData);
     $log->flush();
 }
 ```

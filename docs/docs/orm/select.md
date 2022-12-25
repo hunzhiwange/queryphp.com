@@ -13,10 +13,10 @@
 <?php
 
 use Exception;
-use Leevel\Collection\Collection;
 use Leevel\Database\Ddd\Entity;
 use Leevel\Database\Ddd\Select;
 use Leevel\Database\Page;
+use Leevel\Support\Collection;
 use Tests\Database\DatabaseTestCase as TestCase;
 use Tests\Database\Ddd\Entity\CompositeId;
 use Tests\Database\Ddd\Entity\Relation\Post;
@@ -257,7 +257,7 @@ public function testEntityDefaultWithoutSoftDeleted(): void
         SQL: [70] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at | Params:  1 | Key: Name: [15] :post_delete_at | paramno=0 | name=[15] ":post_delete_at" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -273,7 +273,7 @@ public function testEntityDefaultWithoutSoftDeleted(): void
         SQL: [72] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at_1 | Params:  1 | Key: Name: [17] :post_delete_at_1 | paramno=0 | name=[17] ":post_delete_at_1" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -285,7 +285,7 @@ public function testEntityDefaultWithoutSoftDeleted(): void
         SQL: [70] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at | Params:  1 | Key: Name: [15] :post_delete_at | paramno=0 | name=[15] ":post_delete_at" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -331,7 +331,7 @@ public function testEntityWithSoftDeleted(): void
         SQL: [70] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at | Params:  1 | Key: Name: [15] :post_delete_at | paramno=0 | name=[15] ":post_delete_at" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -347,7 +347,7 @@ public function testEntityWithSoftDeleted(): void
         SQL: [72] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at_1 | Params:  1 | Key: Name: [17] :post_delete_at_1 | paramno=0 | name=[17] ":post_delete_at_1" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -405,7 +405,7 @@ public function testEntityOnlySoftDeleted(): void
         SQL: [70] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at | Params:  1 | Key: Name: [15] :post_delete_at | paramno=0 | name=[15] ":post_delete_at" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -421,7 +421,7 @@ public function testEntityOnlySoftDeleted(): void
         SQL: [72] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at_1 | Params:  1 | Key: Name: [17] :post_delete_at_1 | paramno=0 | name=[17] ":post_delete_at_1" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -433,7 +433,7 @@ public function testEntityOnlySoftDeleted(): void
         SQL: [70] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` > :post_delete_at | Params:  1 | Key: Name: [15] :post_delete_at | paramno=0 | name=[15] ":post_delete_at" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` > 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -479,7 +479,7 @@ public function testWithSoftDeleted(): void
         SQL: [70] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at | Params:  1 | Key: Name: [15] :post_delete_at | paramno=0 | name=[15] ":post_delete_at" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -495,7 +495,7 @@ public function testWithSoftDeleted(): void
         SQL: [72] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at_1 | Params:  1 | Key: Name: [17] :post_delete_at_1 | paramno=0 | name=[17] ":post_delete_at_1" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -553,7 +553,7 @@ public function testOnlySoftDeleted(): void
         SQL: [70] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at | Params:  1 | Key: Name: [15] :post_delete_at | paramno=0 | name=[15] ":post_delete_at" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -569,7 +569,7 @@ public function testOnlySoftDeleted(): void
         SQL: [72] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = :post_delete_at_1 | Params:  1 | Key: Name: [17] :post_delete_at_1 | paramno=0 | name=[17] ":post_delete_at_1" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` = 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -581,7 +581,7 @@ public function testOnlySoftDeleted(): void
         SQL: [70] SELECT `post`.* FROM `post` WHERE `post`.`delete_at` > :post_delete_at | Params:  1 | Key: Name: [15] :post_delete_at | paramno=0 | name=[15] ":post_delete_at" | is_param=1 | param_type=1 (SELECT `post`.* FROM `post` WHERE `post`.`delete_at` > 0)
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 
@@ -623,7 +623,7 @@ public function testLastSql(): void
         eot;
 
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->databaseConnect()->getLastSql(),
     );
 }
@@ -699,7 +699,7 @@ public function testPreLoadPage(): void
         SQL: [63] SELECT `user`.* FROM `user` WHERE `user`.`id` IN (:user_id_in0) | Params:  1 | Key: Name: [12] :user_id_in0 | paramno=0 | name=[12] ":user_id_in0" | is_param=1 | param_type=1 (SELECT `user`.* FROM `user` WHERE `user`.`id` IN (1))
         eot;
     $this->assertSame(
-        \sql_pdo_param_compatible($sql),
+        $sql,
         $select->getLastSql(),
     );
 

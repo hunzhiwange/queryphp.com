@@ -37,7 +37,7 @@ class Demo
 ```
 
 ::: warning 注意
-为了一致性或者更好与 Swoole 对接，请统一使用请求对象处理输入，避免直接使用 `$_GET`、`$_POST`,`$_COOKIE`,`$_FILES`,`$_SERVER` 等全局变量。
+为了一致性或者更好与 RoadRunner 对接，请统一使用请求对象处理输入，避免直接使用 `$_GET`、`$_POST`,`$_COOKIE`,`$_FILES`,`$_SERVER` 等全局变量。
 :::
 
 
@@ -117,25 +117,13 @@ public function testExcept(): void
 }
 ```
     
-## isConsole 是否为 PHP 运行模式命令行, 兼容 Swoole HTTP Service
-
-Swoole HTTP 服务器也以命令行运行，也就是 Swoole 情况下会返回 false。
+## isConsole 是否为 PHP 运行模式命令行
 
 ``` php
 public function testIsConsole(): void
 {
     $request = new Request();
     $this->assertTrue($request->isConsole());
-}
-```
-    
-## isConsole 是否为 PHP 运行模式命令行，Swoole 场景测试
-
-``` php
-public function testIsConsoleForSwoole(): void
-{
-    $request = new Request([], [], [], [], [], ['SERVER_SOFTWARE' => 'swoole-http-server']);
-    $this->assertFalse($request->isConsole());
 }
 ```
     

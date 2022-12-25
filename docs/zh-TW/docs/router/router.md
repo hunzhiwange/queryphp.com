@@ -37,10 +37,7 @@ class Router extends RouterProvider
         ],
 
         // api 请求中间件
-        'api' => [
-            // API 限流，可以通过网关来做限流更高效，如果需要去掉注释即可
-            // 'throttler:60,60',
-        ],
+        'api' => [],
     ];
 
     /**
@@ -50,9 +47,8 @@ class Router extends RouterProvider
      * - 例外在应用执行结束后响应环节也会调用 HTTP 中间件.
      */
     protected array $middlewareAlias = [
-        'auth' => Auth::class,
+        'auth'       => Auth::class,
         'session'    => Session::class,
-        'throttler'  => Throttler::class,
     ];
 
     /**
@@ -608,6 +604,7 @@ class Demo2
     public function handle(Closure $next, Request $request): Response
     {
         $GLOBALS['demo_middlewares'][] = 'Demo2::handle';
+
         return $next($request);
     }
 
@@ -633,6 +630,7 @@ class Demo3
     public function handle(Closure $next, Request $request, int $arg1 = 1, string $arg2 = 'hello'): Response
     {
         $GLOBALS['demo_middlewares'][] = sprintf('Demo3::handle(arg1:%s,arg2:%s)', $arg1, $arg2);
+
         return $next($request);
     }
 }
@@ -652,6 +650,7 @@ class DemoForGroup
     public function handle(Closure $next, Request $request): Response
     {
         $GLOBALS['demo_middlewares'][] = 'DemoForGroup::handle';
+
         return $next($request);
     }
 

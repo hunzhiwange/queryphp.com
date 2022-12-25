@@ -1,7 +1,7 @@
 # 栈
 
 ::: tip Testing Is Documentation
-[tests/Stack/StackTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Stack/StackTest.php)
+[tests/Support/StackTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Support/StackTest.php)
 :::
     
 栈（stack）又名堆栈，它是一种运算受限的线性表。限定仅在表尾进行插入和删除操作的线性表。这一端被称为栈顶，相对地，把另一端称为栈底。
@@ -20,7 +20,7 @@
 ``` php
 <?php
 
-use Leevel\Stack\Stack;
+use Leevel\Support\Stack;
 ```
 
 ## 栈基本使用方法

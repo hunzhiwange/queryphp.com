@@ -13,11 +13,11 @@ public function testAllUnCamelizeStyle(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => $dtoProp1 = new DtoProp1(),
-        'demoObject2Prop' => $dtoProp2 = new DtoProp2(),
-        'demoObject3Prop' => $dto2 = new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => $dtoProp1 = new DtoProp1(),
+        'demoObject2Prop'  => $dtoProp2 = new DtoProp2(),
+        'demoObject3Prop'  => $dto2 = new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $data = $dto1->all();
@@ -40,11 +40,11 @@ public function testAllCamelizeStyle(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => $dtoProp1 = new DtoProp1(),
-        'demoObject2Prop' => $dtoProp2 = new DtoProp2(),
-        'demoObject3Prop' => $dto2 = new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => $dtoProp1 = new DtoProp1(),
+        'demoObject2Prop'  => $dtoProp2 = new DtoProp2(),
+        'demoObject3Prop'  => $dto2 = new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $data = $dto1->all(false);
@@ -60,42 +60,19 @@ public function testAllCamelizeStyle(): void
 }
 ```
     
-## immutable 从数组创建不可变数据传输对象
-
-``` php
-public function testImmutable(): void
-{
-    $this->expectException(\UnexpectedValueException::class);
-    $this->expectExceptionMessage(
-        'You cannot modify value of the public property `demoStringProp` of an immutable data transfer object.'
-    );
-
-    $dto1 = Dto1::immutable([
-        'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
-    ]);
-    $this->assertSame('foo', $dto1->demoStringProp);
-    $dto1->demoStringProp = 'bar';
-}
-```
-    
 ## 默认忽略丢失的值
 
 ``` php
 public function testDefaultIgnoreMissingValues(): void
 {
     $dto1 = new Dto1([
-        'demo_not_found' => 1,
+        'demo_not_found'   => 1,
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $this->assertSame('foo', $dto1->demo_string_prop);
@@ -111,15 +88,15 @@ public function testStrict(): void
     $this->expectExceptionMessage(
         'Public properties `demo_not_found` of data transfer object `Tests\\Support\\Fixtures\\Dto1` was not defined.'
     );
-    
+
     Dto1::strict([
-        'demo_not_found' => 1,
+        'demo_not_found'   => 1,
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 }
 ```
@@ -131,21 +108,21 @@ public function testOnly(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $data = $dto1
         ->only(['demoIntProp', 'demoObject3Prop'])
         ->toArray();
     $this->assertSame([
-        'demo_int_prop' => 1,
+        'demo_int_prop'     => 1,
         'demo_object3_prop' => [
-            'demo_string_prop' => 'hello world'
-        ]
+            'demo_string_prop' => 'hello world',
+        ],
     ], $data);
 }
 ```
@@ -156,21 +133,21 @@ public function testOnly(): void
 public function testOnlyWithOnlyPropertys(): void
 {
     $dto1 = new DtoToArray([
-        'demoStringProp' => 'hello',
-        'demoIntProp' => 123456,
+        'demoStringProp'      => 'hello',
+        'demoIntProp'         => 123456,
         'demoIntOrStringProp' => 45,
     ]);
 
     $data = $dto1->toArray();
     $this->assertSame([
-        'demo_int_prop' => 123456,
+        'demo_int_prop'           => 123456,
         'demo_int_or_string_prop' => 45,
     ], $data);
 
     $data = $dto1->only(['demoStringProp'])->toArray();
     $this->assertSame([
-        'demo_string_prop' => 'hello',
-        'demo_int_prop' => 123456,
+        'demo_string_prop'        => 'hello',
+        'demo_int_prop'           => 123456,
         'demo_int_or_string_prop' => 45,
     ], $data);
 }
@@ -182,14 +159,14 @@ public function testOnlyWithOnlyPropertys(): void
 public function testOnlyWithOnlyPropertysOverrideProperty(): void
 {
     $dto1 = new DtoToArray([
-        'demoStringProp' => 'hello',
-        'demoIntProp' => 123456,
+        'demoStringProp'      => 'hello',
+        'demoIntProp'         => 123456,
         'demoIntOrStringProp' => 45,
     ]);
 
     $data = $dto1->toArray();
     $this->assertSame([
-        'demo_int_prop' => 123456,
+        'demo_int_prop'           => 123456,
         'demo_int_or_string_prop' => 45,
     ], $data);
 
@@ -207,24 +184,24 @@ public function testExcept(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $data = $dto1
         ->except(
             ['demoIntProp', 'demoObject3Prop', 'demoObjectProp',
-            'demoObject3Prop', 'demo_false_prop', 'demo_object2_prop',]
+                'demoObject3Prop', 'demo_false_prop', 'demo_object2_prop', ]
         )
         ->toArray();
     $this->assertSame([
         'demo_string_prop' => 'foo',
-        'demo_float_prop' => 1.5,
-        'demo_true_prop' => true,
-        'demo_mixed_prop' => true,
+        'demo_float_prop'  => 1.5,
+        'demo_true_prop'   => true,
+        'demo_mixed_prop'  => true,
     ], $data);
 }
 ```
@@ -235,8 +212,8 @@ public function testExcept(): void
 public function testExceptWithExceptPropertys(): void
 {
     $dto1 = new DtoToArray2([
-        'demoStringProp' => 'hello',
-        'demoIntProp' => 123456,
+        'demoStringProp'      => 'hello',
+        'demoIntProp'         => 123456,
         'demoIntOrStringProp' => 45,
     ]);
 
@@ -256,20 +233,44 @@ public function testExceptWithExceptPropertys(): void
 public function testExceptWithExceptPropertysOverrideProperty(): void
 {
     $dto1 = new DtoToArray2([
-        'demoStringProp' => 'hello',
-        'demoIntProp' => 123456,
+        'demoStringProp'      => 'hello',
+        'demoIntProp'         => 123456,
         'demoIntOrStringProp' => 45,
     ]);
 
     $data = $dto1->toArray();
     $this->assertSame([
-        'demo_string_prop' => 'hello'
+        'demo_string_prop' => 'hello',
     ], $data);
 
     $data = $dto1->except(['demo_int_prop'], true)->toArray();
     $this->assertSame([
-        'demo_string_prop' => 'hello',
+        'demo_string_prop'        => 'hello',
         'demo_int_or_string_prop' => 45,
+    ], $data);
+}
+```
+    
+## withoutNull 设置转换数组时忽略 NULL 值
+
+``` php
+public function testWithoutNull(): void
+{
+    $dto1 = new DtoToArray3([
+        'demoStringProp' => 'hello',
+        'demoIntProp'    => 123456,
+    ]);
+    $data = $dto1->toArray();
+    $this->assertSame([
+        'demo_string_prop'       => 'hello',
+        'demo_int_prop'          => 123456,
+        'demo_optional_int_prop' => null,
+    ], $data);
+
+    $data = $dto1->withoutNull()->toArray();
+    $this->assertSame([
+        'demo_string_prop' => 'hello',
+        'demo_int_prop'    => 123456,
     ], $data);
 }
 ```
@@ -281,11 +282,11 @@ public function testToArrayUnCamelizeStyle(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => $dtoProp2 = new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => $dtoProp2 = new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $data = $dto1->toArray();
@@ -308,11 +309,11 @@ public function testToArrayCamelizeStyle(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => $dtoProp2 = new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => $dtoProp2 = new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $data = $dto1->camelizeNamingStyle()->toArray();
@@ -334,14 +335,14 @@ public function testToArrayCamelizeStyle(): void
 public function testToArrayWithOnlyPropertys(): void
 {
     $dto1 = new DtoToArray([
-        'demoStringProp' => 'hello',
-        'demoIntProp' => 123456,
+        'demoStringProp'      => 'hello',
+        'demoIntProp'         => 123456,
         'demoIntOrStringProp' => 45,
     ]);
 
     $data = $dto1->toArray();
     $this->assertSame([
-        'demo_int_prop' => 123456,
+        'demo_int_prop'           => 123456,
         'demo_int_or_string_prop' => 45,
     ], $data);
 }
@@ -354,11 +355,11 @@ public function testOffsetExists(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $this->assertTrue(isset($dto1['demo_string_prop']));
@@ -373,11 +374,11 @@ public function testOffsetSet(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $dto1['demo_string_prop'] = 'hello_world';
@@ -397,11 +398,11 @@ public function testOffsetGet(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $this->assertSame('foo', $dto1['demo_string_prop']);
@@ -421,11 +422,11 @@ public function testOffsetUnset(): void
 
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
 
     $this->assertSame('foo', $dto1['demo_string_prop']);
@@ -442,11 +443,11 @@ public function testMagicIsset(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
     $this->assertTrue(isset($dto1->demo_string_prop));
     $this->assertTrue(isset($dto1->demo_int_prop));
@@ -460,13 +461,13 @@ public function testMagicSet(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
-    
+
     $this->assertSame('foo', $dto1->demo_string_prop);
     $dto1->demo_string_prop = 'hello';
     $this->assertSame('hello', $dto1->demo_string_prop);
@@ -480,11 +481,11 @@ public function testMagicGet(): void
 {
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
     $this->assertSame('foo', $dto1->demo_string_prop);
 }
@@ -502,11 +503,11 @@ public function testMagicUnset(): void
 
     $dto1 = new Dto1([
         'demo_string_prop' => 'foo',
-        'demoIntProp' => 1,
-        'demoFloatProp' => 1.5,
-        'demoObjectProp' => new DtoProp1(),
-        'demoObject2Prop' => new DtoProp2(),
-        'demoObject3Prop' => new Dto2(['demoStringProp' => 'hello world']),
+        'demoIntProp'      => 1,
+        'demoFloatProp'    => 1.5,
+        'demoObjectProp'   => new DtoProp1(),
+        'demoObject2Prop'  => new DtoProp2(),
+        'demoObject3Prop'  => new Dto2(['demoStringProp' => 'hello world']),
     ]);
     unset($dto1->demo_string_prop);
 }

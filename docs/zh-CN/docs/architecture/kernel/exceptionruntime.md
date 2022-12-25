@@ -122,6 +122,27 @@ class Runtime extends ExceptionRuntime
     {
         return Leevel::path('assets/exceptions/default.php');
     }
+
+    /**
+     * 获取 JSON 状态的异常模板.
+     */
+    public function getJsonExceptionView(HttpException $e): string
+    {
+        return Leevel::path(sprintf('assets/exceptions/%d.php', $e->getStatusCode()));
+    }
+
+    /**
+     * 获取 JSON 状态的默认异常结果.
+     */
+    public function getDefaultJsonExceptionData(Throwable $e): array
+    {
+        return [
+            'error' => [
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ],
+        ];
+    }
 }
 
 ```
@@ -147,6 +168,7 @@ use Leevel\Log\ILog;
 use Leevel\Option\Option;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 ```
 
 ## 基本使用
@@ -181,6 +203,21 @@ class Runtime11 extends Runtime
     public function getDefaultHttpExceptionView(): string
     {
         return '';
+    }
+
+    public function getJsonExceptionView(HttpException $e): string
+    {
+        return '';
+    }
+
+    public function getDefaultJsonExceptionData(Throwable $e): array
+    {
+        return [
+            'error' => [
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ],
+        ];
     }
 }
 ```
@@ -666,6 +703,21 @@ class Runtime22 extends Runtime
     {
         return '';
     }
+
+    public function getJsonExceptionView(HttpException $e): string
+    {
+        return '';
+    }
+
+    public function getDefaultJsonExceptionData(Throwable $e): array
+    {
+        return [
+            'error' => [
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ],
+        ];
+    }
 }
 ```
 
@@ -825,6 +877,21 @@ class Runtime3 extends Runtime
     public function getDefaultHttpExceptionView(): string
     {
         return __DIR__.'/assert/default.php';
+    }
+
+    public function getJsonExceptionView(HttpException $e): string
+    {
+        return '';
+    }
+
+    public function getDefaultJsonExceptionData(Throwable $e): array
+    {
+        return [
+            'error' => [
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ],
+        ];
     }
 }
 ```

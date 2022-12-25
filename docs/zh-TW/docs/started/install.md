@@ -4,7 +4,7 @@
 [tests/Docs/Started/InstallDoc.php](https://github.com/hunzhiwange/framework/blob/master/tests/Docs/Started/InstallDoc.php)
 :::
     
-QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式，它既可以运行在 PHP-FPM 场景，同时还支持在 Swoole 服务中运行。
+QueryPHP 是一个渐进式 PHP 常驻框架，我们强调的是一个渐进式，它既可以运行在 PHP-FPM 场景，同时还支持在 RoadRunner 服务中运行。
 
 ## 环境要求
 
@@ -115,8 +115,6 @@ index index.html index.php;
   * php-7.2.1
   * php-7.4.0
   * redis-2.8.17
-
-Windows 开发者如果不需要 Swoole 则可以按照其他普通的 PHP 项目来搭建就是了，如果依赖 Swoole 可以采用上面这种虚拟机的方式来搭建环境。
 
 ### Nginx
 

@@ -74,6 +74,9 @@ return [
             // driver
             'driver' => 'local',
 
+            // 驱动类
+            'driver_class' => \Leevel\Filesystem\Local::class,
+
             // path
             'path' => Leevel::storagePath('attachments'),
         ],
@@ -82,6 +85,9 @@ return [
             // driver
             'driver' => 'zip',
 
+            // 驱动类
+            'driver_class' => \Leevel\Filesystem\Zip::class,
+
             // path
             'path' => Leevel::storagePath('attachments/filesystem.zip'),
         ],
@@ -89,6 +95,9 @@ return [
         'ftp' => [
             // driver
             'driver' => 'ftp',
+
+            // 驱动类
+            'driver_class' => \Leevel\Filesystem\Ftp::class,
 
             // 主机
             'host' => Leevel::env('FILESYSTEM_FTP_HOST', 'ftp.example.com'),
@@ -118,6 +127,9 @@ return [
         'sftp' => [
             // driver
             'driver' => 'sftp',
+
+            // 驱动类
+            'driver_class' => \Leevel\Filesystem\Sftp::class,
 
             // 主机
             'host' => Leevel::env('FILESYSTEM_SFTP_HOST', 'sftp.example.com'),

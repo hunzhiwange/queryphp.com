@@ -1,7 +1,7 @@
 # 队列
 
 ::: tip Testing Is Documentation
-[tests/Stack/QueueTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Stack/QueueTest.php)
+[tests/Support/QueueTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Support/QueueTest.php)
 :::
     
 队列 (Queue) 具有先进先出的特性，支持在队列尾部插入元素，在队列头部删除元素的特性。
@@ -20,7 +20,7 @@
 ``` php
 <?php
 
-use Leevel\Stack\Queue;
+use Leevel\Support\Queue;
 ```
 
 ## 队列基本使用方法

@@ -77,10 +77,7 @@ composer.json 可以扩展目录
 |filesystem|文件系统配置|
 |i18n|国际化配置|
 |log|日志配置|
-|mail|邮件配置|
-|protocol|Swoole 配置|
 |session|Session 配置|
-|throttler|限流配置|
 |view|视图配置|
 
 ## 配置缓存

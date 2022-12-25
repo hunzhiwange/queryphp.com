@@ -21,9 +21,9 @@
 ``` php
 <?php
 
-use Leevel\Collection\Collection;
 use Leevel\Database\Ddd\Relation\HasMany;
 use Leevel\Database\Ddd\Select;
+use Leevel\Support\Collection;
 use Tests\Database\DatabaseTestCase as TestCase;
 use Tests\Database\Ddd\Entity\Relation\Comment;
 use Tests\Database\Ddd\Entity\Relation\Post;

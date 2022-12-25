@@ -1,7 +1,7 @@
 # 双向链表
 
 ::: tip Testing Is Documentation
-[tests/Stack/LinkedListTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Stack/LinkedListTest.php)
+[tests/Support/LinkedListTest.php](https://github.com/hunzhiwange/framework/blob/master/tests/Support/LinkedListTest.php)
 :::
     
 在 PHP 双向链表的基础上加上数据类型验证功能，不少业务场景中保证链表中数据一致性。
@@ -16,7 +16,7 @@
 ``` php
 <?php
 
-use Leevel\Stack\LinkedList;
+use Leevel\Support\LinkedList;
 ```
 
 ## 链表基本使用方法

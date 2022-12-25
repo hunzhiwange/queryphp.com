@@ -88,7 +88,7 @@ namespace Tests\Http;
 
 class JsonResponseMyJsonSerializable implements JsonSerializable
 {
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return ['hello' => 'JsonSerializable'];
     }

@@ -632,7 +632,7 @@ public function procedure(string $sql, array $bindParams = [], bool|int $master 
 public function testCacheProcedure(): void
 {
     $this->markTestSkipped('Skip procedure.');
-    
+
     $manager = $this->createDatabaseManager();
 
     $data = ['name' => 'tom', 'content' => 'I love movie.'];
